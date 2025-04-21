@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+# system
+abbr -g "pbc"="pbcopy"
+abbr -g "pbp"="pbpaste"
+
+# npm
+abbr "nr"="npm run"
+
+# docker
+abbr "dco"="docker compose"

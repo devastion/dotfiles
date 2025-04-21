@@ -1,0 +1,27 @@
+[alias]
+  la = "!git config -l | grep alias | cut -c 7-"
+  st = "status -sbu"
+  a = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
+  cp = "cherry-pick"
+  co = "checkout"
+  cr = "!sh -c 'git recent | fzf | xargs git checkout $1' -"
+  br = "branch -v --sort=-committerdate"
+  ci = "commit -v"
+  lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  diffs = "diff --staged"
+  clr = "clone --recurse-submodules"
+  about = "!describe() { msg=\"$1\"; git config branch.\"$(git rev-parse --abbrev-ref HEAD)\".description ${msg:+\"$msg\"}; }; describe"
+  fixup = "!git commit --amend --no-edit --allow-empty \"$@\""
+  undo = "reset --soft HEAD~1"
+  please = "push --force-with-lease"
+  contributors = "shortlog --summary --numbered --email"
+  fixup-with = "!git log -n 50 --pretty=format:\"%h %s\" --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
+  wip = "!git add --all && git commit -m \"wip\""
+  recent = "for-each-ref --count=20 --sort=-committerdate refs/heads/ --format=\"%(refname:short)\""
+  overview = "log --all --since='2 weeks' --oneline --no-merges"
+  recap = "!git log --all --oneline --no-merges --author=$(git config user.email)"
+  today = "!git log --since=00:00:00 --all --oneline --no-merges --author=$(git config user.email)"
+  filter-commits = "!sh -c 'git log --pretty=format:\"%h - %an: %s\" $1 \
+    | fzf --no-sort \
+    | cut -d \" \" -f1 ' -"
+# vim:ft=gitconfig

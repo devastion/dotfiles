@@ -1,0 +1,8 @@
+[user]
+  name = "Dimitar Banev"
+  email = ""
+
+# use custom git config options based on directory
+[includeIf "gitdir:~/Projects/company/"]
+  path = "~/Projects/company/.gitconfig"
+# vim:ft=gitconfig

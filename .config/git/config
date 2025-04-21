@@ -1,0 +1,47 @@
+[init]
+  defaultBranch = "main"
+
+[core]
+  editor = "nvim"
+  excludesFile = "~/.config/git/global.gitignore"
+  attributesfile = "~/.config/git/global.gitattributes"
+
+[diff]
+  submodule = "log"
+
+[pull]
+  ff = true
+
+[push]
+  autoSetupRemote = true
+  followTags = true
+  default = "simple"
+  recurseSubmodules = "check"
+
+[merge]
+  ff = true
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+  instructionFormat = "[%an - %ar] %s"
+
+[rerere]
+  enabled = true
+
+[help]
+  autocorrect = "prompt"
+
+[branch]
+  autoSetupMerge = true
+  autoSetupRebase = "never"
+
+# force ssh
+[url "git@github.com:"]
+  insteadOf = "https://github.com/"
+
+[include]
+  path = "~/.config/git/alias.gitconfig"
+  path = "~/.config/git/delta.gitconfig"
+  path = "~/.config/git/local.gitconfig"
+# vim:ft=gitconfig

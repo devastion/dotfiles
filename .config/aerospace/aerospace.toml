@@ -1,0 +1,154 @@
+# https://nikitabobko.github.io/AeroSpace/guide 
+
+after-login-command = []
+after-startup-command = [
+  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=10.0",
+]
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+start-at-login = true
+
+default-root-container-layout = "accordion"
+default-root-container-orientation = "vertical"
+automatically-unhide-macos-hidden-apps = true
+
+key-mapping.preset = "qwerty"
+
+accordion-padding = 0
+
+# on-focus-changed = ['move-mouse window-lazy-center']
+# on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Change if you are using sketchybar
+[gaps]
+inner.horizontal = 16
+inner.vertical = 16
+outer.left = 16
+outer.bottom = 16
+outer.top = 16
+outer.right = 16
+
+[workspace-to-monitor-force-assignment]
+"MAIN" = "main"
+"CHROME" = "main"
+"CODE" = "main"
+"UTIL" = "main"
+"TERM" = "secondary"
+
+[mode.main.binding]
+# Disable "hide application" and "hide others"
+cmd-h = []
+cmd-alt-h = []
+cmd-m = []
+
+ctrl-alt-cmd-g = "exec-and-forget open -a Ghostty -n"
+
+# layout switching
+ctrl-alt-cmd-t = "layout h_tiles v_tiles"
+ctrl-alt-cmd-s = "layout v_accordion"
+ctrl-alt-cmd-f = "layout floating tiling"
+
+# focus
+ctrl-alt-cmd-h = "focus --boundaries-action stop left"
+ctrl-alt-cmd-j = "focus --boundaries-action stop down"
+ctrl-alt-cmd-k = "focus --boundaries-action stop up"
+ctrl-alt-cmd-l = "focus --boundaries-action stop right"
+alt-tab = "focus-back-and-forth"
+
+# move
+ctrl-alt-cmd-shift-h = "move left"
+ctrl-alt-cmd-shift-j = "move down"
+ctrl-alt-cmd-shift-k = "move up"
+ctrl-alt-cmd-shift-l = "move right"
+
+# monitor focus
+ctrl-alt-cmd-m = "focus-monitor next --wrap-around"
+
+# workspaces
+ctrl-alt-cmd-1 = "workspace MAIN"
+ctrl-alt-cmd-2 = "workspace CHROME"
+ctrl-alt-cmd-3 = "workspace CODE"
+ctrl-alt-cmd-4 = "workspace UTIL"
+ctrl-alt-cmd-5 = "workspace TERM"
+
+# move to workspace
+ctrl-alt-cmd-shift-1 = ["move-node-to-workspace MAIN", "workspace MAIN"]
+ctrl-alt-cmd-shift-2 = ["move-node-to-workspace CHROME", "workspace CHROME"]
+ctrl-alt-cmd-shift-3 = ["move-node-to-workspace CODE", "workspace CODE"]
+ctrl-alt-cmd-shift-4 = ["move-node-to-workspace UTIL", "workspace UTIL"]
+ctrl-alt-cmd-shift-5 = ["move-node-to-workspace TERM", "workspace TERM"]
+
+# resize
+ctrl-alt-cmd-minus = "resize smart -128"
+ctrl-alt-cmd-equal = "resize smart +128"
+ctrl-alt-cmd-shift-equal = "balance-sizes"
+
+# enter service mode
+ctrl-alt-cmd-space = [
+  "exec-and-forget borders active_color=0xfff7768e inactive_color=0xff292e42 width=10.0",
+  "mode service",
+]
+
+[mode.service.binding]
+esc = [
+  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=10.0",
+  "reload-config",
+  "mode main",
+]
+ctrl-alt-cmd-space = [
+  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=10.0",
+  "mode main",
+]
+r = ["flatten-workspace-tree"]
+backspace = ["close-all-windows-but-current"]
+
+# join
+ctrl-alt-cmd-shift-h = "join-with left"
+ctrl-alt-cmd-shift-j = "join-with down"
+ctrl-alt-cmd-shift-k = "join-with up"
+ctrl-alt-cmd-shift-l = "join-with right"
+
+# float windows by default
+[[on-window-detected]]
+check-further-callbacks = true
+run = "layout floating"
+
+# move specific applications to workspaces
+[[on-window-detected]]
+if.app-id = "com.brave.Browser"
+if.window-title-regex-substring = "brave"
+run = ["layout tiling", "move-node-to-workspace MAIN"]
+
+[[on-window-detected]]
+if.window-title-regex-substring = "chrome"
+run = ["layout tiling", "move-node-to-workspace CHROME"]
+
+[[on-window-detected]]
+if.app-id = "com.apple.iCal"
+run = ["layout tiling", "move-node-to-workspace UTIL"]
+
+[[on-window-detected]]
+if.app-id = "com.microsoft.teams2"
+run = ["layout tiling", "move-node-to-workspace CHROME"]
+
+[[on-window-detected]]
+if.app-id = "com.apple.mail"
+run = ["layout tiling", "move-node-to-workspace UTIL"]
+
+[[on-window-detected]]
+if.app-id = "com.postmanlabs.mac"
+run = ["layout tiling", "move-node-to-workspace CODE"]
+
+[[on-window-detected]]
+if.app-id = "com.tinyapp.TablePlus"
+run = ["layout tiling", "move-node-to-workspace CODE"]
+check-further-callbacks = true
+
+[[on-window-detected]]
+if.app-id = "com.tinyapp.TablePlus"
+if.window-title-regex-substring = "General"
+run = ["layout floating"]
+
+[[on-window-detected]]
+if.app-id = "com.mitchellh.ghostty"
+run = ["layout tiling", "move-node-to-workspace TERM"]

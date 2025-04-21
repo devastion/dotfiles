@@ -1,0 +1,14 @@
+[core]
+  pager = "delta"
+
+[interactive]
+  diffFilter = "delta --color-only --features=interactive"
+
+[delta]
+  features = "decorations"
+  line-numbers = true
+  hyperlinks = true
+
+[include]
+  path = "~/.config/git/tokyonight_night.gitconfig"
+# vim:ft=gitconfig
