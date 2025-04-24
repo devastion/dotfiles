@@ -134,7 +134,7 @@ function M.tailwind_config_exists()
 
   if is_readable then
     local is_tailwind = vim.system({ "jq", '.devDependencies."tailwindcss"', package_json }, {}):wait().stdout
-    if is_tailwind then
+    if is_tailwind ~= nil and string.len(is_tailwind) > 5 then
       return true
     end
   end

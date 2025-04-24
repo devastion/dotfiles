@@ -71,9 +71,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Use ESLint as formatter
     if client ~= nil then
-      if client.name == "eslint" then
+      if client.name == "eslint-lsp" then
         client.server_capabilities.documentFormattingProvider = true
-      elseif client.name == "vtsls" or client.name == "volar" then
+      elseif client.name == "vtsls" or client.name == "vue-language-server" then
         client.server_capabilities.documentFormattingProvider = false
       end
     end

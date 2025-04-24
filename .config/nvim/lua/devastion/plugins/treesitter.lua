@@ -167,12 +167,14 @@ return {
         "i`",
         function() require("various-textobjs").mdFencedCodeBlock("inner") end,
         mode = { "o", "x" },
+        ft = "markdown",
         desc = "Fenced Code Block (inner)",
       },
       {
         "a`",
         function() require("various-textobjs").mdFencedCodeBlock("outer") end,
         mode = { "o", "x" },
+        ft = "markdown",
         desc = "Fenced Code Block (outer)",
       },
       {
