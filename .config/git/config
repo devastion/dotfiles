@@ -5,6 +5,9 @@
   editor = "nvim"
   excludesFile = "~/.config/git/global.gitignore"
   attributesfile = "~/.config/git/global.gitattributes"
+  autocrlf = input
+  compression = 9
+  whitespace = error
 
 [diff]
   submodule = "log"
@@ -36,12 +39,16 @@
   autoSetupMerge = true
   autoSetupRebase = "never"
 
-# force ssh
+; force ssh
 [url "git@github.com:"]
   insteadOf = "https://github.com/"
+
+; example git clone gh:devastion/dotfiles
+[url "git@github.com:"]
+  insteadOf = "gh:"
 
 [include]
   path = "~/.config/git/alias.gitconfig"
   path = "~/.config/git/delta.gitconfig"
   path = "~/.config/git/local.gitconfig"
-# vim:ft=gitconfig
+; vim:ft=gitconfig

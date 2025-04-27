@@ -11,4 +11,4 @@
 
 [include]
   path = "~/.config/git/tokyonight_night.gitconfig"
-# vim:ft=gitconfig
+; vim:ft=gitconfig

@@ -24,4 +24,5 @@
   filter-commits = "!sh -c 'git log --pretty=format:\"%h - %an: %s\" $1 \
     | fzf --no-sort \
     | cut -d \" \" -f1 ' -"
-# vim:ft=gitconfig
+  cpbr = "!sh -c 'git branch --show-current | tr -d \"\n\" | pbcopy'"
+; vim:ft=gitconfig

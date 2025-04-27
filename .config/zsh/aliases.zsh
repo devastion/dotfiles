@@ -9,3 +9,5 @@ alias lt="l -la --sort=modified --reverse"
 alias ls="ll"
 
 alias "cd.."="cd_up"
+
+alias nvim="mise x node@latest -- nvim"

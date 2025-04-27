@@ -39,12 +39,12 @@ export EZA_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/eza"
 # load plugins
 plugin-load $zsh_plugin_repos
 
-source "${ZDOTDIR:-$HOME/.config/zsh}/zstyles.zsh"
-source "${ZDOTDIR:-$HOME/.config/zsh}/options.zsh"
-source "${ZDOTDIR:-$HOME/.config/zsh}/aliases.zsh"
+zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/zstyles.zsh"
+zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/options.zsh"
+zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/aliases.zsh"
 
 function zvm_after_init() {
-    FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)
+  FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)
 }
 
 function zvm_after_lazy_keybindings() {
@@ -55,3 +55,4 @@ function zvm_after_lazy_keybindings() {
 [[ ! -f "${ZDOTDIR:-$HOME/.config/zsh}/.p10k.zsh" ]] || source "${ZDOTDIR:-$HOME/.config/zsh}/.p10k.zsh"
 
 eval "$(${HOME}/.local/bin/mise activate zsh --shims)"
+zsh-defer eval "$(zoxide init zsh)"
