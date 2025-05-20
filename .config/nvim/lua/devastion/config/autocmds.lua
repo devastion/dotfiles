@@ -104,17 +104,17 @@ autocmd({ "VimResized" }, {
 })
 
 -- TODO: Refactor TMux leader autocmd
-local tmux_leader = vim.system({ "tmux", "show-options", "-g", "prefix" }, {}):wait().stdout:match("prefix%s+(%S+)")
+local tmux_leader = vim.system({ "tmux", "show", "-gv", "prefix" }, {}):wait().stdout:match("%S+")
 
 local function unset_tmux_leader()
   if tmux_leader then
-    vim.system({ "tmux", "set-option", "-g", "prefix", "None" }, {})
+    vim.system({ "tmux", "set-option", "-p", "prefix", "None" }, {})
   end
 end
 
 local function reset_tmux_leader()
   if tmux_leader then
-    vim.system({ "tmux", "set-option", "-g", "prefix", tmux_leader }, {})
+    vim.system({ "tmux", "set-option", "-p", "prefix", tmux_leader }, {})
   end
 end
 

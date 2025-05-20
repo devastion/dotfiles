@@ -7,6 +7,7 @@ return {
     "typescript",
     "typescriptreact",
     "typescript.tsx",
+    -- "vue",
   },
   root_markers = {
     "tsconfig.json",

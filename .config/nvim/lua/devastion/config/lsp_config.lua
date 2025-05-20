@@ -108,7 +108,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     )
     lsp_keymap(
       lsp_methods.textDocument_documentSymbol,
-      "g0",
+      "gO",
       function() require("fzf-lua").lsp_document_symbols({}) end,
       "LSP: Document Symbol"
     )
