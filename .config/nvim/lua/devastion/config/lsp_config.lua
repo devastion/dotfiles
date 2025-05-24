@@ -178,13 +178,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
     vim.keymap.set("n", "<leader>cq", vim.diagnostic.setloclist, { desc = "Open Diagnostics List" })
 
-    if client and client:supports_method(lsp_methods.textDocument_rename) then
-      vim.keymap.set(
-        "n",
-        "grn",
-        function() return ":IncRename " .. vim.fn.expand("<cword>") end,
-        { buffer = event.buf, desc = "Incremental Rename", expr = true }
-      )
+    if client then
+      if client:supports_method(lsp_methods.textDocument_rename) then
+        vim.keymap.set(
+          "n",
+          "grn",
+          function() return ":IncRename " .. vim.fn.expand("<cword>") end,
+          { buffer = event.buf, desc = "Incremental Rename", expr = true }
+        )
+      end
+
+      if client:supports_method(lsp_methods.textDocument_foldingRange) then
+        vim.o.foldmethod = "expr"
+        vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+      end
     end
   end,
 })
