@@ -1,0 +1,6 @@
+---
+base: lua54
+
+globals:
+  SBar:
+    any: true

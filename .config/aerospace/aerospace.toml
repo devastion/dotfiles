@@ -2,7 +2,15 @@
 
 after-login-command = []
 after-startup-command = [
-  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=10.0",
+  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0",
+]
+exec-on-workspace-change = [
+  "/bin/bash",
+  "-c",
+  "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE",
+]
+on-focus-changed = [
+  "exec-and-forget sketchybar --trigger aerospace_focus_change FOCUSED_WINDOW=$(aerospace list-windows --focused --format '%{window-id}')",
 ]
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
@@ -21,19 +29,19 @@ accordion-padding = 0
 
 # Change if you are using sketchybar
 [gaps]
-inner.horizontal = 16
-inner.vertical = 16
-outer.left = 16
-outer.bottom = 16
-outer.top = 16
-outer.right = 16
+inner.horizontal = [{ monitor.main = 16 }, 16]
+inner.vertical = [{ monitor.main = 16 }, 16]
+outer.left = [{ monitor.main = 16 }, 16]
+outer.bottom = [{ monitor.main = 16 }, 16]
+outer.top = [{ monitor.main = 48 }, 16]
+outer.right = [{ monitor.main = 16 }, 16]
 
 [workspace-to-monitor-force-assignment]
-"MAIN" = "main"
-"CHROME" = "main"
-"CODE" = "main"
-"UTIL" = "main"
-"TERM" = "secondary"
+"1" = "main"
+"2" = "main"
+"3" = "main"
+"4" = "main"
+"5" = "secondary"
 
 [mode.main.binding]
 # Disable "hide application" and "hide others"
@@ -65,18 +73,18 @@ ctrl-alt-cmd-shift-l = "move right"
 ctrl-alt-cmd-m = "focus-monitor next --wrap-around"
 
 # workspaces
-ctrl-alt-cmd-1 = "workspace MAIN"
-ctrl-alt-cmd-2 = "workspace CHROME"
-ctrl-alt-cmd-3 = "workspace CODE"
-ctrl-alt-cmd-4 = "workspace UTIL"
-ctrl-alt-cmd-5 = "workspace TERM"
+ctrl-alt-cmd-1 = "workspace 1"
+ctrl-alt-cmd-2 = "workspace 2"
+ctrl-alt-cmd-3 = "workspace 3"
+ctrl-alt-cmd-4 = "workspace 4"
+ctrl-alt-cmd-5 = "workspace 5"
 
 # move to workspace
-ctrl-alt-cmd-shift-1 = ["move-node-to-workspace MAIN", "workspace MAIN"]
-ctrl-alt-cmd-shift-2 = ["move-node-to-workspace CHROME", "workspace CHROME"]
-ctrl-alt-cmd-shift-3 = ["move-node-to-workspace CODE", "workspace CODE"]
-ctrl-alt-cmd-shift-4 = ["move-node-to-workspace UTIL", "workspace UTIL"]
-ctrl-alt-cmd-shift-5 = ["move-node-to-workspace TERM", "workspace TERM"]
+ctrl-alt-cmd-shift-1 = ["move-node-to-workspace 1", "workspace 1"]
+ctrl-alt-cmd-shift-2 = ["move-node-to-workspace 2", "workspace 2"]
+ctrl-alt-cmd-shift-3 = ["move-node-to-workspace 3", "workspace 3"]
+ctrl-alt-cmd-shift-4 = ["move-node-to-workspace 4", "workspace 4"]
+ctrl-alt-cmd-shift-5 = ["move-node-to-workspace 5", "workspace 5"]
 
 # resize
 ctrl-alt-cmd-minus = "resize smart -128"
@@ -85,18 +93,18 @@ ctrl-alt-cmd-shift-equal = "balance-sizes"
 
 # enter service mode
 ctrl-alt-cmd-space = [
-  "exec-and-forget borders active_color=0xfff7768e inactive_color=0xff292e42 width=10.0",
+  "exec-and-forget borders active_color=0xfff7768e inactive_color=0xff292e42 width=8.0",
   "mode service",
 ]
 
 [mode.service.binding]
 esc = [
-  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=10.0",
+  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0",
   "reload-config",
   "mode main",
 ]
 ctrl-alt-cmd-space = [
-  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=10.0",
+  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0",
   "mode main",
 ]
 r = ["flatten-workspace-tree"]
@@ -117,31 +125,31 @@ run = "layout floating"
 [[on-window-detected]]
 if.app-id = "com.brave.Browser"
 if.window-title-regex-substring = "brave"
-run = ["layout tiling", "move-node-to-workspace MAIN"]
+run = ["layout tiling", "move-node-to-workspace 1"]
 
 [[on-window-detected]]
 if.window-title-regex-substring = "chrome"
-run = ["layout tiling", "move-node-to-workspace CHROME"]
+run = ["layout tiling", "move-node-to-workspace 2"]
 
 [[on-window-detected]]
 if.app-id = "com.apple.iCal"
-run = ["layout tiling", "move-node-to-workspace UTIL"]
+run = ["layout tiling", "move-node-to-workspace 4"]
 
 [[on-window-detected]]
 if.app-id = "com.microsoft.teams2"
-run = ["layout tiling", "move-node-to-workspace CHROME"]
+run = ["layout tiling", "move-node-to-workspace 2"]
 
 [[on-window-detected]]
 if.app-id = "com.apple.mail"
-run = ["layout tiling", "move-node-to-workspace UTIL"]
+run = ["layout tiling", "move-node-to-workspace 4"]
 
 [[on-window-detected]]
 if.app-id = "com.postmanlabs.mac"
-run = ["layout tiling", "move-node-to-workspace CODE"]
+run = ["layout tiling", "move-node-to-workspace 3"]
 
 [[on-window-detected]]
 if.app-id = "com.tinyapp.TablePlus"
-run = ["layout tiling", "move-node-to-workspace CODE"]
+run = ["layout tiling", "move-node-to-workspace 3"]
 check-further-callbacks = true
 
 [[on-window-detected]]
@@ -151,4 +159,4 @@ run = ["layout floating"]
 
 [[on-window-detected]]
 if.app-id = "com.mitchellh.ghostty"
-run = ["layout tiling", "move-node-to-workspace TERM"]
+run = ["layout tiling", "move-node-to-workspace 5"]
