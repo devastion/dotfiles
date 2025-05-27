@@ -4,14 +4,6 @@ after-login-command = []
 after-startup-command = [
   "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0",
 ]
-exec-on-workspace-change = [
-  "/bin/bash",
-  "-c",
-  "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE",
-]
-on-focus-changed = [
-  "exec-and-forget sketchybar --trigger aerospace_focus_change FOCUSED_WINDOW=$(aerospace list-windows --focused --format '%{window-id}')",
-]
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 start-at-login = true
@@ -27,13 +19,12 @@ accordion-padding = 0
 # on-focus-changed = ['move-mouse window-lazy-center']
 # on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
-# Change if you are using sketchybar
 [gaps]
 inner.horizontal = [{ monitor.main = 16 }, 16]
 inner.vertical = [{ monitor.main = 16 }, 16]
 outer.left = [{ monitor.main = 16 }, 16]
 outer.bottom = [{ monitor.main = 16 }, 16]
-outer.top = [{ monitor.main = 48 }, 16]
+outer.top = [{ monitor.main = 16}, 16]
 outer.right = [{ monitor.main = 16 }, 16]
 
 [workspace-to-monitor-force-assignment]
