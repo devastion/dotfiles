@@ -35,6 +35,7 @@ export ZVM_VI_SURROUND_BINDKEY="s-prefix"
 export ABBR_USER_ABBREVIATIONS_FILE="${ZDOTDIR:-$HOME/.config/zsh}/.zsh-abbr"
 export ZSH_AUTOSUGGEST_STRATEGY=(abbreviations history completion)
 export EZA_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/eza"
+export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
 
 # load plugins
 plugin-load $zsh_plugin_repos

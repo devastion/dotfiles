@@ -1,10 +1,10 @@
 # Devastion's dotfiles
 
-My personal dotfiles currently managed by GNU Stow.
+My personal dotfiles.
 
 ## Setup
 
 ```sh
 git clone git@github.com:devastion/dotfiles.git "$HOME/.dotfiles" && \
-cd "$HOME/.dotfiles" && stow .
+"$HOME/.dotfiles/setup.sh"
 ```
