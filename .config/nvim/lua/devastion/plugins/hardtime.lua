@@ -2,9 +2,9 @@
 return {
   "m4xshen/hardtime.nvim",
   dependencies = { "MunifTanjim/nui.nvim" },
-  lazy = false,
+  lazy = true,
   opts = {
-    enabled = true,
+    enabled = false,
   },
   keys = {
     {

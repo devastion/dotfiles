@@ -19,6 +19,7 @@ return {
   },
   keys = {
     { "<leader>rr", function() require("sniprun").run() end, desc = "Run" },
+    { "<leader>rr", ":'<,'>SnipRun<CR>", desc = "Run (visual)", mode = "v" },
     { "<leader>ri", function() require("sniprun").info() end, desc = "Info" },
     { "<leader>rR", function() require("sniprun").reset() end, desc = "Reset" },
     { "<leader>rm", function() require("sniprun").clear_repl() end, desc = "REPL Memory Clean" },

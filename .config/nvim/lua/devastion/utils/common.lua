@@ -65,4 +65,38 @@ function M.custom_foldtext()
   return result
 end
 
+function M.toggles(decrement)
+  local increment_toggles = {
+    ["false"] = "true",
+  }
+
+  local decrement_toggles = {
+    ["true"] = "false",
+  }
+
+  local toggles = decrement and decrement_toggles or increment_toggles
+
+  local cword = vim.fn.expand("<cword>")
+  local newWord
+
+  for word, opposite in pairs(toggles) do
+    if cword == word then
+      newWord = opposite
+    end
+    if cword == opposite then
+      newWord = word
+    end
+  end
+
+  if type(tonumber(cword)) == "number" then
+    newWord = decrement and (cword - 1) or (cword + 1)
+  end
+
+  if newWord then
+    local prevCursor = vim.api.nvim_win_get_cursor(0)
+    vim.cmd.normal({ '"_ciw' .. newWord, bang = true })
+    vim.api.nvim_win_set_cursor(0, prevCursor)
+  end
+end
+
 return M

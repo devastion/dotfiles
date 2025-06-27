@@ -76,4 +76,8 @@ map("v", ">", ">gv")
 map({ "n", "x" }, "H", "g^", { silent = true })
 map({ "n", "x" }, "L", "g$", { silent = true })
 
+map("n", "<C-a><C-a>", function() require("devastion.utils.common").toggles() end, { desc = "Increment" })
+map("n", "<C-a><C-x>", function() require("devastion.utils.common").toggles(true) end, { desc = "Decrement" })
+map("n", "<C-a><C-d>", function() print(vim.fn.expand("<cword>")) end, { desc = "Print <cword>" })
+
 map("n", "<leader>l", function() require("lazy.view").show("home") end, { desc = "Lazy" })

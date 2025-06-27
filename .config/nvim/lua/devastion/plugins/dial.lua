@@ -12,6 +12,8 @@ end
 ---@type LazySpec
 return {
   "monaqa/dial.nvim",
+  -- INFO: Replaced with common utils toggles function
+  enabled = false,
   -- stylua: ignore
   keys = {
     { "<C-a><C-a>", function() return dial_map(true) end, expr = true, desc = "Increment (dial.nvim)", mode = {"n", "v"} },
