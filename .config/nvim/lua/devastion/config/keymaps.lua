@@ -81,3 +81,21 @@ map("n", "<C-a><C-x>", function() require("devastion.utils.common").toggles(true
 map("n", "<C-a><C-d>", function() print(vim.fn.expand("<cword>")) end, { desc = "Print <cword>" })
 
 map("n", "<leader>l", function() require("lazy.view").show("home") end, { desc = "Lazy" })
+
+map("n", "<leader>fn", function()
+  local path = require("devastion.utils.path").get_root_directory()
+  vim.ui.input({ prompt = "New file name: ", default = path .. "/" }, function(input)
+    if input and input ~= "" then
+      vim.cmd("edit " .. vim.fn.fnameescape(input))
+    end
+  end)
+end, { desc = "New File (root)" })
+
+map("n", "<leader>fN", function()
+  local path = require("devastion.utils.path").buffer_dir()
+  vim.ui.input({ prompt = "New file name: ", default = path .. "/" }, function(input)
+    if input and input ~= "" then
+      vim.cmd("edit " .. vim.fn.fnameescape(input))
+    end
+  end)
+end, { desc = "New File (cwd)" })

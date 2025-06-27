@@ -136,3 +136,37 @@ autocmd({ "ModeChanged" }, {
     end
   end,
 })
+
+autocmd("BufNewFile", {
+  group = augroup("templates", {}),
+  desc = "Use templates for files",
+  pattern = "*.*",
+  callback = function()
+    local template_path = require("devastion.utils.path").get_template_path()
+    local file = io.open(template_path, "r")
+    if not file then
+      return
+    end
+
+    local lines = {}
+    local author = "Dimitar Banev"
+    local date = os.date("%Y-%m-%d")
+
+    for line in file:lines() do
+      line = line:gsub("<DATE>", date):gsub("<AUTHOR>", author)
+      table.insert(lines, line)
+    end
+    file:close()
+
+    vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
+
+    -- INFO: Add execute permission to the user for shell files
+    if vim.bo.filetype == "sh" then
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        buffer = 0,
+        once = true,
+        callback = function() vim.fn.system({ "chmod", "u+x", vim.api.nvim_buf_get_name(0) }) end,
+      })
+    end
+  end,
+})

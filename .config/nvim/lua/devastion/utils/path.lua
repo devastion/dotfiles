@@ -21,8 +21,17 @@ function M.get_root_directory()
   return vim.fn.getcwd()
 end
 
----Get current buffer directory
+--- Get current buffer directory
 ---@return string
 function M.buffer_dir() return vim.fn.expand("%:p:h") end
+
+--- Get template path for current filetype
+---@return string
+function M.get_template_path()
+  local config_dir = vim.fn.stdpath("config")
+  local template_path = config_dir .. "/lua/devastion/templates/template." .. vim.bo.filetype
+
+  return template_path
+end
 
 return M
