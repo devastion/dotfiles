@@ -1,16 +1,6 @@
 ---@type LazySpec
 return {
   "ibhagwan/fzf-lua",
-  dependencies = {
-    {
-      "otavioschwanck/fzf-lua-enchanted-files",
-      config = function()
-        vim.g.fzf_lua_enchanted_files = {
-          max_history_per_cwd = 50,
-        }
-      end,
-    },
-  },
   opts = function()
     local fzf = require("fzf-lua")
     local config = fzf.config
@@ -76,19 +66,10 @@ return {
   keys = {
     -- Find
     { "<leader>:", function() require("fzf-lua").command_history({}) end, desc = "Command History" },
-    -- INFO: Replaced below with fzf-lua-enchanted-files. Currently is a bit
-    -- slow, but hopefully will be fixed in the future
-
-    -- { "<leader>ff", function() require("fzf-lua").files({}) end, desc = "Files (root) " },
-    -- {
-    --   "<leader>fF",
-    --   function() require("fzf-lua").files({ cwd = require("devastion.utils.path").buffer_dir() }) end,
-    --   desc = "Files (cwd)",
-    -- },
-    { "<leader>ff", function() require("fzf-lua-enchanted-files").files({}) end, desc = "Files (root) " },
+    { "<leader>ff", function() require("fzf-lua").files({}) end, desc = "Files (root) " },
     {
       "<leader>fF",
-      function() require("fzf-lua-enchanted-files").files({ cwd = require("devastion.utils.path").buffer_dir() }) end,
+      function() require("fzf-lua").files({ cwd = require("devastion.utils.path").buffer_dir() }) end,
       desc = "Files (cwd)",
     },
     {
