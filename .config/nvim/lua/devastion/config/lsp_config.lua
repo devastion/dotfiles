@@ -39,6 +39,7 @@ vim.diagnostic.config({
   underline = false,
   virtual_lines = false,
   virtual_text = {
+    severity = { min = vim.diagnostic.severity.WARN },
     current_line = false,
     prefix = " ",
     severity_sort = true,

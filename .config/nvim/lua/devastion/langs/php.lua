@@ -112,14 +112,6 @@ return {
     end,
   },
   {
-    "ricardoramirezr/blade-nav.nvim",
-    ft = { "blade", "php" },
-    cond = vim.g.laravel_enabled,
-    opts = {
-      close_tag_on_complete = true,
-    },
-  },
-  {
     "ibhagwan/fzf-lua",
     keys = vim.g.laravel_enabled and {
       {
@@ -143,5 +135,16 @@ return {
         desc = "Tests",
       },
     } or {},
+  },
+  -- TODO: Read docs https://github.com/adibhanna/laravel.nvim
+  {
+    "adibhanna/laravel.nvim",
+    cond = vim.g.laravel_enabled,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    event = { "VeryLazy" },
+    opts = {},
   },
 }

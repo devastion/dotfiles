@@ -1,7 +1,9 @@
 {
+  "allowCompoundWords": true,
   "userWords": [
     "augroup",
     "autocmd",
+    "devastion",
     "keymap",
     "nvim"
   ]
