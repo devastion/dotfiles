@@ -14,13 +14,14 @@ return {
     dependencies = {
       "nvim-neotest/neotest-python",
     },
-    opts = {
-      adapters = {
-        ["neotest-python"] = {
-          runner = "pytest",
-          python = ".venv/bin/python",
-        },
-      },
-    },
+    opts = function(_, opts)
+      opts.adapters["neotest-python"] = opts.adapters["neotest-python"] or {}
+      table.insert(opts.adapters["neotest-python"], {
+        runner = "pytest",
+        python = ".venv/bin/python",
+      })
+
+      return opts
+    end,
   },
 }
