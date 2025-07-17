@@ -61,7 +61,7 @@ return {
     },
     fuzzy = {
       use_frecency = true,
-      implementation = "prefer_rust_with_warning",
+      implementation = "rust",
     },
     completion = {
       keyword = {
@@ -135,7 +135,9 @@ return {
     },
     sources = {
       default = { "lsp", "snippets", "path", "buffer" },
-      providers = {},
+      providers = {
+        lsp = { fallbacks = {} },
+      },
     },
     cmdline = {
       enabled = true,

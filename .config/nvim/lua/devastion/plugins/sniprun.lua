@@ -16,6 +16,11 @@ return {
     display = {
       "TempFloatingWindow",
     },
+    interpreter_options = {
+      TypeScript_original = {
+        interpreter = "node",
+      },
+    },
   },
   keys = {
     { "<leader>rr", function() require("sniprun").run() end, desc = "Run" },

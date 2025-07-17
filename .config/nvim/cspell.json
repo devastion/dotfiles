@@ -3,12 +3,19 @@
   "userWords": [
     "augroup",
     "autocmd",
-    "Banev",
     "devastion",
-    "Dimitar",
+    "getcwd",
     "keymap",
     "nvim",
+    "pytest",
     "seon",
+    "sonarjs",
+    "venv",
+    "vtsls",
     "wilks"
+  ],
+  "words": [
+    "Banev",
+    "Dimitar"
   ]
 }

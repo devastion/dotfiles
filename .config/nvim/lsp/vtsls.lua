@@ -17,7 +17,7 @@ return {
   },
   settings = {
     vtsls = {
-      autoUseWorkspaceTsdk = true,
+      autoUseWorkspaceTsdk = false,
       tsserver = {
         globalPlugin = {
           -- Not working well on vue 2

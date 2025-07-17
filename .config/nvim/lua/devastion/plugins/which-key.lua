@@ -19,6 +19,7 @@ return {
         { "<leader>d", group = "+[Debugger]" },
         { "<leader>t", group = "+[Test]" },
         { "<leader>r", group = "+[Run]" },
+        { "<leader>w", group = "+[WTF]" },
         { "<leader>P", group = "+[Plugins]" },
         { leader_keys.toggles, group = "+[UI Toggles]" },
         { "gr", group = "+[LSP]" },

@@ -139,6 +139,7 @@ return {
   -- TODO: Read docs https://github.com/adibhanna/laravel.nvim
   {
     "adibhanna/laravel.nvim",
+    enabled = false,
     cond = vim.g.laravel_enabled,
     dependencies = {
       "MunifTanjim/nui.nvim",

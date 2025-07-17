@@ -8,6 +8,11 @@ if not tailwind_config_exists then
   vim.lsp.enable("tailwindcss-language-server", false)
 end
 
+local disabled_lsp = { "vtsls" }
+for _k, v in pairs(disabled_lsp) do
+  vim.lsp.enable(v, false)
+end
+
 local signs = { ERROR = "✘", WARN = "▲", HINT = "⚑", INFO = "»" }
 vim.diagnostic.config({
   signs = {
@@ -74,7 +79,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client ~= nil then
       if client.name == "eslint-lsp" then
         client.server_capabilities.documentFormattingProvider = true
-      elseif client.name == "vtsls" or client.name == "vue-language-server" then
+      elseif
+        client.name == "vtsls"
+        or client.name == "vue-language-server"
+        or client.name == "typescript-language-server"
+      then
         client.server_capabilities.documentFormattingProvider = false
       end
     end
