@@ -99,8 +99,15 @@ function zvm_after_init() {
   # insert mode
   zvm_bindkey viins "^a" beginning-of-line
   zvm_bindkey viins "^e" end-of-line
-  zvm_bindkey viins "^j" backward-word
-  zvm_bindkey viins "^k" forward-word
-  zvm_bindkey viins "^h" backward-kill-word
-  zvm_bindkey viins "^l" kill-word
+  zvm_bindkey viins "^f" forward-char
+  zvm_bindkey viins "^b" backward-char
+  zvm_bindkey viins "^[f" forward-word
+  zvm_bindkey viins "^[b" backward-word
+  zvm_bindkey viins "^w" backward-kill-word
+  zvm_bindkey viins "^[d" kill-word
+  zvm_bindkey viins "^[^?" backward-kill-word
 }
+
+if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
