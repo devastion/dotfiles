@@ -55,6 +55,9 @@ alias dco="docker compose"
 alias nvim="mise x node@latest -- nvim"
 
 # history options
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE="${ZDOTDIR}/.zsh_history"
 setopt append_history         # Allow multiple sessions to append to one Zsh command history.
 setopt extended_history       # Show timestamp in history.
 setopt hist_expire_dups_first # Expire A duplicate event first when trimming history.

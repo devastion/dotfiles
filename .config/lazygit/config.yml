@@ -26,8 +26,11 @@ gui:
       - "#db4b4b"
     defaultFgColor:
       - "#c0caf5"
+  showCommandLog: false
+  showBottomLine: false
 
 git:
   paging:
     colorArg: always
     pager: delta --dark --paging=never
+  disableForcePushing: true
