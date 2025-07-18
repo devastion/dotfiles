@@ -1,3 +1,4 @@
+local common_utils = require("devastion.utils.common")
 local lsp_utils = require("devastion.utils.lsp")
 local lsp_configs = lsp_utils.lsp_configs()
 vim.lsp.enable(lsp_configs)
@@ -77,13 +78,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Use ESLint as formatter
     if client ~= nil then
+      local disabled_formatting_lsp = { "vtsls", "vue-language-server", "typescript-language-server" }
       if client.name == "eslint-lsp" then
         client.server_capabilities.documentFormattingProvider = true
-      elseif
-        client.name == "vtsls"
-        or client.name == "vue-language-server"
-        or client.name == "typescript-language-server"
-      then
+      elseif common_utils.table_contains(disabled_formatting_lsp, client.name) then
         client.server_capabilities.documentFormattingProvider = false
       end
     end

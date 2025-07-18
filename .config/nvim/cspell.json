@@ -3,9 +3,13 @@
   "userWords": [
     "augroup",
     "autocmd",
+    "cword",
     "devastion",
+    "foldexpr",
     "getcwd",
+    "jumio",
     "keymap",
+    "npmjs",
     "nvim",
     "pytest",
     "seon",

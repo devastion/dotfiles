@@ -99,4 +99,18 @@ function M.toggles(decrement)
   end
 end
 
+---Check if table contains value
+---@param table table
+---@param value string|number
+---@return boolean
+function M.table_contains(table, value)
+  for i = 1, #table do
+    if table[i] == value then
+      return true
+    end
+  end
+
+  return false
+end
+
 return M

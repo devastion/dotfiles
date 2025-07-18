@@ -11,6 +11,9 @@ return {
     input = { enabled = true },
     words = { enabled = true },
     notifier = { enabled = true },
+    terminal = {
+      win = { style = "float" },
+    },
   },
   init = function()
     ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
@@ -129,6 +132,13 @@ return {
       "grN",
       function() Snacks.rename.rename_file() end,
       desc = "Rename File",
+    },
+    -- Snacks Terminal
+    {
+      "<C-_>",
+      function() Snacks.terminal.toggle() end,
+      desc = "Toggle Terminal",
+      mode = { "n", "t" },
     },
   },
 }

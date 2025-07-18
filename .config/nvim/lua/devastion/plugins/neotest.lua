@@ -3,6 +3,7 @@ return {
   "nvim-neotest/neotest",
   lazy = true,
   dependencies = {
+    "nvim-neotest/neotest-plenary",
     "nvim-neotest/nvim-nio",
   },
   opts = {

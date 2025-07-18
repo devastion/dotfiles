@@ -32,4 +32,11 @@ return {
       { "<leader>cT", function() require("tsc").run() end, desc = "Typescript Typecheck" },
     },
   },
+  {
+    "nvim-neotest/neotest",
+    opts = function(_, opts)
+      table.insert(opts.adapters, require("devastion.extras.neotest-node"))
+      return opts
+    end,
+  },
 }
