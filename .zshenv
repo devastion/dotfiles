@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-# zsh dirs
-export ZDOTDIR="${ZDOTDIR:-$HOME/.config/zsh}"
-
 # xdg
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
@@ -18,3 +15,6 @@ export XDG_PROJECTS_DIR=${XDG_PROJECTS_DIR:-$HOME/Projects}
     [[ -d "${(P)zdir}" ]] || mkdir -p -- "${(P)zdir}"
   done
 } XDG_{CONFIG,CACHE,DATA,STATE}_HOME XDG_{RUNTIME,PROJECTS}_DIR
+
+# zsh dirs
+export ZDOTDIR="${ZDOTDIR:-$HOME/.config/zsh}"

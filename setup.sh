@@ -35,6 +35,8 @@ declare -a home_dir_files=(
 )
 
 for f in "${home_dir_files[@]}"; do
-  ln -sf "${SCRIPTPATH}/${f}" "${HOME}/${f}"
-  echo "${HOME}/${f} linked to ${SCRIPTPATH}/${f}"
+  if [ -f ${SCRIPTPATH}/${f} ]; then
+    ln -sf "${SCRIPTPATH}/${f}" "${HOME}/${f}"
+    echo "${HOME}/${f} linked to ${SCRIPTPATH}/${f}"
+  fi
 done

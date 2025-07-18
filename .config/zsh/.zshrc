@@ -4,62 +4,103 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
-  # homebrew
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
+eval "$(mise activate zsh)"
 
-source "${ZDOTDIR:-$HOME/.config/zsh}/zsh_unplugged.zsh"
+source "${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 
 autoload -U compinit; compinit
-autoload -Uz ${ZDOTDIR:-$HOME/.config/zsh}/functions/*(:t)
+autoload -Uz ${ZDOTDIR}/functions/*(:t)
 
-# list of github plugin repos
-typeset -U zsh_plugin_repos=(
-  romkatv/powerlevel10k
-  aloxaf/fzf-tab
-  devastion/zsh-vi-mode
+source "${ZDOTDIR}/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
-  # deferred
-  romkatv/zsh-defer
-  zdharma-continuum/fast-syntax-highlighting
-  zsh-users/zsh-autosuggestions
-  olets/zsh-autosuggestions-abbreviations-strategy
-  hlissner/zsh-autopair
-  olets/zsh-abbr
-)
+# Use caching to make completion for commands such as dpkg and apt usable.
+zstyle ':completion::complete:*' use-cache true
+zstyle ':completion::complete:*' cache-path "${ZDOTDIR}/.zcompcache"
+zstyle ':completion:*' rehash true
 
-# tool variables
+# enhance completions
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+# variables
 export FZF_DEFAULT_OPTS="--tmux=80% --layout=reverse --highlight-line --cycle --bind=ctrl-f:preview-half-page-down,ctrl-b:preview-half-page-up"
-export ZVM_VI_SURROUND_BINDKEY="s-prefix"
-export ABBR_USER_ABBREVIATIONS_FILE="${ZDOTDIR:-$HOME/.config/zsh}/.zsh-abbr"
-export ZSH_AUTOSUGGEST_STRATEGY=(abbreviations history completion)
 export EZA_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/eza"
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export ZVM_VI_SURROUND_BINDKEY="s-prefix"
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
 
-# load plugins
-plugin-load $zsh_plugin_repos
+# aliases
+alias l="eza --git"
+alias ll="l -lao --group-directories-first"
+alias ld="l -lD"
+alias lf="l -lf"
+alias lh="l -ld .* --group-directories-first"
+alias lt="l -la --sort=modified --reverse"
+alias ls="ll"
 
-source "${ZDOTDIR:-$HOME/.config/zsh}/zstyles.zsh"
-source "${ZDOTDIR:-$HOME/.config/zsh}/options.zsh"
-source "${ZDOTDIR:-$HOME/.config/zsh}/aliases.zsh"
+alias "cd.."="cd_up"
+alias pbc="pbcopy"
+alias pbp="pbpaste"
+alias nr="npm run"
+alias dco="docker compose"
 
+alias nvim="mise x node@latest -- nvim"
+
+# history options
+setopt append_history         # Allow multiple sessions to append to one Zsh command history.
+setopt extended_history       # Show timestamp in history.
+setopt hist_expire_dups_first # Expire A duplicate event first when trimming history.
+setopt hist_find_no_dups      # Do not display a previously found event.
+setopt hist_ignore_all_dups   # Remove older duplicate entries from history.
+setopt hist_ignore_dups       # Do not record an event that was just recorded again.
+setopt hist_ignore_space      # Do not record an Event Starting With A Space.
+setopt hist_reduce_blanks     # Remove superfluous blanks from history items.
+setopt hist_save_no_dups      # Do not write a duplicate event to the history file.
+setopt hist_verify            # Do not execute immediately upon history expansion.
+setopt inc_append_history     # Write to the history file immediately, not when the shell exits.
+setopt share_history          # Share history between different instances of the shell.
+
+# other
+setopt auto_cd                # Use cd by typing directory name if it's not a command.
+setopt auto_list              # Automatically list choices on ambiguous completion.
+setopt auto_pushd             # Make cd push the old directory onto the directory stack.
+setopt bang_hist              # Treat the '!' character, especially during Expansion.
+setopt interactive_comments   # Comments even in interactive shells.
+setopt multios                # Implicit tees or cats when multiple redirections are attempted.
+setopt no_beep                # Don't beep on error.
+setopt prompt_subst           # Substitution of parameters inside the prompt each time the prompt is drawn.
+setopt pushd_ignore_dups      # Don't push multiple copies directory onto the directory stack.
+setopt pushd_minus            # Swap the meaning of cd +1 and cd -1 to the opposite.
+
+zle_highlight=('paste:none')  # Disables highlight on paste
+
+source "${ZDOTDIR}/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+source "${ZDOTDIR}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+source "${ZDOTDIR}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
+source "${ZDOTDIR}/plugins/zsh-autopair/zsh-autopair.plugin.zsh"
+
+[[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source "${ZDOTDIR}/.p10k.zsh"
+eval "$(zoxide init zsh)"
+
+# zsh-vi-mode
 function zvm_after_init() {
   FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)
-  bindkey -M viins "^a" beginning-of-line
-  bindkey -M viins "^e" end-of-line
-  bindkey -M viins "^j" backward-word
-  bindkey -M viins "^k" forward-word
-  bindkey -M viins "^h" backward-kill-word
-  bindkey -M viins "^l" kill-word
+  # normal mode
+  zvm_bindkey vicmd "/" fzf-history-widget
+
+  # insert mode
+  zvm_bindkey viins "^a" beginning-of-line
+  zvm_bindkey viins "^e" end-of-line
+  zvm_bindkey viins "^j" backward-word
+  zvm_bindkey viins "^k" forward-word
+  zvm_bindkey viins "^h" backward-kill-word
+  zvm_bindkey viins "^l" kill-word
 }
-
-function zvm_after_lazy_keybindings() {
-  bindkey -M vicmd "^M" autosuggest-execute
-  bindkey -M vicmd "/" fzf-history-widget
-}
-
-[[ ! -f "${ZDOTDIR:-$HOME/.config/zsh}/.p10k.zsh" ]] || source "${ZDOTDIR:-$HOME/.config/zsh}/.p10k.zsh"
-
-eval "$(${HOME}/.local/bin/mise activate zsh --shims)"
-zsh-defer eval "$(zoxide init zsh)"

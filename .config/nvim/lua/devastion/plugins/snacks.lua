@@ -140,5 +140,11 @@ return {
       desc = "Toggle Terminal",
       mode = { "n", "t" },
     },
+    {
+      "<C-/>",
+      function() Snacks.terminal.toggle() end,
+      desc = "Toggle Terminal",
+      mode = { "n", "t" },
+    },
   },
 }
