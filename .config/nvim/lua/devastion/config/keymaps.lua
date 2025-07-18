@@ -5,6 +5,8 @@ map("x", "D", '"_d', { desc = "Delete without yanking" })
 -- Allow moving the cursor through wrapped lines with j, k
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "$", "v:count == 0 ? 'g$' : '$'", { desc = "End of Line", expr = true, silent = true })
+map({ "n", "x" }, "0", "v:count == 0 ? 'g0' : '0'", { desc = "Start of Line", expr = true, silent = true })
 
 -- Commenting
 map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })

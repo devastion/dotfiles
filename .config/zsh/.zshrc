@@ -40,12 +40,18 @@ export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
 # load plugins
 plugin-load $zsh_plugin_repos
 
-zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/zstyles.zsh"
-zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/options.zsh"
-zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/aliases.zsh"
+source "${ZDOTDIR:-$HOME/.config/zsh}/zstyles.zsh"
+source "${ZDOTDIR:-$HOME/.config/zsh}/options.zsh"
+source "${ZDOTDIR:-$HOME/.config/zsh}/aliases.zsh"
 
 function zvm_after_init() {
   FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)
+  bindkey -M viins "^a" beginning-of-line
+  bindkey -M viins "^e" end-of-line
+  bindkey -M viins "^j" backward-word
+  bindkey -M viins "^k" forward-word
+  bindkey -M viins "^h" backward-kill-word
+  bindkey -M viins "^l" kill-word
 }
 
 function zvm_after_lazy_keybindings() {

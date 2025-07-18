@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+HISTSIZE=10000                  # the maximum number of events to save in the internal history.
+SAVEHIST=10000                  # the maximum number of events to save in the history file.
+HISTFILE="${ZDOTDIR}/.zsh_history"
+HISTDUP=erase
+
 # changing directories
 setopt auto_cd                  # if a command isn't valid, but is a directory, cd to that dir
 setopt auto_pushd               # make cd push the old directory onto the directory stack
@@ -39,6 +44,3 @@ unsetopt hup                    # don't kill jobs on shell exit
 
 # other
 unsetopt beep
-
-histsize=10000                  # the maximum number of events to save in the internal history.
-savehist=10000                  # the maximum number of events to save in the history file.
