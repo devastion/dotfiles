@@ -103,40 +103,6 @@ autocmd({ "VimResized" }, {
   end,
 })
 
--- TODO: Refactor TMux leader autocmd
-local tmux_leader = vim.system({ "tmux", "show", "-gv", "prefix" }, {}):wait().stdout:match("%S+")
-
-local function unset_tmux_leader()
-  if tmux_leader then
-    vim.system({ "tmux", "set-option", "-p", "prefix", "None" }, {})
-  end
-end
-
-local function reset_tmux_leader()
-  if tmux_leader then
-    vim.system({ "tmux", "set-option", "-p", "prefix", tmux_leader }, {})
-  end
-end
-
-vim.api.nvim_create_user_command("ResetTmuxLeader", function()
-  local leader = tmux_leader or "C-Space"
-  vim.system({ "tmux", "set-option", "-g", "prefix", leader }, {})
-  vim.notify("Leader set to C-Space", vim.log.levels.INFO, { title = "TMux" })
-end, {})
-
-autocmd({ "ModeChanged" }, {
-  group = augroup("i_tmux_unset_leader", {}),
-  desc = "Disable tmux leader in insert mode",
-  callback = function(args)
-    local new_mode = args.match:sub(-1)
-    if new_mode == "i" then
-      unset_tmux_leader()
-    else
-      reset_tmux_leader()
-    end
-  end,
-})
-
 autocmd("BufNewFile", {
   group = augroup("templates", {}),
   desc = "Use templates for files",
@@ -170,3 +136,5 @@ autocmd("BufNewFile", {
     end
   end,
 })
+
+require("devastion.utils.tmux").setup()
