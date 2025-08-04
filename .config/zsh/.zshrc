@@ -36,6 +36,7 @@ export EZA_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/eza"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export ZVM_VI_SURROUND_BINDKEY="s-prefix"
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
+export ABBR_USER_ABBREVIATIONS_FILE="${ZDOTDIR:-$HOME/.config/zsh}/.zsh-abbr"
 
 # aliases
 alias l="eza --git"
@@ -47,10 +48,12 @@ alias lt="l -la --sort=modified --reverse"
 alias ls="ll"
 
 alias "cd.."="cd_up"
-alias pbc="pbcopy"
-alias pbp="pbpaste"
-alias nr="npm run"
-alias dco="docker compose"
+
+# Replaced with zsh-abbr
+# alias pbc="pbcopy"
+# alias pbp="pbpaste"
+# alias nr="npm run"
+# alias dco="docker compose"
 
 alias nvim="mise x node@latest -- nvim"
 
@@ -89,6 +92,7 @@ source "${ZDOTDIR}/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 source "${ZDOTDIR}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 source "${ZDOTDIR}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
 source "${ZDOTDIR}/plugins/zsh-autopair/zsh-autopair.plugin.zsh"
+source "${ZDOTDIR}/plugins/zsh-abbr/zsh-abbr.plugin.zsh"
 
 [[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source "${ZDOTDIR}/.p10k.zsh"
 eval "$(zoxide init zsh)"
