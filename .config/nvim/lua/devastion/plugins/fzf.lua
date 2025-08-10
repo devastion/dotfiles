@@ -1,6 +1,9 @@
 ---@type LazySpec
 return {
   "ibhagwan/fzf-lua",
+  dependencies = {
+    { "elanmed/fzf-lua-frecency.nvim", opts = {} },
+  },
   opts = function()
     local fzf = require("fzf-lua")
     local config = fzf.config
@@ -88,7 +91,11 @@ return {
       end,
       desc = "Buffers (root) ",
     },
-    { "<leader>fr", function() require("fzf-lua").oldfiles({}) end, desc = "Recent Files" },
+    {
+      "<leader>fr",
+      function() require("fzf-lua").frecency({ cwd_only = true, all_files = true }) end,
+      desc = "Recent Files",
+    },
     { "<leader>fg", function() require("fzf-lua").git_files({}) end, desc = "Git Files" },
     { "<leader>fT", function() require("fzf-lua").filetypes({}) end, desc = "Filetypes" },
     { "<leader>f<tab>", function() require("fzf-lua").tabs({}) end, desc = "Tabs" },
