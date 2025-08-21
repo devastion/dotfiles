@@ -6,21 +6,24 @@ return {
   },
   opts = function()
     local fzf = require("fzf-lua")
-    local config = fzf.config
     local actions = fzf.actions
-
-    -- Quickfix
-    config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
-    config.defaults.keymap.fzf["ctrl-u"] = "half-page-up"
-    config.defaults.keymap.fzf["ctrl-d"] = "half-page-down"
-    config.defaults.keymap.fzf["ctrl-x"] = "jump"
-    config.defaults.keymap.fzf["ctrl-f"] = "preview-page-down"
-    config.defaults.keymap.fzf["ctrl-b"] = "preview-page-up"
-    config.defaults.keymap.builtin["<c-f>"] = "preview-page-down"
-    config.defaults.keymap.builtin["<c-b>"] = "preview-page-up"
 
     return {
       "hide",
+      keymap = {
+        builtin = {
+          ["<C-f>"] = "preview-page-down",
+          ["<C-b>"] = "preview-page-up",
+        },
+        fzf = {
+          ["ctrl-q"] = "select-all+accept",
+          ["ctrl-u"] = "half-page-up",
+          ["ctrl-d"] = "half-page-down",
+          ["ctrl-x"] = "jump",
+          ["ctrl-f"] = "preview-page-down",
+          ["ctrl-b"] = "preview-page-up",
+        },
+      },
       fzf_colors = true,
       fzf_opts = {
         ["--no-scrollbar"] = true,
@@ -95,6 +98,11 @@ return {
       "<leader>fr",
       function() require("fzf-lua").frecency({ cwd_only = true, all_files = true }) end,
       desc = "Recent Files",
+    },
+    {
+      "<leader>fR",
+      function() require("fzf-lua-frecency").clear_db() end,
+      desc = "Clear Recent Files",
     },
     { "<leader>fg", function() require("fzf-lua").git_files({}) end, desc = "Git Files" },
     { "<leader>fT", function() require("fzf-lua").filetypes({}) end, desc = "Filetypes" },
