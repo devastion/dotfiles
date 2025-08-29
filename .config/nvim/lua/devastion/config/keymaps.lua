@@ -5,8 +5,8 @@ map("x", "D", '"_d', { desc = "Delete without yanking" })
 -- Allow moving the cursor through wrapped lines with j, k
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-map({ "n", "x" }, "$", "v:count == 0 ? 'g$' : '$'", { desc = "End of Line", expr = true, silent = true })
-map({ "n", "x" }, "0", "v:count == 0 ? 'g0' : '0'", { desc = "Start of Line", expr = true, silent = true })
+-- map({ "n", "x" }, "$", "v:count == 0 ? 'g$' : '$'", { desc = "End of Line", expr = true, silent = true })
+-- map({ "n", "x" }, "0", "v:count == 0 ? 'g0' : '0'", { desc = "Start of Line", expr = true, silent = true })
 
 -- Commenting
 map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
@@ -58,10 +58,16 @@ map("n", "<leader><tab>h", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "[<tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "<leader><tab>r", function()
   vim.ui.input({ prompt = "Tab Name: " }, function(name)
-    vim.schedule(function()
-      vim.api.nvim_tabpage_set_var(0, "name", name or vim.api.nvim_tabpage_get_number(0))
-      vim.schedule(function() vim.cmd.redrawtabline() end)
-    end)
+    local current_tab = vim.api.nvim_get_current_tabpage()
+    if name then
+      vim.g["TabPageCustomName" .. current_tab] = name
+      vim.schedule(function()
+        vim.api.nvim_tabpage_set_var(0, "name", name)
+        vim.schedule(function() vim.cmd.redrawtabline() end)
+      end)
+    else
+      vim.g["TabPageCustomName" .. current_tab] = nil
+    end
   end)
 end, { desc = "Rename Tab" })
 

@@ -35,8 +35,11 @@ function M.create_auto_command()
 end
 
 function M.setup()
-  M.create_auto_command()
-  M.create_user_command()
+  local is_tmux = os.getenv("TMUX")
+  if is_tmux then
+    M.create_auto_command()
+    M.create_user_command()
+  end
 end
 
 return M
