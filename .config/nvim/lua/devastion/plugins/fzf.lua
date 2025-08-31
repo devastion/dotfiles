@@ -3,6 +3,13 @@ return {
   "ibhagwan/fzf-lua",
   dependencies = {
     { "elanmed/fzf-lua-frecency.nvim", opts = {} },
+    {
+      "piersolenski/import.nvim",
+      opts = {
+        picker = "fzf-lua",
+        insert_at_top = true,
+      },
+    },
   },
   opts = function()
     local fzf = require("fzf-lua")
@@ -107,6 +114,7 @@ return {
     { "<leader>fg", function() require("fzf-lua").git_files({}) end, desc = "Git Files" },
     { "<leader>fT", function() require("fzf-lua").filetypes({}) end, desc = "Filetypes" },
     { "<leader>f<tab>", function() require("fzf-lua").tabs({}) end, desc = "Tabs" },
+    { "<leader>fi", function() require("import").pick() end, desc = "Imports" },
     -- Search
     { "<leader>s'", function() require("fzf-lua").marks({}) end, desc = "Marks" },
     { '<leader>s"', function() require("fzf-lua").registers({}) end, desc = "Registers" },
