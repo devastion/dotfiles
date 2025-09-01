@@ -19,8 +19,8 @@ end
 ---@param lhs string
 ---@param rhs string|function
 ---@param desc string
----@param mode string|table
----@param opts table
+---@param mode string|table|nil
+---@param opts table|nil
 function M.remap(lhs, rhs, desc, mode, opts)
   opts = opts or {}
   opts.desc = desc

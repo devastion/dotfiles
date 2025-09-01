@@ -3,6 +3,7 @@ return {
   "yetone/avante.nvim",
   event = "VeryLazy",
   version = "*",
+  enabled = false,
   opts = {
     provider = "openai",
     auto_suggestions_provider = "openai",

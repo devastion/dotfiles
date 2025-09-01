@@ -10,7 +10,6 @@ return {
       preset = "modern",
       delay = 0,
       spec = {
-        { "<leader>a", group = "+[Avante]", mode = { "n", "v" } },
         { "<leader>f", group = "+[Find]" },
         { "<leader>c", group = "+[Code]", mode = { "n", "v" } },
         { "<leader>s", group = "+[Search]", mode = { "n", "v" } },
@@ -19,7 +18,6 @@ return {
         { "<leader>d", group = "+[Debugger]" },
         { "<leader>t", group = "+[Test]" },
         { "<leader>r", group = "+[Run]" },
-        { "<leader>w", group = "+[WTF]" },
         { "<leader>P", group = "+[Plugins]" },
         { leader_keys.toggles, group = "+[UI Toggles]" },
         { "gr", group = "+[LSP]" },

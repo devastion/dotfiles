@@ -2,19 +2,11 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false,
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
-    main = "nvim-treesitter.configs",
-    event = { "BufReadPost", "BufWritePost", "BufNewFile", "VeryLazy" },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      "rrethy/nvim-treesitter-endwise",
-    },
-    init = function(plugin)
-      require("lazy.core.loader").add_to_rtp(plugin)
-      require("nvim-treesitter.query_predicates")
-    end,
     opts_extend = { "ensure_installed" },
+    ---@class TSConfig
     opts = {
       ensure_installed = {
         "ruby",
@@ -26,72 +18,82 @@ return {
         "diff",
         "regex",
       },
-      auto_install = true,
-      highlight = {
-        enable = true,
-        disable = { "tmux" },
-        additional_vim_regex_highlighting = { "ruby" },
-      },
-      indent = { enable = true, disable = { "ruby" } },
-      endwise = { enable = true },
-      textobjects = {
-        swap = {
-          enable = true,
-          swap_next = {
-            ["<C-a><C-n>"] = "@parameter.inner",
-          },
-          swap_previous = {
-            ["<C-a><C-p>"] = "@parameter.inner",
-          },
-        },
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["al"] = "@loop.outer",
-            ["il"] = "@loop.inner",
-            ["ac"] = "@conditional.outer",
-            ["ic"] = "@conditional.inner",
-            ["ap"] = "@parameter.outer",
-            ["ip"] = "@parameter.inner",
-          },
-        },
-        move = {
-          enable = true,
-          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
-          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-          goto_previous_start = { ["[f"] = "@function.outer", ["[a"] = "@parameter.inner" },
-          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
-        },
-      },
     },
     config = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        opts.ensure_installed = require("devastion.utils.common").dedup(opts.ensure_installed)
+      local utils = require("devastion.utils.common")
+      local ensure_installed = utils.dedup(opts.ensure_installed)
+
+      if ensure_installed and #ensure_installed > 0 then
+        require("nvim-treesitter").install(ensure_installed)
+        -- register and start parsers for filetypes
+        for _, parser in ipairs(ensure_installed) do
+          local filetypes = parser -- In this case, parser is the filetype/language name
+          vim.treesitter.language.register(parser, filetypes)
+
+          vim.api.nvim_create_autocmd({ "FileType" }, {
+            pattern = filetypes,
+            callback = function(event) vim.treesitter.start(event.buf, parser) end,
+          })
+        end
       end
-      require("nvim-treesitter.configs").setup(opts)
+
+      -- Auto-install and start parsers for any buffer
+      vim.api.nvim_create_autocmd({ "BufRead" }, {
+        callback = function(event)
+          local bufnr = event.buf
+          local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+
+          -- Skip if no filetype
+          if filetype == "" then
+            return
+          end
+
+          -- Check if this filetype is already handled by explicit ensure_installed config
+          for _, filetypes in pairs(ensure_installed) do
+            local ft_table = type(filetypes) == "table" and filetypes or { filetypes }
+            if vim.tbl_contains(ft_table, filetype) then
+              return -- Already handled above
+            end
+          end
+
+          -- Get parser name based on filetype
+          local parser_name = vim.treesitter.language.get_lang(filetype) -- might return filetype (not helpful)
+          if not parser_name then
+            return
+          end
+          -- Try to get existing parser (helpful check if filetype was returned above)
+          local parser_configs = require("nvim-treesitter.parsers")
+          if not parser_configs[parser_name] then
+            return -- Parser not available, skip silently
+          end
+
+          local parser_installed = pcall(vim.treesitter.get_parser, bufnr, parser_name)
+
+          if not parser_installed then
+            -- If not installed, install parser synchronously
+            require("nvim-treesitter").install({ parser_name }):wait(30000)
+          end
+
+          -- let's check again
+          parser_installed = pcall(vim.treesitter.get_parser, bufnr, parser_name)
+
+          if parser_installed then
+            -- Start treesitter for this buffer
+            vim.treesitter.start(bufnr, parser_name)
+          end
+        end,
+      })
     end,
-    keys = {
-      {
-        ";",
-        function() require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_next() end,
-        desc = "Repeat Last Move Next",
-        mode = { "n", "x", "o" },
-      },
-      {
-        ",",
-        function() require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_previous() end,
-        desc = "Repeat Last Move Previous",
-        mode = { "n", "x", "o" },
-      },
-    },
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-    opts = { mode = "cursor", max_lines = 0 },
+    opts = {
+      enable_autocmd = true,
+      mode = "cursor",
+      max_lines = 0,
+      multiwindow = true,
+    },
     keys = {
       {
         "[c",
@@ -99,6 +101,66 @@ return {
         desc = "Context",
       },
     },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = { { "nvim-treesitter/nvim-treesitter", branch = "main" } },
+    branch = "main",
+    lazy = false,
+    ---@module "nvim-treesitter-textobjects"
+    opts = {
+      select = {
+        lookahead = true,
+      },
+      move = {
+        set_jumps = true,
+      },
+      multiwindow = true,
+    },
+    config = function(_, opts)
+      require("nvim-treesitter-textobjects").setup(opts)
+      local map = require("devastion.utils.common").remap
+
+      -- TODO: Add more
+      local text_objects_outer = { f = "@function.outer", c = "@class.outer", p = "@parameter.outer" }
+      local text_objects_inner = { f = "@function.inner", c = "@class.inner", p = "@parameter.inner" }
+
+      local select_textobject = require("nvim-treesitter-textobjects.select").select_textobject
+      local goto_next_start = require("nvim-treesitter-textobjects.move").goto_next_start
+      local goto_next_end = require("nvim-treesitter-textobjects.move").goto_next_end
+      local goto_previous_start = require("nvim-treesitter-textobjects.move").goto_previous_start
+      local goto_previous_end = require("nvim-treesitter-textobjects.move").goto_previous_end
+
+      for k, v in pairs(text_objects_outer) do
+        map("a" .. k, function() select_textobject(v, "textobjects") end, "Select " .. v, { "x", "o" })
+        map(
+          "[" .. k,
+          function() goto_previous_start(v, "textobjects") end,
+          "Goto Previous Start " .. v,
+          { "n", "x", "o" }
+        )
+        map(
+          "[" .. string.upper(k),
+          function() goto_previous_end(v, "textobjects") end,
+          "Goto Previous End " .. v,
+          { "n", "x", "o" }
+        )
+      end
+
+      for k, v in pairs(text_objects_inner) do
+        map("i" .. k, function() select_textobject(v, "textobjects") end, "Select " .. v, { "x", "o" })
+        map("]" .. k, function() goto_next_start(v, "textobjects") end, "Goto Next Start " .. v, { "n", "x", "o" })
+        map(
+          "]" .. string.upper(k),
+          function() goto_next_end(v, "textobjects") end,
+          "Goto Next End " .. v,
+          { "n", "x", "o" }
+        )
+      end
+    end,
+  },
+  {
+    "rrethy/nvim-treesitter-endwise",
   },
   {
     "chrisgrieser/nvim-various-textobjs",
