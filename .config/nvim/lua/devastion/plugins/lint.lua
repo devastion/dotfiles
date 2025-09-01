@@ -46,5 +46,5 @@ return {
 
     vim.keymap.set("n", "<leader>cl", function() lint.try_lint() end, { desc = "Lint" })
   end,
-  init = function() vim.g.autolint_enabled = false end,
+  init = function() vim.g.autolint_enabled = true end,
 }

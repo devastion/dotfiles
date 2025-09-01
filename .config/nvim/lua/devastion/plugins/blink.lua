@@ -17,7 +17,8 @@ return {
     "echasnovski/mini.icons",
   },
   version = "1.*",
-  event = { "InsertEnter", "CmdlineEnter" },
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
   opts = {
     keymap = {
       preset = "none",

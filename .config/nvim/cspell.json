@@ -4,6 +4,7 @@
     "augroup",
     "autocmd",
     "autocmds",
+    "Cmdline",
     "cword",
     "devastion",
     "foldexpr",

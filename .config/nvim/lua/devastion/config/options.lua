@@ -35,7 +35,7 @@ o.splitbelow = true
 o.splitright = true
 
 -- Session
-o.sessionoptions = "globals,buffers,tabpages,folds"
+o.sessionoptions = "globals,buffers,tabpages,folds,winsize,winpos,curdir"
 
 -- Search
 o.ignorecase = true

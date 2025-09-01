@@ -89,7 +89,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     lsp_keymap(
       lsp_methods.textDocument_references,
       "grr",
-      function() require("fzf-lua").lsp_references({}) end,
+      function() require("fzf-lua").lsp_references({ ignore_current_line = true }) end,
       "References"
     )
     lsp_keymap(
@@ -154,7 +154,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     lsp_keymap(
       lsp_methods.textDocument_definition,
       "gd",
-      function() require("fzf-lua").lsp_definitions({}) end,
+      function()
+        require("fzf-lua").lsp_definitions({
+          sync = true,
+          jump_to_single_result = true,
+          jump_to_single_result_action = require("fzf-lua.actions").file_vsplit,
+        })
+      end,
       "LSP: Definition"
     )
     lsp_keymap(

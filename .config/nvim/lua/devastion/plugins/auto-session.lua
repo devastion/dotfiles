@@ -5,6 +5,7 @@ return {
   dependencies = {
     {
       "tiagovla/scope.nvim",
+      lazy = false,
       opts = {},
     },
   },

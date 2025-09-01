@@ -2,12 +2,30 @@
 return {
   "ibhagwan/fzf-lua",
   dependencies = {
-    { "elanmed/fzf-lua-frecency.nvim", opts = {} },
+    {
+      "elanmed/fzf-lua-frecency.nvim",
+      opts = {},
+      keys = {
+        {
+          "<leader>fr",
+          function() require("fzf-lua-frecency").frecency({ cwd_only = true, all_files = true }) end,
+          desc = "Recent Files",
+        },
+        {
+          "<leader>fR",
+          function() require("fzf-lua-frecency").clear_db() end,
+          desc = "Clear Recent Files",
+        },
+      },
+    },
     {
       "piersolenski/import.nvim",
       opts = {
         picker = "fzf-lua",
         insert_at_top = true,
+      },
+      keys = {
+        { "<leader>fi", function() require("import").pick() end, desc = "Imports" },
       },
     },
   },
@@ -101,20 +119,9 @@ return {
       end,
       desc = "Buffers (root) ",
     },
-    {
-      "<leader>fr",
-      function() require("fzf-lua").frecency({ cwd_only = true, all_files = true }) end,
-      desc = "Recent Files",
-    },
-    {
-      "<leader>fR",
-      function() require("fzf-lua-frecency").clear_db() end,
-      desc = "Clear Recent Files",
-    },
     { "<leader>fg", function() require("fzf-lua").git_files({}) end, desc = "Git Files" },
     { "<leader>fT", function() require("fzf-lua").filetypes({}) end, desc = "Filetypes" },
     { "<leader>f<tab>", function() require("fzf-lua").tabs({}) end, desc = "Tabs" },
-    { "<leader>fi", function() require("import").pick() end, desc = "Imports" },
     -- Search
     { "<leader>s'", function() require("fzf-lua").marks({}) end, desc = "Marks" },
     { '<leader>s"', function() require("fzf-lua").registers({}) end, desc = "Registers" },

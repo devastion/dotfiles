@@ -2,9 +2,14 @@
 return {
   "gbprod/yanky.nvim",
   lazy = true,
+  dependencies = {
+    "kkharji/sqlite.lua",
+  },
   opts = {
     ring = {
-      history_length = 1000,
+      storage = "sqlite",
+      storage_path = vim.fn.stdpath("data") .. "/databases/yanky.db",
+      history_length = 10000,
     },
     highlight = {
       on_yank = false,
