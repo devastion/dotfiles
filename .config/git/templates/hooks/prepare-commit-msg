@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+BRANCH=$(git branch | grep '^\*' | cut -b3- | cut -f1,2 -d'-')
+BRANCHTYPE=${BRANCH%/*}
+FILE=$(cat "$1")
+
+FIRSTLINE=$(sed -n "1p" "$1")
+if [[ -z $FIRSTLINE ]]; then
+    echo -e "$BRANCHTYPE: $FILE" >"$1"
+fi

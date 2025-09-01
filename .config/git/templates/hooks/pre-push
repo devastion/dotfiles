@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+if [ -x "$(command -v gitleaks)" ]; then
+  gitleaks -v --exit-code 0 dir
+  gitleaks -v --exit-code 1 git
+fi
