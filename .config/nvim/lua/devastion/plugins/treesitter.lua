@@ -122,8 +122,20 @@ return {
       local map = require("devastion.utils.common").remap
 
       -- TODO: Add more
-      local text_objects_outer = { f = "@function.outer", c = "@class.outer", p = "@parameter.outer" }
-      local text_objects_inner = { f = "@function.inner", c = "@class.inner", p = "@parameter.inner" }
+      local text_objects_outer = {
+        f = "@function.outer",
+        c = "@class.outer",
+        p = "@parameter.outer",
+        l = "@loop.outer",
+        a = "@attribute.outer",
+      }
+      local text_objects_inner = {
+        f = "@function.inner",
+        c = "@class.inner",
+        p = "@parameter.inner",
+        l = "@loop.inner",
+        a = "@attribute.inner",
+      }
 
       local select_textobject = require("nvim-treesitter-textobjects.select").select_textobject
       local goto_next_start = require("nvim-treesitter-textobjects.move").goto_next_start

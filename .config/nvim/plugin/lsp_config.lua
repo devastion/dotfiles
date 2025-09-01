@@ -156,8 +156,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "gd",
       function()
         require("fzf-lua").lsp_definitions({
-          sync = true,
-          jump1_action = true,
+          jump1 = true,
         })
       end,
       "LSP: Definition"
