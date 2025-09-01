@@ -6,6 +6,10 @@ fi
 
 eval "$(mise activate zsh)"
 
+if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 source "${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 
 autoload -U compinit; compinit
@@ -114,7 +118,3 @@ function zvm_after_init() {
   zvm_bindkey viins "^[d" kill-word
   zvm_bindkey viins "^[^?" backward-kill-word
 }
-
-if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
