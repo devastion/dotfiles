@@ -19,7 +19,7 @@ return {
     pre_save_cmds = {
       "ScopeSaveState",
     },
-    post_restore_cmds = { "ScopeLoadState", "RestoreTabPagesName" },
+    post_restore_cmds = { "ScopeLoadState", "RestoreTabPagesName", "TSContext enable" },
   },
   keys = {
     {

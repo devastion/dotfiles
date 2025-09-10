@@ -2,8 +2,6 @@
 return {
   "nvim-neotest/neotest",
   lazy = true,
-  -- TODO: Remove when fix is merged
-  branch = "fix/subprocess/load-adapters",
   dependencies = {
     "nvim-neotest/neotest-plenary",
     "nvim-neotest/nvim-nio",

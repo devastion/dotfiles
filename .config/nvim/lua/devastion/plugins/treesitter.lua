@@ -22,6 +22,7 @@ return {
     config = function(_, opts)
       local utils = require("devastion.utils.common")
       local ensure_installed = utils.dedup(opts.ensure_installed)
+      local ignored = { "tmux" }
 
       if ensure_installed and #ensure_installed > 0 then
         require("nvim-treesitter").install(ensure_installed)
@@ -50,6 +51,13 @@ return {
 
           -- Check if this filetype is already handled by explicit ensure_installed config
           for _, filetypes in pairs(ensure_installed) do
+            local ft_table = type(filetypes) == "table" and filetypes or { filetypes }
+            if vim.tbl_contains(ft_table, filetype) then
+              return -- Already handled above
+            end
+          end
+
+          for _, filetypes in pairs(ignored) do
             local ft_table = type(filetypes) == "table" and filetypes or { filetypes }
             if vim.tbl_contains(ft_table, filetype) then
               return -- Already handled above
@@ -169,6 +177,17 @@ return {
           { "n", "x", "o" }
         )
       end
+
+      map(
+        "<C-a><C-n>",
+        function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end,
+        "Swap @parameter with next"
+      )
+      map(
+        "<C-a><C-p>",
+        function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end,
+        "Swap @parameter with previous"
+      )
     end,
   },
   {

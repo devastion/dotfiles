@@ -13,6 +13,8 @@ function M.lsp_configs()
   return lsp_configs
 end
 
+---Install packages with mason
+---@param packages table<string>
 function M.mason_install(packages)
   local mr = require("mason-registry")
 
