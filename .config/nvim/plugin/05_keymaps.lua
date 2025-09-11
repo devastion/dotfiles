@@ -54,20 +54,6 @@ map("n", "<leader><tab>l", vim.cmd.tabnext, { desc = "Next Tab" })
 map("n", "]<tab>", vim.cmd.tabnext, { desc = "Next Tab" })
 map("n", "<leader><tab>h", vim.cmd.tabprevious, { desc = "Previous Tab" })
 map("n", "[<tab>", vim.cmd.tabprevious, { desc = "Previous Tab" })
-map("n", "<leader><tab>r", function()
-  vim.ui.input({ prompt = "Tab Name: " }, function(name)
-    local current_tab = vim.api.nvim_get_current_tabpage()
-    if name then
-      vim.g["TabPageCustomName" .. current_tab] = name
-      vim.schedule(function()
-        vim.api.nvim_tabpage_set_var(0, "name", name)
-        vim.schedule(function() vim.cmd.redrawtabline() end)
-      end)
-    else
-      vim.g["TabPageCustomName" .. current_tab] = nil
-    end
-  end)
-end, { desc = "Rename Tab" })
 
 -- Add undo break-points
 map("i", ",", ",<c-g>u")

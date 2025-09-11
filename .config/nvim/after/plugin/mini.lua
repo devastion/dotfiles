@@ -13,7 +13,6 @@ end)
 MiniDeps.later(function() require("mini.move").setup() end)
 MiniDeps.later(function() require("mini.comment").setup() end)
 MiniDeps.later(function() require("mini.cursorword").setup() end)
-MiniDeps.later(function() require("mini.bufremove").setup() end)
 
 MiniDeps.later(function()
   local function setup_mini_pairs(opts)

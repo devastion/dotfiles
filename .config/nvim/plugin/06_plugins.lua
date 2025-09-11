@@ -34,21 +34,13 @@ MiniDeps.now(function()
 end)
 
 MiniDeps.now(function()
-  MiniDeps.add({
-    source = "rmagatti/auto-session",
-    depends = { "tiagovla/scope.nvim" },
-  })
+  MiniDeps.add({ source = "rmagatti/auto-session" })
 
-  require("scope").setup()
   require("auto-session").setup({
     bypass_save_filetypes = { "gitcommit" },
     close_filetypes_on_save = { "checkhealth", "help" },
     git_use_branch_name = true,
     git_auto_restore_on_branch_change = true,
-    pre_save_cmds = {
-      "ScopeSaveState",
-    },
-    post_restore_cmds = { "ScopeLoadState", "RestoreTabPagesName" },
   })
 end)
 
