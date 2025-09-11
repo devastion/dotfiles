@@ -83,7 +83,7 @@ MiniDeps.later(
         reindent_linewise = true,
       },
       sort = {
-        prefix = "",
+        prefix = "so",
         func = nil,
       },
     })

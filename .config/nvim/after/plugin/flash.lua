@@ -41,6 +41,7 @@ MiniDeps.later(function()
     },
   })
 
+  vim.keymap.set("o", "r", function() require("flash").remote() end, { desc = "Remote Flash" })
   vim.keymap.set("n", "<leader><Space>", function()
     local flash = require("flash")
 

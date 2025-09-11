@@ -82,5 +82,5 @@ map("v", ">", ">gv")
 map({ "n", "x" }, "H", "g^", { silent = true })
 map({ "n", "x" }, "L", "g$", { silent = true })
 
-map("n", "<C-a><C-a>", function() vim.g.toggles() end, { desc = "Increment" })
-map("n", "<C-a><C-x>", function() vim.g.toggles(true) end, { desc = "Decrement" })
+map("n", "<C-a><C-a>", function() vim.g.word_cycle() end, { desc = "Increment" })
+map("n", "<C-a><C-x>", function() vim.g.word_cycle(true) end, { desc = "Decrement" })

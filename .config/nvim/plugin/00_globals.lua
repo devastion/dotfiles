@@ -72,38 +72,62 @@ g.custom_foldtext = function()
   return result
 end
 
-g.toggles = function(decrement)
-  local increment_toggles = {
-    ["false"] = "true",
+g.word_cycle = function(decrement)
+  local toggle_groups = {
+    { "true", "false" },
+    { "on", "off" },
+    { "now", "later" },
   }
 
-  local decrement_toggles = {
-    ["true"] = "false",
-  }
-
-  local toggles = decrement and decrement_toggles or increment_toggles
-
-  local cword = vim.fn.expand("<cword>")
-  local newWord
-
-  for word, opposite in pairs(toggles) do
-    if cword == word then
-      newWord = opposite
+  local function match_case(original, new)
+    if original:match("^%u+$") then
+      return new:upper()
     end
-    if cword == opposite then
-      newWord = word
+    if original:match("^%l+$") then
+      return new:lower()
     end
+    if original:match("^%u%l+$") then
+      return new:sub(1, 1):upper() .. new:sub(2):lower()
+    end
+    return new
   end
 
-  if type(tonumber(cword)) == "number" then
-    newWord = decrement and (cword - 1) or (cword + 1)
+  local function get_next_word(word)
+    local lower = word:lower()
+    for _, group in ipairs(toggle_groups) do
+      for i, w in ipairs(group) do
+        if w == lower then
+          local swap = group[(i % #group) + (decrement and -1 or 1)]
+          return match_case(word, swap)
+        end
+      end
+    end
+    return nil
   end
 
-  if newWord then
-    local prevCursor = vim.api.nvim_win_get_cursor(0)
-    vim.cmd.normal({ '"_ciw' .. newWord, bang = true })
-    vim.api.nvim_win_set_cursor(0, prevCursor)
+  local word = vim.fn.expand("<cword>")
+  local replacement = get_next_word(word)
+  if not replacement then
+    return
   end
+
+  local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local line = vim.api.nvim_get_current_line()
+
+  local start_col = col
+  while start_col > 0 and line:sub(start_col, start_col):match("[%w_]") do
+    start_col = start_col - 1
+  end
+  start_col = start_col + 1
+
+  local end_col = col + 1
+  while line:sub(end_col, end_col):match("[%w_]") do
+    end_col = end_col + 1
+  end
+  end_col = end_col - 1
+
+  local new_line = line:sub(1, start_col - 1) .. replacement .. line:sub(end_col + 1)
+  vim.api.nvim_set_current_line(new_line)
 end
 
 vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
