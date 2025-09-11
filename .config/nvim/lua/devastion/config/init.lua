@@ -1,7 +1,0 @@
-require("devastion.config.globals")
-require("devastion.config.options")
-require("devastion.config.lazy")
-require("devastion.config.autocmds")
-require("devastion.config.filetypes")
-require("devastion.config.keymaps")
-require("devastion.config.lsp_config")
