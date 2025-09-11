@@ -62,32 +62,33 @@ MiniDeps.later(function()
   })
 end)
 MiniDeps.later(function() require("mini.splitjoin").setup({ mappings = { toggle = "J" } }) end)
-MiniDeps.later(
-  function()
-    require("mini.operators").setup({
-      evaluate = {
-        prefix = "",
-        func = nil,
-      },
-      exchange = {
-        prefix = "",
-        reindent_linewise = true,
-      },
-      multiply = {
-        prefix = "",
-        func = nil,
-      },
-      replace = {
-        prefix = "ss",
-        reindent_linewise = true,
-      },
-      sort = {
-        prefix = "so",
-        func = nil,
-      },
-    })
-  end
-)
+MiniDeps.later(function()
+  local mini_operators = require("mini.operators")
+  mini_operators.setup({
+    evaluate = {
+      prefix = "",
+      func = nil,
+    },
+    exchange = {
+      prefix = "",
+      reindent_linewise = true,
+    },
+    multiply = {
+      prefix = "",
+      func = nil,
+    },
+    replace = {
+      prefix = "",
+      reindent_linewise = true,
+    },
+    sort = {
+      prefix = "",
+      func = nil,
+    },
+  })
+  mini_operators.make_mappings("replace", { textobject = "ss", line = "sS", selection = "ss" })
+  mini_operators.make_mappings("sort", { textobject = "so", line = "sO", selection = "so" })
+end)
 MiniDeps.later(
   function()
     require("mini.indentscope").setup({

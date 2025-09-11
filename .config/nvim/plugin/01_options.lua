@@ -29,6 +29,7 @@ o.list = true
 o.listchars = "tab:» ,trail:·,nbsp:␣,"
 o.fillchars = "eob: ,fold: ,foldopen:,foldsep: ,foldclose:"
 o.laststatus = 3
+o.showtabline = 0
 
 -- Splits
 o.splitbelow = true

@@ -70,3 +70,7 @@ map({ "n", "x" }, "L", "g$", { silent = true })
 
 map("n", "<C-a><C-a>", function() vim.g.word_cycle() end, { desc = "Increment" })
 map("n", "<C-a><C-x>", function() vim.g.word_cycle(true) end, { desc = "Decrement" })
+
+-- Buffers
+map("n", "<leader>`", function() pcall(vim.cmd.e, "#") end, { desc = "Switch to Previous Buffer" })
+map("n", "<leader>bd", function() pcall(vim.cmd("bd")) end, { desc = "Delete Buffer" })
