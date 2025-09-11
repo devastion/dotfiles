@@ -40,6 +40,7 @@ return {
         disable = { "missing-fields", "incomplete-signature-doc" },
         unusedLocalExclude = { "_*" },
       },
+      telemetry = { enable = false },
     },
   },
 }
