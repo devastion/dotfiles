@@ -34,11 +34,6 @@ MiniDeps.now(function()
 end)
 
 MiniDeps.now(function()
-  require("mini.notify").setup()
-  vim.notify = require("mini.notify").make_notify()
-end)
-
-MiniDeps.now(function()
   MiniDeps.add({
     source = "rmagatti/auto-session",
     depends = { "tiagovla/scope.nvim" },

@@ -86,13 +86,20 @@ MiniDeps.later(function()
     },
     messages = { enabled = true },
     popupmenu = { enabled = false },
-    notify = { enabled = false },
+    notify = { enabled = true, view = "notify" },
     lsp = {
-      progress = { enabled = false },
+      progress = { enabled = true },
       hover = { enabled = false },
       signature = { enabled = false },
       message = { enabled = false },
     },
     health = { checker = false },
   })
+
+  vim.keymap.set(
+    "n",
+    "<leader>sn",
+    function() require("noice.integrations.fzf").open() end,
+    { desc = "Notifications' History" }
+  )
 end)
