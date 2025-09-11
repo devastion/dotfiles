@@ -25,4 +25,5 @@
     | fzf --no-sort \
     | cut -d \" \" -f1 ' -"
   cpbr = "!sh -c 'git branch --show-current | tr -d \"\n\" | pbcopy'"
+  conflicts = "diff --name-only --diff-filter=U"
 ; vim:ft=gitconfig

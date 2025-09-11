@@ -11,7 +11,6 @@ MiniDeps.later(function()
       { "<leader>g", group = "+[Git]", mode = { "n", "v" } },
       { "<leader>gh", group = "+[Hunks]", mode = { "n", "v" } },
       { "<leader>gt", group = "+[Toggles]" },
-      { "<leader>gx", group = "+[Conflicts]" },
       { "<leader>t", group = "+[Testing]", mode = { "n", "v" } },
       { "<leader><tab>", group = "+[Tabs]" },
       { "gr", group = "+[LSP]" },
