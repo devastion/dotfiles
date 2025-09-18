@@ -28,3 +28,5 @@ vim.g.mason_install = function(packages)
     end
   end)
 end
+
+vim.env.PATH = table.concat({ vim.fn.stdpath("data"), "mason", "bin" }, "/") .. ":" .. vim.env.PATH
