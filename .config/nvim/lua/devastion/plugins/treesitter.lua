@@ -48,7 +48,10 @@ local installed_filetypes = vim.iter(ensure_installed):map(vim.treesitter.langua
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = installed_filetypes,
-  callback = function(event) vim.treesitter.start(event.buf) end,
+  callback = function(event)
+    vim.treesitter.start(event.buf)
+    vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
 })
 
 ---Install treesitter parsers
@@ -56,7 +59,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.g.ts_install = function(parsers) require("nvim-treesitter").install(parsers) end
 
 -- Auto-install and start parsers for any buffer
-vim.api.nvim_create_autocmd({ "BufRead" }, {
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   callback = function(event)
     local bufnr = event.buf
     local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
@@ -86,6 +89,7 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
     if not parser_name then
       return
     end
+
     -- Try to get existing parser (helpful check if filetype was returned above)
     local parser_configs = require("nvim-treesitter.parsers")
     if not parser_configs[parser_name] then
@@ -105,6 +109,7 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
     if parser_installed then
       -- Start treesitter for this buffer
       vim.treesitter.start(bufnr, parser_name)
+      vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
   end,
 })

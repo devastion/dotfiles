@@ -1,4 +1,3 @@
-vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
 vim.env.PATH = table.concat({ vim.fn.stdpath("data"), "mason", "bin" }, "/") .. ":" .. vim.env.PATH
 
 vim.g.mapleader = vim.keycode("<Space>")
@@ -12,18 +11,14 @@ vim.g.loaded_ruby_provider = 0
 
 vim.g.autolint_enabled = true
 vim.g.autoformat_enabled = false
-vim.g.have_nerd_font = true
 
 require("devastion.core.options")
 require("devastion.core.filetypes")
 require("devastion.core.autocmds")
+require("devastion.core.usercmds")
 require("devastion.core.keymaps")
 
-vim.pack.add({ "https://github.com/folke/tokyonight.nvim" }, { confirm = false })
-vim.api.nvim_cmd({
-  cmd = "colorscheme",
-  args = { "tokyonight-night" },
-}, {})
+require("devastion.plugins.tokyonight")
 
 vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" }, { confirm = false })
 require("mini.notify").setup()
@@ -33,17 +28,12 @@ require("mini.icons").setup()
 MiniIcons.mock_nvim_web_devicons()
 MiniIcons.tweak_lsp_kind()
 
-vim.pack.add({ "https://github.com/rmagatti/auto-session" }, { confirm = false })
-require("auto-session").setup({
-  bypass_save_filetypes = { "gitcommit" },
-  close_filetypes_on_save = { "checkhealth", "help" },
-  git_use_branch_name = true,
-  git_auto_restore_on_branch_change = true,
-})
-
+require("devastion.plugins.scope")
+require("devastion.plugins.auto-session")
 require("devastion.plugins.treesitter")
 require("devastion.plugins.which-key")
 require("devastion.plugins.mini")
+require("devastion.plugins.bufferline")
 require("devastion.plugins.mason")
 require("devastion.plugins.conform")
 require("devastion.plugins.lint")
@@ -59,7 +49,11 @@ require("devastion.plugins.neotest")
 require("devastion.plugins.grug-far")
 require("devastion.plugins.neogen")
 require("devastion.plugins.arrow")
-require("devastion.plugins.misc")
+require("devastion.plugins.git-conflict")
+require("devastion.plugins.stay-centered")
+require("devastion.plugins.highlight-colors")
+require("devastion.plugins.inc-rename")
+require("devastion.plugins.guess-indent")
 
 vim.g.custom_foldtext = function()
   local function fold_virt_text(result, s, lnum, coloff)

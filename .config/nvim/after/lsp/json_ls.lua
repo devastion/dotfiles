@@ -1,3 +1,5 @@
+vim.pack.add({ "https://github.com/b0o/schemastore.nvim" }, { confirm = false })
+
 vim.g.mason_install({ "json-lsp" })
 vim.g.ts_install({ "json", "jsonc", "json5" })
 

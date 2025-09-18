@@ -8,6 +8,7 @@ vim.keymap.set(
 )
 require("mini.move").setup()
 require("mini.comment").setup()
+require("mini.bufremove").setup()
 require("mini.cursorword").setup()
 local function setup_mini_pairs(opts)
   local pairs = require("mini.pairs")
