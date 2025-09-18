@@ -2,7 +2,7 @@
 
 after-login-command = []
 after-startup-command = [
-  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0",
+  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0 style=uniform order=above",
 ]
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
@@ -84,18 +84,18 @@ ctrl-alt-cmd-shift-equal = "balance-sizes"
 
 # enter service mode
 ctrl-alt-cmd-space = [
-  "exec-and-forget borders active_color=0xfff7768e inactive_color=0xff292e42 width=8.0",
+  "exec-and-forget borders active_color=0xfff7768e inactive_color=0xff292e42 width=8.0 style=uniform order=above",
   "mode service",
 ]
 
 [mode.service.binding]
 esc = [
-  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0",
+  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0 style=uniform order=above",
   "reload-config",
   "mode main",
 ]
 ctrl-alt-cmd-space = [
-  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0",
+  "exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0 style=uniform order=above",
   "mode main",
 ]
 r = ["flatten-workspace-tree"]
