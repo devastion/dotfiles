@@ -88,3 +88,17 @@ map("n", "<C-a><C-x>", function() vim.g.word_cycle(true) end, { desc = "Decremen
 -- Buffers
 map("n", "<leader>`", function() pcall(vim.cmd.e, "#") end, { desc = "Switch to Previous Buffer" })
 map("n", "<leader>bd", function() pcall(vim.cmd("bd")) end, { desc = "Delete Buffer" })
+
+-- Diagnostics
+map(
+  "n",
+  "<leader>cd",
+  function() vim.diagnostic.open_float({ border = "single" }) end,
+  { desc = "LSP: Line Diagnostics" }
+)
+map(
+  "n",
+  "<leader>cq",
+  function() vim.diagnostic.setloclist({ border = "single" }) end,
+  { desc = "LSP: Diagnostics to QF" }
+)

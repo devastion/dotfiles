@@ -5,4 +5,8 @@ vim.filetype.add({
     ["compose.yml"] = "yaml.docker-compose",
     ["compose.yaml"] = "yaml.docker-compose",
   },
+  pattern = {
+    [".?env.*"] = "dotenv",
+    [".*/.github/workflows/.*%.yml"] = "yaml.ghaction",
+  },
 })

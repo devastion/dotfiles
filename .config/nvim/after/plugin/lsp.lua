@@ -124,20 +124,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("grt", function() vim.lsp.buf.type_definition() end, "LSP: Goto Type Definition", "n", opts)
     map("grd", function() vim.lsp.buf.declaration() end, "LSP: Goto Declaration", "n", opts)
     map("gq", function() vim.lsp.buf.format({ async = true }) end, "LSP: Format", "n", opts)
-    map(
-      "<leader>cd",
-      function() vim.diagnostic.open_float({ border = "single" }) end,
-      "LSP: Line Diagnostics",
-      "n",
-      opts
-    )
-    map(
-      "<leader>cq",
-      function() vim.diagnostic.setloclist({ border = "single" }) end,
-      "LSP: Diagnostics to QF",
-      "n",
-      opts
-    )
 
     -- fzf-lua
     local fzf = require("fzf-lua")

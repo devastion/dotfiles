@@ -1,7 +1,12 @@
 vim.pack.add({ "https://github.com/mfussenegger/nvim-lint" }, { confirm = false })
 
+vim.g.mason_install({ "actionlint", "dotenv-linter" })
+
 local lint = require("lint")
-lint.linters_by_ft = {}
+lint.linters_by_ft = {
+  ghaction = { "actionlint" },
+  dotenv = { "dotenv_linter" },
+}
 
 local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
