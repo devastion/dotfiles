@@ -1,3 +1,5 @@
+vim.wo.wrap = true
+
 local build = function() vim.fn["mkdp#util#install"]() end
 
 vim.pack.add({

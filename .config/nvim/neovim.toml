@@ -4,9 +4,3 @@ name = "neovim"
 
 [vim]
 any = true
-
-[MiniIcons]
-any = true
-
-[MiniNotify]
-any = true

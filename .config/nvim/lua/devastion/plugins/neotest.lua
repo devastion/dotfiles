@@ -1,8 +1,9 @@
 vim.pack.add({
-  { src = "https://github.com/nvim-neotest/neotest" },
-  { src = "https://github.com/nvim-neotest/nvim-nio" },
-  { src = "https://github.com/nvim-lua/plenary.nvim" },
-  { src = "https://github.com/olimorris/neotest-phpunit" },
+  "https://github.com/nvim-neotest/neotest",
+  "https://github.com/nvim-neotest/nvim-nio",
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/olimorris/neotest-phpunit",
+  "https://github.com/devastion/neotest-node",
 }, { confirm = false })
 
 require("neotest").setup({
@@ -13,6 +14,7 @@ require("neotest").setup({
         XDEBUG_CONFIG = "idekey=neotest",
       },
     }),
+    require("neotest-node"),
   },
   status = { virtual_text = true },
   output = { open_on_run = true },

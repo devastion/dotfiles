@@ -1,5 +1,4 @@
 [tools]
-"asdf:neovim" = "nightly"
 ast-grep = "latest"
 bat = "latest"
 delta = "latest"
