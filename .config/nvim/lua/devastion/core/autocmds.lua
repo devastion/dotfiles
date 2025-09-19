@@ -142,3 +142,19 @@ autocmd({ "ModeChanged" }, {
     end
   end,
 })
+
+autocmd("BufWritePost", {
+  pattern = "*",
+  callback = function(event)
+    local file = vim.fn.expand("%:p")
+    if vim.fn.filereadable(file) == 1 and vim.fn.filewritable(file) == 1 then
+      local first_line = vim.fn.getline(1)
+      if first_line:match("^#!") then
+        vim.keymap.set("n", "<leader>cx", function()
+          vim.fn.system({ "chmod", "+x", vim.fn.expand("%:p") })
+          print("Made " .. vim.fn.expand("%:t") .. " executable")
+        end, { desc = "Chmod +x current file", buffer = event.buf })
+      end
+    end
+  end,
+})
