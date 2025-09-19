@@ -128,10 +128,7 @@ require("blink.cmp").setup({
     nerd_font_variant = "normal",
   },
   sources = {
-    default = { "lsp", "snippets", "path", "buffer" },
-    providers = {
-      lsp = { fallbacks = {} },
-    },
+    default = { "lsp", "path", "snippets", "buffer" },
   },
   cmdline = {
     enabled = true,

@@ -51,6 +51,7 @@ vim.keymap.set(
   { desc = "Buffers (cwd)" }
 )
 vim.keymap.set("n", "<leader>fg", function() require("fzf-lua").git_files() end, { desc = "Git Files" })
+vim.keymap.set("n", "<leader>fr", function() require("fzf-lua").oldfiles() end, { desc = "Recent Files" })
 vim.keymap.set("n", "<leader>fT", function() require("fzf-lua").filetypes() end, { desc = "Filetypes" })
 vim.keymap.set("n", "<leader>f<tab>", function() require("fzf-lua").tabs() end, { desc = "Tabs" })
 

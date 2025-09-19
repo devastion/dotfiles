@@ -1,3 +1,7 @@
+if vim.loader then
+  vim.loader.enable()
+end
+
 require("devastion.core.globals")
 require("devastion.core.options")
 require("devastion.core.filetypes")
@@ -42,4 +46,6 @@ require("devastion.plugins.stay-centered")
 require("devastion.plugins.highlight-colors")
 require("devastion.plugins.inc-rename")
 require("devastion.plugins.guess-indent")
-require("devastion.plugins.tmux-navigator")
+require("devastion.plugins.live-command")
+require("devastion.plugins.vim-tmux-navigator")
+require("devastion.plugins.vim-fugitive")
