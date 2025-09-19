@@ -8,6 +8,7 @@ require("devastion.core.filetypes")
 require("devastion.core.autocmds")
 require("devastion.core.usercmds")
 require("devastion.core.keymaps")
+require("devastion.core.lsp")
 
 require("devastion.plugins.tokyonight")
 

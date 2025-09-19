@@ -129,7 +129,13 @@ run = ["layout tiling", "move-node-to-workspace 1"]
 
 [[on-window-detected]]
 if.app-id = "com.apple.iCal"
+if.window-title-regex-substring = "calendar"
 run = ["layout tiling", "move-node-to-workspace 4"]
+
+[[on-window-detected]]
+if.app-id = "com.apple.iCal"
+run = ["layout floating"]
+check-further-callbacks = true
 
 [[on-window-detected]]
 if.app-id = "com.microsoft.teams2"

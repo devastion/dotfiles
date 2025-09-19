@@ -1,30 +1,6 @@
----Check if table contains value
----@param table table
----@param value string|number
----@return boolean
-local table_contains = function(table, value)
-  for i = 1, #table do
-    if table[i] == value then
-      return true
-    end
-  end
+local utils = require("devastion.utils")
 
-  return false
-end
-
----Get all configurations in lsp/*
----@return table
-local get_lsp_configs = function()
-  local lsp_configs = {}
-
-  for _, v in ipairs(vim.api.nvim_get_runtime_file("after/lsp/*", true)) do
-    local name = vim.fn.fnamemodify(v, ":t:r")
-    table.insert(lsp_configs, name)
-  end
-
-  return lsp_configs
-end
-vim.lsp.enable(get_lsp_configs())
+vim.lsp.enable(utils.get_lsp_configs())
 
 local disabled_lsp = {
   tailwindcss_ls = vim.g.is_tailwind_project,
@@ -67,17 +43,12 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
--- On LSP attach
+-- On LSP Attach
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
-  desc = "LSP keymaps",
+  desc = "LSP Keymaps",
   callback = function(event)
-    local map = function(lhs, rhs, desc, mode, opts)
-      opts = opts or {}
-      opts.desc = desc
-      mode = mode or "n"
-      vim.keymap.set(mode, lhs, rhs, opts)
-    end
+    local map = utils.remap
 
     local client_id = vim.tbl_get(event, "data", "client_id")
     local client = vim.lsp.get_client_by_id(client_id)
@@ -87,7 +58,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       local disabled_formatting_lsp = { "vue_ls", "ts_ls" }
       if client.name == "eslint_ls" then
         client.server_capabilities.documentFormattingProvider = true
-      elseif table_contains(disabled_formatting_lsp, client.name) then
+      elseif utils.table_contains(disabled_formatting_lsp, client.name) then
         client.server_capabilities.documentFormattingProvider = false
       end
     end

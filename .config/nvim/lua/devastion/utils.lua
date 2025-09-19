@@ -6,7 +6,7 @@ local M = {}
 ---@param desc string?
 ---@param mode string|table?
 ---@param opts table?
-M.remap = function(lhs, rhs, desc, mode, opts)
+function M.remap(lhs, rhs, desc, mode, opts)
   opts = opts or {}
   opts.desc = desc
   mode = mode or "n"
@@ -16,7 +16,7 @@ end
 ---Remove duplicates
 ---@param list table
 ---@return table
-M.dedup = function(list)
+function M.dedup(list)
   local ret = {}
   local seen = {}
   for _, v in ipairs(list) do
@@ -32,7 +32,7 @@ end
 ---@param table table
 ---@param value string|number
 ---@return boolean
-M.table_contains = function(table, value)
+function M.table_contains(table, value)
   for i = 1, #table do
     if table[i] == value then
       return true
@@ -45,7 +45,7 @@ end
 ---Get repository out of url
 ---@param url string
 ---@return string url Repository owner/repo
-M.url_to_repository = function(url)
+function M.url_to_repository(url)
   -- trim
   url = url:match("^%s*(.-)%s*$")
 
@@ -72,18 +72,18 @@ end
 
 ---Check if current directory is a git repo
 ---@return boolean
-M.is_git_repo = function()
+function M.is_git_repo()
   vim.fn.system("git rev-parse --is-inside-work-tree")
   return vim.v.shell_error == 0
 end
 
 ---Get root directory of git project
 ---@return string|nil
-M.get_git_root = function() return vim.fn.systemlist("git rev-parse --show-toplevel")[1] end
+function M.get_git_root() return vim.fn.systemlist("git rev-parse --show-toplevel")[1] end
 
 ---Get root directory of git project or fallback to current directory
 ---@return string|nil
-M.get_root_directory = function()
+function M.get_root_directory()
   if M.is_git_repo() then
     return M.get_git_root()
   end
@@ -92,8 +92,8 @@ M.get_root_directory = function()
 end
 
 ---Get all configurations in after/lsp/*
----@return table
-M.get_lsp_configs = function()
+---@return table<string>
+function M.get_lsp_configs()
   local lsp_configs = {}
 
   for _, v in ipairs(vim.api.nvim_get_runtime_file("after/lsp/*", true)) do
@@ -106,7 +106,7 @@ end
 
 ---Better foldtext
 ---@return table
-M.custom_foldtext = function()
+function M.custom_foldtext()
   local function fold_virt_text(result, s, lnum, coloff)
     if not coloff then
       coloff = 0
@@ -146,7 +146,7 @@ end
 
 ---Cycle through words (true -> false, on -> off)
 ---@param decrement boolean?
-M.word_cycle = function(decrement)
+function M.word_cycle(decrement)
   local toggle_groups = {
     { "true", "false" },
     { "on", "off" },
