@@ -26,10 +26,11 @@ local get_lsp_configs = function()
 end
 vim.lsp.enable(get_lsp_configs())
 
--- INFO: Temporary disabled
-local disabled_lsp = { "tailwindcss_ls" }
-for _k, v in pairs(disabled_lsp) do
-  vim.lsp.enable(v, false)
+local disabled_lsp = {
+  tailwindcss_ls = vim.g.is_tailwind_project,
+}
+for k, v in pairs(disabled_lsp) do
+  vim.lsp.enable(k, v)
 end
 
 local diagnostic_signs = {

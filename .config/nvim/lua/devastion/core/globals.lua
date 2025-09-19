@@ -10,6 +10,11 @@ vim.g.loaded_ruby_provider = 0
 vim.g.autolint_enabled = true
 vim.g.autoformat_enabled = false
 
+---Install packages
+---@param specs (string|vim.pack.Spec)[]
+vim.g.package_manager_install = function(specs) vim.pack.add(specs, { confirm = false }) end
+vim.g.package_manager_update = function() vim.pack.update() end
+
 vim.g.custom_foldtext = function()
   local function fold_virt_text(result, s, lnum, coloff)
     if not coloff then
@@ -104,3 +109,47 @@ vim.g.word_cycle = function(decrement)
   local new_line = line:sub(1, start_col - 1) .. replacement .. line:sub(end_col + 1)
   vim.api.nvim_set_current_line(new_line)
 end
+
+---Checks if composer.json contains laravel/framework
+---@return boolean
+vim.g.is_laravel_project = (function()
+  local composer = vim.fn.getcwd() .. "/composer.json"
+
+  if vim.fn.filereadable(composer) == 0 then
+    return false
+  end
+
+  local is_laravel = vim.system({ "jq", '.require."laravel/framework"', composer }, {}):wait().stdout
+  if is_laravel then
+    vim.schedule(function() vim.notify("Laravel detected", vim.log.levels.INFO) end)
+    return true
+  end
+
+  return false
+end)()
+
+vim.g.is_tailwind_project = (function()
+  local package_json = vim.fn.getcwd() .. "/package.json"
+
+  if vim.fn.filereadable(package_json) == 0 then
+    return false
+  end
+
+  local function has_tailwind(query)
+    local result = vim.system({ "jq", "-r", query, package_json }):wait()
+
+    if result.code == 0 then
+      local out = vim.trim(result.stdout or "")
+      return out ~= "" and out ~= "null"
+    end
+
+    return false
+  end
+
+  if has_tailwind(".dependencies.tailwindcss") or has_tailwind(".devDependencies.tailwindcss") then
+    vim.schedule(function() vim.notify("TailwindCSS detected", vim.log.levels.INFO) end)
+    return true
+  end
+
+  return false
+end)()

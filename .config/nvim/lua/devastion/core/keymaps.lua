@@ -87,7 +87,11 @@ map("n", "<C-a><C-x>", function() vim.g.word_cycle(true) end, { desc = "Decremen
 
 -- Buffers
 map("n", "<leader>`", function() pcall(vim.cmd.e, "#") end, { desc = "Switch to Previous Buffer" })
+map("n", "<leader>bb", function() pcall(vim.cmd.e, "#") end, { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", function() pcall(vim.cmd("bd")) end, { desc = "Delete Buffer" })
+map("n", "<leader>bn", function() vim.cmd.enew() end, { desc = "New File" })
+map("n", "<leader>b0", function() vim.cmd("bfirst") end, { desc = "First Buffer" })
+map("n", "<leader>b$", function() vim.cmd("blast") end, { desc = "Last Buffer" })
 
 -- Diagnostics
 map(

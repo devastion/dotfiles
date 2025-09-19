@@ -50,7 +50,7 @@ local function setup_mini_pairs(opts)
   end
 end
 setup_mini_pairs({
-  modes = { insert = true, command = false, terminal = false },
+  modes = { insert = true, command = true, terminal = false },
   skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
   skip_ts = { "string" },
   skip_unbalanced = true,
