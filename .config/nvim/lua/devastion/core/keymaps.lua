@@ -92,6 +92,8 @@ map("n", "<leader>bd", function() pcall(vim.cmd("bd")) end, { desc = "Delete Buf
 map("n", "<leader>bn", function() vim.cmd.enew() end, { desc = "New File" })
 map("n", "<leader>b0", function() vim.cmd("bfirst") end, { desc = "First Buffer" })
 map("n", "<leader>b$", function() vim.cmd("blast") end, { desc = "Last Buffer" })
+map("n", "]b", function() vim.cmd("bnext") end, { desc = "Next Buffer" })
+map("n", "[b", function() vim.cmd("bprev") end, { desc = "Previous Buffer" })
 
 -- Diagnostics
 map(

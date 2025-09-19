@@ -11,7 +11,25 @@
   whitespace = error
 
 [diff]
+  tool = "nvimdiff"
   submodule = "log"
+
+[difftool]
+  prompt = false
+
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
+[merge]
+  tool = "nvimdiff"
+  ff = true
+
+[mergetool]
+  prompt = false
+  keepBackup = false
+
+[mergetool "nvimdiff"]
+  layout = "LOCAL,BASE,REMOTE / MERGED"
 
 [pull]
   ff = true
@@ -21,9 +39,6 @@
   followTags = true
   default = "simple"
   recurseSubmodules = "check"
-
-[merge]
-  ff = true
 
 [rebase]
   autoSquash = true
