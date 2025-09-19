@@ -9,3 +9,7 @@ Setup intelephense license with following command. The typo (licence) is **inten
 ```sh
 mkdir $HOME/intelephense && echo YOUR_LICENSE_KEY > $HOME/intelephense/licence.txt
 ```
+
+## Dependencies
+
+`neovim@0.12`, `ast-grep`, `fd`, `fzf`, `jq`, `ripgrep`, `tree-sitter`
