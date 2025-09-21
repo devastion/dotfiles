@@ -158,3 +158,18 @@ autocmd("BufWritePost", {
     end
   end,
 })
+
+autocmd("PackChanged", {
+  pattern = "*",
+  callback = function(event)
+    local p = event.data
+    if p.kind ~= "delete" and p.spec.name == "nvim-treesitter" then
+      require("nvim-treesitter.install").update(nil, { summary = true })
+    end
+  end,
+})
+
+autocmd("SourcePost", {
+  pattern = { ".nvim.lua", ".nvimrc", ".exrc" },
+  callback = function(args) vim.notify("Loaded project config: " .. args.file, vim.log.levels.INFO) end,
+})

@@ -12,6 +12,10 @@ o.tabclose = "uselast"
 o.clipboard = "unnamedplus"
 o.completeopt = "menu,menuone,noselect,fuzzy"
 
+-- INFO: Run .nvim.lua .nvimrc .exrc (per directory config)
+o.exrc = true
+o.secure = true
+
 -- Sign Column
 o.signcolumn = "yes"
 o.number = true

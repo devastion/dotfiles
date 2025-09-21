@@ -7,11 +7,6 @@ for k, v in ipairs(runtime_files) do
 end
 table.insert(runtime_files, "${3rd}/luv/library")
 
-vim.g.mason_install({ "lua-language-server", "stylua", "selene" })
-vim.g.ts_install({ "lua", "luadoc", "luap" })
-require("conform").formatters_by_ft.lua = { "stylua" }
-require("lint").linters_by_ft.lua = { "selene" }
-
 ---@type vim.lsp.Config
 return {
   cmd = { "lua-language-server" },

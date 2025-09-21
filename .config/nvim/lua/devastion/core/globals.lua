@@ -154,3 +154,16 @@ vim.g.is_tailwind_project = (function()
 
   return false
 end)()
+
+vim.g.is_selene_config_available = (function()
+  local cwd = vim.fn.getcwd()
+  local selene_configs = { "selene.toml", "selene.yml", "selene.yaml" }
+
+  for _, v in ipairs(selene_configs) do
+    if vim.fn.filereadable(cwd .. "/" .. v) == 1 then
+      return true
+    end
+  end
+
+  return false
+end)()

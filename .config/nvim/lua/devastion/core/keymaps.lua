@@ -89,6 +89,14 @@ map("n", "<C-a><C-x>", function() vim.g.word_cycle(true) end, { desc = "Decremen
 map("n", "<leader>`", function() pcall(vim.cmd.e, "#") end, { desc = "Switch to Previous Buffer" })
 map("n", "<leader>bb", function() pcall(vim.cmd.e, "#") end, { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", function() pcall(vim.cmd("bd")) end, { desc = "Delete Buffer" })
+map("n", "<leader>bo", function()
+  local current = vim.api.nvim_get_current_buf()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current then
+      pcall(vim.api.nvim_buf_delete, buf, { force = true })
+    end
+  end
+end, { desc = "Close Other Buffers" })
 map("n", "<leader>bn", function() vim.cmd.enew() end, { desc = "New File" })
 map("n", "<leader>b0", function() vim.cmd("bfirst") end, { desc = "First Buffer" })
 map("n", "<leader>b$", function() vim.cmd("blast") end, { desc = "Last Buffer" })

@@ -3,7 +3,7 @@ vim.pack.add({ "https://github.com/ibhagwan/fzf-lua" }, { confirm = false })
 local fzf = require("fzf-lua")
 local actions = fzf.actions
 fzf.setup({
-  "hide",
+  "fzf-native",
   keymap = {
     builtin = { ["<C-f>"] = "preview-page-down", ["<C-b>"] = "preview-page-up" },
     fzf = {

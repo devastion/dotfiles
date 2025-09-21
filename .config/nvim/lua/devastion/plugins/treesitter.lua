@@ -129,7 +129,7 @@ local text_objects_outer = {
   p = "@parameter.outer",
   l = "@loop.outer",
   a = "@attribute.outer",
-  b = "@block.outer",
+  -- b = "@block.outer",
 }
 local text_objects_inner = {
   f = "@function.inner",
@@ -137,7 +137,7 @@ local text_objects_inner = {
   p = "@parameter.inner",
   l = "@loop.inner",
   a = "@attribute.inner",
-  b = "@block.inner",
+  -- b = "@block.inner",
 }
 
 local select_textobject = require("nvim-treesitter-textobjects.select").select_textobject
