@@ -163,8 +163,10 @@ autocmd("PackChanged", {
   pattern = "*",
   callback = function(event)
     local p = event.data
-    if p.kind ~= "delete" and p.spec.name == "nvim-treesitter" then
-      require("nvim-treesitter.install").update(nil, { summary = true })
+    local post_update = (p.spec.data or {}).post_update
+
+    if p.kind ~= "delete" and type(post_update) == "function" then
+      pcall(post_update, p)
     end
   end,
 })

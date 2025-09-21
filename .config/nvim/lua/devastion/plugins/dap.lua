@@ -51,8 +51,8 @@ for type, icon in pairs(breakpoint_icons) do
 end
 
 -- setup dap from vscode launch.json
-local vscode = require("dap.ext.vscode")
 local json = require("plenary.json")
+local vscode = require("dap.ext.vscode")
 
 ---@diagnostic disable-next-line: duplicate-set-field
 vscode.json_decode = function(str) return vim.json.decode(json.json_strip_comments(str)) end

@@ -1,4 +1,5 @@
 vim.pack.add({ "https://github.com/folke/which-key.nvim" }, { confirm = false })
+
 require("which-key").setup({
   preset = "modern",
   delay = 0,
@@ -7,8 +8,6 @@ require("which-key").setup({
     { "<leader>c", group = "+[Code]", mode = { "n", "v" } },
     { "<leader>s", group = "+[Search]", mode = { "n", "v" } },
     { "<leader>g", group = "+[Git]", mode = { "n", "v" } },
-    { "<leader>gh", group = "+[Hunks]", mode = { "n", "v" } },
-    { "<leader>gt", group = "+[Toggles]" },
     { "<leader>t", group = "+[Testing]", mode = { "n", "v" } },
     { "<leader><tab>", group = "+[Tabs]" },
     { "gr", group = "+[LSP]" },
@@ -34,4 +33,5 @@ require("which-key").setup({
     { "<auto>", mode = "nixsotc" },
     { "s", mode = { "n", "v" } },
   },
+  sort = { "order", "group", "alphanum" },
 })

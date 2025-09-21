@@ -1,5 +1,9 @@
 vim.pack.add({
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+  {
+    src = "https://github.com/nvim-treesitter/nvim-treesitter",
+    version = "main",
+    data = { post_update = function(_) require("nvim-treesitter.install").update(nil, { summary = true }) end },
+  },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
   { src = "https://github.com/rrethy/nvim-treesitter-endwise" },

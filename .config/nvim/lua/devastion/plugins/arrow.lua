@@ -2,6 +2,7 @@ vim.pack.add({ "https://github.com/otavioschwanck/arrow.nvim" }, { confirm = fal
 
 require("arrow").setup({
   show_icons = true,
+  always_show_path = true,
   leader_key = "m",
   buffer_leader_key = "M",
   separate_by_branch = true,

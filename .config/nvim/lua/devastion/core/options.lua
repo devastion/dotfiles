@@ -13,6 +13,7 @@ o.clipboard = "unnamedplus"
 o.completeopt = "menu,menuone,noselect,fuzzy"
 
 -- INFO: Run .nvim.lua .nvimrc .exrc (per directory config)
+-- Use :trust, :secure
 o.exrc = true
 o.secure = true
 

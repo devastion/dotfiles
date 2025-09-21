@@ -96,3 +96,5 @@ vim.keymap.set("n", "<leader>gs", function() require("fzf-lua").git_status() end
 vim.keymap.set("n", "<leader>gS", function() require("fzf-lua").git_stash() end, { desc = "Stash" })
 vim.keymap.set("n", "<leader>gl", function() require("fzf-lua").git_commits() end, { desc = "Log" })
 vim.keymap.set("n", "<leader>gL", function() require("fzf-lua").git_bcommits() end, { desc = "Log (file)" })
+vim.keymap.set("n", "<leader>gT", function() require("fzf-lua").git_tags() end, { desc = "Tags" })
+vim.keymap.set("n", "<leader>gd", function() require("fzf-lua").git_diff() end, { desc = "Diffs" })
