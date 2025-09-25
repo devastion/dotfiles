@@ -3,7 +3,7 @@ vim.pack.add({ "https://github.com/ThePrimeagen/refactoring.nvim" }, { confirm =
 require("refactoring").setup({})
 
 require("which-key").add({ "<leader>r", group = "+[Refactor]", mode = { "n", "x" } })
-require("which-key").add({ "<leader>rb", group = "+[Block]" })
+require("which-key").add({ "<leader>rb", group = "+[Block]", mode = { "n", "x" } })
 
 vim.keymap.set(
   { "n", "x" },

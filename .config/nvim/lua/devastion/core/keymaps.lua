@@ -116,3 +116,9 @@ map(
   function() vim.diagnostic.setloclist({ border = "single" }) end,
   { desc = "LSP: Diagnostics to QF" }
 )
+
+-- Toggles
+map("n", "<leader>Tw", function()
+  vim.o.wrap = not vim.o.wrap
+  vim.notify("vim.o.wrap is set to " .. tostring(vim.o.wrap))
+end, { desc = "Toggle vim.o.wrap" })

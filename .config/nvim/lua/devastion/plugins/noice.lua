@@ -1,6 +1,7 @@
 vim.pack.add({
   { src = "https://github.com/folke/noice.nvim" },
   { src = "https://github.com/muniftanjim/nui.nvim" },
+  { src = "https://github.com/rcarriga/nvim-notify" },
 }, { confirm = false })
 
 require("noice").setup({
@@ -99,5 +100,13 @@ vim.keymap.set(
   "n",
   "<leader>sn",
   function() require("noice.integrations.fzf").open() end,
-  { desc = "Notifications' History" }
+  { desc = "Notifications History" }
 )
+
+vim.keymap.set("n", "<esc>", function()
+  require("noice").cmd("dismiss")
+
+  local esc = vim.api.nvim_replace_termcodes("<esc>", true, false, true)
+
+  vim.api.nvim_feedkeys(esc, "n", false)
+end, { desc = "Escape and Clear Notifications" })

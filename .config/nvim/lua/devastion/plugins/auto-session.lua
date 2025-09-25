@@ -52,7 +52,7 @@ local options = {
 }
 
 if package.loaded["scope"] then
-  vim.schedule(function() vim.notify("scope loaded") end)
+  vim.schedule(function() vim.notify("scope.nvim loaded") end)
   options.pre_save_cmds = { "ScopeSaveState" }
   options.post_restore_cmds = { "ScopeLoadState", "RestoreTabPagesName", "TSContext enable" }
 end

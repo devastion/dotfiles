@@ -20,6 +20,7 @@ require("neotest").setup({
   output = { open_on_run = true },
 })
 
+require("which-key").add({ "<leader>t", group = "+[Testing]", mode = { "n", "v" } })
 vim.keymap.set("n", "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, { desc = "Run File" })
 vim.keymap.set(
   "n",

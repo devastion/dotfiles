@@ -8,7 +8,7 @@ require("which-key").setup({
     { "<leader>c", group = "+[Code]", mode = { "n", "v" } },
     { "<leader>s", group = "+[Search]", mode = { "n", "v" } },
     { "<leader>g", group = "+[Git]", mode = { "n", "v" } },
-    { "<leader>t", group = "+[Testing]", mode = { "n", "v" } },
+    { "<leader>T", group = "+[Toggles]", mode = { "n", "v" } },
     { "<leader><tab>", group = "+[Tabs]" },
     { "gr", group = "+[LSP]" },
     { "gc", group = "+[Comment]" },

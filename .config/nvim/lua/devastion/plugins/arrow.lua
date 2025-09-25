@@ -5,7 +5,7 @@ require("arrow").setup({
   always_show_path = true,
   leader_key = "m",
   buffer_leader_key = "M",
-  separate_by_branch = true,
+  separate_by_branch = false,
   separate_save_and_remove = true,
   per_buffer_config = {
     sort_automatically = false,

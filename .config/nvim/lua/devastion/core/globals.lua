@@ -7,7 +7,7 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
-vim.g.tabline_enabled = false
+vim.g.tabline_enabled = true
 vim.g.autolint_enabled = true
 vim.g.autoformat_enabled = false
 
