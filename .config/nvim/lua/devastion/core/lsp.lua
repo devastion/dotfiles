@@ -55,6 +55,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Use ESLint as formatter
     if client ~= nil then
+      if client:supports_method(vim.lsp.protocol.Methods.textDocument_foldingRange) then
+        vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+      end
+
       local disabled_formatting_lsp = { "vue_ls", "ts_ls" }
       if client.name == "eslint_ls" then
         client.server_capabilities.documentFormattingProvider = true
@@ -85,17 +89,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
     )
     map("g0", function() vim.lsp.buf.document_symbol() end, "LSP: Document Symbol", "n", opts)
     map(
-      "<C-s>",
+      "<C-k>",
       function() vim.lsp.buf.signature_help({ border = "single" }) end,
       "LSP: Signature Help",
       { "i", "s" },
       opts
     )
+    map("gK", function() vim.lsp.buf.signature_help({ border = "single" }) end, "LSP: Signature Help", "n", opts)
     map("K", function() vim.lsp.buf.hover({ border = "single" }) end, "LSP: Hover", "n", opts)
     map("gd", function() vim.lsp.buf.definition() end, "LSP: Goto Definition", "n", opts)
     map("grt", function() vim.lsp.buf.type_definition() end, "LSP: Goto Type Definition", "n", opts)
     map("grd", function() vim.lsp.buf.declaration() end, "LSP: Goto Declaration", "n", opts)
     map("gq", function() vim.lsp.buf.format({ async = true }) end, "LSP: Format", "n", opts)
+    map("grc", function() vim.lsp.codelens.run() end, "LSP: Run Codelens", "n", opts)
+    map("grC", function() vim.lsp.codelens.refresh() end, "LSP: Refresh and Display Codelens", "n", opts)
 
     -- fzf-lua
     local fzf = require("fzf-lua")
