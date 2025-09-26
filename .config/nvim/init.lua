@@ -12,10 +12,7 @@ require("devastion.core.lsp")
 
 require("devastion.plugins.tokyonight")
 
-vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" }, { confirm = false })
--- require("mini.notify").setup({ lsp_progress = { enable = false } })
--- vim.notify = require("mini.notify").make_notify()
-
+vim.pack.add({ "https://github.com/nvim-mini/mini.icons" }, { confirm = false })
 require("mini.icons").setup()
 require("mini.icons").mock_nvim_web_devicons()
 require("mini.icons").tweak_lsp_kind()

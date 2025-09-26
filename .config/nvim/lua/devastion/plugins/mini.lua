@@ -1,3 +1,17 @@
+vim.pack.add({
+  "https://github.com/nvim-mini/mini.files",
+  "https://github.com/nvim-mini/mini.move",
+  "https://github.com/nvim-mini/mini.comment",
+  "https://github.com/nvim-mini/mini.bufremove",
+  "https://github.com/nvim-mini/mini.cursorword",
+  "https://github.com/nvim-mini/mini.align",
+  "https://github.com/nvim-mini/mini.pairs",
+  "https://github.com/nvim-mini/mini.splitjoin",
+  "https://github.com/nvim-mini/mini.operators",
+  "https://github.com/nvim-mini/mini.indentscope",
+  "https://github.com/nvim-mini/mini.surround",
+}, { confirm = false })
+
 require("mini.files").setup()
 vim.keymap.set("n", "<leader>e", function() require("mini.files").open() end, { desc = "Files (root)" })
 vim.keymap.set(

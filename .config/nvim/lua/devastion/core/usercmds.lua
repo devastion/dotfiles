@@ -19,12 +19,7 @@ usercmd("VimPack", function(args)
 
   local subcommand_tbl = {
     clean = function()
-      local active_plugins = {
-        "render-markdown.nvim",
-        "markdown-preview.nvim",
-        "scope.nvim",
-        "bufferline.nvim",
-      }
+      local active_plugins = {}
       local unused_plugins = {}
 
       for _, plugin in ipairs(vim.pack.get()) do
