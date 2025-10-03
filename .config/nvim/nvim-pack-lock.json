@@ -1,0 +1,78 @@
+{
+  "plugins": {
+    "arrow.nvim": [],
+    "auto-session": [],
+    "blink.cmp": {
+      "version": "'v1.6.0'"
+    },
+    "bufferline.nvim": [],
+    "conform.nvim": [],
+    "flash.nvim": [],
+    "friendly-snippets": [],
+    "fzf-lua": [],
+    "git-conflict.nvim": [],
+    "gitsigns.nvim": [],
+    "grug-far.nvim": [],
+    "guess-indent.nvim": [],
+    "inc-rename.nvim": [],
+    "kulala.nvim": [],
+    "live-command.nvim": [],
+    "lualine.nvim": [],
+    "mason.nvim": [],
+    "mini.align": [],
+    "mini.bufremove": [],
+    "mini.comment": [],
+    "mini.files": [],
+    "mini.icons": [],
+    "mini.indentscope": [],
+    "mini.move": [],
+    "mini.operators": [],
+    "mini.pairs": [],
+    "mini.splitjoin": [],
+    "mini.surround": [],
+    "neogen": [],
+    "neotest": [],
+    "neotest-node": [],
+    "neotest-phpunit": {
+      "version": "'autodetect-docker-command'"
+    },
+    "noice.nvim": [],
+    "nui.nvim": [],
+    "nvim-bqf": [],
+    "nvim-dap": [],
+    "nvim-dap-ui": [],
+    "nvim-dap-virtual-text": [],
+    "nvim-highlight-colors": [],
+    "nvim-lint": [],
+    "nvim-nio": [],
+    "nvim-notify": [],
+    "nvim-spider": [],
+    "nvim-treesitter": {
+      "rev": "0594d1ba",
+      "version": "'main'"
+    },
+    "nvim-treesitter-context": [],
+    "nvim-treesitter-endwise": [],
+    "nvim-treesitter-textobjects": {
+      "version": "'main'"
+    },
+    "nvim-ts-autotag": [],
+    "nvim_context_vt": [],
+    "one-small-step-for-vimkind": {
+      "version": "'84689d9e'"
+    },
+    "plenary.nvim": [],
+    "refactoring.nvim": [],
+    "schemastore.nvim": [],
+    "scope.nvim": [],
+    "snacks.nvim": [],
+    "sqlite.lua": [],
+    "stay-centered.nvim": [],
+    "todo-comments.nvim": [],
+    "tokyonight.nvim": [],
+    "vim-fugitive": [],
+    "vim-tmux-navigator": [],
+    "which-key.nvim": [],
+    "yanky.nvim": []
+  }
+}

@@ -3,7 +3,6 @@ vim.pack.add({
   "https://github.com/nvim-mini/mini.move",
   "https://github.com/nvim-mini/mini.comment",
   "https://github.com/nvim-mini/mini.bufremove",
-  "https://github.com/nvim-mini/mini.cursorword",
   "https://github.com/nvim-mini/mini.align",
   "https://github.com/nvim-mini/mini.pairs",
   "https://github.com/nvim-mini/mini.splitjoin",
@@ -37,7 +36,6 @@ vim.api.nvim_create_autocmd("User", {
 require("mini.move").setup()
 require("mini.comment").setup()
 require("mini.bufremove").setup()
-require("mini.cursorword").setup()
 require("mini.align").setup()
 local function setup_mini_pairs(opts)
   local pairs = require("mini.pairs")
