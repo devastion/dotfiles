@@ -8,7 +8,7 @@ local prefix = "<leader>R"
 
 require("which-key").add({ prefix, group = "+[Rest]", mode = { "n", "v" } })
 
-local map = function(key, rhs, desc, mode) require("devastion.utils").remap(prefix .. key, rhs, desc, mode) end
+local map = require("devastion.utils").map(prefix)
 
 map("r", function() require("kulala").run() end, "Run", { "n", "v" })
 map("R", function() require("kulala").run_all() end, "Run all", { "n", "v" })

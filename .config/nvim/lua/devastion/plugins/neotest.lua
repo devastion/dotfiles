@@ -2,7 +2,7 @@ vim.pack.add({
   "https://github.com/nvim-neotest/neotest",
   "https://github.com/nvim-neotest/nvim-nio",
   "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/olimorris/neotest-phpunit",
+  { src = "https://github.com/devastion/neotest-phpunit", version = "autodetect-docker-command" },
   "https://github.com/devastion/neotest-node",
 }, { confirm = false })
 

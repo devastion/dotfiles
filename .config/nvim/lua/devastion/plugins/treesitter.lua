@@ -8,6 +8,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
   { src = "https://github.com/rrethy/nvim-treesitter-endwise" },
   { src = "https://github.com/windwp/nvim-ts-autotag" },
+  "https://github.com/andersevenrud/nvim_context_vt",
 }, { confirm = false })
 
 local ensure_installed = {
@@ -209,3 +210,5 @@ vim.keymap.set(
 )
 
 require("nvim-ts-autotag").setup()
+
+require("nvim_context_vt").setup({ min_rows = 10 })

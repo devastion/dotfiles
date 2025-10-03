@@ -20,6 +20,20 @@ vim.keymap.set(
   function() require("mini.files").open(vim.api.nvim_buf_get_name(0), true) end,
   { desc = "Files (cwd)" }
 )
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MiniFilesActionCreate",
+  callback = function(args)
+    local ext = vim.fn.fnamemodify(args.data.to, ":e")
+    local template = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
+
+    if vim.fn.filereadable(template) == 1 then
+      local lines = vim.fn.readfile(template)
+      vim.api.nvim_buf_set_lines(args.buf, 0, -1, false, lines)
+      vim.cmd("silent write! " .. vim.fn.fnameescape(args.data.to))
+    end
+  end,
+})
+
 require("mini.move").setup()
 require("mini.comment").setup()
 require("mini.bufremove").setup()

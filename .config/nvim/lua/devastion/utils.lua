@@ -13,6 +13,18 @@ function M.remap(lhs, rhs, desc, mode, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+---Create keymap
+---@param prefix string
+---@return fun(lhs: string, rhs: string|function, desc: string?, mode: string|table?, opts: table?)
+function M.map(prefix)
+  return function(lhs, rhs, desc, mode, opts)
+    opts = opts or {}
+    opts.desc = desc
+    mode = mode or "n"
+    vim.keymap.set(mode, prefix .. lhs, rhs, opts)
+  end
+end
+
 ---Remove duplicates
 ---@param list table
 ---@return table
