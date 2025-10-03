@@ -122,3 +122,7 @@ map("n", "<leader>Tw", function()
   vim.o.wrap = not vim.o.wrap
   vim.notify("vim.o.wrap is set to " .. tostring(vim.o.wrap))
 end, { desc = "Toggle vim.o.wrap" })
+map("n", "<leader>Td", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+  vim.notify("Diagnostics " .. (not vim.diagnostic.is_enabled() and "disabled" or "enabled"))
+end, { desc = "Toggle Diagnostics" })

@@ -30,7 +30,7 @@ vim.diagnostic.config({
         or string.format("%s (%s)", d.message, d.source)
     end,
   },
-  underline = false,
+  underline = true,
   virtual_lines = false,
   virtual_text = {
     severity = { min = vim.diagnostic.severity.WARN },

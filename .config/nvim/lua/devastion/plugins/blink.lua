@@ -3,7 +3,7 @@ vim.pack.add({
   { src = "https://github.com/rafamadriz/friendly-snippets" },
 }, { confirm = false, load = function() end })
 
-vim.api.nvim_create_autocmd("InsertEnter", {
+vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter" }, {
   once = true,
   callback = function()
     vim.cmd.packadd("blink.cmp")
