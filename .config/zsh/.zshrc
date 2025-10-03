@@ -93,10 +93,11 @@ setopt pushd_minus            # Swap the meaning of cd +1 and cd -1 to the oppos
 zle_highlight=('paste:none')  # Disables highlight on paste
 
 source "${ZDOTDIR}/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
-source "${ZDOTDIR}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-source "${ZDOTDIR}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
-source "${ZDOTDIR}/plugins/zsh-autopair/zsh-autopair.plugin.zsh"
-source "${ZDOTDIR}/plugins/zsh-abbr/zsh-abbr.plugin.zsh"
+source "${ZDOTDIR}/plugins/zsh-defer/zsh-defer.plugin.zsh"
+zsh-defer source "${ZDOTDIR}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+zsh-defer source "${ZDOTDIR}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
+zsh-defer source "${ZDOTDIR}/plugins/zsh-autopair/zsh-autopair.plugin.zsh"
+zsh-defer source "${ZDOTDIR}/plugins/zsh-abbr/zsh-abbr.plugin.zsh"
 
 [[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source "${ZDOTDIR}/.p10k.zsh"
 eval "$(zoxide init zsh)"

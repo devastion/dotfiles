@@ -212,3 +212,9 @@ vim.keymap.set(
 require("nvim-ts-autotag").setup()
 
 require("nvim_context_vt").setup({ min_rows = 10 })
+vim.keymap.set(
+  "n",
+  "<leader>Tc",
+  function() require("nvim_context_vt").toggle_context() end,
+  { desc = "Toggle context virtual text" }
+)

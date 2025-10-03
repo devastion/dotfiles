@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
 function cd_up() {
+  if [[ -z "$1" ]]; then
+    cd ..
+    return
+  fi
+
   cd "$(printf "%0.s../" $(seq 1 "$1"))" || return
 }
