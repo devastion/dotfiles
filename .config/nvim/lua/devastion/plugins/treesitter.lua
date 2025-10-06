@@ -2,7 +2,13 @@ vim.pack.add({
   {
     src = "https://github.com/nvim-treesitter/nvim-treesitter",
     version = "main",
-    data = { post_update = function(_) require("nvim-treesitter.install").update(nil, { summary = true }) end },
+    data = {
+      post_update = function(_)
+        vim.notify("Updating treesitter parsers...", vim.log.levels.INFO)
+        require("nvim-treesitter.install").update(nil, { summary = true })
+        vim.notify("Treesitter parsers updated!", vim.log.levels.INFO)
+      end,
+    },
   },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },

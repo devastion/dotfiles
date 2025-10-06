@@ -99,10 +99,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("K", function() vim.lsp.buf.hover({ border = "single" }) end, "LSP: Hover", "n", opts)
     map("gd", function() vim.lsp.buf.definition() end, "LSP: Goto Definition", "n", opts)
     map("grt", function() vim.lsp.buf.type_definition() end, "LSP: Goto Type Definition", "n", opts)
-    map("grd", function() vim.lsp.buf.declaration() end, "LSP: Goto Declaration", "n", opts)
+    map("grd", function() vim.lsp.buf.declaration() end, "Goto Declaration", "n", opts)
     map("gq", function() vim.lsp.buf.format({ async = true }) end, "LSP: Format", "n", opts)
-    map("grc", function() vim.lsp.codelens.run() end, "LSP: Run Codelens", "n", opts)
-    map("grC", function() vim.lsp.codelens.refresh() end, "LSP: Refresh and Display Codelens", "n", opts)
+    map("grc", function() vim.lsp.codelens.run() end, "Run Codelens", "n", opts)
+    map("grC", function() vim.lsp.codelens.refresh() end, "Refresh and Display Codelens", "n", opts)
 
     -- fzf-lua
     local fzf = require("fzf-lua")
@@ -127,12 +127,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     )
     map("g0", function() fzf.lsp_document_symbols() end, "LSP: Document Symbol", "n", opts)
     map("gd", function() fzf.lsp_definitions({ jump1 = true }) end, "LSP: Goto Definition", "n", opts)
-    map("grt", function() fzf.lsp_typedefs() end, "LSP: Goto Type Definition", "n", opts)
-    map("grd", function() fzf.lsp_declarations() end, "LSP: Goto Declaration", "n", opts)
+    map("grt", function() fzf.lsp_typedefs() end, "Goto Type Definition", "n", opts)
+    map("grd", function() fzf.lsp_declarations() end, "Goto Declaration", "n", opts)
     map(
       "grn",
       function() return ":IncRename " .. vim.fn.expand("<cword>") end,
-      "LSP: Incremental Rename",
+      "Incremental Rename",
       "n",
       { buffer = event.buf, desc = "Incremental Rename", expr = true }
     )

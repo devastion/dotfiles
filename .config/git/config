@@ -25,10 +25,11 @@
   ff = true
 
 [mergetool]
-  prompt = false
+  prompt = true
   keepBackup = false
 
 [mergetool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
   layout = "LOCAL,BASE,REMOTE / MERGED"
 
 [pull]

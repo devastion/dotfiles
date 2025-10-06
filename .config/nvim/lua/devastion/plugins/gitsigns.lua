@@ -1,12 +1,5 @@
 vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" }, { confirm = false })
 
-local map = function(lhs, rhs, desc, mode, opts)
-  opts = opts or {}
-  opts.desc = desc
-  mode = mode or "n"
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
-
 require("gitsigns").setup({
   numhl = true,
   signs = {
@@ -18,10 +11,13 @@ require("gitsigns").setup({
   },
   on_attach = function(bufnr)
     local gitsigns = require("gitsigns")
+
     require("which-key").add({
       { "<leader>gh", group = "+[Hunks]", mode = { "n", "v" } },
       { "<leader>gt", group = "+[Toggles]" },
     })
+
+    local map = require("devastion.utils").remap
 
     ---@diagnostic disable: param-type-mismatch
     -- Navigation

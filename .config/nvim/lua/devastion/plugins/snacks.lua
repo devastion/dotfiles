@@ -14,6 +14,8 @@ local map = require("devastion.utils").remap
 
 map("]]", function() require("snacks.words").jump(vim.v.count1, false) end, "Next Word Reference")
 map("[[", function() require("snacks.words").jump(-vim.v.count1, false) end, "Prev Word Reference")
+map("<C-n>", function() require("snacks.words").jump(vim.v.count1, false) end, "Next Word Reference", "i")
+map("<C-p>", function() require("snacks.words").jump(-vim.v.count1, false) end, "Prev Word Reference", "i")
 map("<C-_>", function() require("snacks.terminal").toggle() end, "Toggle Terminal", { "n", "t" })
 map("<C-/>", function() require("snacks.terminal").toggle() end, "Toggle Terminal", { "n", "t" })
 map("grN", function() require("snacks.rename").rename_file() end, "Rename File")

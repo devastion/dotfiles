@@ -3,7 +3,7 @@ vim.pack.add({ "https://github.com/chrisgrieser/nvim-spider" }, { confirm = fals
 local spider = require("spider")
 
 spider.setup({
-  skipInsignificantPunctuation = true,
+  skipInsignificantPunctuation = false,
   consistentOperatorPending = true,
   subwordMovement = true,
   customPatterns = {},
