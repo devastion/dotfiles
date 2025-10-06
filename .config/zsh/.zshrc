@@ -1,21 +1,35 @@
 #!/usr/bin/env zsh
 
+ZPLUGINDIR=${ZPLUGINDIR:-${ZDOTDIR:-$HOME/.config/zsh}/plugins}
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-eval "$(mise activate zsh)"
 
 if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-source "${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme"
+if [[ ! -d $ZPLUGINDIR/zsh_unplugged ]]; then
+  git clone --quiet https://github.com/mattmc3/zsh_unplugged $ZPLUGINDIR/zsh_unplugged
+fi
+source $ZPLUGINDIR/zsh_unplugged/zsh_unplugged.zsh
 
 autoload -U compinit; compinit
 autoload -Uz ${ZDOTDIR}/functions/*(:t)
 
-source "${ZDOTDIR}/plugins/fzf-tab/fzf-tab.plugin.zsh"
+repos=(
+  "romkatv/powerlevel10k"
+
+  "Aloxaf/fzf-tab"
+  "zsh-users/zsh-autosuggestions"
+  "hlissner/zsh-autopair"
+  "jeffreytse/zsh-vi-mode"
+
+  "romkatv/zsh-defer"
+  "zdharma-continuum/fast-syntax-highlighting"
+  "olets/zsh-abbr"
+)
 
 # Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache true
@@ -92,18 +106,15 @@ setopt pushd_minus            # Swap the meaning of cd +1 and cd -1 to the oppos
 
 zle_highlight=('paste:none')  # Disables highlight on paste
 
-source "${ZDOTDIR}/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
-source "${ZDOTDIR}/plugins/zsh-defer/zsh-defer.plugin.zsh"
-zsh-defer source "${ZDOTDIR}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-zsh-defer source "${ZDOTDIR}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
-zsh-defer source "${ZDOTDIR}/plugins/zsh-autopair/zsh-autopair.plugin.zsh"
-zsh-defer source "${ZDOTDIR}/plugins/zsh-abbr/zsh-abbr.plugin.zsh"
+plugin-load $repos
 
 [[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source "${ZDOTDIR}/.p10k.zsh"
-eval "$(zoxide init zsh)"
 
 # zsh-vi-mode
 function zvm_after_init() {
+  eval "$(mise activate zsh)"
+  eval "$(zoxide init zsh)"
+
   FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)
   # normal mode
   zvm_bindkey vicmd "/" fzf-history-widget

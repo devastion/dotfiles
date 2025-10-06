@@ -30,5 +30,3 @@ cdpath=(
   "${HOME}/Projects"
   $cdpath
 )
-
-eval "$(mise activate zsh --shims)"
