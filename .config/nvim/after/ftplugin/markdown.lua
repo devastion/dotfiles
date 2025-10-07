@@ -10,3 +10,4 @@ vim.pack.add({
 build()
 
 vim.keymap.set("n", "<leader>cp", "<cmd>MarkdownPreviewToggle<cr>", { buffer = true, desc = "Markdown Preview" })
+vim.keymap.set("n", "<leader>Tm", "<cmd>RenderMarkdown toggle<cr>", { buffer = true, desc = "Toggle Render Markdown" })

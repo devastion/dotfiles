@@ -12,4 +12,4 @@ mkdir $HOME/intelephense && echo YOUR_LICENSE_KEY > $HOME/intelephense/licence.t
 
 ## Dependencies
 
-`neovim@0.12`, `ast-grep`, `fd`, `fzf`, `jq`, `ripgrep`, `tree-sitter`
+`neovim@0.12`, `ast-grep`, `fd`, `fzf`, `jq`, `ripgrep`, `tree-sitter`, `imagemagick`

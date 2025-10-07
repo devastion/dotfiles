@@ -1,6 +1,6 @@
 vim.pack.add({ "https://github.com/mfussenegger/nvim-lint" }, { confirm = false })
 
-vim.g.mason_install({ "actionlint", "dotenv-linter" })
+vim.g.mason_install({ "actionlint", "dotenv-linter", "cspell" })
 
 local lint = require("lint")
 lint.linters_by_ft = {
@@ -45,3 +45,12 @@ vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
 })
 
 vim.keymap.set({ "n", "v" }, "<Leader>cl", function() lint.try_lint() end, { desc = "Lint" })
+
+local ns = require("lint").get_namespace("cspell")
+vim.keymap.set({ "n", "v" }, "<Leader>cs", function() lint.try_lint("cspell") end, { desc = "Lint with CSpell" })
+vim.keymap.set(
+  { "n", "v" },
+  "<Leader>cS",
+  function() vim.diagnostic.reset(ns, vim.api.nvim_win_get_buf(0)) end,
+  { desc = "Clear CSpell Diagnostics" }
+)

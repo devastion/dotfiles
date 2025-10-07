@@ -4,6 +4,7 @@ vim.lsp.enable(utils.get_lsp_configs())
 
 local disabled_lsp = {
   tailwindcss_ls = vim.g.is_tailwind_project,
+  cspell_ls = false,
 }
 for k, v in pairs(disabled_lsp) do
   vim.lsp.enable(k, v)
@@ -30,7 +31,9 @@ vim.diagnostic.config({
         or string.format("%s (%s)", d.message, d.source)
     end,
   },
-  underline = true,
+  underline = {
+    severity = vim.diagnostic.severity.WARN,
+  },
   virtual_lines = false,
   virtual_text = {
     severity = { min = vim.diagnostic.severity.WARN },
@@ -68,6 +71,35 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     local opts = { buffer = event.buf }
+
+    map(
+      "]e",
+      function() vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.ERROR }) end,
+      "Next Error",
+      "n",
+      opts
+    )
+    map(
+      "[e",
+      function() vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.ERROR }) end,
+      "Prev Error",
+      "n",
+      opts
+    )
+    map(
+      "]w",
+      function() vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.WARN }) end,
+      "Next Warning",
+      "n",
+      opts
+    )
+    map(
+      "[w",
+      function() vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.WARN }) end,
+      "Prev Warning",
+      "n",
+      opts
+    )
     map("grr", function() vim.lsp.buf.references() end, "References", "n", opts)
     map("gri", function() vim.lsp.buf.implementation() end, "Implementation", "n", opts)
     map("grn", function() vim.lsp.buf.rename() end, "Rename", "n", opts)
@@ -90,6 +122,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("g0", function() vim.lsp.buf.document_symbol() end, "LSP: Document Symbol", "n", opts)
     map(
       "<C-k>",
+      function() vim.lsp.buf.signature_help({ border = "single" }) end,
+      "LSP: Signature Help",
+      { "i", "s" },
+      opts
+    )
+    map(
+      "<C-s>",
       function() vim.lsp.buf.signature_help({ border = "single" }) end,
       "LSP: Signature Help",
       { "i", "s" },

@@ -18,6 +18,7 @@
     "kulala.nvim": [],
     "live-command.nvim": [],
     "lualine.nvim": [],
+    "markdown-preview.nvim": [],
     "mason.nvim": [],
     "mini.align": [],
     "mini.bufremove": [],
@@ -65,6 +66,9 @@
     },
     "plenary.nvim": [],
     "refactoring.nvim": [],
+    "render-markdown.nvim": {
+      "rev": "ea3678d"
+    },
     "schemastore.nvim": [],
     "scope.nvim": [],
     "snacks.nvim": [],

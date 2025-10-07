@@ -53,6 +53,8 @@ export FZF_DEFAULT_OPTS="--tmux=80% --layout=reverse --highlight-line --cycle --
 export EZA_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/eza"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export ZVM_VI_SURROUND_BINDKEY="s-prefix"
+export ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+export ZVM_VI_HIGHLIGHT_BACKGROUND=("paste:none")
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
 export ABBR_USER_ABBREVIATIONS_FILE="${ZDOTDIR:-$HOME/.config/zsh}/.zsh-abbr"
 
@@ -116,6 +118,7 @@ function zvm_after_init() {
   eval "$(zoxide init zsh)"
 
   FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)
+
   # normal mode
   zvm_bindkey vicmd "/" fzf-history-widget
 

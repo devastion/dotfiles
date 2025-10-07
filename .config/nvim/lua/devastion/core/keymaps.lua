@@ -104,18 +104,8 @@ map("n", "]b", function() vim.cmd("bnext") end, { desc = "Next Buffer" })
 map("n", "[b", function() vim.cmd("bprev") end, { desc = "Previous Buffer" })
 
 -- Diagnostics
-map(
-  "n",
-  "<leader>cd",
-  function() vim.diagnostic.open_float({ border = "single" }) end,
-  { desc = "LSP: Line Diagnostics" }
-)
-map(
-  "n",
-  "<leader>cq",
-  function() vim.diagnostic.setloclist({ border = "single" }) end,
-  { desc = "LSP: Diagnostics to QF" }
-)
+map("n", "<leader>cd", function() vim.diagnostic.open_float({ border = "single" }) end, { desc = "Line Diagnostics" })
+map("n", "<leader>cq", function() vim.diagnostic.setqflist({ border = "single" }) end, { desc = "Diagnostics to QF" })
 
 -- Toggles
 map("n", "<leader>Tw", function()
