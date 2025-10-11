@@ -1,4 +1,11 @@
-vim.pack.add({ "https://github.com/mason-org/mason.nvim" }, { confirm = false })
+vim.pack.add({
+  {
+    src = "https://github.com/mason-org/mason.nvim",
+    data = {
+      post_update = function(_) require("mason.api.command").MasonUpdate() end,
+    },
+  },
+}, { confirm = false })
 
 require("mason").setup({
   ui = {
