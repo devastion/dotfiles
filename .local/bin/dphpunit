@@ -47,11 +47,11 @@ if [[ -n "$container" ]]; then
   # echo "docker exec -i "$container" php -d memory_limit=-1 "$phpunitPath" "${args[@]}
 
   # Run the tests
-  docker exec -it $container $execPath -c "XDEBUG_MODE=coverage $phpunitPath -d memory_limit=-1 -d --log-junit=${localPhpUnitResultPath} --coverage-cobertura=${localPhpUnitCoveragePath} ${args}"
+  docker exec -it $container $execPath -c "XDEBUG_MODE=coverage $phpunitPath -d memory_limit=-1 -d --coverage-cobertura=${localPhpUnitCoveragePath} ${args}"
   # docker exec -it $container $phpunitPath -d memory_limit=-1 ${args[@]}
 
   # copy results
-  docker cp -a "$container:$localPhpUnitResultPath" "$outputPath" | - &>/dev/null
+  docker cp -a "$container:$outputPath" "$outputPath" | - &>/dev/null
   docker cp "$container:$localPhpUnitCoveragePath" "./coverage/cobertura.xml" | - &>/dev/null
 
   # replace docker path to locals

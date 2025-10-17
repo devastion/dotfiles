@@ -4,6 +4,8 @@ vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
   { src = "https://github.com/devastion/neotest-phpunit", version = "autodetect-docker-command" },
   "https://github.com/devastion/neotest-node",
+  -- TODO: Use main repo when merged
+  "https://github.com/diidiiman/neotest-python",
 }, { confirm = false })
 
 require("neotest").setup({
@@ -15,6 +17,13 @@ require("neotest").setup({
       },
     }),
     require("neotest-node"),
+    require("neotest-python")({
+      docker = {
+        container = "python-container",
+        args = { "-i", "-w", "/app" },
+        workdir = "/app",
+      },
+    }),
   },
   status = { virtual_text = true },
   output = { open_on_run = true },
