@@ -9,9 +9,9 @@
       "src": "https://github.com/rmagatti/auto-session"
     },
     "blink.cmp": {
-      "rev": "bae4bae",
+      "rev": "327fff9",
       "src": "https://github.com/saghen/blink.cmp",
-      "version": "'v1.6.0'"
+      "version": "'v1.7.0'"
     },
     "bufferline.nvim": {
       "rev": "655133c",
@@ -154,6 +154,10 @@
       "rev": "6782b09",
       "src": "https://github.com/mfussenegger/nvim-dap"
     },
+    "nvim-dap-python": {
+      "rev": "64652d1",
+      "src": "https://github.com/mfussenegger/nvim-dap-python"
+    },
     "nvim-dap-ui": {
       "rev": "cf91d5e",
       "src": "https://github.com/rcarriga/nvim-dap-ui"
@@ -260,6 +264,10 @@
     "tokyonight.nvim": {
       "rev": "d14614c",
       "src": "https://github.com/folke/tokyonight.nvim"
+    },
+    "venv-selector.nvim": {
+      "rev": "7fff64b",
+      "src": "https://github.com/linux-cultist/venv-selector.nvim"
     },
     "vim-fugitive": {
       "rev": "61b51c0",

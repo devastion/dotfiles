@@ -39,7 +39,6 @@ autocmd("FileType", {
     "plaintex",
     "typst",
     "gitcommit",
-    "markdown",
   },
   callback = function()
     vim.wo.wrap = true

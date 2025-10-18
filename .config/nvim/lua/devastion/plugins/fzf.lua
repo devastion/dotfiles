@@ -98,3 +98,19 @@ vim.keymap.set("n", "<leader>gl", function() require("fzf-lua").git_commits() en
 vim.keymap.set("n", "<leader>gL", function() require("fzf-lua").git_bcommits() end, { desc = "Log (file)" })
 vim.keymap.set("n", "<leader>gT", function() require("fzf-lua").git_tags() end, { desc = "Tags" })
 vim.keymap.set("n", "<leader>gd", function() require("fzf-lua").git_diff() end, { desc = "Diffs" })
+-- vim.keymap.set("n", "<leader>gx", function()
+--   require("fzf-lua").fzf_exec("git grep -I -n '<<<<<<< '", {
+--     prompt = "Git Conflicts> ",
+--     previewer = "builtin", -- shows preview of the line in file
+--     actions = {
+--       ["default"] = function(selected)
+--         -- Extract filename and line number from `git grep` output
+--         local file, lnum = selected[1]:match("([^:]+):(%d+):")
+--         if file and lnum then
+--           vim.cmd("edit " .. file)
+--           vim.cmd(lnum)
+--         end
+--       end,
+--     },
+--   })
+-- end, { desc = "Conflicts" })

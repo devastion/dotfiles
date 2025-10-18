@@ -18,6 +18,7 @@ stylua = "latest"
 tmux = "latest"
 tree-sitter = "latest"
 usage = "latest"
+yq = "latest"
 zoxide = "latest"
 
 [settings]

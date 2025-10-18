@@ -1,6 +1,3 @@
-vim.g.mason_install({ "basedpyright" })
-vim.g.ts_install({ "python" })
-
 local function set_python_path(command)
   local path = command.args
   local clients = vim.lsp.get_clients({

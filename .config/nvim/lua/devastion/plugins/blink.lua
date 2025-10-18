@@ -1,5 +1,5 @@
 vim.pack.add({
-  { src = "https://github.com/saghen/blink.cmp", version = "v1.6.0" },
+  { src = "https://github.com/saghen/blink.cmp", version = "v1.7.0" },
   { src = "https://github.com/rafamadriz/friendly-snippets" },
 }, { confirm = false, load = function() end })
 
@@ -60,7 +60,9 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter" }, {
         ["<C-f>"] = { "scroll_documentation_down", "fallback" },
       },
       fuzzy = {
-        use_frecency = true,
+        frecency = {
+          enabled = true,
+        },
         implementation = "prefer_rust",
       },
       completion = {

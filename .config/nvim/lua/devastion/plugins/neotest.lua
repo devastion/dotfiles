@@ -18,6 +18,8 @@ require("neotest").setup({
     }),
     require("neotest-node"),
     require("neotest-python")({
+      dap = { justMyCode = false },
+      runner = "pytest",
       docker = {
         container = "python-container",
         args = { "-i", "-w", "/app" },
@@ -30,20 +32,45 @@ require("neotest").setup({
 })
 
 require("which-key").add({ "<leader>t", group = "+[Testing]", mode = { "n", "v" } })
-vim.keymap.set("n", "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, { desc = "Run File" })
+vim.keymap.set("n", "<leader>ta", function() require("neotest").run.attach() end, { desc = "Attach" })
+vim.keymap.set("n", "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end, { desc = "Run File" })
 vim.keymap.set(
   "n",
-  "<leader>tT",
+  "<leader>tF",
+  function() require("neotest").run.run({ vim.fn.expand("%"), strategy = "dap" }) end,
+  { desc = "Run with (DAP)" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>tt",
   function() require("neotest").run.run({ suite = true }) end,
   { desc = "Run All Test Files" }
 )
+vim.keymap.set(
+  "n",
+  "<leader>tT",
+  function() require("neotest").run.run({ suite = true, strategy = "dap" }) end,
+  { desc = "Run All Test Files (DAP)" }
+)
 vim.keymap.set("n", "<leader>tr", function() require("neotest").run.run() end, { desc = "Run Nearest" })
+vim.keymap.set(
+  "n",
+  "<leader>tR",
+  function() require("neotest").run.run({ strategy = "dap" }) end,
+  { desc = "Run Nearest (DAP)" }
+)
 vim.keymap.set("n", "<leader>tl", function() require("neotest").run.run_last() end, { desc = "Run Last" })
+vim.keymap.set(
+  "n",
+  "<leader>tL",
+  function() require("neotest").run.run_last({ strategy = "dap" }) end,
+  { desc = "Run Last (DAP)" }
+)
 vim.keymap.set("n", "<leader>ts", function() require("neotest").summary.toggle() end, { desc = "Toggle Summary" })
 vim.keymap.set(
   "n",
   "<leader>to",
-  function() require("neotest").output.open({ enter = true, auto_close = false }) end,
+  function() require("neotest").output.open({ enter = true }) end,
   { desc = "Show Output" }
 )
 vim.keymap.set(
