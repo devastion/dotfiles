@@ -34,7 +34,7 @@ vim.keymap.set("n", "<leader>tt", function() require("neotest").run.run(vim.fn.e
 vim.keymap.set(
   "n",
   "<leader>tT",
-  function() require("neotest").run.run(vim.uv.cwd()) end,
+  function() require("neotest").run.run({ suite = true }) end,
   { desc = "Run All Test Files" }
 )
 vim.keymap.set("n", "<leader>tr", function() require("neotest").run.run() end, { desc = "Run Nearest" })
@@ -43,7 +43,7 @@ vim.keymap.set("n", "<leader>ts", function() require("neotest").summary.toggle()
 vim.keymap.set(
   "n",
   "<leader>to",
-  function() require("neotest").output.open({ enter = true, auto_close = true }) end,
+  function() require("neotest").output.open({ enter = true, auto_close = false }) end,
   { desc = "Show Output" }
 )
 vim.keymap.set(

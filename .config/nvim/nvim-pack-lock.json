@@ -217,6 +217,10 @@
       "src": "https://github.com/jbyuki/one-small-step-for-vimkind",
       "version": "'84689d9e'"
     },
+    "package-info.nvim": {
+      "rev": "a1de9eb",
+      "src": "https://github.com/vuki656/package-info.nvim"
+    },
     "plenary.nvim": {
       "rev": "b9fd522",
       "src": "https://github.com/nvim-lua/plenary.nvim"
