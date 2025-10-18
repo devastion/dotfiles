@@ -1,0 +1,15 @@
+# Devastion's NeoVim Config
+
+Personal neovim config.
+
+## Reminders
+
+Setup intelephense license with following command. The typo (licence) is **intentional** and it should be that way!
+
+```sh
+mkdir $HOME/intelephense && echo YOUR_LICENSE_KEY > $HOME/intelephense/licence.txt
+```
+
+## Dependencies
+
+`neovim`, `ast-grep`, `fd`, `fzf`, `jq`, `ripgrep`, `tree-sitter`, `imagemagick`
