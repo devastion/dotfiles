@@ -53,10 +53,6 @@
       "rev": "7c79416",
       "src": "https://github.com/smjonas/inc-rename.nvim"
     },
-    "kulala.nvim": {
-      "rev": "0d50e9c",
-      "src": "https://github.com/mistweaverco/kulala.nvim"
-    },
     "live-command.nvim": {
       "rev": "d23d94a",
       "src": "https://github.com/smjonas/live-command.nvim"
@@ -272,6 +268,10 @@
     "which-key.nvim": {
       "rev": "b4177e3",
       "src": "https://github.com/folke/which-key.nvim"
+    },
+    "workspace-diagnostics.nvim": {
+      "rev": "60f9175",
+      "src": "https://github.com/artemave/workspace-diagnostics.nvim"
     },
     "yanky.nvim": {
       "rev": "04775cc",

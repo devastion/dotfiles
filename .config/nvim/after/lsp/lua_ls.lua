@@ -28,6 +28,9 @@ return {
         checkThirdParty = false,
         library = runtime_files,
       },
+      codeLens = {
+        enable = true,
+      },
       diagnostics = {
         globals = {
           "vim",

@@ -11,9 +11,13 @@ vim.g.tabline_enabled = true
 vim.g.autolint_enabled = true
 vim.g.autoformat_enabled = false
 
----Install packages
+--- Install packages
 ---@param specs (string|vim.pack.Spec)[]
-vim.g.package_manager_install = function(specs) vim.pack.add(specs, { confirm = false }) end
+---@param opts vim.pack.keyset.add
+vim.g.package_manager_install = function(specs, opts)
+  local default_opts = opts or { confirm = false }
+  vim.pack.add(specs, default_opts)
+end
 vim.g.package_manager_update = function() vim.pack.update() end
 
 vim.g.custom_foldtext = function()

@@ -34,7 +34,13 @@ autocmd({ "BufWritePre" }, {
 autocmd("FileType", {
   desc = "Wrap and check for spell in text filetypes",
   group = augroup("wrap_spell", { clear = true }),
-  pattern = { "text", "plaintex", "typst", "gitcommit" },
+  pattern = {
+    "text",
+    "plaintex",
+    "typst",
+    "gitcommit",
+    "markdown",
+  },
   callback = function()
     vim.wo.wrap = true
     vim.wo.spell = true

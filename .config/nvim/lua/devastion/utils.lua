@@ -4,8 +4,8 @@ local M = {}
 ---@param lhs string
 ---@param rhs string|function
 ---@param desc string?
----@param mode string|table?
----@param opts table?
+---@param mode string|string[]?
+---@param opts vim.keymap.set.Opts?
 function M.remap(lhs, rhs, desc, mode, opts)
   opts = opts or {}
   opts.desc = desc

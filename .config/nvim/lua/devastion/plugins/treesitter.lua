@@ -134,21 +134,22 @@ require("nvim-treesitter-textobjects").setup({
   },
   multiwindow = true,
 })
+
 local text_objects_outer = {
   f = "@function.outer",
   c = "@class.outer",
   p = "@parameter.outer",
   l = "@loop.outer",
-  a = "@attribute.outer",
-  -- b = "@block.outer",
+  a = "@assignment.outer",
+  r = "@return.outer",
 }
 local text_objects_inner = {
   f = "@function.inner",
   c = "@class.inner",
   p = "@parameter.inner",
   l = "@loop.inner",
-  a = "@attribute.inner",
-  -- b = "@block.inner",
+  a = "@assignment.inner",
+  r = "@return.inner",
 }
 
 local select_textobject = require("nvim-treesitter-textobjects.select").select_textobject
