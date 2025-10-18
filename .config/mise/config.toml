@@ -1,5 +1,4 @@
 [tools]
-"asdf:neovim" = "nightly"
 ast-grep = "latest"
 bat = "latest"
 delta = "latest"
@@ -11,6 +10,7 @@ go = "latest"
 jq = "latest"
 lazygit = "latest"
 lua = "5.1"
+neovim = "latest"
 node = "latest"
 ripgrep = "latest"
 rust = "latest"
