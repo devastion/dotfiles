@@ -12,7 +12,7 @@ return {
           { "<leader>c", group = "+[Code]", mode = { "n", "v" } },
           { "<leader>s", group = "+[Search]", mode = { "n", "v" } },
           { "<leader>g", group = "+[Git]", mode = { "n", "v" } },
-          { "<leader>U", group = "+[UI Toggles]", mode = { "n", "v" } },
+          { "<leader>u", group = "+[UI Toggles]", mode = { "n", "v" } },
           { "<leader><tab>", group = "+[Tabs]" },
           { "gr", group = "+[LSP]" },
           { "gc", group = "+[Comment]" },

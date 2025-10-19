@@ -114,18 +114,6 @@ map("<leader>cq", function()
   vim.diagnostic.setqflist({ border = "single" })
 end, "Diagnostics to QF")
 
--- UI Toggles
-map("<leader>Uw", function()
-  vim.o.wrap = not vim.o.wrap
-  vim.notify("vim.o.wrap is set to " .. tostring(vim.o.wrap))
-end, "Toggle Word Wrap")
-map("<leader>Ud", function()
-  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-  vim.notify("Diagnostics " .. (vim.diagnostic.is_enabled() and "enabled" or "disabled"))
-end, "Toggle Diagnostics")
-
--- Insert Mode
-
 -- Add undo break-points
 map(",", ",<c-g>u", nil, "i")
 map(".", ".<c-g>u", nil, "i")

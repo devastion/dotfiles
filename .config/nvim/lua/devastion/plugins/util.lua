@@ -47,7 +47,7 @@ return {
     ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
     opts = {},
     keys = {
-      { "<leader>Um", "<cmd>RenderMarkdown toggle<cr>", desc = "Toggle Render Markdown", ft = "markdown" },
+      { "<leader>um", "<cmd>RenderMarkdown toggle<cr>", desc = "Toggle Render Markdown", ft = "markdown" },
     },
   },
   {

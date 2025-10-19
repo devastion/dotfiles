@@ -1,6 +1,14 @@
 vim.g.mapleader = vim.keycode("<Space>")
 vim.g.maplocalleader = vim.keycode("<Bslash>")
 
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+vim.g.autolint_enabled = true
+vim.g.autoformat_enabled = false
+
 local utils = require("devastion.utils")
 
 vim.g.is_laravel_project = utils.package_exists("composer.json", '.require."laravel/framework"')

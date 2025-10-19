@@ -33,11 +33,13 @@ return {
         "json",
         "json5",
         "jsonc",
+        "latex",
         "lua",
         "luadoc",
         "luap",
         "markdown",
         "markdown_inline",
+        "norg",
         "php",
         "php_only",
         "phpdoc",
@@ -46,9 +48,11 @@ return {
         "query",
         "regex",
         "scss",
+        "svelte",
         "toml",
         "tsx",
         "typescript",
+        "typst",
         "vim",
         "vimdoc",
         "vue",
@@ -188,10 +192,10 @@ return {
         end, { desc = "Goto Next End " .. v })
       end
 
-      vim.keymap.set("n", "<C-a><C-n>", function()
+      vim.keymap.set("n", "<leader>a", function()
         require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
       end, { desc = "Swap @parameter with next" })
-      vim.keymap.set("n", "<C-a><C-p>", function()
+      vim.keymap.set("n", "<leader>A", function()
         require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner")
       end, { desc = "Swap @parameter with previous" })
     end,
