@@ -1,4 +1,4 @@
-local map = require("devastion.utils").remap
+local map = vim.g.remap
 
 -- Allow moving the cursor through wrapped lines with j, k
 map("j", "v:count == 0 ? 'gj' : 'j'", "Down", { "n", "x" }, { expr = true, silent = true })
@@ -108,10 +108,10 @@ end, "Cycle Words")
 
 -- Diagnostics
 map("<leader>cd", function()
-  vim.diagnostic.open_float({ border = "single" })
+  vim.diagnostic.open_float({ border = vim.g.ui_border })
 end, "Line Diagnostics")
 map("<leader>cq", function()
-  vim.diagnostic.setqflist({ border = "single" })
+  vim.diagnostic.setqflist({ border = vim.g.ui_border })
 end, "Diagnostics to QF")
 
 -- Add undo break-points

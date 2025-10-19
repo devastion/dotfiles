@@ -75,7 +75,7 @@ return {
         list = { selection = { preselect = false, auto_insert = true } },
         menu = {
           auto_show = true,
-          border = "single",
+          border = vim.g.ui_border,
           max_height = 15,
           scrolloff = 0,
           draw = {
@@ -119,7 +119,7 @@ return {
           update_delay_ms = 100,
           treesitter_highlighting = true,
           window = {
-            border = "single",
+            border = vim.g.ui_border,
           },
         },
         trigger = {
@@ -129,7 +129,7 @@ return {
       signature = {
         enabled = true,
         window = {
-          border = "single",
+          border = vim.g.ui_border,
         },
       },
       appearance = {

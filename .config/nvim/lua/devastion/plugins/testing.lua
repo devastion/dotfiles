@@ -5,7 +5,6 @@ return {
     lazy = true,
     dependencies = {
       "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
       { "devastion/neotest-phpunit", version = "autodetect-docker-command" },
       "devastion/neotest-node",
       "diidiiman/neotest-python",
@@ -143,9 +142,6 @@ return {
   },
   {
     "andythigpen/nvim-coverage",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
     version = "*",
     cond = vim.g.is_laravel_project,
     config = function()

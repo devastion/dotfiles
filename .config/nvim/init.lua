@@ -19,7 +19,7 @@ require("devastion.core.options")
 require("devastion.core.filetypes")
 require("devastion.core.autocmds")
 require("devastion.core.keymaps")
-require("devastion.core.lsp")
+require("devastion.core.diagnostics")
 
 require("lazy").setup({
   spec = {
@@ -36,6 +36,8 @@ require("lazy").setup({
         }, {})
       end,
     },
+    { "nvim-lua/plenary.nvim", lazy = true },
+    { "muniftanjim/nui.nvim", lazy = true },
     { import = "devastion.plugins" },
   },
   install = { colorscheme = { "tokyonight" } },

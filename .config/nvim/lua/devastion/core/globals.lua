@@ -9,6 +9,9 @@ vim.g.loaded_ruby_provider = 0
 vim.g.autolint_enabled = true
 vim.g.autoformat_enabled = false
 
+vim.g.ui_border = "single"
+vim.g.remap = require("devastion.utils").remap
+
 local utils = require("devastion.utils")
 
 vim.g.is_laravel_project = utils.package_exists("composer.json", '.require."laravel/framework"')

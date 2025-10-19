@@ -19,7 +19,7 @@ return {
           { "<leader>gt", group = "+[Toggles]" },
         })
 
-        local map = require("devastion.utils").remap
+        local map = vim.g.remap
 
         map("]h", function()
           if vim.wo.diff then
