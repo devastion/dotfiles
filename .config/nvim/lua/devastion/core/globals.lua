@@ -88,6 +88,7 @@ vim.g.mason_ensure_installed = {
   "lua-language-server",
   "marksman",
   "php-cs-fixer",
+  "php-debug-adapter",
   "phpcs",
   "pint",
   "prettier",

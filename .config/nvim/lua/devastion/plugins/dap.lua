@@ -56,6 +56,23 @@ return {
     local dap = require("dap")
     local dapui = require("dapui")
 
+    dap.adapters.php = {
+      type = "executable",
+      command = "node",
+      args = {
+        vim.fn.stdpath("data") .. "/mason/packages/php-debug-adapter/php-debug-adapter",
+      },
+    }
+
+    dap.configurations.php = {
+      {
+        type = "php",
+        request = "launch",
+        name = "Listen for xdebug",
+        port = "9003",
+      },
+    }
+
     require("nvim-dap-virtual-text").setup({})
 
     dapui.setup({

@@ -167,3 +167,10 @@ autocmd("BufWritePost", {
     end
   end,
 })
+
+autocmd("SourcePost", {
+  pattern = { ".nvim.lua", ".nvimrc", ".exrc" },
+  callback = function(args)
+    vim.notify("Loaded project config: " .. args.file, vim.log.levels.INFO)
+  end,
+})

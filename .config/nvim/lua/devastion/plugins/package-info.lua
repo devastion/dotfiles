@@ -14,6 +14,7 @@ return {
         end,
         mode = "n",
         desc = "Show Package Info",
+        ft = "json",
       },
       {
         "<leader>nh",
@@ -22,6 +23,7 @@ return {
         end,
         mode = "n",
         desc = "Hide Package Info",
+        ft = "json",
       },
       {
         "<leader>nt",
@@ -30,6 +32,7 @@ return {
         end,
         mode = "n",
         desc = "Toggle Package Info",
+        ft = "json",
       },
       {
         "<leader>nu",
@@ -38,6 +41,7 @@ return {
         end,
         mode = "n",
         desc = "Update Package",
+        ft = "json",
       },
       {
         "<leader>nd",
@@ -46,6 +50,7 @@ return {
         end,
         mode = "n",
         desc = "Delete Package",
+        ft = "json",
       },
       {
         "<leader>ni",
@@ -54,6 +59,7 @@ return {
         end,
         mode = "n",
         desc = "Install Package",
+        ft = "json",
       },
       {
         "<leader>nc",
@@ -62,6 +68,7 @@ return {
         end,
         mode = "n",
         desc = "Change Package Version",
+        ft = "json",
       },
     }
   end,
