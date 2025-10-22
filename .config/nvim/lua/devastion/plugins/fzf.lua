@@ -8,7 +8,10 @@ return {
     return {
       "hide",
       keymap = {
-        builtin = { ["<C-f>"] = "preview-page-down", ["<C-b>"] = "preview-page-up" },
+        builtin = {
+          ["<c-f>"] = "preview-page-down",
+          ["<c-b>"] = "preview-page-up",
+        },
         fzf = {
           ["ctrl-q"] = "select-all+accept",
           ["ctrl-u"] = "half-page-up",
@@ -266,6 +269,14 @@ return {
       desc = "Quickfix List",
     },
     {
+      "<leader>st",
+      function()
+        require("fzf-lua").treesitter()
+      end,
+      mode = "n",
+      desc = "Treesitter",
+    },
+    {
       "<leader>sr",
       function()
         require("fzf-lua").resume()
@@ -356,7 +367,7 @@ return {
       desc = "Diffs",
     },
     {
-      "<leader>gx",
+      "<leader>fx",
       function()
         require("fzf-lua").fzf_exec("git grep -I -n '<<<<<<< '", {
           prompt = "Git Conflicts> ",

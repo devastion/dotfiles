@@ -9,6 +9,7 @@ return {
       php = vim.g.is_laravel_project and {} or { "phpcs" },
       sh = { "shellcheck" },
       bash = { "shellcheck" },
+      dockerfile = { "hadolint" },
     },
   },
   config = function(_, opts)

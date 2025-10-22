@@ -32,6 +32,12 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
+map("]d", function()
+  vim.diagnostic.jump({ count = 1, float = true })
+end, "Next Diagnostic", "n")
+map("[d", function()
+  vim.diagnostic.jump({ count = -1, float = true })
+end, "Prev Diagnostic", "n")
 map("]e", function()
   vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.ERROR })
 end, "Next Error", "n")

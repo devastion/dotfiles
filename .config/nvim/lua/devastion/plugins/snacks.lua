@@ -50,7 +50,7 @@ return {
       desc = "Open File in Repository",
     },
     {
-      "<C-_>",
+      "<c-_>",
       function()
         require("snacks.terminal").toggle()
       end,
@@ -58,7 +58,7 @@ return {
       mode = { "n", "t" },
     },
     {
-      "<C-/>",
+      "<c-/>",
       function()
         require("snacks.terminal").toggle()
       end,
@@ -66,7 +66,7 @@ return {
       mode = { "n", "t" },
     },
     {
-      "<C-n>",
+      "<c-n>",
       function()
         require("snacks.words").jump(vim.v.count1, false)
       end,
@@ -74,7 +74,7 @@ return {
       mode = "i",
     },
     {
-      "<C-p>",
+      "<c-p>",
       function()
         require("snacks.words").jump(-vim.v.count1, false)
       end,
@@ -94,6 +94,20 @@ return {
         Snacks.lazygit()
       end,
       desc = "Lazygit (cwd)",
+    },
+    {
+      "<leader>bd",
+      function()
+        Snacks.bufdelete()
+      end,
+      desc = "Delete Buffer (snacks)",
+    },
+    {
+      "<leader>bo",
+      function()
+        Snacks.bufdelete.other()
+      end,
+      desc = "Delete Other Buffers (snacks)",
     },
   },
   init = function()

@@ -5,7 +5,6 @@ return {
     "rcarriga/nvim-dap-ui",
     "thehamsta/nvim-dap-virtual-text",
     "nvim-neotest/nvim-nio",
-    "nvim-lua/plenary.nvim",
     {
       "jbyuki/one-small-step-for-vimkind",
       ft = "lua",

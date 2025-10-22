@@ -19,7 +19,7 @@ return {
     return {
       keymap = {
         preset = "none",
-        ["<Esc>"] = {
+        ["<esc>"] = {
           function(cmp)
             if cmp.is_visible() and cmp.get_selected_item() ~= nil then
               return cmp.cancel()
@@ -29,10 +29,10 @@ return {
           end,
           "fallback",
         },
-        ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
-        ["<CR>"] = { "accept", "fallback" },
-        ["<C-e>"] = { "hide", "fallback" },
-        ["<Tab>"] = {
+        ["<c-space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<cr>"] = { "accept", "fallback" },
+        ["<c-e>"] = { "hide", "fallback" },
+        ["<tab>"] = {
           "snippet_forward",
           "select_next",
           function(cmp)
@@ -42,7 +42,7 @@ return {
           end,
           "fallback",
         },
-        ["<S-Tab>"] = {
+        ["<s-tab>"] = {
           "snippet_backward",
           "select_prev",
           function(cmp)
@@ -52,10 +52,10 @@ return {
           end,
           "fallback",
         },
-        ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
-        ["<C-n>"] = { "select_next", "fallback_to_mappings" },
-        ["<C-b>"] = { "scroll_documentation_up", "fallback" },
-        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+        ["<c-p>"] = { "select_prev", "fallback_to_mappings" },
+        ["<c-n>"] = { "select_next", "fallback_to_mappings" },
+        ["<c-b>"] = { "scroll_documentation_up", "fallback" },
+        ["<c-f>"] = { "scroll_documentation_down", "fallback" },
       },
       fuzzy = {
         frecency = {
@@ -142,8 +142,8 @@ return {
         enabled = true,
         keymap = {
           preset = "none",
-          ["<CR>"] = { "accept_and_enter", "fallback" },
-          ["<Tab>"] = {
+          ["<cr>"] = { "accept_and_enter", "fallback" },
+          ["<tab>"] = {
             function(cmp)
               if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then
                 return cmp.accept()
@@ -152,9 +152,9 @@ return {
             "show_and_insert",
             "select_next",
           },
-          ["<S-Tab>"] = { "show_and_insert", "select_prev" },
-          ["<C-n>"] = { "select_next", "fallback" },
-          ["<C-p>"] = { "select_prev", "fallback" },
+          ["<S-tab>"] = { "show_and_insert", "select_prev" },
+          ["<c-n>"] = { "select_next", "fallback" },
+          ["<c-p>"] = { "select_prev", "fallback" },
         },
         completion = {
           menu = { auto_show = true },

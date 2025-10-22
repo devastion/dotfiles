@@ -100,11 +100,11 @@ function M.ts_install(parsers)
 end
 
 ---Check if package exists in json or yaml file
----@param filepath string
----@param query string
+---@param filename string
+---@param query string|string[]
 ---@return boolean
-function M.package_exists(filepath, query)
-  local absolute_path = M.get_root_directory() .. "/" .. filepath
+function M.package_exists(filename, query)
+  local absolute_path = M.get_root_directory() .. "/" .. filename
   local is_readable = function(file)
     if vim.fn.filereadable(file) == 0 then
       return false
@@ -123,7 +123,7 @@ function M.package_exists(filepath, query)
     end
 
     vim.schedule(function()
-      vim.notify(query .. " mathed on " .. filepath, vim.log.levels.INFO)
+      vim.notify(q .. " matched on " .. filename, vim.log.levels.INFO)
     end)
 
     return true

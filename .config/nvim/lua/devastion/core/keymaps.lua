@@ -5,25 +5,25 @@ map("j", "v:count == 0 ? 'gj' : 'j'", "Down", { "n", "x" }, { expr = true, silen
 map("k", "v:count == 0 ? 'gk' : 'k'", "Up", { "n", "x" }, { expr = true, silent = true })
 
 -- Move to window using the <ctrl> hjkl keys
-map("<C-h>", "<C-w>h", "Go to Left Window", "n", { remap = true })
-map("<C-j>", "<C-w>j", "Go to Lower Window", "n", { remap = true })
-map("<C-k>", "<C-w>k", "Go to Upper Window", "n", { remap = true })
-map("<C-l>", "<C-w>l", "Go to Right Window", "n", { remap = true })
+map("<c-h>", "<c-w>h", "Go to Left Window", "n", { remap = true })
+map("<c-j>", "<c-w>j", "Go to Lower Window", "n", { remap = true })
+map("<c-k>", "<c-w>k", "Go to Upper Window", "n", { remap = true })
+map("<c-l>", "<c-w>l", "Go to Right Window", "n", { remap = true })
 
 -- Resize window using <ctrl> arrow keys
-map("<C-Up>", function()
+map("<c-Up>", function()
   local height = vim.api.nvim_win_get_height(0)
   vim.api.nvim_win_set_height(0, height + 2)
 end, "Increase Window Height")
-map("<C-Down>", function()
+map("<c-Down>", function()
   local height = vim.api.nvim_win_get_height(0)
   vim.api.nvim_win_set_height(0, height - 2)
 end, "Decrease Window Height")
-map("<C-Left>", function()
+map("<c-Left>", function()
   local width = vim.api.nvim_win_get_width(0)
   vim.api.nvim_win_set_width(0, width + 2)
 end, "Increase Window Width")
-map("<C-Right>", function()
+map("<c-Right>", function()
   local width = vim.api.nvim_win_get_width(0)
   vim.api.nvim_win_set_width(0, width - 2)
 end, "Decrease Window Width")
@@ -99,10 +99,10 @@ map("<", "<gv", nil, "v")
 map(">", ">gv", nil, "v")
 
 -- Increments, Diagnostics, and Toggles
-map("<Tab>", function()
+map("<tab>", function()
   require("devastion.utils").word_cycle()
 end, "Cycle Words")
-map("<S-Tab>", function()
+map("<s-tab>", function()
   require("devastion.utils").word_cycle(true)
 end, "Cycle Words")
 
@@ -119,13 +119,16 @@ map(",", ",<c-g>u", nil, "i")
 map(".", ".<c-g>u", nil, "i")
 map(";", ";<c-g>u", nil, "i")
 
--- Disable Keys
-
 -- Disable the spacebar key's default behavior in Normal and Visual modes
-map("<Space>", "<Nop>", nil, { "n", "v" }, { silent = true })
+map("<space>", "<nop>", nil, { "n", "v" }, { silent = true })
 
 -- Disable arrow keys in normal mode
 map("<left>", "", nil, "n")
 map("<right>", "", nil, "n")
 map("<up>", "", nil, "n")
 map("<down>", "", nil, "n")
+
+-- lazy.nvim
+map("<leader>L", function()
+  require("lazy.view").show("home")
+end, "Lazy")

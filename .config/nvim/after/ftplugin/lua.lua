@@ -1,6 +1,6 @@
 vim.b.autoformat_enabled = true
 
-local map = require("devastion.utils").remap
+local map = vim.g.remap
 
 map("<leader>fp", function()
   require("fzf-lua").files({

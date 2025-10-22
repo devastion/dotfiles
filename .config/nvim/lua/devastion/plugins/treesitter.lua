@@ -27,6 +27,7 @@ return {
         "gitattributes",
         "gitcommit",
         "gitignore",
+        "graphql",
         "html",
         "javascript",
         "jsdoc",

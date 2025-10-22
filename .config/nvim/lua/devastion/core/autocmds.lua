@@ -129,26 +129,28 @@ autocmd("BufReadPost", {
   end,
 })
 
-autocmd({ "ModeChanged" }, {
-  group = vim.api.nvim_create_augroup("i_tmux_unset_leader", {}),
-  desc = "Disable TMux leader in insert mode",
-  callback = function(event)
-    local new_mode = event.match:sub(-1)
-    local function get_tmux_leader()
-      if not vim.g.tmux_leader_key then
-        vim.g.tmux_leader_key = vim.system({ "tmux", "show", "-gv", "prefix" }, {}):wait().stdout:match("%S+")
+if vim.env.TMUX then
+  autocmd({ "ModeChanged" }, {
+    group = vim.api.nvim_create_augroup("i_tmux_unset_leader", {}),
+    desc = "Disable TMux leader in insert mode",
+    callback = function(event)
+      local new_mode = event.match:sub(-1)
+      local function get_tmux_leader()
+        if not vim.g.tmux_leader_key then
+          vim.g.tmux_leader_key = vim.system({ "tmux", "show", "-gv", "prefix" }, {}):wait().stdout:match("%S+")
+        end
+
+        return vim.g.tmux_leader_key
       end
 
-      return vim.g.tmux_leader_key
-    end
-
-    if new_mode == "i" then
-      vim.system({ "tmux", "set-option", "-p", "prefix", "None" }, {})
-    else
-      vim.system({ "tmux", "set-option", "-p", "prefix", get_tmux_leader() }, {})
-    end
-  end,
-})
+      if new_mode == "i" then
+        vim.system({ "tmux", "set-option", "-p", "prefix", "None" }, {})
+      else
+        vim.system({ "tmux", "set-option", "-p", "prefix", get_tmux_leader() }, {})
+      end
+    end,
+  })
+end
 
 autocmd("BufWritePost", {
   pattern = "*",
@@ -157,7 +159,7 @@ autocmd("BufWritePost", {
     if vim.fn.filereadable(file) == 1 and vim.fn.filewritable(file) == 1 then
       local first_line = vim.fn.getline(1)
       if first_line:match("^#!") then
-        vim.keymap.set("n", "<leader>cx", function()
+        vim.keymap.set("n", "<leader>cX", function()
           vim.fn.system({ "chmod", "+x", vim.fn.expand("%:p") })
           print("Made " .. vim.fn.expand("%:t") .. " executable")
         end, { desc = "Chmod +x current file", buffer = event.buf })

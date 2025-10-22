@@ -37,7 +37,6 @@ require("lazy").setup({
       end,
     },
     { "nvim-lua/plenary.nvim", lazy = true },
-    { "muniftanjim/nui.nvim", lazy = true },
     { import = "devastion.plugins" },
   },
   install = { colorscheme = { "tokyonight" } },
@@ -51,3 +50,5 @@ require("lazy").setup({
     },
   },
 })
+
+require("devastion.core.lsp")
