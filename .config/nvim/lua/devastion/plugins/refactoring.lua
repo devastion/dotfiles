@@ -3,7 +3,10 @@ return {
   "ThePrimeagen/refactoring.nvim",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "nvim-treesitter/nvim-treesitter",
+    {
+      "nvim-treesitter/nvim-treesitter",
+      branch = "main",
+    },
   },
   keys = function()
     require("which-key").add({ "<leader>r", group = "+[Refactor]", mode = { "n", "x" } })

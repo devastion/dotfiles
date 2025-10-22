@@ -2,7 +2,7 @@
 return {
   "gbprod/yanky.nvim",
   dependencies = { "kkharji/sqlite.lua" },
-  event = { "VeryLazy" },
+  lazy = true,
   opts = {
     ring = {
       storage = "sqlite",

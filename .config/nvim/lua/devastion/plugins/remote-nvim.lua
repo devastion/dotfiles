@@ -5,6 +5,15 @@ return {
   dependencies = {
     "nvim-telescope/telescope.nvim",
   },
+  lazy = true,
+  cmd = {
+    "RemoteStart",
+    "RemoteStop",
+    "RemoteInfo",
+    "RemoteCleanup",
+    "RemoteConfigDel",
+    "RemoteLog",
+  },
   opts = {},
   config = function(_, opts)
     require("remote-nvim").setup({

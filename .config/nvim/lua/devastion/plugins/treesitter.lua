@@ -84,7 +84,12 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+      },
+    },
     branch = "main",
     event = { "VeryLazy" },
     opts = {
@@ -156,7 +161,12 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+      },
+    },
     event = { "VeryLazy" },
     opts = {
       enable = true,
@@ -168,17 +178,32 @@ return {
   {
     "rrethy/nvim-treesitter-endwise",
     event = { "VeryLazy" },
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+      },
+    },
   },
   {
     "windwp/nvim-ts-autotag",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+      },
+    },
     event = { "VeryLazy" },
     opts = {},
   },
   {
     "andersevenrud/nvim_context_vt",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+      },
+    },
     event = { "VeryLazy" },
     opts = {},
   },

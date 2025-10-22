@@ -164,3 +164,7 @@ run = ["layout floating"]
 [[on-window-detected]]
 if.app-id = "com.mitchellh.ghostty"
 run = ["layout tiling", "move-node-to-workspace 5"]
+
+[[on-window-detected]]
+if.app-id = "com.culturedcode.ThingsMac"
+run = ["layout tiling", "move-node-to-workspace 4"]
