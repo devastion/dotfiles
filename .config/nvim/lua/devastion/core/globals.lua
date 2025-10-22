@@ -86,6 +86,8 @@ vim.g.mason_ensure_installed = {
   "intelephense",
   "json-lsp",
   "lua-language-server",
+  "markdown-toc",
+  "markdownlint-cli2",
   "marksman",
   "php-cs-fixer",
   "php-debug-adapter",

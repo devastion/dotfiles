@@ -10,6 +10,7 @@ return {
       sh = { "shellcheck" },
       bash = { "shellcheck" },
       dockerfile = { "hadolint" },
+      markdown = { "markdownlint-cli2" },
     },
   },
   config = function(_, opts)
