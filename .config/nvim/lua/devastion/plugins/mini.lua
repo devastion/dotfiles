@@ -1,8 +1,10 @@
+local mini_version = "*"
+
 ---@type LazySpec
 return {
   {
     "echasnovski/mini.icons",
-    version = "*",
+    version = mini_version,
     lazy = true,
     opts = {},
     init = function()
@@ -14,7 +16,7 @@ return {
   },
   {
     "nvim-mini/mini.files",
-    version = "*",
+    version = mini_version,
     opts = {},
     keys = {
       {
@@ -37,7 +39,7 @@ return {
   },
   {
     "nvim-mini/mini.pairs",
-    version = "*",
+    version = mini_version,
     event = { "InsertEnter", "CmdlineEnter" },
     opts = {
       modes = { insert = true, command = true, terminal = false },
@@ -87,8 +89,8 @@ return {
   },
   {
     "nvim-mini/mini.surround",
-    version = "*",
-    event = { "InsertEnter", "CmdlineEnter" },
+    version = mini_version,
+    event = { "VeryLazy" },
     opts = {
       mappings = {
         add = "sa",
@@ -106,7 +108,7 @@ return {
   },
   {
     "nvim-mini/mini.indentscope",
-    version = "*",
+    version = mini_version,
     event = { "VeryLazy" },
     opts = function()
       return {
@@ -119,8 +121,8 @@ return {
   },
   {
     "nvim-mini/mini.operators",
-    version = "*",
-    event = { "InsertEnter", "CmdlineEnter" },
+    version = mini_version,
+    event = { "VeryLazy" },
     opts = {
       evaluate = {
         prefix = "",
@@ -153,7 +155,7 @@ return {
   },
   {
     "nvim-mini/mini.splitjoin",
-    version = "*",
+    version = mini_version,
     event = { "VeryLazy" },
     opts = {
       mappings = { toggle = "J" },
@@ -161,19 +163,19 @@ return {
   },
   {
     "nvim-mini/mini.align",
-    version = "*",
+    version = mini_version,
     event = { "VeryLazy" },
     opts = {},
   },
   {
     "nvim-mini/mini.move",
-    version = "*",
+    version = mini_version,
     event = { "VeryLazy" },
     opts = {},
   },
   {
     "nvim-mini/mini.comment",
-    version = "*",
+    version = mini_version,
     dependencies = {
       {
         "JoosepAlviste/nvim-ts-context-commentstring",

@@ -1,22 +1,28 @@
 ---@type LazySpec
 return {
   "otavioschwanck/arrow.nvim",
-  dependencies = { "echasnovski/mini.icons" },
   keys = {
     {
-      "m",
+      "<leader>h",
       function()
         require("arrow.commands").commands.open()
       end,
-      desc = "Arrow",
+      desc = "Arrow File Mappings",
+    },
+    {
+      "<leader>H",
+      function()
+        require("arrow.commands").commands.open(vim.api.nvim_get_current_buf())
+      end,
+      desc = "Arrow Buffer Mappings",
     },
   },
   opts = {
     show_icons = true,
     always_show_path = true,
     separate_by_branch = true,
-    leader_key = "m",
-    buffer_leader_key = "M",
+    leader_key = "<leader>h",
+    buffer_leader_key = "<leader>H",
     separate_save_and_remove = true,
     per_buffer_config = {
       sort_automatically = false,

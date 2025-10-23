@@ -41,7 +41,7 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
       once = true,
-      callback = function(args)
+      callback = function()
         vim.ui.select = function(...)
           require("lazy").load({ plugins = { "fzf-lua" } })
           require("fzf-lua").register_ui_select()
@@ -97,6 +97,11 @@ return {
               cmd = "fd -g -p -t f '**/core/**'",
             })
           end, "Core", "n")
+          map("<leader>fh", function()
+            require("fzf-lua").files({
+              cmd = "fd -g -p -t f '**/helpers/*'",
+            })
+          end, "Helpers", "n")
         end
       end,
     })
@@ -256,6 +261,14 @@ return {
       end,
       mode = "n",
       desc = "Grep (live)",
+    },
+    {
+      "<leader>sG",
+      function()
+        require("devastion.helpers.fzf").folder_grep()
+      end,
+      mode = "n",
+      desc = "Grep in Folder",
     },
     {
       "<leader>sg",
@@ -430,19 +443,7 @@ return {
     {
       "<leader>fx",
       function()
-        require("fzf-lua").fzf_exec("git grep -I -n '<<<<<<< '", {
-          prompt = "Git Conflicts> ",
-          previewer = "builtin",
-          actions = {
-            ["default"] = function(selected)
-              local file, lnum = selected[1]:match("([^:]+):(%d+):")
-              if file and lnum then
-                vim.cmd("edit " .. file)
-                vim.cmd(lnum)
-              end
-            end,
-          },
-        })
+        require("devastion.helpers.fzf").git_conflicts()
       end,
       desc = "Conflicts",
     },

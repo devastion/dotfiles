@@ -302,4 +302,27 @@ function M.get_attached_clients()
   return language_servers
 end
 
+---Safe require a module
+---@param module string Module name
+---@return any: Module if successful, nil otherwise
+function M.safe_require(module)
+  local ok, result = pcall(require, module)
+  if not ok then
+    vim.notify("Could not require module '" .. module .. "'", vim.log.levels.ERROR)
+    return nil
+  end
+  return result
+end
+
+---Check if a command-line tool exists
+---@param cmd string The command to check
+---@return boolean: True if the command exists, false otherwise
+function M.check_cmd_exists(cmd)
+  if not cmd or cmd == "" then
+    return false
+  end
+
+  return vim.fn.executable(cmd) == 1
+end
+
 return M

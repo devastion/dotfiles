@@ -4,6 +4,7 @@ return {
   lazy = true,
   dependencies = {
     "nvim-neotest/nvim-nio",
+    "nvim-neotest/neotest-plenary",
     { "devastion/neotest-phpunit", version = "autodetect-docker-command" },
     "devastion/neotest-node",
     "diidiiman/neotest-python",
@@ -12,6 +13,7 @@ return {
     local dap = require("dap")
     require("neotest").setup({
       adapters = {
+        require("neotest-plenary"),
         require("neotest-phpunit")({
           phpunit_cmd = function()
             return "dphpunit"
