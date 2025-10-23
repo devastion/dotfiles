@@ -9,7 +9,7 @@ return {
         gui = "bold",
       },
     }
-    local signs = require("devastion.utils").diagnostic_signs
+    local signs = vim.g.diagnostic_signs
 
     return {
       options = {

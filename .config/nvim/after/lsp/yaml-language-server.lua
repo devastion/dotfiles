@@ -14,12 +14,9 @@ return {
         enable = false,
         url = "",
       },
+      schemas = require("schemastore").yaml.schemas(),
     },
   },
-  before_init = function(_, config)
-    config.settings.yaml.schemas = config.settings.yaml.schemas or {}
-    vim.list_extend(config.settings.yaml.schemas, require("schemastore").yaml.schemas())
-  end,
   root_markers = { ".git" },
   on_init = function(client)
     client.server_capabilities.documentFormattingProvider = true

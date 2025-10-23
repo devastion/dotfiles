@@ -15,6 +15,7 @@ local utils = require("devastion.utils")
 
 vim.g.remap = utils.remap
 vim.g.custom_foldtext = utils.custom_foldtext
+vim.g.diagnostic_signs = utils.diagnostic_signs
 
 vim.g.is_laravel_project = utils.package_exists("composer.json", '.require."laravel/framework"')
 

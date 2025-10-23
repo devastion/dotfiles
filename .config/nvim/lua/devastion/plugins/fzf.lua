@@ -38,7 +38,68 @@ return {
     require("fzf-lua").setup(opts)
   end,
   init = function()
-    require("fzf-lua").register_ui_select()
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      once = true,
+      callback = function(args)
+        vim.ui.select = function(...)
+          require("lazy").load({ plugins = { "fzf-lua" } })
+          require("fzf-lua").register_ui_select()
+
+          return vim.ui.select(...)
+        end
+
+        local map = vim.g.remap
+        local utils = require("devastion.utils")
+        local is_file_readable = utils.is_file_readable
+
+        if is_file_readable("composer.json") then
+          map("<leader>fc", function()
+            require("fzf-lua").files({
+              cmd = "fd -g -p -t f '**/controllers/**'",
+            })
+          end, "Controllers", "n")
+          map("<leader>fm", function()
+            require("fzf-lua").files({
+              cmd = "fd -g -p -t f '**/models/**' --exclude='tests'",
+            })
+          end, "Models", "n")
+          map("<leader>fs", function()
+            require("fzf-lua").files({
+              cmd = "fd -g -p -t f '**/services/**' --exclude='tests'",
+            })
+          end, "Services", "n")
+          map("<leader>ft", function()
+            require("fzf-lua").files({
+              cmd = "fd -g -p -t f '**/tests/**'",
+            })
+          end, "Tests", "n")
+        end
+
+        if is_file_readable("lazy-lock.json", true) then
+          map("<leader>fp", function()
+            require("fzf-lua").files({
+              cmd = "fd -g -p -t f '**/plugins/*'",
+            })
+          end, "Plugins", "n")
+          map("<leader>fl", function()
+            require("fzf-lua").files({
+              cmd = "fd -g -p -t f '**/lsp/*'",
+            })
+          end, "LSP", "n")
+          map("<leader>ft", function()
+            require("fzf-lua").files({
+              cmd = "fd -g -p -t f '**/ftplugin/**'",
+            })
+          end, "FTPlugin", "n")
+          map("<leader>fc", function()
+            require("fzf-lua").files({
+              cmd = "fd -g -p -t f '**/core/**'",
+            })
+          end, "Core", "n")
+        end
+      end,
+    })
   end,
   keys = {
     -- Find

@@ -9,6 +9,7 @@ return {
     "diidiiman/neotest-python",
   },
   config = function()
+    local dap = require("dap")
     require("neotest").setup({
       adapters = {
         require("neotest-phpunit")({
@@ -18,6 +19,7 @@ return {
           env = {
             XDEBUG_CONFIG = "idekey=neotest",
           },
+          dap = dap.configurations.php[1],
         }),
         require("neotest-node"),
         require("neotest-python")({

@@ -99,21 +99,25 @@ function M.ts_install(parsers)
   require("nvim-treesitter").install(parsers)
 end
 
+---Check if file is readable
+---@param filename string
+---@param cwd boolean?
+---@return boolean
+function M.is_file_readable(filename, cwd)
+  local root = cwd and vim.fn.getcwd() or M.get_root_directory()
+  local file_path = root .. "/" .. filename
+
+  return vim.fn.filereadable(file_path) == 1
+end
+
 ---Check if package exists in json or yaml file
 ---@param filename string
 ---@param query string|string[]
 ---@return boolean
 function M.package_exists(filename, query)
   local absolute_path = M.get_root_directory() .. "/" .. filename
-  local is_readable = function(file)
-    if vim.fn.filereadable(file) == 0 then
-      return false
-    end
 
-    return true
-  end
-
-  if not is_readable(absolute_path) then
+  if not M.is_file_readable(filename) then
     return false
   end
 

@@ -1,7 +1,6 @@
 ---@type LazySpec
 return {
   "vuki656/package-info.nvim",
-  dependencies = { "muniftanjim/nui.nvim" },
   event = { "BufReadPost package.json" },
   opts = {},
   keys = function()

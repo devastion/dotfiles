@@ -3,7 +3,7 @@ local map = vim.g.remap
 
 -- Setup diagnostics
 vim.diagnostic.config({
-  signs = { text = utils.diagnostic_signs },
+  signs = { text = vim.g.diagnostic_signs },
   float = {
     source = false,
     border = vim.g.ui_border,
