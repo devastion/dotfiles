@@ -24,7 +24,16 @@ return {
       fzf_colors = true,
       fzf_opts = { ["--no-scrollbar"] = true },
       defaults = { formatter = "path.dirname_first" },
-      winopts = { width = 0.8, height = 0.8, row = 0.5, col = 0.5, preview = { scrollchars = { "┃", "" } } },
+      winopts = {
+        width = 0.8,
+        height = 0.8,
+        row = 0.5,
+        col = 0.5,
+        preview = {
+          scrollchars = { "┃", "" },
+          wrap = true,
+        },
+      },
       files = {
         cwd_prompt = false,
         actions = { ["alt-i"] = { actions.toggle_ignore }, ["alt-h"] = { actions.toggle_hidden } },
@@ -44,7 +53,20 @@ return {
       callback = function()
         vim.ui.select = function(...)
           require("lazy").load({ plugins = { "fzf-lua" } })
-          require("fzf-lua").register_ui_select()
+
+          local Plugin = require("lazy.core.plugin")
+          local opts = Plugin.values("fzf-lua", "opts", false) or {}
+
+          require("fzf-lua").register_ui_select(function(_, items)
+            local min_h, max_h = 0.15, 0.70
+            local h = (#items + 4) / vim.o.lines
+            if h < min_h then
+              h = min_h
+            elseif h > max_h then
+              h = max_h
+            end
+            return { winopts = { height = h, width = 0.60, row = 0.40 } }
+          end)
 
           return vim.ui.select(...)
         end

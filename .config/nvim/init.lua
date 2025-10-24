@@ -18,6 +18,7 @@ require("devastion.core.globals")
 require("devastion.core.options")
 require("devastion.core.filetypes")
 require("devastion.core.autocmds")
+require("devastion.core.usercmds")
 require("devastion.core.keymaps")
 require("devastion.core.diagnostics")
 

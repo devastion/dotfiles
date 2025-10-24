@@ -28,6 +28,22 @@ function M.dedup(list)
   return ret
 end
 
+---Filter table items
+---@param all string[]
+---@param exclude string[]
+---@return string[]
+function M.filter_table_items(all, exclude)
+  local exclude_set = {}
+
+  for _, v in ipairs(exclude) do
+    exclude_set[v] = true
+  end
+
+  return vim.tbl_filter(function(v)
+    return not exclude_set[v]
+  end, all)
+end
+
 ---Check if table contains value
 ---@param table table
 ---@param value string|number

@@ -1,5 +1,7 @@
 local map = vim.g.remap
 
+map("D", '"_d', "Delete without yanking", "x")
+
 -- Allow moving the cursor through wrapped lines with j, k
 map("j", "v:count == 0 ? 'gj' : 'j'", "Down", { "n", "x" }, { expr = true, silent = true })
 map("k", "v:count == 0 ? 'gk' : 'k'", "Up", { "n", "x" }, { expr = true, silent = true })

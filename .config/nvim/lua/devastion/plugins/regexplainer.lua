@@ -8,5 +8,7 @@ return {
     "RegexplainerHide",
     "RegexplainerToggle",
   },
-  opts = {},
+  opts = {
+    auto = true,
+  },
 }

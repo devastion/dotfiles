@@ -3,5 +3,9 @@ return {
   "nvim-focus/focus.nvim",
   version = "*",
   event = { "VeryLazy" },
-  opts = {},
+  opts = {
+    ui = {
+      signcolumn = false,
+    },
+  },
 }

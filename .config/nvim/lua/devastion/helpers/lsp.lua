@@ -64,4 +64,14 @@ function M.get_lsp_configs()
   return lsp_configs
 end
 
+function M.is_lsp_client_active(name)
+  for _, client in pairs(vim.lsp.get_clients()) do
+    if client.name == name then
+      return true
+    end
+  end
+
+  return false
+end
+
 return M

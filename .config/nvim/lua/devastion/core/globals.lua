@@ -21,6 +21,7 @@ vim.g.diagnostic_signs = {
   [vim.diagnostic.severity.HINT] = "⚑",
   [vim.diagnostic.severity.INFO] = "»",
 }
+vim.g.disabled_lsp = { "cspell-lsp" }
 
 vim.g.is_laravel_project = utils.package_exists("composer.json", '.require."laravel/framework"')
 
