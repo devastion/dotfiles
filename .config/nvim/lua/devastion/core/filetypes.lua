@@ -1,10 +1,11 @@
 vim.filetype.add({
+  filename = {
+    [".env"] = "dotenv",
+  },
   pattern = {
-    ["(^|/)%.?env[%.-]?[%w_]*$"] = "dotenv",
-    [".*/.github/workflows/.*%.yml"] = "yaml.ghaction",
-    ["docker-compose%.yml"] = "yaml.docker-compose",
-    ["docker-compose%.yaml"] = "yaml.docker-compose",
-    ["compose%.yml"] = "yaml.docker-compose",
-    ["compose%.yaml"] = "yaml.docker-compose",
+    ["%.env%.[%w_.-]+"] = "dotenv",
+    [".*/%.github/workflows/.*%.ya?ml"] = "yaml.ghaction",
+    [".*/docker%-compose%.ya?ml"] = "yaml.docker-compose",
+    [".*/compose%.ya?ml"] = "yaml.docker-compose",
   },
 })

@@ -2,12 +2,21 @@
 return {
   "stevearc/conform.nvim",
   lazy = true,
-  cmd = "ConformInfo",
+  cmd = {
+    "ConformInfo",
+  },
   keys = {
     {
       "<leader>cf",
       function()
-        require("conform").format()
+        require("conform").format({ async = true }, function(err)
+          if not err then
+            local mode = vim.api.nvim_get_mode().mode
+            if vim.startswith(string.lower(mode), "v") then
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+            end
+          end
+        end)
       end,
       mode = { "n", "x" },
       desc = "Format",
@@ -39,6 +48,10 @@ return {
         python = { "black" },
         markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
         ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+        sql = { "sqlfluff" },
+        pgsql = { "sqlfluff" },
+        mysql = { "sqlfluff" },
+        plsql = { "sqlfluff" },
       },
       stop_after_first = true,
       formatters = {
@@ -58,6 +71,20 @@ return {
               return d.source == "markdownlint"
             end, vim.diagnostic.get(ctx.buf))
             return #diag > 0
+          end,
+        },
+        sqlfluff = {
+          command = "sqlfluff",
+          args = {
+            "format",
+            "-n",
+            "--dialect=ansi",
+            "--disable-progress-bar",
+            "-",
+          },
+          stdin = true,
+          cwd = function()
+            return vim.fn.getcwd()
           end,
         },
       },

@@ -85,6 +85,7 @@ autocmd("FileType", {
     "dap-float",
     "mininotify-history",
     "nvim-pack",
+    "dbout",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false

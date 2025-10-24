@@ -11,6 +11,10 @@ return {
       bash = { "shellcheck" },
       dockerfile = { "hadolint" },
       markdown = { "markdownlint-cli2" },
+      sql = { "sqlfluff" },
+      pgsql = { "sqlfluff" },
+      mysql = { "sqlfluff" },
+      plsql = { "sqlfluff" },
     },
   },
   config = function(_, opts)

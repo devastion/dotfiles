@@ -2,7 +2,13 @@
 return {
   "meanderingprogrammer/render-markdown.nvim",
   ft = { "markdown", "norg", "rmd", "org" },
-  opts = {},
+  opts = {
+    completions = {
+      lsp = {
+        enabled = true,
+      },
+    },
+  },
   keys = {
     {
       "<leader>um",
