@@ -241,7 +241,7 @@ return {
     {
       "<leader>sd",
       function()
-        require("fzf-lua").diagnostics_workspace()
+        require("fzf-lua").diagnostics_workspace({ severity_limit = vim.diagnostic.severity.WARN })
       end,
       mode = "n",
       desc = "Diagnostics (workspace)",
@@ -249,7 +249,7 @@ return {
     {
       "<leader>sD",
       function()
-        require("fzf-lua").diagnostics_document()
+        require("fzf-lua").diagnostics_document({ severity_limit = vim.diagnostic.severity.WARN })
       end,
       mode = "n",
       desc = "Diagnostics (document)",

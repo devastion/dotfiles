@@ -5,8 +5,15 @@ return {
   dependencies = {
     "nvim-neotest/nvim-nio",
     "nvim-neotest/neotest-plenary",
-    { "devastion/neotest-phpunit", version = "autodetect-docker-command" },
-    "devastion/neotest-node",
+    {
+      "devastion/neotest-phpunit",
+      version = "autodetect-docker-command",
+      dev = true,
+    },
+    {
+      "devastion/neotest-node",
+      dev = true,
+    },
     "diidiiman/neotest-python",
   },
   config = function()

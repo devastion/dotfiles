@@ -50,6 +50,9 @@ require("lazy").setup({
       height = 0.8,
     },
   },
+  dev = {
+    path = "~/projects/github/neovim-plugins",
+  },
   performance = {
     rtp = {
       disabled_plugins = {
