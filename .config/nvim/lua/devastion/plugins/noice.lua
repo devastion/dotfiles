@@ -2,9 +2,6 @@
 return {
   "folke/noice.nvim",
   event = { "VeryLazy" },
-  dependencies = {
-    "rcarriga/nvim-notify",
-  },
   opts = {
     cmdline = {
       enabled = true,
@@ -92,18 +89,25 @@ return {
       progress = { enabled = true },
       hover = { enabled = false },
       signature = { enabled = false },
-      message = { enabled = false },
+      message = { enabled = true },
     },
     health = { checker = false },
   },
   keys = {
     {
-      "<Esc>",
+      "<esc>",
       function()
         require("noice").cmd("dismiss")
         local esc = vim.api.nvim_replace_termcodes("<esc>", true, false, true)
         vim.api.nvim_feedkeys(esc, "n", false)
       end,
+    },
+    {
+      "<leader>sn",
+      function()
+        require("noice").cmd("pick")
+      end,
+      desc = "Noice",
     },
   },
 }

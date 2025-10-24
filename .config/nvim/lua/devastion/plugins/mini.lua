@@ -38,6 +38,46 @@ return {
     },
   },
   {
+    "nvim-mini/mini.ai",
+    event = { "VeryLazy" },
+    opts = function()
+      local gen_spec = require("mini.ai").gen_spec
+      local gen_ai_spec = require("mini.extra").gen_ai_spec
+      return {
+        n_lines = 500,
+        custom_textobjects = {
+          o = gen_spec.treesitter({ -- code block
+            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+          }),
+          f = gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
+          c = gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
+          t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
+          d = { "%f[%d]%d+" }, -- digits
+          e = { -- Word with case
+            { "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
+            "^().*()$",
+          },
+          u = gen_spec.function_call(), -- u for "Usage"
+          U = gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+          g = gen_ai_spec.buffer(), -- buffer
+          D = gen_ai_spec.diagnostic(),
+          I = gen_ai_spec.indent(),
+          L = gen_ai_spec.line(),
+          N = gen_ai_spec.number(),
+        },
+      }
+    end,
+    config = function(_, opts)
+      require("mini.ai").setup(opts)
+      Devastion.on_load("which-key.nvim", function()
+        vim.schedule(function()
+          require("devastion.helpers.mini").ai_whichkey(opts)
+        end)
+      end)
+    end,
+  },
+  {
     "nvim-mini/mini.pairs",
     version = mini_version,
     event = { "InsertEnter", "CmdlineEnter" },
@@ -193,5 +233,11 @@ return {
         end,
       },
     },
+  },
+  {
+    "nvim-mini/mini.extra",
+    version = mini_version,
+    event = { "VeryLazy" },
+    opts = {},
   },
 }

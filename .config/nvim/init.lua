@@ -1,3 +1,28 @@
+_G.Devastion = {}
+
+function Devastion.is_loaded(name)
+  local Config = require("lazy.core.config")
+  return Config.plugins[name] and Config.plugins[name]._.loaded
+end
+
+---@param name string
+---@param fn fun(name:string)
+function Devastion.on_load(name, fn)
+  if Devastion.is_loaded(name) then
+    fn(name)
+  else
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "LazyLoad",
+      callback = function(event)
+        if event.data == name then
+          fn(name)
+          return true
+        end
+      end,
+    })
+  end
+end
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"

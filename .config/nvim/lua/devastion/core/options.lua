@@ -2,7 +2,7 @@ local o = vim.o
 
 -- General
 o.mouse = ""
-o.updatetime = 250
+o.updatetime = 200
 o.timeoutlen = 300
 o.autowrite = true
 o.autowriteall = true
@@ -11,6 +11,10 @@ o.confirm = true
 o.tabclose = "uselast"
 o.clipboard = "unnamedplus"
 o.completeopt = "menu,menuone,noselect,fuzzy"
+vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
+o.sidescrolloff = 8
+o.virtualedit = "block"
+o.ruler = false
 
 -- INFO: Run .nvim.lua .nvimrc .exrc (per directory config)
 -- Use :trust, :secure
@@ -52,6 +56,7 @@ o.infercase = true
 -- Indentation
 o.tabstop = 2
 o.shiftwidth = 2
+o.shiftround = true
 o.softtabstop = 2
 o.expandtab = true
 o.autoindent = true
@@ -84,6 +89,7 @@ o.backup = false
 o.writebackup = false
 o.undofile = true
 o.undolevels = 10000
+o.jumpoptions = "view"
 
 -- Encoding and Spelling
 o.encoding = "utf-8"

@@ -84,79 +84,76 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter",
-        branch = "main",
-      },
-    },
     branch = "main",
-    event = { "VeryLazy" },
+    event = "VeryLazy",
     opts = {
-      select = {
-        lookahead = true,
-      },
       move = {
+        enable = true,
         set_jumps = true,
+        keys = {
+          goto_next_start = {
+            ["]f"] = "@function.outer",
+            ["]c"] = "@class.outer",
+            ["]a"] = "@parameter.inner",
+          },
+          goto_next_end = {
+            ["]F"] = "@function.outer",
+            ["]C"] = "@class.outer",
+            ["]A"] = "@parameter.inner",
+          },
+          goto_previous_start = {
+            ["[f"] = "@function.outer",
+            ["[c"] = "@class.outer",
+            ["[a"] = "@parameter.inner",
+          },
+          goto_previous_end = {
+            ["[F"] = "@function.outer",
+            ["[C"] = "@class.outer",
+            ["[A"] = "@parameter.inner",
+          },
+        },
       },
-      multiwindow = true,
     },
     config = function(_, opts)
-      require("nvim-treesitter-textobjects").setup(opts)
+      local TS = require("nvim-treesitter-textobjects")
+      TS.setup(opts)
 
-      local text_objects_outer = {
-        f = "@function.outer",
-        c = "@class.outer",
-        p = "@parameter.outer",
-        l = "@loop.outer",
-        a = "@assignment.outer",
-        r = "@return.outer",
-      }
-      local text_objects_inner = {
-        f = "@function.inner",
-        c = "@class.inner",
-        p = "@parameter.inner",
-        l = "@loop.inner",
-        a = "@assignment.inner",
-        r = "@return.inner",
-      }
+      local function attach(buf)
+        ---@type table<string, table<string, string>>
+        local moves = vim.tbl_get(opts, "move", "keys") or {}
 
-      local select_textobject = require("nvim-treesitter-textobjects.select").select_textobject
-      local goto_next_start = require("nvim-treesitter-textobjects.move").goto_next_start
-      local goto_next_end = require("nvim-treesitter-textobjects.move").goto_next_end
-      local goto_previous_start = require("nvim-treesitter-textobjects.move").goto_previous_start
-      local goto_previous_end = require("nvim-treesitter-textobjects.move").goto_previous_end
-
-      for k, v in pairs(text_objects_outer) do
-        vim.keymap.set({ "x", "o" }, "a" .. k, function()
-          select_textobject(v, "textobjects")
-        end, { desc = "Select " .. v })
-        vim.keymap.set({ "n", "x", "o" }, "[" .. k, function()
-          goto_previous_start(v, "textobjects")
-        end, { desc = "Goto Previous Start " .. v })
-        vim.keymap.set({ "n", "x", "o" }, "[" .. string.upper(k), function()
-          goto_previous_end(v, "textobjects")
-        end, { desc = "Goto Previous End " .. v })
+        for method, keymaps in pairs(moves) do
+          for key, query in pairs(keymaps) do
+            local desc = query:gsub("@", ""):gsub("%..*", "")
+            desc = desc:sub(1, 1):upper() .. desc:sub(2)
+            desc = (key:sub(1, 1) == "[" and "Prev " or "Next ") .. desc
+            desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
+            if not (vim.wo.diff and key:find("[cC]")) then
+              vim.keymap.set({ "n", "x", "o" }, key, function()
+                require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
+              end, {
+                buffer = buf,
+                desc = desc,
+                silent = true,
+              })
+            end
+          end
+        end
+        vim.keymap.set("n", "<leader>a", function()
+          require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
+        end, { desc = "Swap @parameter with next", buffer = buf })
+        vim.keymap.set("n", "<leader>A", function()
+          require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner")
+        end, { desc = "Swap @parameter with previous", buffer = buf })
       end
 
-      for k, v in pairs(text_objects_inner) do
-        vim.keymap.set({ "x", "o" }, "i" .. k, function()
-          select_textobject(v, "textobjects")
-        end, { desc = "Select " .. v })
-        vim.keymap.set({ "n", "x", "o" }, "]" .. k, function()
-          goto_next_start(v, "textobjects")
-        end, { desc = "Goto Next Start " .. v })
-        vim.keymap.set({ "n", "x", "o" }, "]" .. string.upper(k), function()
-          goto_next_end(v, "textobjects")
-        end, { desc = "Goto Next End " .. v })
-      end
-
-      vim.keymap.set("n", "<leader>a", function()
-        require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
-      end, { desc = "Swap @parameter with next" })
-      vim.keymap.set("n", "<leader>A", function()
-        require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner")
-      end, { desc = "Swap @parameter with previous" })
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("lazyvim_treesitter_textobjects", { clear = true }),
+        callback = function(ev)
+          attach(ev.buf)
+        end,
+      })
+      vim.tbl_map(attach, vim.api.nvim_list_bufs())
     end,
   },
   {
