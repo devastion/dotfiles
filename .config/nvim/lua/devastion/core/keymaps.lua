@@ -100,10 +100,10 @@ map(">", ">gv", nil, "v")
 
 -- Increments, Diagnostics, and Toggles
 map("<tab>", function()
-  require("devastion.utils").word_cycle()
+  require("devastion.helpers.misc").word_cycle()
 end, "Cycle Words")
 map("<s-tab>", function()
-  require("devastion.utils").word_cycle(true)
+  require("devastion.helpers.misc").word_cycle(true)
 end, "Cycle Words")
 
 -- Diagnostics

@@ -4,7 +4,7 @@ return {
   event = { "VeryLazy" },
   opts = function()
     local attached_clients = {
-      require("devastion.utils").get_attached_clients,
+      require("devastion.helpers.lsp").get_attached_clients,
       color = {
         gui = "bold",
       },

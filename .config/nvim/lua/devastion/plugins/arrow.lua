@@ -3,14 +3,14 @@ return {
   "otavioschwanck/arrow.nvim",
   keys = {
     {
-      "<leader>h",
+      "m",
       function()
         require("arrow.commands").commands.open()
       end,
       desc = "Arrow File Mappings",
     },
     {
-      "<leader>H",
+      "M",
       function()
         require("arrow.commands").commands.open(vim.api.nvim_get_current_buf())
       end,
@@ -21,8 +21,8 @@ return {
     show_icons = true,
     always_show_path = true,
     separate_by_branch = true,
-    leader_key = "<leader>h",
-    buffer_leader_key = "<leader>H",
+    leader_key = "m",
+    buffer_leader_key = "M",
     separate_save_and_remove = true,
     per_buffer_config = {
       sort_automatically = false,

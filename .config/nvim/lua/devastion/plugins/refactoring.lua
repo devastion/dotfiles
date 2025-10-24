@@ -9,9 +9,19 @@ return {
     },
   },
   keys = function()
-    require("which-key").add({ "<leader>r", group = "+[Refactor]", mode = { "n", "x" } })
-    require("which-key").add({ "<leader>rb", group = "+[Block]", mode = { "n", "x" } })
     return {
+      {
+        "<leader>r",
+        "",
+        mode = { "n", "x" },
+        desc = "+[Refactor]",
+      },
+      {
+        "<leader>rb",
+        "",
+        mode = { "n", "x" },
+        desc = "+[Block]",
+      },
       {
         "<leader>rr",
         function()

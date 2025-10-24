@@ -1,9 +1,8 @@
 ---@type LazySpec
 return {
   "tiagovla/scope.nvim",
-  enabled = false,
-  cmd = { "ScopeSaveState", "ScopeLoadState" },
-  opts = {},
+  lazy = false,
+  config = true,
   init = function()
     vim.api.nvim_create_user_command("RestoreTabPagesName", function()
       local tabs = vim.api.nvim_list_tabpages()

@@ -13,11 +13,6 @@ return {
     on_attach = function(bufnr)
       local gitsigns = require("gitsigns")
 
-      require("which-key").add({
-        { "<leader>gh", group = "+[Hunks]", mode = { "n", "v" } },
-        { "<leader>gt", group = "+[Toggles]" },
-      })
-
       local map = vim.g.remap
 
       map("]h", function()

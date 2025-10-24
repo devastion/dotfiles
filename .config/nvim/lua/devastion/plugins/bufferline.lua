@@ -1,7 +1,6 @@
 ---@type LazySpec
 return {
   "akinsho/bufferline.nvim",
-  enabled = false,
   event = "VeryLazy",
   version = "*",
   dependencies = { "echasnovski/mini.icons" },

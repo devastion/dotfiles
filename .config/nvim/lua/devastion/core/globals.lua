@@ -14,8 +14,13 @@ vim.g.ui_border = "single"
 local utils = require("devastion.utils")
 
 vim.g.remap = utils.remap
-vim.g.custom_foldtext = utils.custom_foldtext
-vim.g.diagnostic_signs = utils.diagnostic_signs
+vim.g.custom_foldtext = require("devastion.helpers.misc").custom_foldtext
+vim.g.diagnostic_signs = {
+  [vim.diagnostic.severity.ERROR] = "✘",
+  [vim.diagnostic.severity.WARN] = "▲",
+  [vim.diagnostic.severity.HINT] = "⚑",
+  [vim.diagnostic.severity.INFO] = "»",
+}
 
 vim.g.is_laravel_project = utils.package_exists("composer.json", '.require."laravel/framework"')
 
@@ -70,12 +75,14 @@ vim.g.treesitter_ignored = { "tmux" }
 vim.g.mason_ensure_installed = {
   "actionlint",
   "ansible-language-server",
+  "ansible-lint",
   "basedpyright",
   "bash-language-server",
   "black",
   "blade-formatter",
   "clangd",
   "cspell",
+  "cspell-lsp",
   "css-lsp",
   "debugpy",
   "docker-language-server",

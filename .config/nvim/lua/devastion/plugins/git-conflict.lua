@@ -8,8 +8,12 @@ return {
     disable_diagnostics = false,
   },
   keys = function()
-    require("which-key").add({ "<leader>gx", group = "+[Conflicts]" })
     return {
+      {
+        "<leader>gx",
+        "",
+        desc = "+[Conflicts]",
+      },
       {
         "]x",
         function()

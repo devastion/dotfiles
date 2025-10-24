@@ -1,6 +1,6 @@
 local utils = require("devastion.utils")
 local map = vim.g.remap
-vim.lsp.enable(utils.get_lsp_configs())
+vim.lsp.enable(require("devastion.helpers.lsp").get_lsp_configs())
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),

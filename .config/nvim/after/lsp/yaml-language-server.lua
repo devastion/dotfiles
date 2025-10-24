@@ -1,7 +1,11 @@
 ---@type vim.lsp.Config
 return {
   cmd = { "yaml-language-server", "--stdio" },
-  filetypes = { "yaml" },
+  filetypes = {
+    "yaml",
+    "yaml.docker-compose",
+  },
+  root_markers = { ".git" },
   settings = {
     redhat = { telemetry = { enabled = false } },
     yaml = {
@@ -17,7 +21,6 @@ return {
       schemas = require("schemastore").yaml.schemas(),
     },
   },
-  root_markers = { ".git" },
   on_init = function(client)
     client.server_capabilities.documentFormattingProvider = true
   end,

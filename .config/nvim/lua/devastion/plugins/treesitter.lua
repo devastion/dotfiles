@@ -205,6 +205,9 @@ return {
       },
     },
     event = { "VeryLazy" },
-    opts = {},
+    opts = {
+      prefix = "",
+      min_rows = 10,
+    },
   },
 }

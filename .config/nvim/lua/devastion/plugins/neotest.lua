@@ -40,8 +40,13 @@ return {
     })
   end,
   keys = function()
-    require("which-key").add({ "<leader>t", group = "+[Testing]", mode = { "n", "v" } })
     return {
+      {
+        "<leader>t",
+        "",
+        mode = { "n", "v" },
+        desc = "+[Testing]",
+      },
       {
         "<leader>ta",
         function()

@@ -146,8 +146,13 @@ return {
     end
   end,
   keys = function()
-    require("which-key").add({ "<leader>d", group = "+[Debugger]", mode = { "n", "v" } })
     return {
+      {
+        "<leader>d",
+        "",
+        mode = { "n", "v" },
+        desc = "+[Debugger]",
+      },
       {
         "<leader>db",
         function()

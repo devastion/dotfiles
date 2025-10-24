@@ -4,8 +4,13 @@ return {
   event = { "BufReadPost package.json" },
   opts = {},
   keys = function()
-    require("which-key").add({ "<leader>n", group = "+[Package Info]" })
     return {
+      {
+        "<leader>n",
+        "",
+        desc = "+[Package Info]",
+        ft = "json",
+      },
       {
         "<leader>ns",
         function()
