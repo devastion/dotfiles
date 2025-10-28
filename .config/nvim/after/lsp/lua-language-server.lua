@@ -29,10 +29,6 @@ return {
         library = runtime_files,
       },
       diagnostics = {
-        globals = {
-          "vim",
-        },
-        disable = { "missing-fields", "incomplete-signature-doc" },
         unusedLocalExclude = { "_*" },
       },
     },

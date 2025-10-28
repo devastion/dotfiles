@@ -23,7 +23,7 @@ return {
         require("neotest-plenary"),
         require("neotest-phpunit")({
           phpunit_cmd = function()
-            return "dphpunit"
+            return vim.g.phpunit_cmd
           end,
           env = {
             XDEBUG_CONFIG = "idekey=neotest",
@@ -44,6 +44,7 @@ return {
       },
       status = { virtual_text = true },
       output = { open_on_run = true },
+      floating = { border = vim.g.ui_border },
     })
   end,
   keys = function()

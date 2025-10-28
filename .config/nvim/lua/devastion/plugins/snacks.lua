@@ -109,6 +109,15 @@ return {
       end,
       desc = "Delete Other Buffers (snacks)",
     },
+    {
+      "<localleader>r",
+      function()
+        Snacks.debug.run()
+      end,
+      desc = "Run Lua",
+      mode = { "n", "x" },
+      ft = "lua",
+    },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {

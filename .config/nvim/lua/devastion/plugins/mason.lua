@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   "mason-org/mason.nvim",
-  cmd = "Mason",
+  cmd = { "Mason", "MasonUpdate" },
   keys = {
     {
       "<leader>cm",

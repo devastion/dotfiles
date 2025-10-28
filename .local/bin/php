@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# -e: exit on error
+# -u: error on undefined variable
+# -o pipefail: fail if any command in a pipeline fails
+set -euo pipefail
+
+# avoid word splitting issues
+IFS=$'\n\t'
+
+trap 'echo "Error on line $LINENO"; exit 1' ERR
+
+PHP_PATH="/opt/homebrew/bin/php"
+
+DOCKER_FILE_NAMES=(
+  "Dockerfile"
+  "dockerfile"
+  "docker-compose.yml"
+  "docker-compose.yaml"
+)
+
+DOCKER_FILE_FOUND=false
+
+for filename in "${DOCKER_FILE_NAMES[@]}"; do
+  if [[ -f "$filename" ]]; then
+    DOCKER_FILE_FOUND=true
+    break
+  fi
+done
+
+if $DOCKER_FILE_FOUND; then
+  CONTAINER_NAME="php"
+  CONTAINER=$(docker ps -n=-1 --filter name="$CONTAINER_NAME" --format="{{.ID}}")
+
+  if [[ -n "$CONTAINER" ]]; then
+    docker exec -i "$CONTAINER" php "$@"
+  else
+    $PHP_PATH "$@"
+  fi
+else
+  $PHP_PATH "$@"
+fi

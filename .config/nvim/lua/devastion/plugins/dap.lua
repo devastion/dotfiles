@@ -5,6 +5,7 @@ return {
     "rcarriga/nvim-dap-ui",
     "thehamsta/nvim-dap-virtual-text",
     "nvim-neotest/nvim-nio",
+    "liadoz/nvim-dap-repl-highlights",
     {
       "jbyuki/one-small-step-for-vimkind",
       ft = "lua",
@@ -90,9 +91,34 @@ return {
           ["/var/www/html"] = "${workspaceFolder}",
         },
       },
+      {
+        log = true,
+        type = "php",
+        request = "launch",
+        name = "Launch currently open file",
+        port = 9003,
+        stopOnEntry = false,
+        program = "${file}",
+        cwd = "${fileDirname}",
+        xdebugSettings = {
+          max_children = 512,
+          max_data = 1024,
+          max_depth = 4,
+        },
+        breakpoints = {
+          exception = {
+            Notice = false,
+            Warning = false,
+            Error = false,
+            Exception = false,
+            ["*"] = false,
+          },
+        },
+      },
     }
 
     require("nvim-dap-virtual-text").setup({})
+    require("nvim-dap-repl-highlights").setup({})
 
     dapui.setup({
       icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },

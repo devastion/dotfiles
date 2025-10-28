@@ -74,4 +74,19 @@ function M.is_lsp_client_active(name)
   return false
 end
 
+---@class LspCommand: lsp.ExecuteCommandParams
+---@field open? boolean
+---@field handler? lsp.Handler
+
+---Executes LSP Command
+---@param opts LspCommand
+function M.execute(opts)
+  local params = {
+    command = opts.command,
+    arguments = opts.arguments,
+  }
+
+  return vim.lsp.buf_request(0, "workspace/executeCommand", params, opts.handler)
+end
+
 return M

@@ -8,6 +8,7 @@ vim.g.loaded_ruby_provider = 0
 
 vim.g.autolint_enabled = true
 vim.g.autoformat_enabled = false
+vim.g.phpunit_cmd = vim.env.HOME .. "/.local/bin/dphpunit"
 
 vim.g.ui_border = "single"
 

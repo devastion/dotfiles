@@ -5,4 +5,5 @@
 .zcompcache
 Session.vim
 local.gitconfig
+.nvim.lua
 # vim:ft=gitignore

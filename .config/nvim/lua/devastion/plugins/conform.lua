@@ -52,6 +52,7 @@ return {
         pgsql = { "sqlfluff" },
         mysql = { "sqlfluff" },
         plsql = { "sqlfluff" },
+        dockerfile = { "dockerfmt" },
       },
       stop_after_first = true,
       formatters = {

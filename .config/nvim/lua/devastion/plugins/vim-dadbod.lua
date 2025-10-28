@@ -3,9 +3,9 @@ return {
   "kristijanhusak/vim-dadbod-ui",
   cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
   dependencies = {
-    { "vim-dadbod", cmd = { "DB" }, lazy = true },
-    { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+    { "tpope/vim-dadbod", cmd = { "DB" }, lazy = true },
     { "tpope/vim-dotenv", cmd = { "Dotenv" }, lazy = true },
+    { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
   },
   keys = {
     { "<leader>D", "<cmd>DBUIToggle<CR>", desc = "Toggle DBUI" },
