@@ -23,6 +23,27 @@ function Devastion.on_load(name, fn)
   end
 end
 
+---@param name string
+function Devastion.get_plugin(name)
+  return require("lazy.core.config").spec.plugins[name]
+end
+
+---@param name string
+---@param path string?
+function Devastion.get_plugin_path(name, path)
+  local plugin = Devastion.get_plugin(name)
+  path = path and "/" .. path or ""
+  return plugin and (plugin.dir .. path)
+end
+
+---@param plugin string
+function Devastion.has(plugin)
+  return Devastion.get_plugin(plugin) ~= nil
+end
+
+Devastion.mini = require("devastion.helpers.mini")
+Devastion.lsp = require("devastion.helpers.lsp")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"

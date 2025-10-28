@@ -75,6 +75,13 @@ return {
         filter = { event = "msg_showmode" },
       },
     },
+    commands = {
+      all = {
+        view = "popup",
+        opts = { enter = true, format = "details" },
+        filter = {},
+      },
+    },
     presets = {
       bottom_search = false,
       command_palette = false,
@@ -105,7 +112,7 @@ return {
     {
       "<leader>sn",
       function()
-        require("noice").cmd("pick")
+        require("noice").cmd("all")
       end,
       desc = "Noice",
     },

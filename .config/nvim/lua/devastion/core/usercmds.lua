@@ -14,3 +14,7 @@ usercmd("ToggleLspClient", function()
     end
   end)
 end, { desc = "Toggle LSP Client" })
+
+usercmd("LspListActiveClients", function()
+  vim.notify(vim.inspect(Devastion.lsp.get_attached_clients()), vim.log.levels.INFO)
+end, { desc = "List Active LSP Clients" })

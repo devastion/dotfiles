@@ -4,6 +4,7 @@ return {
   version = "1.*",
   dependencies = {
     "rafamadriz/friendly-snippets",
+    "fang2hou/blink-copilot",
   },
   event = { "InsertEnter", "CmdlineEnter" },
   opts = function()
@@ -114,7 +115,7 @@ return {
           },
         },
         documentation = {
-          auto_show = true,
+          auto_show = Devastion.has("lsp_signature.nvim"),
           auto_show_delay_ms = 0,
           update_delay_ms = 100,
           treesitter_highlighting = true,
@@ -136,7 +137,7 @@ return {
         nerd_font_variant = "normal",
       },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "copilot", "lsp", "path", "snippets", "buffer" },
         per_filetype = {
           sql = { "snippets", "dadbod", "buffer" },
           pgsql = { "snippets", "dadbod", "buffer" },
@@ -144,7 +145,18 @@ return {
           plsql = { "snippets", "dadbod", "buffer" },
         },
         providers = {
+          path = {
+            enabled = function()
+              return vim.bo.filetype ~= "copilot-chat"
+            end,
+          },
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+          copilot = {
+            name = "copilot",
+            module = "blink-copilot",
+            score_offset = 100,
+            async = true,
+          },
         },
       },
       cmdline = {

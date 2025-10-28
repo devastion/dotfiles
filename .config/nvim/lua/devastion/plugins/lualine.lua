@@ -2,13 +2,10 @@
 return {
   "nvim-lualine/lualine.nvim",
   event = { "VeryLazy" },
+  dependencies = {
+    "andrem222/copilot-lualine",
+  },
   opts = function()
-    local attached_clients = {
-      require("devastion.helpers.lsp").get_attached_clients,
-      color = {
-        gui = "bold",
-      },
-    }
     local signs = vim.g.diagnostic_signs
 
     return {
@@ -38,7 +35,7 @@ return {
             cond = require("noice").api.statusline.mode.has,
             color = { fg = "#ff9e64" },
           },
-          attached_clients,
+          "copilot",
           "encoding",
           "filetype",
         },
