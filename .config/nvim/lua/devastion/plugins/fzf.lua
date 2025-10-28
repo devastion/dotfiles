@@ -365,14 +365,6 @@ return {
       desc = "Quickfix List",
     },
     {
-      "<leader>st",
-      function()
-        require("fzf-lua").treesitter()
-      end,
-      mode = "n",
-      desc = "Treesitter",
-    },
-    {
       "<leader>sr",
       function()
         require("fzf-lua").resume()

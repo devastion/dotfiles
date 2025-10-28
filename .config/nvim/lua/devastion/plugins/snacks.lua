@@ -19,7 +19,7 @@ return {
     indent = { enabled = false },
     input = { enabled = false },
     picker = { enabled = false },
-    notifier = { enabled = true },
+    notifier = { enabled = false },
     scope = { enabled = false },
     scroll = { enabled = false },
   },

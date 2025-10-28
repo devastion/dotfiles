@@ -174,7 +174,6 @@ return {
   },
   {
     "rrethy/nvim-treesitter-endwise",
-    event = { "VeryLazy" },
     dependencies = {
       {
         "nvim-treesitter/nvim-treesitter",
