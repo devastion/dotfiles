@@ -32,6 +32,7 @@ vim.g.treesitter_ensure_installed = {
   "c",
   "cpp",
   "css",
+  "dap_repl",
   "diff",
   "dockerfile",
   "git_config",
@@ -76,7 +77,6 @@ vim.g.treesitter_ensure_installed = {
 vim.g.treesitter_ignored = { "tmux" }
 
 vim.g.mason_ensure_installed = {
-  "actionlint",
   "ansible-language-server",
   "ansible-lint",
   "basedpyright",
@@ -95,6 +95,7 @@ vim.g.mason_ensure_installed = {
   "hadolint",
   "html-lsp",
   "intelephense",
+  "js-debug-adapter",
   "json-lsp",
   "lua-language-server",
   "markdown-toc",
@@ -114,4 +115,5 @@ vim.g.mason_ensure_installed = {
   "typescript-language-server",
   "vue-language-server",
   "yaml-language-server",
+  "actionlint",
 }

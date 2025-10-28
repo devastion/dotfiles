@@ -7,7 +7,6 @@ return {
     "nvim-neotest/neotest-plenary",
     {
       "devastion/neotest-phpunit",
-      version = "autodetect-docker-command",
       dev = true,
     },
     {
@@ -27,6 +26,7 @@ return {
           end,
           env = {
             XDEBUG_CONFIG = "idekey=neotest",
+            XDEBUG_MODE = "coverage",
           },
           dap = dap.configurations.php[1],
         }),

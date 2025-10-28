@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
   "otavioschwanck/arrow.nvim",
+  event = { "VeryLazy" },
   keys = {
     {
       "m",
@@ -27,5 +28,6 @@ return {
     per_buffer_config = {
       sort_automatically = false,
     },
+    save_key = "git_root",
   },
 }
