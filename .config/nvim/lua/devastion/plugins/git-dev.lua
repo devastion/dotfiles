@@ -33,7 +33,7 @@ return {
           require("git-dev").open(repo)
         end
       end,
-      desc = "[O]pen a remote git repository",
+      desc = "[O]pen a remote git repository (git-dev)",
     },
   },
 }

@@ -2,7 +2,7 @@
 return {
   "folke/todo-comments.nvim",
   cmd = { "TodoFzfLua" },
-  lazy = true,
+  event = { "VeryLazy" },
   opts = {},
   keys = {
     {

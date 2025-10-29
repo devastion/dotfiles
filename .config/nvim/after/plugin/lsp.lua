@@ -117,8 +117,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, "Incremental Rename", "n", { buffer = event.buf, desc = "Incremental Rename", expr = true })
 
     -- lsp_signature
-    map("<c-s>", function()
-      require("lsp_signature").toggle_float_win()
-    end, "LSP: Signature Help", { "i", "s", "n" }, opts)
+    if Devastion.lazy.has("lsp_signature.nvim") then
+      map("<c-s>", function()
+        require("lsp_signature").toggle_float_win()
+      end, "LSP: Signature Help", { "i", "s", "n" }, opts)
+    end
   end,
 })

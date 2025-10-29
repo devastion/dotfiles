@@ -85,8 +85,35 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "main",
-    event = "VeryLazy",
+    event = { "VeryLazy" },
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+      },
+    },
     opts = {
+      select = {
+        enable = true,
+        lookahead = true,
+        keys = {
+          select_textobject = {
+            ["if"] = "@function.inner",
+            ["ic"] = "@class.inner",
+            ["ia"] = "@parameter.inner",
+            ["il"] = "@loop.inner",
+            ["iA"] = "@assignment.inner",
+            ["iC"] = "@condition.inner",
+
+            ["af"] = "@function.outer",
+            ["ac"] = "@class.outer",
+            ["aa"] = "@parameter.outer",
+            ["al"] = "@loop.outer",
+            ["aA"] = "@assignment.outer",
+            ["aC"] = "@condition.outer",
+          },
+        },
+      },
       move = {
         enable = true,
         set_jumps = true,
@@ -139,6 +166,29 @@ return {
             end
           end
         end
+
+        if not Devastion.lazy.is_loaded("mini.ai") then
+          ---@type table<string, table<string, string>>
+          local select = vim.tbl_get(opts, "select", "keys") or {}
+
+          for method, keymaps in pairs(select) do
+            for key, query in pairs(keymaps) do
+              local desc = query:gsub("@", ""):gsub("%..*", "")
+              desc = desc:sub(1, 1):upper() .. desc:sub(2)
+              desc = (key:sub(1, 1) == "i" and "Inner " or "Outer ") .. desc
+              if not (vim.wo.diff and key:find("[cC]")) then
+                vim.keymap.set({ "x", "o" }, key, function()
+                  require("nvim-treesitter-textobjects.select")[method](query, "textobjects")
+                end, {
+                  buffer = buf,
+                  desc = desc,
+                  silent = true,
+                })
+              end
+            end
+          end
+        end
+
         vim.keymap.set("n", "<localleader>a", function()
           require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
         end, { desc = "Swap @parameter with next", buffer = buf })
@@ -148,7 +198,7 @@ return {
       end
 
       vim.api.nvim_create_autocmd("FileType", {
-        group = vim.api.nvim_create_augroup("lazyvim_treesitter_textobjects", { clear = true }),
+        group = vim.api.nvim_create_augroup("nvim_treesitter_textobjects", { clear = true }),
         callback = function(ev)
           attach(ev.buf)
         end,

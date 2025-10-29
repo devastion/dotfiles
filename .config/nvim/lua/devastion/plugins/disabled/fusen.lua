@@ -1,8 +1,8 @@
+-- INFO: Terrible performance
+
 ---@type LazySpec
 return {
   "walkersumida/fusen.nvim",
-  -- INFO: Terrible performance
-  enabled = false,
   event = { "VeryLazy" },
   opts = {},
   keys = {

@@ -45,6 +45,7 @@ return {
       local gen_ai_spec = require("mini.extra").gen_ai_spec
       return {
         n_lines = 500,
+        search_method = "cover",
         custom_textobjects = {
           o = gen_spec.treesitter({ -- code block
             a = { "@block.outer", "@conditional.outer", "@loop.outer" },
@@ -70,9 +71,9 @@ return {
     end,
     config = function(_, opts)
       require("mini.ai").setup(opts)
-      Devastion.on_load("which-key.nvim", function()
+      Devastion.lazy.on_load("which-key.nvim", function()
         vim.schedule(function()
-          require("devastion.helpers.mini").ai_whichkey(opts)
+          Devastion.mini.ai_whichkey(opts)
         end)
       end)
     end,

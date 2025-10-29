@@ -1,46 +1,6 @@
 _G.Devastion = {}
 
-function Devastion.is_loaded(name)
-  local Config = require("lazy.core.config")
-  return Config.plugins[name] and Config.plugins[name]._.loaded
-end
-
----@param name string
----@param fn fun(name:string)
-function Devastion.on_load(name, fn)
-  if Devastion.is_loaded(name) then
-    fn(name)
-  else
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "LazyLoad",
-      callback = function(event)
-        if event.data == name then
-          fn(name)
-          return true
-        end
-      end,
-    })
-  end
-end
-
----@param name string
-function Devastion.get_plugin(name)
-  return require("lazy.core.config").spec.plugins[name]
-end
-
----@param name string
----@param path string?
-function Devastion.get_plugin_path(name, path)
-  local plugin = Devastion.get_plugin(name)
-  path = path and "/" .. path or ""
-  return plugin and (plugin.dir .. path)
-end
-
----@param plugin string
-function Devastion.has(plugin)
-  return Devastion.get_plugin(plugin) ~= nil
-end
-
+Devastion.lazy = require("devastion.util.lazy")
 Devastion.mini = require("devastion.helpers.mini")
 Devastion.lsp = require("devastion.helpers.lsp")
 
@@ -91,7 +51,7 @@ require("lazy").setup({
   checker = { enabled = false },
   change_detection = { notify = false },
   ui = {
-    border = "single",
+    border = vim.g.ui_border,
     size = {
       width = 0.8,
       height = 0.8,
@@ -99,18 +59,5 @@ require("lazy").setup({
   },
   dev = {
     path = "~/projects/github/neovim-plugins",
-  },
-  performance = {
-    rtp = {
-      disabled_plugins = {
-        "gzip",
-        "matchit",
-        "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-      },
-    },
   },
 })

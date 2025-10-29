@@ -4,6 +4,9 @@ return {
   dependencies = { "kkharji/sqlite.lua" },
   lazy = true,
   opts = {
+    system_clipboard = {
+      sync_with_ring = not vim.env.SSH_CONNECTION,
+    },
     ring = {
       storage = "sqlite",
       storage_path = vim.fn.stdpath("data") .. "/databases/yanky.db",

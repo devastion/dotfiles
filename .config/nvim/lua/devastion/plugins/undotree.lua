@@ -1,8 +1,20 @@
 ---@type LazySpec
 return {
   "jiaoshijie/undotree",
+  lazy = true,
   cmd = { "Undotree" },
   opts = {},
+  keys = {
+    {
+      "<leader>U",
+      function()
+        require("undotree").toggle()
+      end,
+      desc = "Undotree Toggle",
+      noremap = true,
+      expr = true,
+    },
+  },
   init = function()
     vim.api.nvim_create_user_command("Undotree", function(opts)
       local args = opts.fargs

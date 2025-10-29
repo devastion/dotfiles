@@ -115,7 +115,7 @@ return {
           },
         },
         documentation = {
-          auto_show = Devastion.has("lsp_signature.nvim"),
+          auto_show = true,
           auto_show_delay_ms = 0,
           update_delay_ms = 100,
           treesitter_highlighting = true,
@@ -128,7 +128,7 @@ return {
         },
       },
       signature = {
-        enabled = true,
+        enabled = not Devastion.lazy.has("lsp_signature.nvim"),
         window = {
           border = vim.g.ui_border,
         },

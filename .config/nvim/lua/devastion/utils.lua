@@ -88,9 +88,18 @@ function M.mason_install(packages)
 
   mr.refresh(function()
     for _, tool in ipairs(packages) do
-      local p = mr.get_package(tool)
+      local name, version
+
+      if type(tool) == "table" then
+        name = tool[1]
+        version = tool.version
+      else
+        name = tool
+      end
+
+      local p = mr.get_package(name)
       if not p:is_installed() then
-        p:install()
+        p:install({ version = version })
       end
     end
   end)

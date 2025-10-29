@@ -28,6 +28,5 @@ return {
     per_buffer_config = {
       sort_automatically = false,
     },
-    save_key = "git_root",
   },
 }
