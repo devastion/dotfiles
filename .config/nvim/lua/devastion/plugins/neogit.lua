@@ -2,6 +2,10 @@
 return {
   "NeogitOrg/neogit",
   lazy = true,
+  dependencies = {
+    "ibhagwan/fzf-lua",
+  },
+  cmd = { "Neogit" },
   opts = {},
   keys = {
     {

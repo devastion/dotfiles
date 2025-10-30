@@ -15,15 +15,65 @@ return {
     config = function()
       local utils = require("devastion.utils")
 
+      local ensure_installed = {
+        "bash",
+        "blade",
+        "c",
+        "cpp",
+        "css",
+        "dap_repl",
+        "diff",
+        "dockerfile",
+        "git_config",
+        "git_rebase",
+        "gitattributes",
+        "gitcommit",
+        "gitignore",
+        "graphql",
+        "html",
+        "javascript",
+        "jsdoc",
+        "json",
+        "json5",
+        "jsonc",
+        "latex",
+        "lua",
+        "luadoc",
+        "luap",
+        "markdown",
+        "markdown_inline",
+        "norg",
+        "php",
+        "php_only",
+        "phpdoc",
+        "printf",
+        "python",
+        "query",
+        "regex",
+        "scss",
+        "sql",
+        "svelte",
+        "toml",
+        "tsx",
+        "typescript",
+        "typst",
+        "vim",
+        "vimdoc",
+        "vue",
+        "xml",
+        "yaml",
+      }
+      local treesitter_ignore = { "tmux" }
+
       local isnt_installed = function(lang)
         return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) == 0
       end
-      local to_install = vim.tbl_filter(isnt_installed, vim.g.treesitter_ensure_installed)
+      local to_install = vim.tbl_filter(isnt_installed, ensure_installed)
       if #to_install > 0 then
         utils.ts_install(to_install)
       end
       local installed_filetypes =
-        vim.iter(vim.g.treesitter_ensure_installed):map(vim.treesitter.language.get_filetypes):flatten():totable()
+        vim.iter(ensure_installed):map(vim.treesitter.language.get_filetypes):flatten():totable()
 
       vim.api.nvim_create_autocmd("FileType", {
         pattern = installed_filetypes,
@@ -42,14 +92,14 @@ return {
             return
           end
 
-          for _, filetypes in pairs(vim.g.treesitter_ensure_installed) do
+          for _, filetypes in pairs(ensure_installed) do
             local ft_table = type(filetypes) == "table" and filetypes or { filetypes }
             if vim.tbl_contains(ft_table, filetype) then
               return
             end
           end
 
-          for _, filetypes in pairs(vim.g.treesitter_ignored) do
+          for _, filetypes in pairs(treesitter_ignore) do
             local ft_table = type(filetypes) == "table" and filetypes or { filetypes }
             if vim.tbl_contains(ft_table, filetype) then
               return

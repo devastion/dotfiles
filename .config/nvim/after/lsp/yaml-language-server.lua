@@ -4,6 +4,7 @@ return {
   filetypes = {
     "yaml",
     "yaml.docker-compose",
+    "yaml.ansible",
   },
   root_markers = { ".git" },
   settings = {
