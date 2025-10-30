@@ -1,4 +1,5 @@
 [tools]
+ansible = "latest"
 ast-grep = "latest"
 bat = "latest"
 delta = "latest"
@@ -13,6 +14,7 @@ lua = "5.1"
 mysql = "latest"
 neovim = "latest"
 node = "latest"
+pipx = "latest"
 python = "latest"
 ripgrep = "latest"
 rust = "latest"

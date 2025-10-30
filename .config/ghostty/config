@@ -19,6 +19,7 @@ quick-terminal-position = center
 quick-terminal-screen = macos-menu-bar
 quick-terminal-animation-duration = 0
 shell-integration-features = no-cursor
+confirm-close-surface = false
 
 keybind = clear
 keybind = performable:cmd+c=copy_to_clipboard
