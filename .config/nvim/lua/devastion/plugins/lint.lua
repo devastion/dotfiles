@@ -15,6 +15,7 @@ return {
       pgsql = { "sqlfluff" },
       mysql = { "sqlfluff" },
       plsql = { "sqlfluff" },
+      yaml = { "yamllint" },
     },
   },
   config = function(_, opts)

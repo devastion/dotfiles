@@ -1,0 +1,6 @@
+---
+- name: Setup dotfiles
+  hosts: all
+
+  roles:
+    - git

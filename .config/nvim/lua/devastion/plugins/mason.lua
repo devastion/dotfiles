@@ -66,6 +66,7 @@ return {
       "typescript-language-server",
       { "vue-language-server", version = "3.0.8" },
       "yaml-language-server",
+      "yamllint",
     },
   },
   config = function(_, opts)

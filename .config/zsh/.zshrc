@@ -61,7 +61,7 @@ alias ld="l -lD"
 alias lf="l -lf"
 alias lh="l -ld .* --group-directories-first"
 alias lt="l -la --sort=modified --reverse"
-alias ls="ll --grid"
+alias ls="ll"
 
 alias "cd.."="cd_up"
 
