@@ -104,7 +104,7 @@ return {
         replace = "sr",
         find = "",
         find_left = "",
-        highlight = "",
+        highlight = "sh",
         update_n_lines = "",
         suffix_last = "",
         suffix_next = "",

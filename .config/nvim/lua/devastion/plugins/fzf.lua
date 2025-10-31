@@ -30,13 +30,17 @@ return {
         row = 0.5,
         col = 0.5,
         preview = {
+          default = "bat_native",
           scrollchars = { "┃", "" },
           wrap = true,
         },
       },
       files = {
         cwd_prompt = false,
-        actions = { ["alt-i"] = { actions.toggle_ignore }, ["alt-h"] = { actions.toggle_hidden } },
+        actions = {
+          ["alt-i"] = { actions.toggle_ignore },
+          ["alt-h"] = { actions.toggle_hidden },
+        },
       },
       grep = { actions = { ["alt-i"] = { actions.toggle_ignore }, ["alt-h"] = { actions.toggle_hidden } } },
       lsp = { code_actions = { previewer = "codeaction_native" } },
@@ -279,7 +283,7 @@ return {
     {
       "<leader>sg",
       function()
-        require("fzf-lua").live_grep_native()
+        require("fzf-lua").live_grep()
       end,
       mode = "n",
       desc = "Grep (live)",
@@ -373,6 +377,14 @@ return {
       desc = "Resume",
     },
     {
+      "<leader>sR",
+      function()
+        require("fzf-lua").grep_last()
+      end,
+      mode = "n",
+      desc = "Grep Last",
+    },
+    {
       "<leader>sw",
       function()
         require("fzf-lua").grep_cword()
@@ -460,6 +472,48 @@ return {
         require("devastion.helpers.fzf").git_conflicts()
       end,
       desc = "Conflicts",
+    },
+
+    -- DAP
+    {
+      "<leader>ds",
+      "",
+      desc = "+[FZF]",
+    },
+    {
+      "<leader>dsc",
+      function()
+        require("fzf-lua").dap_commands()
+      end,
+      desc = "Commands",
+    },
+    {
+      "<leader>dsC",
+      function()
+        require("fzf-lua").dap_configurations()
+      end,
+      desc = "Configuratiosn",
+    },
+    {
+      "<leader>dsb",
+      function()
+        require("fzf-lua").dap_breakpoints()
+      end,
+      desc = "Breakpoints",
+    },
+    {
+      "<leader>dsv",
+      function()
+        require("fzf-lua").dap_variables()
+      end,
+      desc = "Variables",
+    },
+    {
+      "<leader>dsf",
+      function()
+        require("fzf-lua").dap_frames()
+      end,
+      desc = "Frames",
     },
   },
 }

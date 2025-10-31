@@ -48,7 +48,7 @@ return {
           end
         end)
       end,
-      desc = "Move current buffer to tab",
+      desc = "Move current buffer to tab (scope.nvim)",
     },
     {
       "<leader><tab>r",
@@ -68,7 +68,20 @@ return {
           end
         end)
       end,
-      desc = "Rename Tab",
+      desc = "Rename Tab (scope.nvim)",
+    },
+    {
+      "<leader><tab>d",
+      function()
+        local current_tab = vim.api.nvim_get_current_tabpage()
+
+        if vim.g["TabPageCustomName" .. current_tab] then
+          vim.g["TabPageCustomName" .. current_tab] = nil
+        end
+
+        vim.cmd.tabclose()
+      end,
+      desc = "Close Tab (scope.nvim)",
     },
   },
 }

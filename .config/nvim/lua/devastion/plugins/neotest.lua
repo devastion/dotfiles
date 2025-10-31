@@ -29,6 +29,17 @@ return {
             XDEBUG_MODE = "coverage",
           },
           dap = dap.configurations.php[1],
+          coverage = {
+            enabled = true,
+            args = "--coverage-cobertura",
+            path = "coverage/cobertura.xml",
+          },
+          docker = {
+            enabled = true,
+            container_name = "php",
+            args = { "exec", "-i", "-w", "/var/www/html" },
+            workdir = nil,
+          },
         }),
         require("neotest-node"),
         require("neotest-python")({

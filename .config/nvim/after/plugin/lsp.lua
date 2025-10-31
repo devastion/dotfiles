@@ -84,7 +84,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- fzf-lua
     local fzf = require("fzf-lua")
     map("grr", function()
-      fzf.lsp_references({ ignore_current_line = true })
+      fzf.lsp_references({ ignore_current_line = true, includeDeclaration = false })
     end, "References", "n", opts)
     map("gri", function()
       fzf.lsp_implementations()
@@ -120,7 +120,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if Devastion.lazy.has("lsp_signature.nvim") then
       map("<c-s>", function()
         require("lsp_signature").toggle_float_win()
-      end, "LSP: Signature Help", { "i", "s", "n" }, opts)
+      end, "LSP: Signature Help", { "i", "s" }, opts)
     end
   end,
 })

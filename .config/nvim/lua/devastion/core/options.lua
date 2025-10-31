@@ -11,10 +11,12 @@ o.confirm = true
 o.tabclose = "uselast"
 o.clipboard = "unnamedplus"
 o.completeopt = "menu,menuone,noselect,fuzzy"
-vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
+-- vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
+o.shortmess = "CFOSWaco"
 o.sidescrolloff = 8
 o.virtualedit = "block"
 o.ruler = false
+o.switchbuf = "usetab"
 
 -- INFO: Run .nvim.lua .nvimrc .exrc (per directory config)
 -- Use :trust, :secure
@@ -39,10 +41,19 @@ o.listchars = "tab:» ,trail:·,nbsp:␣,"
 o.fillchars = "eob: ,fold: ,foldopen:,foldsep: ,foldclose:"
 o.laststatus = 3
 o.showtabline = 0
+o.winborder = "single"
+
+o.iskeyword = "@,48-57,_,192-255,-" -- Treat dash as `word` textobject part
+
+-- Pattern for a start of numbered list (used in `gw`). This reads as
+-- "Start of list item is: at least one special character (digit, -, +, *)
+-- possibly followed by punctuation (. or `)`) followed by at least one space".
+o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 
 -- Splits
 o.splitbelow = true
 o.splitright = true
+o.splitkeep = "screen"
 
 -- Session
 o.sessionoptions = "globals,buffers,tabpages,folds,winsize,winpos,curdir,localoptions"
@@ -86,7 +97,7 @@ o.smoothscroll = true
 -- Backup, Undo and History
 o.swapfile = false
 o.backup = false
-o.writebackup = false
+o.writebackup = true
 o.undofile = true
 o.undolevels = 10000
 o.jumpoptions = "view"
