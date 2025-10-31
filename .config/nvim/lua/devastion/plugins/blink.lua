@@ -5,6 +5,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "fang2hou/blink-copilot",
+    "alexandre-abrioux/blink-cmp-npm.nvim",
   },
   event = { "InsertEnter", "CmdlineEnter" },
   opts = function()
@@ -139,14 +140,32 @@ return {
         nerd_font_variant = "normal",
       },
       sources = {
-        default = { "copilot", "lsp", "path", "snippets", "buffer" },
+        default = {
+          "ecolog",
+          "npm",
+          "copilot",
+          "lsp",
+          "path",
+          "snippets",
+          "buffer",
+        },
         per_filetype = {
           sql = { "snippets", "dadbod", "buffer" },
           pgsql = { "snippets", "dadbod", "buffer" },
           mysql = { "snippets", "dadbod", "buffer" },
           plsql = { "snippets", "dadbod", "buffer" },
+          lua = { inherit_defaults = true, "lazydev" },
         },
         providers = {
+          buffer = {
+            opts = {
+              get_bufnrs = function()
+                return vim.tbl_filter(function(bufnr)
+                  return vim.bo[bufnr].buftype == ""
+                end, vim.api.nvim_list_bufs())
+              end,
+            },
+          },
           path = {
             enabled = function()
               return vim.bo.filetype ~= "copilot-chat"
@@ -158,6 +177,30 @@ return {
             module = "blink-copilot",
             score_offset = 100,
             async = true,
+          },
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            score_offset = 100,
+          },
+          npm = {
+            name = "npm",
+            module = "blink-cmp-npm",
+            async = true,
+            -- optional - make blink-cmp-npm completions top priority (see `:h blink.cmp`)
+            score_offset = 100,
+            -- optional - blink-cmp-npm config
+            ---@module "blink-cmp-npm"
+            ---@type blink-cmp-npm.Options
+            opts = {
+              ignore = {},
+              only_semantic_versions = true,
+              only_latest_version = false,
+            },
+          },
+          ecolog = {
+            name = "ecolog",
+            module = "ecolog.integrations.cmp.blink_cmp",
           },
         },
       },

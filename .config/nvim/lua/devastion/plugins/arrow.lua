@@ -13,7 +13,7 @@ return {
     {
       "M",
       function()
-        require("arrow.commands").commands.open(vim.api.nvim_get_current_buf())
+        require("arrow.commands").commands.open()
       end,
       desc = "Arrow Buffer Mappings",
     },

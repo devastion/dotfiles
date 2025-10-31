@@ -35,6 +35,7 @@ return {
             cond = require("noice").api.statusline.mode.has,
             color = { fg = "#ff9e64" },
           },
+          require("ecolog.integrations.statusline").lualine(),
           "copilot",
           "encoding",
           "filetype",
