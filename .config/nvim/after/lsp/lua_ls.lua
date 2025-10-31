@@ -29,6 +29,7 @@ return {
         library = runtime_files,
       },
       diagnostics = {
+        disable = { "missing-fields", "incomplete-signature-doc" },
         unusedLocalExclude = { "_*" },
       },
     },

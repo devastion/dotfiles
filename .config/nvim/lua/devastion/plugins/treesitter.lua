@@ -306,4 +306,9 @@ return {
       min_rows = 10,
     },
   },
+  {
+    "bezhermoso/tree-sitter-ghostty",
+    ft = "ghostty",
+    build = "make nvim_install",
+  },
 }

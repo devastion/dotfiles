@@ -17,6 +17,8 @@ return {
       return line:sub(col, col):match("%s") == nil
     end
 
+    ---@module "blink.cmp"
+    ---@type blink.cmp.Config
     return {
       keymap = {
         preset = "none",

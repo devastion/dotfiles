@@ -1,11 +1,17 @@
 theme = tokyonight
-font-family = JetBrainsMono Nerd Font
+
+# font
+font-family = Maple Mono Normal NF
 font-style = Medium
 font-size = 16
 font-feature = -calt
 bold-is-bright = true
+
+# window
 window-padding-x = 8
 window-padding-y = 8
+
+# macos
 macos-titlebar-style = hidden
 macos-window-shadow = false
 macos-option-as-alt = true
@@ -13,15 +19,19 @@ macos-non-native-fullscreen = true
 macos-window-buttons = hidden
 macos-titlebar-proxy-icon = hidden
 mouse-hide-while-typing = true
-quit-after-last-window-closed = true
-copy-on-select = true
+
 quick-terminal-position = center
 quick-terminal-screen = macos-menu-bar
 quick-terminal-animation-duration = 0
-shell-integration-features = no-cursor
-confirm-close-surface = false
 
+shell-integration-features = no-cursor, ssh-env
+confirm-close-surface = false
+quit-after-last-window-closed = true
+copy-on-select = true
+
+# keybinds
 keybind = clear
 keybind = performable:cmd+c=copy_to_clipboard
 keybind = performable:cmd+v=paste_from_clipboard
-# vim:ft=cfg
+
+# vim: ft=ghostty
