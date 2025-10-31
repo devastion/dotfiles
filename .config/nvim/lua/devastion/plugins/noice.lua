@@ -91,7 +91,7 @@ return {
     },
     messages = { enabled = true },
     popupmenu = { enabled = false },
-    notify = { enabled = false, view = "notify" },
+    notify = { enabled = true, view = "notify" },
     lsp = {
       progress = { enabled = true },
       hover = { enabled = false },
@@ -111,10 +111,36 @@ return {
     },
     {
       "<leader>sn",
+      "",
+      desc = "+[Noice]",
+    },
+    {
+      "<leader>snh",
+      function()
+        require("noice").cmd("history")
+      end,
+      desc = "History",
+    },
+    {
+      "<leader>sna",
       function()
         require("noice").cmd("all")
       end,
-      desc = "Noice",
+      desc = "All",
+    },
+    {
+      "<leader>snl",
+      function()
+        require("noice").cmd("last")
+      end,
+      desc = "Last",
+    },
+    {
+      "<leader>sne",
+      function()
+        require("noice").cmd("errors")
+      end,
+      desc = "Errors",
     },
   },
 }

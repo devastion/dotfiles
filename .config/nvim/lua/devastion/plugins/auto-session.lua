@@ -19,6 +19,10 @@ return {
     },
 
     post_restore_cmds = {
+      function()
+        require("arrow.git").refresh_git_branch()
+        require("arrow.persist").load_cache_file()
+      end,
       "ScopeLoadState",
       "RestoreTabPagesName",
     },

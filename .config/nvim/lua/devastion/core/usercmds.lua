@@ -7,7 +7,7 @@ usercmd("ToggleLspClient", function()
     prompt = "Select LSP Client:",
   }, function(choice)
     if choice then
-      local is_active = require("devastion.helpers.lsp").is_lsp_client_active(choice)
+      local is_active = Devastion.lsp.is_lsp_client_active(choice)
       vim.lsp.enable(choice, not is_active)
 
       vim.notify(choice .. " " .. (is_active and "deactivated" or "activated"), vim.log.levels.INFO)

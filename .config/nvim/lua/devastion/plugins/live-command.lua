@@ -15,4 +15,7 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    require("live-command").setup(opts)
+  end,
 }

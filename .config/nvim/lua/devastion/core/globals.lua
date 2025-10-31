@@ -15,7 +15,7 @@ vim.g.ui_border = "single"
 local utils = require("devastion.utils")
 
 vim.g.remap = utils.remap
-vim.g.custom_foldtext = require("devastion.helpers.misc").custom_foldtext
+
 vim.g.diagnostic_signs = {
   [vim.diagnostic.severity.ERROR] = "✘",
   [vim.diagnostic.severity.WARN] = "▲",

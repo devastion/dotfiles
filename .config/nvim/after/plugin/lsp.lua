@@ -1,6 +1,6 @@
 local utils = require("devastion.utils")
 local map = vim.g.remap
-local lsp_configs = require("devastion.helpers.lsp").get_lsp_configs()
+local lsp_configs = Devastion.lsp.get_lsp_configs()
 
 vim.lsp.enable(utils.filter_table_items(lsp_configs, vim.g.disabled_lsp))
 

@@ -1,8 +1,10 @@
 _G.Devastion = {}
 
 Devastion.lazy = require("devastion.util.lazy")
-Devastion.mini = require("devastion.helpers.mini")
-Devastion.lsp = require("devastion.helpers.lsp")
+Devastion.mini = require("devastion.util.mini")
+Devastion.lsp = require("devastion.util.lsp")
+Devastion.fzf = require("devastion.util.fzf")
+Devastion.misc = require("devastion.util.misc")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -45,6 +47,7 @@ require("lazy").setup({
     },
     { "nvim-lua/plenary.nvim", lazy = true },
     { "muniftanjim/nui.nvim", lazy = true },
+    { "nvim-neotest/nvim-nio", lazy = true },
     { import = "devastion.plugins" },
   },
   install = { colorscheme = { "tokyonight" } },

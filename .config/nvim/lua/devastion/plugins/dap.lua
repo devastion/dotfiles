@@ -4,7 +4,6 @@ return {
   dependencies = {
     "rcarriga/nvim-dap-ui",
     "thehamsta/nvim-dap-virtual-text",
-    "nvim-neotest/nvim-nio",
     "liadoz/nvim-dap-repl-highlights",
     {
       "jbyuki/one-small-step-for-vimkind",

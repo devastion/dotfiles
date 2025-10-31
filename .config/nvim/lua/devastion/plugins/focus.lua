@@ -4,6 +4,7 @@ return {
   version = "*",
   event = { "VeryLazy" },
   opts = {
+    enable = false,
     ui = {
       signcolumn = false,
     },

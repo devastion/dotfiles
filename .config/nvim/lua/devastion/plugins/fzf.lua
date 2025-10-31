@@ -291,7 +291,7 @@ return {
     {
       "<leader>sG",
       function()
-        require("devastion.helpers.fzf").folder_grep()
+        Devastion.fzf.folder_grep()
       end,
       mode = "n",
       desc = "Grep in Folder",
@@ -469,7 +469,7 @@ return {
     {
       "<leader>fx",
       function()
-        require("devastion.helpers.fzf").git_conflicts()
+        Devastion.fzf.git_conflicts()
       end,
       desc = "Conflicts",
     },

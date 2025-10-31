@@ -3,7 +3,6 @@ return {
   "nvim-neotest/neotest",
   lazy = true,
   dependencies = {
-    "nvim-neotest/nvim-nio",
     "nvim-neotest/neotest-plenary",
     {
       "devastion/neotest-phpunit",
@@ -24,6 +23,11 @@ return {
           phpunit_cmd = function()
             return vim.g.phpunit_cmd
           end,
+          filter_dirs = {
+            "vendor",
+            "node_modules",
+            "git",
+          },
           env = {
             XDEBUG_CONFIG = "idekey=neotest",
             XDEBUG_MODE = "coverage",

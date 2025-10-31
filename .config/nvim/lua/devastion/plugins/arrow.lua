@@ -1,7 +1,6 @@
 ---@type LazySpec
 return {
   "otavioschwanck/arrow.nvim",
-  lazy = false,
   keys = {
     {
       "m",
@@ -27,6 +26,18 @@ return {
     separate_save_and_remove = true,
     per_buffer_config = {
       sort_automatically = false,
+    },
+    mappings = {
+      edit = "e",
+      delete_mode = "x",
+      clear_all_items = "C",
+      toggle = "s",
+      open_vertical = "v",
+      open_horizontal = "-",
+      quit = "q",
+      remove = "d",
+      next_item = "]",
+      prev_item = "[",
     },
   },
 }
