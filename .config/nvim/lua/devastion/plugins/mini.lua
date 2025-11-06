@@ -45,7 +45,7 @@ return {
       local gen_ai_spec = require("mini.extra").gen_ai_spec
       return {
         n_lines = 500,
-        search_method = "cover",
+        search_method = "cover_or_nearest",
         custom_textobjects = {
           o = gen_spec.treesitter({ -- code block
             a = { "@block.outer", "@conditional.outer", "@loop.outer" },

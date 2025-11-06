@@ -51,4 +51,13 @@ return {
     preferred_environment = "development",
     provider_patterns = true,
   },
+  keys = {
+    {
+      "<leader>fE",
+      function()
+        vim.cmd("EcologFzf")
+      end,
+      desc = "Env Variables (Ecolog Fzf)",
+    },
+  },
 }

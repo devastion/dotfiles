@@ -14,6 +14,7 @@ return {
         border = vim.g.ui_border,
       },
     },
+    image = { enabled = true },
     dashboard = { enabled = false },
     explorer = { enabled = false },
     indent = { enabled = false },

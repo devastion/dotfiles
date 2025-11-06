@@ -14,7 +14,7 @@ autocmd({ "FileType" }, {
   group = augroup("global_file_tweaks", { clear = true }),
   pattern = { "*" },
   callback = function()
-    vim.o.formatoptions = "jqlc"
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
     if vim.o.scroll > 10 then
       vim.o.scroll = 10
     end
@@ -132,7 +132,7 @@ autocmd("BufReadPost", {
 
 if vim.env.TMUX then
   autocmd({ "ModeChanged" }, {
-    group = vim.api.nvim_create_augroup("i_tmux_unset_leader", {}),
+    group = augroup("i_tmux_unset_leader", {}),
     desc = "Disable TMux leader in insert mode",
     callback = function(event)
       local new_mode = event.match:sub(-1)
@@ -174,4 +174,10 @@ autocmd("SourcePost", {
   callback = function(args)
     vim.notify("Loaded project config: " .. args.file, vim.log.levels.INFO)
   end,
+})
+
+autocmd("FileType", {
+  desc = "Automatically Split help Buffers to the right",
+  pattern = "help",
+  command = "wincmd L",
 })

@@ -2,7 +2,6 @@
 return {
   "jiaoshijie/undotree",
   lazy = true,
-  cmd = { "Undotree" },
   opts = {},
   keys = {
     {
@@ -12,7 +11,6 @@ return {
       end,
       desc = "Undotree Toggle",
       noremap = true,
-      expr = true,
     },
   },
   init = function()
