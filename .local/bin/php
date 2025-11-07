@@ -28,7 +28,7 @@ for filename in "${DOCKER_FILE_NAMES[@]}"; do
   fi
 done
 
-if $DOCKER_FILE_FOUND; then
+if $DOCKER_FILE_FOUND && docker version &>/dev/null; then
   CONTAINER_NAME="php"
   CONTAINER=$(docker ps -n=-1 --filter name="$CONTAINER_NAME" --format="{{.ID}}")
 
