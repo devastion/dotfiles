@@ -1,20 +1,22 @@
 ---
-- name: Install git via homebrew on MacOS
-  community.general.homebrew:
+- name: Install aerospace via homebrew on MacOS
+  community.general.homebrew_cask:
     name:
-      - git
+      - nikitabobko/tap/aerospace
     state: present
   when: ansible_distribution == "MacOSX"
 
-- name: Create "$HOME/.config/git" directory if not exists
+- name: Create "$HOME/.config/aerospace" directory if not exists
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME')  }}/.config/{{ role_name }}"
     mode: "0755"
     state: directory
+  when: ansible_distribution == "MacOSX"
 
-- name: Create symlink of files to "$HOME/.config/git" directory
+- name: Create symlink of files to "$HOME/.config/aerospace" directory
   ansible.builtin.file:
     src: "{{ role_path }}/files"
     dest: "{{ lookup('env', 'HOME')  }}/.config/{{ role_name }}"
     state: link
     force: true
+  when: ansible_distribution == "MacOSX"
