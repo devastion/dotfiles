@@ -15,12 +15,20 @@ return {
       },
     },
     image = { enabled = true },
+    notifier = {
+      enabled = true,
+      style = "fancy",
+    },
+    styles = {
+      notification = {
+        wo = { wrap = true },
+      },
+    },
     dashboard = { enabled = false },
     explorer = { enabled = false },
     indent = { enabled = false },
     input = { enabled = false },
     picker = { enabled = false },
-    notifier = { enabled = false },
     scope = { enabled = false },
     scroll = { enabled = false },
   },
@@ -121,6 +129,21 @@ return {
       desc = "Run Lua",
       mode = { "n", "x" },
       ft = "lua",
+    },
+    {
+      "<localleader>s",
+      function()
+        Snacks.scratch()
+      end,
+      desc = "Scratch",
+      ft = "lua",
+    },
+    {
+      "<leader>sns",
+      function()
+        Snacks.notifier.show_history()
+      end,
+      desc = "Snacks Notifier",
     },
   },
   init = function()

@@ -184,7 +184,7 @@ return {
     version = mini_version,
     dependencies = {
       {
-        "JoosepAlviste/nvim-ts-context-commentstring",
+        "joosepalviste/nvim-ts-context-commentstring",
         lazy = true,
         opts = {
           enable_autocmd = false,
