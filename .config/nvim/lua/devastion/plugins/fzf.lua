@@ -123,11 +123,11 @@ return {
               cmd = "fd -g -p -t f '**/core/**'",
             })
           end, "Core", "n")
-          map("<leader>fh", function()
+          map("<leader>fu", function()
             require("fzf-lua").files({
-              cmd = "fd -g -p -t f '**/helpers/*'",
+              cmd = "fd -g -p -t f '**/util/*'",
             })
-          end, "Helpers", "n")
+          end, "Util", "n")
         end
       end,
     })
