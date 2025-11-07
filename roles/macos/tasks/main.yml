@@ -1,0 +1,8 @@
+---
+- name: '[ macOS] Disable "Are you sure to open this application?" dialog'
+  community.general.osx_defaults:
+    domain: com.apple.LaunchServices
+    key: LSQuarantine
+    type: bool
+    value: false
+    state: present

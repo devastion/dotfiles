@@ -53,6 +53,7 @@ return {
         mysql = { "sqlfluff" },
         plsql = { "sqlfluff" },
         dockerfile = { "dockerfmt" },
+        yaml = { "yamlfmt" },
       },
       stop_after_first = true,
       formatters = {

@@ -1,22 +1,25 @@
 ---
-- name: Install aerospace via homebrew on MacOS
+- name: "[homebrew] Install Aerospace"
   community.general.homebrew_cask:
     name:
       - nikitabobko/tap/aerospace
     state: present
-  when: ansible_distribution == "MacOSX"
 
-- name: "Create {{ lookup('env', 'HOME')  }}/.config/{{ role_name }} directory if not exists"
+- name: 'Create "{{ lookup(''env'', ''HOME'')  }}/.config/{{ role_name }}" directory if not exists'
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME')  }}/.config/{{ role_name }}"
     mode: "0755"
     state: directory
-  when: ansible_distribution == "MacOSX"
 
-- name: "Create symlink of files to {{ lookup('env', 'HOME')  }}/.config/{{ role_name }} directory"
+- name: 'Create symlink of files to "{{ lookup(''env'', ''HOME'')  }}/.config/{{ role_name }}" directory'
   ansible.builtin.file:
     src: "{{ role_path }}/files"
     dest: "{{ lookup('env', 'HOME')  }}/.config/{{ role_name }}"
     state: link
     force: true
-  when: ansible_distribution == "MacOSX"
+
+- name: "[homebrew] Install JankyBorders"
+  community.general.homebrew:
+    name:
+      - felixkratz/formulae/borders
+    state: present

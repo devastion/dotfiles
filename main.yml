@@ -1,7 +1,18 @@
 ---
-- name: Setup dotfiles
-  hosts: all
+- name: Setup local workstation
+  hosts: local
+
+  pre_tasks:
+    - name: "Set distro name to lowercase"
+      ansible.builtin.set_fact:
+        distro_name: "{{ ansible_distribution | lower }}"
 
   roles:
+    - role: macos
+      when: distro_name == "macosx"
+
+    - common
     - git
-    - aerospace
+
+    - role: aerospace
+      when: distro_name == "macosx"

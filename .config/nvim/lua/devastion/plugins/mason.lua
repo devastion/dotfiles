@@ -67,6 +67,7 @@ return {
       { "vue-language-server", version = "3.0.8" },
       "yaml-language-server",
       "yamllint",
+      "yamlfmt",
     },
   },
   config = function(_, opts)

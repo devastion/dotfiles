@@ -1,0 +1,16 @@
+---
+- name: "[homebrew] Install Homebrew packages"
+  community.general.homebrew:
+    name:
+      - coreutils
+      - mas
+      - php
+      - composer
+      - imagemagick
+    state: present
+
+- name: "[homebrew] Install Homebrew casks"
+  community.general.homebrew_cask:
+    name:
+      - font-maple-mono-normal-nf
+      - font-jetbrains-mono-nerd-font
