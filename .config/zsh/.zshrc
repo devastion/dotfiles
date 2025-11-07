@@ -6,10 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ ! -d $ZPLUGINDIR/zsh_unplugged ]]; then
-  git clone --quiet https://github.com/mattmc3/zsh_unplugged $ZPLUGINDIR/zsh_unplugged
-fi
-source $ZPLUGINDIR/zsh_unplugged/zsh_unplugged.zsh
+source "${ZDOTDIR:-$HOME/.config/zsh}/zsh_unplugged.zsh"
 
 autoload -U compinit; compinit
 autoload -Uz ${ZDOTDIR}/functions/*(:t)
