@@ -219,6 +219,7 @@ return {
             "select_next",
           },
           ["<S-tab>"] = { "show_and_insert", "select_prev" },
+          ["<c-space>"] = { "show", "fallback" },
           ["<c-n>"] = { "select_next", "fallback" },
           ["<c-p>"] = { "select_prev", "fallback" },
         },

@@ -144,7 +144,7 @@ if vim.env.TMUX then
         return vim.g.tmux_leader_key
       end
 
-      if new_mode == "i" then
+      if new_mode == "i" or new_mode == "c" then
         vim.system({ "tmux", "set-option", "-p", "prefix", "None" }, {})
       else
         vim.system({ "tmux", "set-option", "-p", "prefix", get_tmux_leader() }, {})
