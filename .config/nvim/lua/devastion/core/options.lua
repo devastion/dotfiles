@@ -53,7 +53,7 @@ o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 -- Splits
 o.splitbelow = true
 o.splitright = true
-o.splitkeep = "screen"
+o.splitkeep = "cursor"
 
 -- Session
 o.sessionoptions = "globals,buffers,tabpages,folds,winsize,winpos,curdir,localoptions"
