@@ -5,7 +5,7 @@ return {
   keys = function()
     ---@param increment boolean
     ---@param g? boolean
-    function dial(increment, g)
+    local function dial(increment, g)
       local mode = vim.fn.mode(true)
       -- Use visual commands for VISUAL 'v', VISUAL LINE 'V' and VISUAL BLOCK '\22'
       local is_visual = mode == "v" or mode == "V" or mode == "\22"
@@ -95,6 +95,15 @@ return {
       cyclic = true,
     })
 
+    local enable_disable = augend.constant.new({
+      elements = {
+        "enable",
+        "disable",
+      },
+      word = true,
+      cyclic = true,
+    })
+
     return {
       dials_by_ft = {
         css = "css",
@@ -122,6 +131,7 @@ return {
           capitalized_boolean,
           augend.constant.alias.bool, -- boolean value (true <-> false)
           logical_alias,
+          enable_disable,
         },
         vue = {
           augend.constant.new({ elements = { "let", "const" } }),

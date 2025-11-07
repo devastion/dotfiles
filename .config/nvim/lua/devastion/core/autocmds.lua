@@ -133,7 +133,7 @@ autocmd("BufReadPost", {
 if vim.env.TMUX then
   autocmd({ "ModeChanged" }, {
     group = augroup("i_tmux_unset_leader", {}),
-    desc = "Disable TMux leader in insert mode",
+    desc = "Disable TMux prefix in insert mode",
     callback = function(event)
       local new_mode = event.match:sub(-1)
       local function get_tmux_leader()
@@ -181,3 +181,14 @@ autocmd("FileType", {
   pattern = "help",
   command = "wincmd L",
 })
+
+-- local autocmd_files = vim.fn.glob(vim.fn.stdpath("config") .. "/lua/devastion/core/autocmds/*.lua")
+--
+-- for _, file in ipairs(vim.split(autocmd_files, "\n")) do
+--   if not file:match("init.lua$") then
+--     local module_name = file:match(".*/(.*).lua$")
+--     if module_name then
+--       require("devastion.core.autocmds." .. module_name)
+--     end
+--   end
+-- end

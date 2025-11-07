@@ -6,14 +6,14 @@
     state: present
   when: ansible_distribution == "MacOSX"
 
-- name: Create "$HOME/.config/aerospace" directory if not exists
+- name: "Create {{ lookup('env', 'HOME')  }}/.config/{{ role_name }} directory if not exists"
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME')  }}/.config/{{ role_name }}"
     mode: "0755"
     state: directory
   when: ansible_distribution == "MacOSX"
 
-- name: Create symlink of files to "$HOME/.config/aerospace" directory
+- name: "Create symlink of files to {{ lookup('env', 'HOME')  }}/.config/{{ role_name }} directory"
   ansible.builtin.file:
     src: "{{ role_path }}/files"
     dest: "{{ lookup('env', 'HOME')  }}/.config/{{ role_name }}"

@@ -18,3 +18,43 @@ end, { desc = "Toggle LSP Client" })
 usercmd("LspListActiveClients", function()
   vim.notify(vim.inspect(Devastion.lsp.get_attached_clients()), vim.log.levels.INFO)
 end, { desc = "List Active LSP Clients" })
+
+usercmd("Template", function(args)
+  local templates = Devastion.misc.get_templates()
+
+  if args.args ~= "" and vim.tbl_contains(templates, args.args) then
+    local template = vim.fn.stdpath("config") .. "/lua/devastion/templates/" .. args.args
+
+    if vim.fn.filereadable(template) == 1 then
+      local lines = vim.fn.readfile(template)
+
+      vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    end
+
+    return
+  end
+
+  vim.ui.select(templates, {
+    prompt = "Select Template:",
+  }, function(choice)
+    if choice then
+      local template = vim.fn.stdpath("config") .. "/lua/devastion/templates/" .. choice
+
+      if vim.fn.filereadable(template) == 1 then
+        local lines = vim.fn.readfile(template)
+
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+      end
+    end
+  end)
+end, {
+  desc = "Use Template",
+  nargs = "?",
+  complete = function(_, cmdline, _)
+    local templates = Devastion.misc.get_templates()
+
+    if cmdline:match("^['<,'>]*Template[!]*%s+%w*$") then
+      return templates
+    end
+  end,
+})

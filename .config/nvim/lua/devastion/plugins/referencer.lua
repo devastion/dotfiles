@@ -8,4 +8,13 @@ return {
   opts = {
     format = "%d ref(s)",
   },
+  keys = {
+    {
+      "<leader>ur",
+      function()
+        require("referencer").toggle()
+      end,
+      desc = "Toggle Referencer",
+    },
+  },
 }

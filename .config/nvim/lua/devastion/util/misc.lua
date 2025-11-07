@@ -108,4 +108,15 @@ function M.custom_foldtext()
   return result
 end
 
+function M.get_templates()
+  local templates = {}
+
+  for _, v in ipairs(vim.api.nvim_get_runtime_file("lua/devastion/templates/*", true)) do
+    local name = vim.fn.fnamemodify(v, ":t")
+    table.insert(templates, name)
+  end
+
+  return templates
+end
+
 return M
