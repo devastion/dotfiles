@@ -16,3 +16,6 @@
 
     - role: aerospace
       when: distro_name == "macosx"
+
+    - role: ghostty
+      when: distro_name == "macosx"

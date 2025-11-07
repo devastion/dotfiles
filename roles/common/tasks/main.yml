@@ -8,3 +8,13 @@
   ansible.builtin.include_tasks:
     file: "{{ role_path }}/tasks/{{ distro_name }}.yml"
   when: distro_config.stat.exists
+
+- name: "Create symlink for each config"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: "{{ lookup('env', 'HOME')  }}/.config/{{ item }}"
+    state: link
+    force: true
+  loop:
+    - eza
+    - bat

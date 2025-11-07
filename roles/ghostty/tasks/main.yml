@@ -1,0 +1,19 @@
+---
+- name: "[homebrew] Install Ghostty"
+  community.general.homebrew_cask:
+    name:
+      - ghostty
+    state: present
+
+- name: 'Create "{{ lookup(''env'', ''HOME'')  }}/.config/{{ role_name }}" directory if not exists'
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME')  }}/.config/{{ role_name }}"
+    mode: "0755"
+    state: directory
+
+- name: 'Create symlink of files to "{{ lookup(''env'', ''HOME'')  }}/.config/{{ role_name }}" directory'
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ lookup('env', 'HOME')  }}/.config/{{ role_name }}"
+    state: link
+    force: true
