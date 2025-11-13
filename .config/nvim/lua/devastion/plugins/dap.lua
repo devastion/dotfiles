@@ -57,6 +57,8 @@ return {
     local dapui = require("dapui")
     local vscode = require("dap.ext.vscode")
 
+    dap.defaults.fallback.switchbuf = "usevisible,useopen,usetab,uselast,newtab"
+
     dap.adapters.php = {
       type = "executable",
       command = "node",

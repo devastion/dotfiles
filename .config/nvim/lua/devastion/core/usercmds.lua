@@ -1,7 +1,7 @@
 local usercmd = vim.api.nvim_create_user_command
 
 usercmd("ToggleLspClient", function()
-  local lsp_configs = require("devastion.helpers.lsp").get_lsp_configs()
+  local lsp_configs = Devastion.lsp.get_lsp_configs()
 
   vim.ui.select(lsp_configs, {
     prompt = "Select LSP Client:",
@@ -58,3 +58,19 @@ end, {
     end
   end,
 })
+
+usercmd("DirDiff", function(opts)
+  if vim.tbl_count(opts.fargs) ~= 2 then
+    vim.notify("DirDiff requires exactly two directory arguments", vim.log.levels.ERROR)
+    return
+  end
+
+  vim.cmd("tabnew")
+  vim.cmd.packadd("nvim.difftool")
+  require("difftool").open(opts.fargs[1], opts.fargs[2], {
+    rename = {
+      detect = false,
+    },
+    ignore = { ".git" },
+  })
+end, { complete = "dir", nargs = "*" })

@@ -28,9 +28,10 @@ return {
   keys = {
     {
       "<c-s>",
-      "<cmd>CodeSnapSave<cr>",
+      ":CodeSnapSave<cr>",
       desc = "Codesnap Save Snapshot",
       mode = { "x" },
+      silent = true,
     },
   },
 }

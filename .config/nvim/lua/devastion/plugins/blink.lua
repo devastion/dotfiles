@@ -6,6 +6,7 @@ return {
     "rafamadriz/friendly-snippets",
     "fang2hou/blink-copilot",
     "alexandre-abrioux/blink-cmp-npm.nvim",
+    "mikavilpas/blink-ripgrep.nvim",
   },
   event = { "InsertEnter", "CmdlineEnter" },
   opts = function()
@@ -148,6 +149,7 @@ return {
           "path",
           "snippets",
           "buffer",
+          "ripgrep",
         },
         per_filetype = {
           sql = { "snippets", "dadbod", "buffer" },
@@ -201,6 +203,17 @@ return {
           ecolog = {
             name = "ecolog",
             module = "ecolog.integrations.cmp.blink_cmp",
+          },
+          ripgrep = {
+            module = "blink-ripgrep",
+            name = "Ripgrep",
+            ---@module "blink-ripgrep"
+            ---@type blink-ripgrep.Options
+            opts = {
+              backend = {
+                use = "gitgrep-or-ripgrep",
+              },
+            },
           },
         },
       },

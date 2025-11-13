@@ -18,6 +18,9 @@ return {
         telemetry = {
           telemetryLevel = "off",
         },
+        advanced = {
+          inlineSuggestCount = 3,
+        },
       },
     },
     suggestion = {

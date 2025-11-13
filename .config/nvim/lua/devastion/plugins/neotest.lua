@@ -7,6 +7,7 @@ return {
     {
       "devastion/neotest-phpunit",
       dev = true,
+      branch = "feat/add-docker-and-coverage-support",
     },
     {
       "devastion/neotest-node",
@@ -29,20 +30,15 @@ return {
             "git",
           },
           env = {
-            XDEBUG_CONFIG = "idekey=neotest",
+            XDEBUG_CONFIG = "idekey=neovim",
             XDEBUG_MODE = "coverage",
           },
           dap = dap.configurations.php[1],
-          coverage = {
-            enabled = true,
-            args = "--coverage-cobertura",
-            path = "coverage/cobertura.xml",
-          },
           docker = {
             enabled = true,
-            container_name = "php",
-            args = { "exec", "-i", "-w", "/var/www/html" },
-            workdir = nil,
+          },
+          coverage = {
+            enabled = true,
           },
         }),
         require("neotest-node"),

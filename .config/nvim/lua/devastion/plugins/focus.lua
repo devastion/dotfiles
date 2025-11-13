@@ -12,12 +12,13 @@ return {
   init = function()
     local ignore_filetypes = {
       "qf",
+      "dap-repl",
       "dapui_scopes",
       "dapui_stacks",
-      "dapui_repl",
       "dapui_watches",
       "dapui_breakpoints",
       "dapui_console",
+      "neotest-summary",
     }
 
     local augroup = vim.api.nvim_create_augroup("FocusDisable", { clear = true })

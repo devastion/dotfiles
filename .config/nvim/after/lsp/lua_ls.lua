@@ -32,6 +32,9 @@ return {
         disable = { "missing-fields", "incomplete-signature-doc" },
         unusedLocalExclude = { "_*" },
       },
+      hint = {
+        enable = true,
+      },
     },
   },
 }

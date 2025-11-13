@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
   "iamcco/markdown-preview.nvim",
+  ft = { "markdown" },
   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
   build = function()
     require("lazy").load({ plugins = { "markdown-preview.nvim" } })
