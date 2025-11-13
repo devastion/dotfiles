@@ -19,7 +19,7 @@ return {
           telemetryLevel = "off",
         },
         advanced = {
-          inlineSuggestCount = 3,
+          inlineSuggestCount = 2,
         },
       },
     },

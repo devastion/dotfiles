@@ -6,7 +6,6 @@ return {
     "rafamadriz/friendly-snippets",
     "fang2hou/blink-copilot",
     "alexandre-abrioux/blink-cmp-npm.nvim",
-    "mikavilpas/blink-ripgrep.nvim",
   },
   event = { "InsertEnter", "CmdlineEnter" },
   opts = function()
@@ -142,21 +141,20 @@ return {
       },
       sources = {
         default = {
-          "ecolog",
-          "npm",
           "copilot",
           "lsp",
           "path",
           "snippets",
           "buffer",
-          "ripgrep",
+          "npm",
+          "ecolog",
         },
         per_filetype = {
           sql = { "snippets", "dadbod", "buffer" },
           pgsql = { "snippets", "dadbod", "buffer" },
           mysql = { "snippets", "dadbod", "buffer" },
           plsql = { "snippets", "dadbod", "buffer" },
-          lua = { inherit_defaults = true, "lazydev" },
+          lua = { "lazydev", inherit_defaults = true },
         },
         providers = {
           buffer = {
@@ -203,17 +201,6 @@ return {
           ecolog = {
             name = "ecolog",
             module = "ecolog.integrations.cmp.blink_cmp",
-          },
-          ripgrep = {
-            module = "blink-ripgrep",
-            name = "Ripgrep",
-            ---@module "blink-ripgrep"
-            ---@type blink-ripgrep.Options
-            opts = {
-              backend = {
-                use = "gitgrep-or-ripgrep",
-              },
-            },
           },
         },
       },
