@@ -71,6 +71,8 @@ ctrl-alt-cmd-3 = "workspace 3"
 ctrl-alt-cmd-4 = "workspace 4"
 ctrl-alt-cmd-5 = "workspace 5"
 ctrl-alt-cmd-6 = "workspace 6"
+ctrl-alt-cmd-d = "workspace next"
+ctrl-alt-cmd-a = "workspace prev"
 
 # move to workspace
 ctrl-alt-cmd-shift-1 = ["move-node-to-workspace 1", "workspace 1"]
@@ -79,6 +81,8 @@ ctrl-alt-cmd-shift-3 = ["move-node-to-workspace 3", "workspace 3"]
 ctrl-alt-cmd-shift-4 = ["move-node-to-workspace 4", "workspace 4"]
 ctrl-alt-cmd-shift-5 = ["move-node-to-workspace 5", "workspace 5"]
 ctrl-alt-cmd-shift-6 = ["move-node-to-workspace 6", "workspace 6"]
+ctrl-alt-cmd-shift-d = ["move-node-to-workspace next", "workspace next"]
+ctrl-alt-cmd-shift-a = ["move-node-to-workspace prev", "workspace prev"]
 
 # resize
 ctrl-alt-cmd-minus = "resize smart -128"
