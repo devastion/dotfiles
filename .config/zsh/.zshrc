@@ -15,6 +15,7 @@ repos=(
   "romkatv/powerlevel10k"
 
   "Aloxaf/fzf-tab"
+  "Freed-Wu/fzf-tab-source"
   "zsh-users/zsh-autosuggestions"
   "hlissner/zsh-autopair"
   "jeffreytse/zsh-vi-mode"
