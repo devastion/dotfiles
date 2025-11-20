@@ -43,7 +43,13 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
 # variables
-export FZF_DEFAULT_OPTS="--tmux=80% --layout=reverse --highlight-line --cycle --bind=ctrl-f:preview-half-page-down,ctrl-b:preview-half-page-up"
+export FZF_DEFAULT_OPTS="--tmux=80% \
+  --layout=reverse \
+  --highlight-line \
+  --cycle \
+  --bind=ctrl-f:preview-half-page-down,ctrl-b:preview-half-page-up \
+  --color=border:#27a1b9
+"
 export EZA_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/eza"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export ZVM_VI_SURROUND_BINDKEY="s-prefix"
