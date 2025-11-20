@@ -22,6 +22,7 @@ repos=(
 
   "romkatv/zsh-defer"
   "zdharma-continuum/fast-syntax-highlighting"
+  "jimhester/per-directory-history"
   "olets/zsh-abbr"
 )
 
@@ -57,6 +58,9 @@ export ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 export ZVM_VI_HIGHLIGHT_BACKGROUND=("paste:none")
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
 export ABBR_USER_ABBREVIATIONS_FILE="${ZDOTDIR:-$HOME/.config/zsh}/.zsh-abbr"
+export HISTORY_BASE="$ZDOTDIR/.per_directory_history"
+export HISTORY_START_WITH_GLOBAL=true
+export PER_DIRECTORY_HISTORY_TOGGLE="^G"
 
 # aliases
 alias l="eza --git"
