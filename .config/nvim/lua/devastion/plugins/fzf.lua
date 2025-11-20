@@ -19,6 +19,8 @@ return {
           ["ctrl-x"] = "jump",
           ["ctrl-f"] = "preview-page-down",
           ["ctrl-b"] = "preview-page-up",
+          ["alt-j"] = "preview-down",
+          ["alt-k"] = "preview-up",
         },
       },
       fzf_colors = true,

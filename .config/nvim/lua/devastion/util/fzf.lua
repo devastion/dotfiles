@@ -1,6 +1,6 @@
-local M = {}
-
 local utils = require("devastion.utils")
+
+local M = {}
 
 ---Folder grep function
 ---Allows selecting a folder and running grep in it
