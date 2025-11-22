@@ -2,6 +2,9 @@
 return {
   "nvim-lualine/lualine.nvim",
   event = { "VeryLazy" },
+  dependencies = {
+    "andrem222/copilot-lualine",
+  },
   opts = function()
     local signs = vim.g.diagnostic_signs
 
@@ -33,6 +36,7 @@ return {
             color = { fg = "#ff9e64" },
           },
           require("ecolog.integrations.statusline").lualine(),
+          "copilot",
           "encoding",
           "filetype",
         },

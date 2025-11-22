@@ -5,6 +5,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "alexandre-abrioux/blink-cmp-npm.nvim",
+    "fang2hou/blink-copilot",
   },
   event = { "InsertEnter", "CmdlineEnter" },
   opts = function()
@@ -140,6 +141,7 @@ return {
       },
       sources = {
         default = {
+          "copilot",
           "lsp",
           "path",
           "snippets",
@@ -170,6 +172,12 @@ return {
             end,
           },
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+          copilot = {
+            name = "copilot",
+            module = "blink-copilot",
+            score_offset = 100,
+            async = true,
+          },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
