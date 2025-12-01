@@ -9,3 +9,4 @@ abbr "nr"="npm run"
 
 # docker
 abbr "dco"="docker compose"
+abbr "dcs"="docker stop $(docker ps -q)"

@@ -1,12 +1,10 @@
 os:
   editPreset: nvim
-
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never
   disableForcePushing: true
-
 # tokyonight_night theme
 gui:
   nerdFontsVersion: "3"
@@ -37,4 +35,3 @@ gui:
       - "#c0caf5"
   showCommandLog: false
   showBottomLine: false
-
