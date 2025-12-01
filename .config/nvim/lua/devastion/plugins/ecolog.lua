@@ -13,7 +13,7 @@ return {
         },
         mappings = {
           copy_value = "ctrl-y",
-          copy_name = "ctrl-Y",
+          copy_name = "ctrl-u",
           append_value = "ctrl-a",
           append_name = "enter",
           edit_var = "ctrl-e",

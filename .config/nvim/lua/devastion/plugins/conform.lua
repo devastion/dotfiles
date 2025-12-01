@@ -43,7 +43,7 @@ return {
         bash = { "shfmt" },
         sh = { "shfmt" },
         blade = { "blade-formatter" },
-        php = vim.g.is_laravel_project and { "pint" } or { "php_cs_fixer" },
+        php = vim.g.is_laravel_project and { "pint_docker" } or { "php_cs_fixer" },
         graphql = { "prettier" },
         python = { "black" },
         markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
@@ -89,6 +89,25 @@ return {
             return vim.fn.getcwd()
           end,
         },
+        pint_docker = function(bufnr)
+          local container_id = Devastion.docker.get_container_id("php")
+          local file_name = vim.fn.fnamemodify(vim.fn.bufname(bufnr), ":.")
+
+          return {
+            command = "docker",
+            args = {
+              "exec",
+              "-i",
+              "-w",
+              "/var/www/html",
+              container_id,
+              "/bin/sh",
+              "-c",
+              "php vendor/bin/pint " .. file_name,
+            },
+            stdin = false,
+          }
+        end,
       },
       format_on_save = function(bufnr)
         if vim.g.autoformat_enabled or vim.b[bufnr].autoformat_enabled then

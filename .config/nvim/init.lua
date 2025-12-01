@@ -5,6 +5,7 @@ Devastion.mini = require("devastion.util.mini")
 Devastion.lsp = require("devastion.util.lsp")
 Devastion.fzf = require("devastion.util.fzf")
 Devastion.misc = require("devastion.util.misc")
+Devastion.docker = require("devastion.util.docker")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

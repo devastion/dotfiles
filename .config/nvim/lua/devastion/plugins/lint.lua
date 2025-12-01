@@ -3,10 +3,60 @@ return {
   "mfussenegger/nvim-lint",
   lazy = true,
   opts = {
+    linters = {
+      phpstan_docker = function()
+        local container_id = Devastion.docker.get_container_id("php")
+        local file_name = vim.fn.fnamemodify(vim.fn.bufname("%"), ":.")
+
+        return {
+          name = "phpstan_docker",
+          cmd = "docker",
+          args = {
+            "exec",
+            "-i",
+            "-w",
+            "/var/www/html",
+            container_id,
+            "/bin/sh",
+            "-c",
+            "php vendor/bin/phpstan analyze --error-format=json --no-progress --memory-limit=2G " .. file_name,
+          },
+          stdin = false,
+          append_fname = false,
+          ignore_exitcode = true,
+          parser = function(output, bufnr)
+            if vim.trim(output) == "" or output == nil then
+              return {}
+            end
+
+            local file_name = "/var/www/html/" .. vim.fn.fnamemodify(vim.fn.bufname(bufnr), ":.")
+            local file = vim.json.decode(output).files[file_name]
+
+            if file == nil then
+              return {}
+            end
+
+            local diagnostics = {}
+
+            for _, message in ipairs(file.messages or {}) do
+              table.insert(diagnostics, {
+                lnum = type(message.line) == "number" and (message.line - 1) or 0,
+                col = 0,
+                message = message.message,
+                source = "phpstan_docker",
+                code = message.identifier,
+              })
+            end
+
+            return diagnostics
+          end,
+        }
+      end,
+    },
     linters_by_ft = {
       ghaction = { "actionlint" },
       dotenv = { "dotenv_linter" },
-      php = vim.g.is_laravel_project and {} or { "phpcs" },
+      php = vim.g.is_laravel_project and { "phpstan_docker" } or { "phpcs" },
       sh = { "shellcheck" },
       bash = { "shellcheck" },
       dockerfile = { "hadolint" },
@@ -20,6 +70,7 @@ return {
   },
   config = function(_, opts)
     local lint = require("lint")
+    lint.linters = opts.linters
     lint.linters_by_ft = opts.linters_by_ft
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -40,7 +91,7 @@ return {
           if #names > 0 then
             for _, name in ipairs(names) do
               local cmd = vim.fn.executable(name)
-              if cmd == 0 then
+              if cmd == 0 and string.find(cmd, "docker") ~= nil then
                 vim.notify("Linter " .. name .. " is not available", vim.log.levels.INFO)
                 return
               else

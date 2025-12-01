@@ -1,3 +1,11 @@
+local lint_progress = function()
+  local linters = require("lint").get_running()
+  if #linters == 0 then
+    return "󰦕"
+  end
+  return "󱉶 " .. table.concat(linters, ", ")
+end
+
 ---@type LazySpec
 return {
   "nvim-lualine/lualine.nvim",
@@ -28,6 +36,7 @@ return {
           },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { "filename" },
+          lint_progress,
         },
         lualine_x = {
           {
