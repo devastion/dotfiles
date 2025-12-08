@@ -70,7 +70,7 @@ return {
   },
   config = function(_, opts)
     local lint = require("lint")
-    lint.linters = opts.linters
+    lint.linters.phpstan_docker = opts.linters.phpstan_docker
     lint.linters_by_ft = opts.linters_by_ft
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

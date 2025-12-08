@@ -43,7 +43,7 @@ return {
         bash = { "shfmt" },
         sh = { "shfmt" },
         blade = { "blade-formatter" },
-        php = vim.g.is_laravel_project and { "pint_docker" } or { "php_cs_fixer" },
+        php = vim.g.is_laravel_project and { "pint" } or { "php_cs_fixer" },
         graphql = { "prettier" },
         python = { "black" },
         markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
