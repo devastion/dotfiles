@@ -47,6 +47,7 @@ return {
       grep = { actions = { ["alt-i"] = { actions.toggle_ignore }, ["alt-h"] = { actions.toggle_hidden } } },
       lsp = { code_actions = { previewer = "codeaction_native" } },
       oldfiles = { cwd_only = true, include_current_session = true, winopts = { preview = { hidden = true } } },
+      undotree = { previewer = "undotree_native", locate = true },
     }
   end,
   config = function(_, opts)
@@ -516,6 +517,16 @@ return {
         require("fzf-lua").dap_frames()
       end,
       desc = "Frames",
+    },
+
+    -- Undotree
+    {
+      "<leader>U",
+      function()
+        require("fzf-lua").undotree()
+      end,
+      mode = "n",
+      desc = "Command History",
     },
   },
 }
