@@ -74,7 +74,6 @@ return {
       {
         "<leader>t",
         "",
-        mode = { "n", "v" },
         desc = "+[Testing]",
       },
       {

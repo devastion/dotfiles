@@ -12,7 +12,6 @@ return {
         { "<leader>s", group = "+[Search]", mode = { "n", "v" } },
         { "<leader>g", group = "+[Git]", mode = { "n", "v" } },
         { "<leader>gh", group = "+[Hunks]", mode = { "n", "v" } },
-        { "<leader>gx", group = "+[Conflicts]" },
         { "<leader>gt", group = "+[Toggles]" },
         { "<leader>u", group = "+[UI Toggles]", mode = { "n", "v" } },
         { "<leader><tab>", group = "+[Tabs]" },

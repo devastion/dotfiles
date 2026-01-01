@@ -33,6 +33,13 @@ return {
         mask_char = "*",
         mask_length = nil,
         skip_comments = false,
+        sources = {
+          [".env"] = "none",
+          [".env.prod"] = "full",
+          [".env.local"] = "partial",
+          [".env.testing"] = "partial",
+          ["shell"] = "none",
+        },
       },
       modules = {
         cmp = true,
