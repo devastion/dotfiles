@@ -36,12 +36,14 @@ outer.right = [{ monitor.main = 16 }, 16]
 "6" = "secondary"
 
 [mode.main.binding]
-# Disable "hide application" and "hide others"
+# disable "hide application" and "hide others"
 cmd-h = []
 cmd-alt-h = []
 cmd-m = []
 
 ctrl-alt-cmd-g = "exec-and-forget open -a Ghostty -n"
+# screenshot to clipboard
+ctrl-alt-cmd-shift-s = "exec-and-forget screencapture -i -c"
 
 # layout switching
 ctrl-alt-cmd-t = "layout h_tiles v_tiles"
@@ -72,18 +74,18 @@ ctrl-alt-cmd-3 = "workspace 3"
 ctrl-alt-cmd-4 = "workspace 4"
 ctrl-alt-cmd-5 = "workspace 5"
 ctrl-alt-cmd-6 = "workspace 6"
-ctrl-alt-cmd-d = "workspace next"
-ctrl-alt-cmd-a = "workspace prev"
+ctrl-alt-cmd-d = "workspace next --wrap-around"
+ctrl-alt-cmd-a = "workspace prev --wrap-around"
 
 # move to workspace
-ctrl-alt-cmd-shift-1 = ["move-node-to-workspace 1", "workspace 1"]
-ctrl-alt-cmd-shift-2 = ["move-node-to-workspace 2", "workspace 2"]
-ctrl-alt-cmd-shift-3 = ["move-node-to-workspace 3", "workspace 3"]
-ctrl-alt-cmd-shift-4 = ["move-node-to-workspace 4", "workspace 4"]
-ctrl-alt-cmd-shift-5 = ["move-node-to-workspace 5", "workspace 5"]
-ctrl-alt-cmd-shift-6 = ["move-node-to-workspace 6", "workspace 6"]
-ctrl-alt-cmd-shift-d = ["move-node-to-workspace next", "workspace next"]
-ctrl-alt-cmd-shift-a = ["move-node-to-workspace prev", "workspace prev"]
+ctrl-alt-cmd-shift-1 = "move-node-to-workspace 1 --focus-follows-window"
+ctrl-alt-cmd-shift-2 = "move-node-to-workspace 2 --focus-follows-window"
+ctrl-alt-cmd-shift-3 = "move-node-to-workspace 3 --focus-follows-window"
+ctrl-alt-cmd-shift-4 = "move-node-to-workspace 4 --focus-follows-window"
+ctrl-alt-cmd-shift-5 = "move-node-to-workspace 5 --focus-follows-window"
+ctrl-alt-cmd-shift-6 = "move-node-to-workspace 6 --focus-follows-window"
+ctrl-alt-cmd-shift-d = "move-node-to-workspace next --focus-follows-window"
+ctrl-alt-cmd-shift-a = "move-node-to-workspace prev --focus-follows-window"
 
 # resize
 ctrl-alt-cmd-minus = "resize smart -128"
