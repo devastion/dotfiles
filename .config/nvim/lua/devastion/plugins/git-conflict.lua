@@ -1,12 +1,16 @@
 ---@type LazySpec
 return {
   "akinsho/git-conflict.nvim",
+  enabled = false,
   version = "*",
   opts = {
     default_mappings = false,
     default_commands = true,
     disable_diagnostics = false,
   },
+  config = function(_, opts)
+    require("git-conflict").setup(opts)
+  end,
   keys = function()
     return {
       {
