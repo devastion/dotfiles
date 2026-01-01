@@ -42,6 +42,7 @@ return {
       "docker-language-server",
       "dotenv-linter",
       "eslint-lsp",
+      "editorconfig-checker",
       "graphql-language-service-cli",
       "hadolint",
       "html-lsp",

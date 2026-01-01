@@ -54,6 +54,7 @@ return {
       end,
     },
     linters_by_ft = {
+      ["*"] = { "editorconfig-checker" },
       ghaction = { "actionlint" },
       dotenv = { "dotenv_linter" },
       php = vim.g.is_laravel_project and { "phpstan_docker" } or { "phpcs" },
