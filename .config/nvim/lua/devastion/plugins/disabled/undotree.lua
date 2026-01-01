@@ -1,8 +1,7 @@
+-- INFO: Replace with fzf-lua
 ---@type LazySpec
 return {
   "jiaoshijie/undotree",
-  -- INFO: Replace with fzf-lua
-  enabled = false,
   lazy = true,
   opts = {},
   keys = {
