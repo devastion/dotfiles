@@ -1,7 +1,6 @@
 ---@type LazySpec
 return {
   "akinsho/git-conflict.nvim",
-  enabled = false,
   version = "*",
   opts = {
     default_mappings = false,
