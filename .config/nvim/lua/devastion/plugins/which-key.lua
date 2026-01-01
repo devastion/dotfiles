@@ -7,7 +7,7 @@ return {
       preset = "helix",
       delay = 0,
       spec = {
-        { "<leader>f", group = "+[Find]" },
+        { "<leader>f", group = "+[Find]", mode = { "n", "v" } },
         { "<leader>c", group = "+[Code]", mode = { "n", "v" } },
         { "<leader>s", group = "+[Search]", mode = { "n", "v" } },
         { "<leader>g", group = "+[Git]", mode = { "n", "v" } },

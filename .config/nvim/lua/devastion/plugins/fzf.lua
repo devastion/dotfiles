@@ -526,7 +526,7 @@ return {
         require("fzf-lua").undotree()
       end,
       mode = "n",
-      desc = "Command History",
+      desc = "Undotree",
     },
   },
 }
