@@ -18,3 +18,4 @@
   loop:
     - eza
     - bat
+    - lazygit
