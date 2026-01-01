@@ -59,8 +59,8 @@ export ZVM_VI_HIGHLIGHT_BACKGROUND=("paste:none")
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
 export ABBR_USER_ABBREVIATIONS_FILE="${ZDOTDIR:-$HOME/.config/zsh}/.zsh-abbr"
 export HISTORY_BASE="$ZDOTDIR/.per_directory_history"
-export HISTORY_START_WITH_GLOBAL=true
-export PER_DIRECTORY_HISTORY_TOGGLE="^G"
+export HISTORY_START_WITH_GLOBAL=false
+export PER_DIRECTORY_HISTORY_TOGGLE="^H"
 
 # aliases
 alias l="eza --git"
@@ -137,4 +137,6 @@ function zvm_after_init() {
   zvm_bindkey viins "^w" backward-kill-word
   zvm_bindkey viins "^[d" kill-word
   zvm_bindkey viins "^[^?" backward-kill-word
+
+  source "${ZDOTDIR:-$HOME/.config/zsh}/fzf_lua.zsh"
 }

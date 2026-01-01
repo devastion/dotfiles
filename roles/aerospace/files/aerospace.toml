@@ -54,6 +54,7 @@ ctrl-alt-cmd-j = "focus --boundaries-action stop down"
 ctrl-alt-cmd-k = "focus --boundaries-action stop up"
 ctrl-alt-cmd-l = "focus --boundaries-action stop right"
 alt-tab = "focus-back-and-forth"
+cmd-backtick = "workspace-back-and-forth"
 
 # move
 ctrl-alt-cmd-shift-h = "move left"
