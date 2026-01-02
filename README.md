@@ -8,3 +8,9 @@ My personal dotfiles.
 git clone git@github.com:devastion/dotfiles.git "$HOME/.dotfiles" && \
 "$HOME/.dotfiles/setup.sh"
 ```
+
+## Ansible
+
+```sh
+ansible-playbook main.yml
+```

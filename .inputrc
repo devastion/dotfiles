@@ -1,2 +1,4 @@
-set bell-style none # do not bell on tab-completion
-set meta-flag on # enables recognition of meta key
+# do not bell on tab-completion
+set bell-style none
+# enables recognition of meta key
+set meta-flag on 

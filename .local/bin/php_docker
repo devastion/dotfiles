@@ -33,11 +33,7 @@ if $DOCKER_FILE_FOUND && docker version &>/dev/null; then
   CONTAINER=$(docker ps -n=-1 --filter name="$CONTAINER_NAME" --format="{{.ID}}")
 
   if [[ -n "$CONTAINER" ]]; then
-    # TODO: Sort out what to use
-
-    # docker exec "$CONTAINER" php "$@"
-    # docker exec -i "$CONTAINER" php "$@"
-    $PHP_PATH "$@"
+    docker exec -i "$CONTAINER" php "$@"
   else
     $PHP_PATH "$@"
   fi
