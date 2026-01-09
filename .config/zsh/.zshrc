@@ -14,8 +14,14 @@ plugins_before_compinit=(
 plugin-load $plugins_before_compinit
 
 autoload -U compinit; compinit
-autoload -Uz ${ZDOTDIR}/functions/*(:t)
-autoload -Uz ${XDG_DATA_HOME}/shell/functions/*(:t)
+
+if [[ -d "$ZDOTDIR/functions" ]]; then
+  autoload -Uz ${ZDOTDIR}/functions/*(:t)
+fi
+
+if [[ -d "$XDG_DATA_HOME/shell/functions" ]]; then
+  autoload -Uz ${XDG_DATA_HOME}/shell/functions/*(:t)
+fi
 
 repos=(
   "romkatv/powerlevel10k"

@@ -24,12 +24,17 @@ path=(
   $path
 )
 
-fpath=(
-  "${XDG_DATA_HOME}/shell/functions"
-  "${ZDOTDIR}/functions"
-  "${ZDOTDIR}/completions"
-  $fpath
-)
+if [[ -d "$XDG_DATA_HOME/shell/functions" ]]; then
+  fpath+=("${XDG_DATA_HOME}/shell/functions")
+fi
+
+if [[ -d "$ZDOTDIR/functions" ]]; then
+  fpath+=("${ZDOTDIR}/functions")
+fi
+
+if [[ -d "$ZDOTDIR/completions" ]]; then
+  fpath+=("${ZDOTDIR}/completions")
+fi
 
 cdpath=(
   "${XDG_PROJECTS_DIR:-HOME/Projects}"
