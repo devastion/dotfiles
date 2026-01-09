@@ -44,6 +44,7 @@ return {
         lua = { "stylua" },
         bash = { "shfmt" },
         sh = { "shfmt" },
+        zsh = { "shfmt" },
         blade = { "blade-formatter" },
         php = vim.g.is_laravel_project and {
           (is_docker_running and Devastion.docker.get_container_id("php")) and "pint_docker" or "pint",
