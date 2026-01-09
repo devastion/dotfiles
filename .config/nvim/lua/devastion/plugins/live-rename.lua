@@ -1,0 +1,5 @@
+---@type LazySpec
+return {
+  "saecki/live-rename.nvim",
+  opts = {},
+}

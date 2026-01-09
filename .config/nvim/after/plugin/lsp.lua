@@ -112,9 +112,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("grd", function()
       fzf.lsp_declarations()
     end, "Goto Declaration", "n", opts)
-    map("grn", function()
-      return ":IncRename " .. vim.fn.expand("<cword>")
-    end, "Incremental Rename", "n", { buffer = event.buf, desc = "Incremental Rename", expr = true })
+    if Devastion.lazy.is_loaded("inc-rename.nvim") then
+      map("grn", function()
+        return ":IncRename " .. vim.fn.expand("<cword>")
+      end, "Incremental Rename", "n", { buffer = event.buf, desc = "Incremental Rename", expr = true })
+    end
+    if Devastion.lazy.is_loaded("live-rename.nvim") then
+      map("grn", function()
+        require("live-rename").rename()
+      end, "Live Rename", "n", { buffer = event.buf, desc = "Incremental Rename" })
+    end
 
     -- lsp_signature
     if Devastion.lazy.has("lsp_signature.nvim") then
