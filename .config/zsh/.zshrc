@@ -8,6 +8,11 @@ fi
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/zsh_unplugged.zsh"
 
+plugins_before_compinit=(
+  "zsh-users/zsh-completions"
+)
+plugin-load $plugins_before_compinit
+
 autoload -U compinit; compinit
 autoload -Uz ${ZDOTDIR}/functions/*(:t)
 autoload -Uz ${XDG_DATA_HOME}/shell/functions/*(:t)
