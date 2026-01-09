@@ -34,7 +34,7 @@ return {
         mask_length = nil,
         skip_comments = false,
         sources = {
-          [".env"] = "none",
+          [".env"] = "partial",
           [".env.prod"] = "full",
           [".env.local"] = "partial",
           [".env.testing"] = "partial",
@@ -65,6 +65,13 @@ return {
         vim.cmd("EcologFzf")
       end,
       desc = "Env Variables (Ecolog Fzf)",
+    },
+    {
+      "<localleader>t",
+      function()
+        vim.cmd("EcologShelterToggle")
+      end,
+      desc = "Toggle Shelter",
     },
   },
 }

@@ -31,6 +31,8 @@ return {
     },
   },
   opts = function()
+    local is_docker_running = Devastion.docker.is_daemon_running()
+
     return {
       default_format_opts = {
         timeout_ms = 3000,
@@ -43,7 +45,9 @@ return {
         bash = { "shfmt" },
         sh = { "shfmt" },
         blade = { "blade-formatter" },
-        php = vim.g.is_laravel_project and { "pint" } or { "php_cs_fixer" },
+        php = vim.g.is_laravel_project and {
+          (is_docker_running and Devastion.docker.get_container_id("php")) and "pint_docker" or "pint",
+        } or { "php_cs_fixer" },
         graphql = { "prettier" },
         python = { "black" },
         markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
@@ -101,11 +105,11 @@ return {
               "-w",
               "/var/www/html",
               container_id,
-              "/bin/sh",
+              "/bin/bash",
               "-c",
-              "php vendor/bin/pint " .. file_name,
+              "temp=$(mktemp) && cp " .. file_name .. " $temp && php vendor/bin/pint $temp --quiet && cat $temp",
             },
-            stdin = false,
+            stdin = true,
           }
         end,
       },
