@@ -10,6 +10,7 @@ source "${ZDOTDIR:-$HOME/.config/zsh}/zsh_unplugged.zsh"
 
 autoload -U compinit; compinit
 autoload -Uz ${ZDOTDIR}/functions/*(:t)
+autoload -Uz ${XDG_DATA_HOME}/shell/functions/*(:t)
 
 repos=(
   "romkatv/powerlevel10k"

@@ -25,6 +25,7 @@ path=(
 )
 
 fpath=(
+  "${XDG_DATA_HOME}/shell/functions"
   "${ZDOTDIR}/functions"
   "${ZDOTDIR}/completions"
   $fpath
