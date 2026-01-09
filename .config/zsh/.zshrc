@@ -23,6 +23,7 @@ repos=(
   "romkatv/zsh-defer"
   "zdharma-continuum/fast-syntax-highlighting"
   "jimhester/per-directory-history"
+  "piotr1215/zsh-jumper"
   "olets/zsh-abbr"
 )
 
@@ -42,6 +43,10 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' switch-group '<' '>'
+
+# zsh-jumper vi-mode
+zstyle ':zsh-jumper:' disable-bindings yes
+bindkey -M viins "^X/" zsh-jumper-widget
 
 # variables
 export FZF_DEFAULT_OPTS="--tmux=80% \
