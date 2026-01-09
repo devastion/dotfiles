@@ -1,3 +1,4 @@
+---
 # yaml-language-server: $schema=./plugins/tmux-which-key/config.schema.yaml
 command_alias_start_index: 200
 keybindings:
@@ -17,7 +18,7 @@ macros:
   - name: reload-config
     commands:
       - display "#{log_info} Loading config... "
-      - source-file $HOME/.tmux.conf
+      - source "${XDG_CONFIG_HOME}/tmux/tmux.conf"
       - display -p "\n\n... Press ENTER to continue"
   - name: restart-pane
     commands:
@@ -245,16 +246,13 @@ items:
         menu:
           - name: Install
             key: i
-            command:
-              run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/install_plugins
+            command: run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/install_plugins
           - name: Update
             key: u
-            command:
-              run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/update_plugins
+            command: run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/update_plugins
           - name: Clean
             key: c
-            command:
-              run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/clean_plugins
+            command: run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/clean_plugins
       - name: Detach
         key: D
         command: detach
@@ -269,9 +267,18 @@ items:
         key: ","
         command: customize-mode -Z
   - separator: true
-  - name: Time
+  - name: TMux Pane Focus
     key: T
-    command: clock-mode
+    command: run "$TMUX_PLUGIN_MANAGER_PATH/tmux-pane-focus/scripts/menu.sh"
+  - name: TMux FZF url
+    key: u
+    command: run "$TMUX_PLUGIN_MANAGER_PATH/tmux-fzf-url/fzf-url.rb"
+  - name: TMux Fast Copy
+    key: f
+    command: run "$TMUX_PLUGIN_MANAGER_PATH/tmux-fastcopy/bin/tmux-fastcopy"
+  - name: TMux Jump
+    key: J
+    command: run "$TMUX_PLUGIN_MANAGER_PATH/tmux-jump/scripts/tmux-jump.sh"
   - name: Show messages
     key: "~"
     command: show-messages
