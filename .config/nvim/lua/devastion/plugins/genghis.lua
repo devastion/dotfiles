@@ -7,30 +7,30 @@ return {
   },
   opts = {},
   keys = {
-    { "<leader>o", "", desc = "+[File Operations]" },
+    { "<leader>F", "", desc = "+[File Operations]" },
     {
-      "<leader>on",
+      "<leader>Fn",
       function()
         require("genghis").createNewFile()
       end,
       desc = "New File",
     },
     {
-      "<leader>oN",
+      "<leader>FN",
       function()
         require("genghis").createNewFileInFolder()
       end,
       desc = "New File (cwd)",
     },
     {
-      "<leader>od",
+      "<leader>Fd",
       function()
         require("genghis").duplicateFile()
       end,
       desc = "Duplicate File",
     },
     {
-      "<leader>on",
+      "<leader>Fn",
       function()
         require("genghis").moveSelectionToNewFile()
       end,
@@ -38,92 +38,92 @@ return {
       mode = "x",
     },
     {
-      "<leader>or",
+      "<leader>Fr",
       function()
         require("genghis").renameFile()
       end,
       desc = "Rename File",
     },
     {
-      "<leader>om",
+      "<leader>Fm",
       function()
         require("genghis").moveToFolderInCwd()
       end,
       desc = "Move File to CWD",
     },
     {
-      "<leader>oM",
+      "<leader>FM",
       function()
         require("genghis").moveAndRenameFile()
       end,
       desc = "Move and Rename File to CWD",
     },
     {
-      "<leader>oX",
+      "<leader>FX",
       function()
         require("genghis").chmodx()
       end,
       desc = "Execute chmod +x on Current File",
     },
     {
-      "<leader>oD",
+      "<leader>FD",
       function()
         require("genghis").trashFile()
       end,
       desc = "Trash File",
     },
     {
-      "<leader>oo",
+      "<leader>Fo",
       function()
         require("genghis").showInSystemExplorer()
       end,
       desc = "Show in System Explorer",
     },
-    { "<leader>oc", "", desc = "+[Copy]" },
+    { "<leader>Fc", "", desc = "+[Copy]" },
     {
-      "<leader>ocn",
+      "<leader>Fcn",
       function()
         require("genghis").copyFilename()
       end,
       desc = "File Name",
     },
     {
-      "<leader>ocp",
+      "<leader>Fcp",
       function()
         require("genghis").copyFilepath()
       end,
       desc = "File Path",
     },
     {
-      "<leader>ocP",
+      "<leader>FcP",
       function()
         require("genghis").copyFilepathWithTilde()
       end,
       desc = "Absolute Path with Tilde",
     },
     {
-      "<leader>ocr",
+      "<leader>Fcr",
       function()
         require("genghis").copyRelativePath()
       end,
       desc = "Relative Path",
     },
     {
-      "<leader>ocd",
+      "<leader>Fcd",
       function()
         require("genghis").copyDirectoryPath()
       end,
       desc = "Directory Path",
     },
     {
-      "<leader>ocD",
+      "<leader>FcD",
       function()
         require("genghis").copyRelativeDirectoryPath()
       end,
       desc = "Relative Directory Path",
     },
     {
-      "<leader>ocf",
+      "<leader>Fcf",
       function()
         require("genghis").copyFileItself()
       end,

@@ -13,6 +13,7 @@ return {
     },
   },
   opts = {
+    disable_limit_reached_message = true,
     server_opts_overrides = {
       settings = {
         telemetry = {
