@@ -13,7 +13,7 @@ plugins_before_compinit=(
 )
 plugin-load $plugins_before_compinit
 
-autoload -U compinit; compinit
+autoload -Uz compinit; compinit
 
 if [[ -d "$ZDOTDIR/functions" ]]; then
   autoload -Uz ${ZDOTDIR}/functions/*(:t)

@@ -39,7 +39,10 @@ _arguments "${_arguments_options[@]}" : \
 '--rewrite=[String to replace the matched AST node]:FIX:_default' \
 '-l+[The language of the pattern. Supported languages are\: \[Bash, C, Cpp, CSharp, Css, Elixir, Go, Haskell, Hcl, Html, Java, JavaScript, Json, Kotlin, Lua, Nix, Php, Python, Ruby, Rust, Scala, Solidity, Swift, Tsx, TypeScript, Yaml\]]:LANG:_default' \
 '--lang=[The language of the pattern. Supported languages are\: \[Bash, C, Cpp, CSharp, Css, Elixir, Go, Haskell, Hcl, Html, Java, JavaScript, Json, Kotlin, Lua, Nix, Php, Python, Ruby, Rust, Scala, Solidity, Swift, Tsx, TypeScript, Yaml\]]:LANG:_default' \
-'--debug-query=[Print query pattern'\''s tree-sitter AST. Requires lang be set explicitly]' \
+'--debug-query=[Print query pattern'\''s tree-sitter AST. Requires lang be set explicitly]::format:((pattern\:"Print the query parsed in Pattern format"
+ast\:"Print the query in tree-sitter AST format, only named nodes are shown"
+cst\:"Print the query in tree-sitter CST format, both named and unnamed nodes are shown"
+sexp\:"Print the query in S-expression format"))' \
 '--strictness=[The strictness of the pattern]:STRICTNESS:((cst\:"Match exact all node"
 smart\:"Match all node except source trivial nodes"
 ast\:"Match only ast nodes"
@@ -55,7 +58,9 @@ vcs\:"Don'\''t respect version control ignore files (.gitignore, etc.). This imp
 '*--globs=[Include or exclude file paths]:GLOBS:_default' \
 '-j+[Set the approximate number of threads to use]:NUM:_default' \
 '--threads=[Set the approximate number of threads to use]:NUM:_default' \
-'(-i --interactive)--json=[Output matches in structured JSON]' \
+'(-i --interactive)--json=[Output matches in structured JSON]::STYLE:((pretty\:"Prints the matches as a pretty-printed JSON array, with indentation and line breaks. This is useful for human readability, but not for parsing by other programs. This is the default value for the \`--json\` option"
+stream\:"Prints each match as a separate JSON object, followed by a newline character. This is useful for streaming the output to other programs that can read one object per line"
+compact\:"Prints the matches as a single-line JSON array, without any whitespace. This is useful for saving space and minimizing the output size"))' \
 '--color=[Controls output color]:WHEN:((auto\:"Try to use colors, but don'\''t force the issue. If the output is piped to another program, or the console isn'\''t available on Windows, or if TERM=dumb, or if \`NO_COLOR\` is defined, for example, then don'\''t use colors"
 always\:"Try very hard to emit colors. This includes emitting ANSI colors on Windows if the console API is unavailable (not implemented yet)"
 ansi\:"Ansi is like Always, except it never tries to use anything other than emitting ANSI color codes"
@@ -80,6 +85,7 @@ never\:"Never print heading regardless of output type"))' \
 '--interactive[Start interactive edit session]' \
 '-U[Apply all rewrite without confirmation if true]' \
 '--update-all[Apply all rewrite without confirmation if true]' \
+'(-i --interactive --json -U --update-all)--files-with-matches[Print only the paths with at least one match and suppress match contents]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 '*::paths -- The paths to search. You can provide multiple paths separated by spaces:_files' \
@@ -90,16 +96,16 @@ _arguments "${_arguments_options[@]}" : \
 '-r+[Scan the codebase with the single rule located at the path RULE_FILE]:RULE_FILE:_files' \
 '--rule=[Scan the codebase with the single rule located at the path RULE_FILE]:RULE_FILE:_files' \
 '(-r --rule)--inline-rules=[Scan the codebase with a rule defined by the provided RULE_TEXT]:RULE_TEXT:_default' \
-'(--json -i --interactive)--format=[Output warning/error messages in GitHub Action format]:FORMAT:(github)' \
+'(--json -i --interactive)--format=[Output warning/error messages in different formats]:FORMAT:(github sarif)' \
 '(--json)--report-style=[]:REPORT_STYLE:((rich\:"Output a richly formatted diagnostic, with source code previews"
 medium\:"Output a condensed diagnostic, with a line number, severity, message and notes (if any)"
 short\:"Output a short diagnostic, with a line number, severity, and message"))' \
 '(-r --rule)--filter=[Scan the codebase with rules with ids matching REGEX]:REGEX:_default' \
-'*--error=[Set rule severity to error]' \
-'*--warning=[Set rule severity to warning]' \
-'*--info=[Set rule severity to info]' \
-'*--hint=[Set rule severity to hint]' \
-'*--off=[Turn off rule]' \
+'*--error=[Set rule severity to error]::RULE_ID:_default' \
+'*--warning=[Set rule severity to warning]::RULE_ID:_default' \
+'*--info=[Set rule severity to info]::RULE_ID:_default' \
+'*--hint=[Set rule severity to hint]::RULE_ID:_default' \
+'*--off=[Turn off rule]::RULE_ID:_default' \
 '*--no-ignore=[Do not respect hidden file system or ignore files (.gitignore, .ignore, etc.)]:FILE_TYPE:((hidden\:"Search hidden files and directories. By default, hidden files and directories are skipped"
 dot\:"Don'\''t respect .ignore files. This does *not* affect whether ast-grep will ignore files and directories whose names begin with a dot. For that, use --no-ignore hidden"
 exclude\:"Don'\''t respect ignore files that are manually configured for the repository such as git'\''s '\''.git/info/exclude'\''"
@@ -109,7 +115,9 @@ vcs\:"Don'\''t respect version control ignore files (.gitignore, etc.). This imp
 '*--globs=[Include or exclude file paths]:GLOBS:_default' \
 '-j+[Set the approximate number of threads to use]:NUM:_default' \
 '--threads=[Set the approximate number of threads to use]:NUM:_default' \
-'(-i --interactive)--json=[Output matches in structured JSON]' \
+'(-i --interactive)--json=[Output matches in structured JSON]::STYLE:((pretty\:"Prints the matches as a pretty-printed JSON array, with indentation and line breaks. This is useful for human readability, but not for parsing by other programs. This is the default value for the \`--json\` option"
+stream\:"Prints each match as a separate JSON object, followed by a newline character. This is useful for streaming the output to other programs that can read one object per line"
+compact\:"Prints the matches as a single-line JSON array, without any whitespace. This is useful for saving space and minimizing the output size"))' \
 '--color=[Controls output color]:WHEN:((auto\:"Try to use colors, but don'\''t force the issue. If the output is piped to another program, or the console isn'\''t available on Windows, or if TERM=dumb, or if \`NO_COLOR\` is defined, for example, then don'\''t use colors"
 always\:"Try very hard to emit colors. This includes emitting ANSI colors on Windows if the console API is unavailable (not implemented yet)"
 ansi\:"Ansi is like Always, except it never tries to use anything other than emitting ANSI color codes"
@@ -132,6 +140,7 @@ entity\:"Show per-file/per-rule tracing information"))' \
 '--interactive[Start interactive edit session]' \
 '-U[Apply all rewrite without confirmation if true]' \
 '--update-all[Apply all rewrite without confirmation if true]' \
+'(-i --interactive --json -U --update-all)--files-with-matches[Print only the paths with at least one match and suppress match contents]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 '*::paths -- The paths to search. You can provide multiple paths separated by spaces:_files' \

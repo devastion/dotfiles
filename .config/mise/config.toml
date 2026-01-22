@@ -1,12 +1,6 @@
 [tools]
 ansible = "latest"
-ast-grep = "latest"
-bat = "latest"
-delta = "latest"
-eza = "latest"
-fd = "latest"
 fzf = "latest"
-gitleaks = "latest"
 go = "latest"
 jq = "latest"
 lazygit = "latest"
@@ -24,9 +18,85 @@ stylua = "latest"
 tmux = "latest"
 tree-sitter = "latest"
 usage = "latest"
-watchexec = "latest"
-yq = "latest"
-zoxide = "latest"
+
+[tools.bat]
+version = "latest"
+postinstall = '''
+if command -v bat &> /dev/null; then
+  bat cache --build && bat --completion $(basename -- "$SHELL") > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_bat"
+fi
+'''
+
+[tools.eza]
+version = "latest"
+postinstall = '''
+if command -v eza &> /dev/null; then
+  curl https://raw.githubusercontent.com/eza-community/eza/refs/heads/main/completions/$(basename -- "$SHELL")/_eza > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_eza"
+fi
+'''
+
+[tools.fd]
+version = "latest"
+postinstall = '''
+if command -v fd &> /dev/null; then
+  fd --gen-completions $(basename -- "$SHELL") > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_fd"
+fi
+'''
+
+[tools.ast-grep]
+version = "latest"
+postinstall = '''
+if command -v ast-grep &> /dev/null; then
+  ast-grep completions $(basename -- "$SHELL") > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_ast-grep"
+fi
+'''
+
+[tools.delta]
+version = "latest"
+postinstall = '''
+if command -v delta &> /dev/null; then
+  delta --generate-completion $(basename -- "$SHELL") > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_delta"
+fi
+'''
+
+[tools.gitleaks]
+version = "latest"
+postinstall = '''
+if command -v gitleaks &> /dev/null; then
+  gitleaks completion $(basename -- "$SHELL") > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_gitleaks"
+fi
+'''
+
+[tools.zoxide]
+version = "latest"
+postinstall = '''
+if command -v zoxide &> /dev/null; then
+  curl https://raw.githubusercontent.com/ajeetdsouza/zoxide/refs/heads/main/contrib/completions/_zoxide > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_zoxide"
+fi
+'''
+
+[tools.yq]
+version = "latest"
+postinstall = '''
+if command -v yq &> /dev/null; then
+  yq completion $(basename -- "$SHELL") > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_yq"
+fi
+'''
+
+[tools.watchexec]
+version = "latest"
+postinstall = '''
+if command -v watchexec &> /dev/null; then
+  watchexec --completions $(basename -- "$SHELL") > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_watchexec"
+fi
+'''
 
 [settings]
+lockfile = true
+experimental = true
 idiomatic_version_file_enable_tools = ["node"]
+
+[hooks]
+postinstall = '''
+echo "Installed: $MISE_INSTALLED_TOOLS"
+'''

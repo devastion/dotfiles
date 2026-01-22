@@ -74,3 +74,8 @@ usercmd("DirDiff", function(opts)
     ignore = { ".git" },
   })
 end, { complete = "dir", nargs = "*" })
+
+usercmd("W", function()
+  vim.notify("Write without autocmds")
+  vim.cmd([[noa write]])
+end, { desc = "Write Buffer without AutoCommands" })

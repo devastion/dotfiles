@@ -101,12 +101,12 @@ map("<", "<gv", nil, "v")
 map(">", ">gv", nil, "v")
 
 -- Increments, Diagnostics, and Toggles
--- map("<tab>", function()
---   require("devastion.helpers.misc").word_cycle()
--- end, "Cycle Words")
--- map("<s-tab>", function()
---   require("devastion.helpers.misc").word_cycle(true)
--- end, "Cycle Words")
+map("<C-a>", function()
+  Devastion.misc.word_cycle()
+end, "Cycle Words")
+map("<C-x>", function()
+  Devastion.misc.word_cycle(true)
+end, "Cycle Words")
 
 -- Diagnostics
 map("<leader>cd", function()
