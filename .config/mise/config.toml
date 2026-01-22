@@ -8,9 +8,7 @@ lua = "5.1"
 mysql = "latest"
 neovim = "latest"
 node = "latest"
-pipx = "latest"
 python = "latest"
-ripgrep = "latest"
 rust = "latest"
 shellcheck = "latest"
 shfmt = "latest"
@@ -88,6 +86,30 @@ version = "latest"
 postinstall = '''
 if command -v watchexec &> /dev/null; then
   watchexec --completions $(basename -- "$SHELL") > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_watchexec"
+fi
+'''
+
+[tools.pipx]
+version = "latest"
+postinstall = '''
+if command -v pipx &> /dev/null; then
+  pipx install argcomplete
+fi
+'''
+
+[tools.ripgrep]
+version = "latest"
+postinstall = '''
+if command -v rg &> /dev/null; then
+  rg --generate "complete-$(basename -- "$SHELL")" > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_rg"
+fi
+'''
+
+[tools.tlrc]
+version = "latest"
+postinstall = '''
+if command -v tldr &> /dev/null; then
+  curl https://raw.githubusercontent.com/tldr-pages/tlrc/refs/heads/main/completions/_tldr > "${ZDOTDIR:-$HOME/.config/zsh}/completions/_tldr"
 fi
 '''
 

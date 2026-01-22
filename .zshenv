@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
+  SHELL_SESSIONS_DISABLE=1
+fi
+
 # xdg
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}

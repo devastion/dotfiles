@@ -1,5 +1,25 @@
 #!/usr/bin/env zsh
 
+# zsh
+## xdg base dirs (fallbacks)
+: ${XDG_CONFIG_HOME:=$HOME/.config}
+: ${XDG_DATA_HOME:=$HOME/.local/share}
+: ${XDG_STATE_HOME:=$HOME/.local/state}
+: ${XDG_CACHE_HOME:=$HOME/.cache}
+
+export ZSH_DATA_DIR="$XDG_DATA_HOME/zsh"
+export ZSH_STATE_DIR="$XDG_STATE_HOME/zsh"
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
+export ZCOMPDUMP="$ZSH_CACHE_DIR/zcompdump"
+export ZCOMPCACHE="$ZSH_CACHE_DIR/zcompcache"
+export ZPLUGINDIR="$ZSH_DATA_DIR/plugins"
+
+## ensure dirs exist
+mkdir -p \
+"$ZSH_DATA_DIR" \
+"$ZSH_STATE_DIR" \
+"$ZSH_CACHE_DIR"
+
 # system settings
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
@@ -11,6 +31,7 @@ export GIT_EDITOR="nvim"
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>-'
 export PAGER="less"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export LESSOPEN='| lessfilter %s'
 
 # paths without duplicates
 typeset -gU path fpath cdpath

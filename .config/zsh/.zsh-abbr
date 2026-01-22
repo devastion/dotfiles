@@ -1,12 +1,14 @@
 #!/usr/bin/env zsh
 
 # system
-abbr -g "pbc"="pbcopy"
-abbr -g "pbp"="pbpaste"
+abbr -g pbc="pbcopy"
+abbr -g pbp="pbpaste"
 
 # npm
-abbr "nr"="npm run"
+abbr nr="npm run"
 
 # docker
-abbr "dco"="docker compose"
-abbr "dcs"="docker stop $(docker ps -q)"
+abbr dco="docker compose"
+abbr dcs="docker stop $(docker ps -q)"
+
+abbr nv="mise x node@latest -- nvim"
