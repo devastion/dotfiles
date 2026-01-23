@@ -67,6 +67,7 @@ return {
       mysql = { "sqlfluff" },
       plsql = { "sqlfluff" },
       yaml = { "yamllint" },
+      lua = { "luacheck" },
     },
   },
   config = function(_, opts)
