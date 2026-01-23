@@ -25,3 +25,4 @@ vim.g.diagnostic_signs = {
 vim.g.disabled_lsp = { "cspell-lsp" }
 
 vim.g.is_laravel_project = utils.package_exists("composer.json", '.require."laravel/framework"')
+vim.g.is_luacheck_project = utils.is_file_readable(".luacheckrc")

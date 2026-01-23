@@ -18,6 +18,7 @@ usage = "latest"
 java = "latest"
 amber = "nightly"
 fzf = "latest"
+pkl = "latest"
 
 [tools.bat]
 version = "latest"

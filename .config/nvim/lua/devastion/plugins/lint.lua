@@ -52,6 +52,12 @@ return {
           end,
         }
       end,
+      shellcheck_bash = function()
+        local shellcheck = require("lint").linters.shellcheck
+        local linter = shellcheck
+        table.insert(linter.args, 1, "--shell=bash")
+        return linter
+      end,
     },
     linters_by_ft = {
       ["*"] = { "editorconfig-checker" },
@@ -67,11 +73,12 @@ return {
       mysql = { "sqlfluff" },
       plsql = { "sqlfluff" },
       yaml = { "yamllint" },
-      lua = { "luacheck" },
+      lua = vim.g.is_luacheck_project and { "luacheck" } or {},
     },
   },
   config = function(_, opts)
     local lint = require("lint")
+    lint.linters.shellcheck_bash = opts.linters.shellcheck_bash
     lint.linters.phpstan_docker = opts.linters.phpstan_docker
     lint.linters_by_ft = opts.linters_by_ft
 

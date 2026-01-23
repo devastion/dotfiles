@@ -1,110 +1,110 @@
-local o = vim.o
+local opt = vim.opt
 
 -- General
-o.mouse = ""
-o.updatetime = 200
-o.timeoutlen = 300
-o.autowrite = true
-o.autowriteall = true
-o.autoread = true
-o.confirm = true
-o.tabclose = "uselast"
-o.clipboard = "unnamedplus"
-o.completeopt = "menu,menuone,noselect,fuzzy"
--- vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
-o.shortmess = "CFOSWaco"
-o.sidescrolloff = 8
-o.virtualedit = "block"
-o.ruler = false
-o.switchbuf = "usetab"
+opt.mouse = ""
+opt.updatetime = 200
+opt.timeoutlen = 300
+opt.autowrite = true
+opt.autowriteall = true
+opt.autoread = true
+opt.confirm = true
+opt.clipboard = "unnamedplus" -- Use system clipboard
+opt.completeopt = { "menu", "menuone", "noselect", "fuzzy" }
+opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.sidescrolloff = 8
+opt.virtualedit = "block"
+opt.ruler = false
+opt.switchbuf = "usetab"
 
--- INFO: Run .nvim.lua .nvimrc .exrc (per directory config)
--- Use :trust, :secure
-o.exrc = true
-o.secure = true
+-- Per-directory config
+opt.exrc = true
+opt.secure = true
 
--- Sign Column
-o.signcolumn = "yes"
-o.number = true
-o.relativenumber = true
+-- Sign Column & Line Numbers
+opt.signcolumn = "yes"
+opt.number = true
+opt.relativenumber = true
 
 -- UI
-o.background = "dark"
-o.showmode = false
-o.showcmd = false
-o.termguicolors = true
-o.cmdheight = 0
-o.cursorline = true
-o.conceallevel = 2
-o.list = true
-o.listchars = "tab:» ,trail:·,nbsp:␣,"
-o.fillchars = "eob: ,fold: ,foldopen:,foldsep: ,foldclose:"
-o.laststatus = 3
-o.showtabline = 0
-o.winborder = "single"
+opt.background = "dark"
+opt.showmode = false
+opt.showcmd = false
+opt.termguicolors = true
+opt.cmdheight = 0
+opt.cursorline = true
+opt.conceallevel = 2
+opt.list = true
+opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+opt.fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" }
+opt.laststatus = 3
+opt.showtabline = 0
 
-o.iskeyword = "@,48-57,_,192-255,-" -- Treat dash as `word` textobject part
+-- Keyword definition (treat dash as part of word)
+opt.iskeyword:append("-")
+opt.iskeyword:append("@")
+opt.iskeyword:append("48-57")
+opt.iskeyword:append("_")
+opt.iskeyword:append("192-255")
 
--- Pattern for a start of numbered list (used in `gw`). This reads as
--- "Start of list item is: at least one special character (digit, -, +, *)
--- possibly followed by punctuation (. or `)`) followed by at least one space".
-o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
+-- Format list pattern for text formatting
+opt.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 
 -- Splits
-o.splitbelow = true
-o.splitright = true
-o.splitkeep = "cursor"
+opt.splitbelow = true
+opt.splitright = true
+opt.splitkeep = "cursor"
 
 -- Session
-o.sessionoptions = "globals,buffers,tabpages,folds,winsize,winpos,curdir,localoptions"
+opt.sessionoptions = { "globals", "buffers", "tabpages", "folds", "winsize", "winpos", "curdir", "localoptions" }
 
 -- Search
-o.ignorecase = true
-o.smartcase = true
-o.hlsearch = false
-o.infercase = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.hlsearch = false
+opt.infercase = true
 
 -- Indentation
-o.tabstop = 2
-o.shiftwidth = 2
-o.shiftround = true
-o.softtabstop = 2
-o.expandtab = true
-o.autoindent = true
-o.smartindent = true
-o.linebreak = true
-o.breakindent = true
-o.breakindentopt = "shift:2,sbr"
-o.breakat = " \t;:,!?"
-o.showbreak = "↪ "
-o.wrap = false
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.shiftround = true
+opt.softtabstop = 2
+opt.expandtab = true
+opt.autoindent = true
+opt.smartindent = true
+opt.linebreak = true
+opt.breakindent = true
+opt.breakindentopt = { "shift:2", "sbr" }
+opt.breakat = " \t;:,!?"
+opt.showbreak = "↪ "
+opt.wrap = false
 
--- Folding
-o.foldenable = true
-o.foldmethod = "expr"
-o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-o.foldtext = "v:lua._G.Devastion.misc.custom_foldtext()"
-o.foldcolumn = "0"
-o.foldlevel = 99
-o.foldlevelstart = 99
-o.foldnestmax = 4
+-- Folding (uses Treesitter)
+opt.foldenable = true
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+if vim.fn.exists("v:lua._G.Devastion.misc.custom_foldtext") == 1 then
+  opt.foldtext = "v:lua._G.Devastion.misc.custom_foldtext()"
+end
+opt.foldcolumn = "0"
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldnestmax = 4
 
 -- Scrolling
-o.scroll = 10
-o.scrolloff = 10
-o.smoothscroll = true
+opt.scrolloff = 10
+opt.smoothscroll = true
 
 -- Backup, Undo and History
-o.swapfile = false
-o.backup = false
-o.writebackup = true
-o.undofile = true
-o.undolevels = 10000
-o.jumpoptions = "view"
+opt.swapfile = false
+opt.backup = false
+opt.writebackup = true
+opt.undofile = true
+opt.undolevels = 10000
+opt.jumpoptions = "view"
 
 -- Encoding and Spelling
-o.encoding = "utf-8"
-o.fileencoding = "utf-8"
-o.spell = false
-o.spelloptions = "camel,noplainbuffer"
-o.spelllang = "en"
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
+opt.spell = false
+opt.spelloptions = { "camel", "noplainbuffer" }
+opt.spelllang = { "en" }
