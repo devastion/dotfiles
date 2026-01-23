@@ -5,5 +5,5 @@ function dai() {
   local cid
   cid=$(docker ps | sed 1d | fzf -1 -q "$1" | awk '{print $1}')
 
-  docker exec -it "$cid" "/bin/sh"
+  docker exec -it "$cid" sh -c "if [ -x /bin/bash ]; then exec /bin/bash; else exec /bin/sh; fi"
 }

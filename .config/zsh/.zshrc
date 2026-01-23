@@ -71,11 +71,6 @@ FZF_DEFAULT_OPTS="--tmux=80% \
 EZA_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/eza"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-GLOBALIAS_FILTER_VALUES=(
-  "l" "ll" "ld" "lf" "lh" "lt" "ls" "lsg"
-  "rm" "cp" "mv"
-)
-
 ## zsh-vi-mode
 ZVM_VI_SURROUND_BINDKEY="s-prefix"
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
@@ -111,7 +106,6 @@ plugins=(
   "ohmyzsh/plugins/magic-enter"
   "ohmyzsh/plugins/aliases"
   "ohmyzsh/plugins/gitignore"
-  "ohmyzsh/plugins/globalias"
   "ohmyzsh/plugins/fzf"
   "zledit"
   "zsh-you-should-use"

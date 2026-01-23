@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 
 function cd_up() {
+  if [[ -n "$(git rev-parse --show-toplevel 2>/dev/null)" && -z "$1" ]]; then
+    builtin cd "$(git rev-parse --show-toplevel)" || return
+
+    return 0
+  fi
+
   if [[ -z "$1" ]]; then
     cd ..
-    return
+    return 0
   fi
 
   cd "$(printf "%0.s../" $(seq 1 "$1"))" || return
+  return 0
 }
