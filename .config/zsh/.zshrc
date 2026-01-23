@@ -18,7 +18,6 @@ repos=(
   "zsh-users/zsh-autosuggestions"
   "hlissner/zsh-autopair"
   "piotr1215/zledit"
-  "olets/zsh-abbr"
   "zsh-users/zsh-completions"
 )
 plugin-clone $repos
@@ -97,75 +96,9 @@ export ZVM_VI_SURROUND_BINDKEY="s-prefix"
 export ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 export ZVM_VI_HIGHLIGHT_BACKGROUND=("paste:none")
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
-export ABBR_USER_ABBREVIATIONS_FILE="${ZDOTDIR:-$HOME/.config/zsh}/.zsh-abbr"
 
 # aliases
-if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
-  function unquarantine() {
-    for attribute in com.apple.metadata:kMDItemDownloadedDate com.apple.metadata:kMDItemWhereFroms com.apple.quarantine; do
-      xattr -r -d "$attribute" "$@"
-    done
-  }
-fi
-
-# history
-alias h="history"
-alias hl="history | less"
-alias hs="history | grep"
-alias hsi="history | grep -i"
-
-# ls
-alias l="eza --git"
-alias ll="l -lao --group-directories-first"
-alias ld="l -lD"
-alias lf="l -lf"
-alias lh="l -ld .* --group-directories-first"
-alias lt="l -la --sort=modified --reverse"
-alias ls="ll"
-alias lsg="l -ao --group-directories-first --grid"
-
-alias q="exit"
-alias mypw="pwgen -c -n -s -y 26 -1"
-alias ndate="date \"+%d-%m-%y\""
-alias rl="reset && exec zsh -l" # easy reload of zsh stuff
-alias "cd.."="cd_up"
-alias grep="grep --color"
-alias sgrep="grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} "
-
-alias t="tail -f"
-
-alias pbc="pbcopy"
-alias pbp="pbpaste"
-alias nr="npm run"
-alias dco="docker compose"
-
-alias h="history"
-alias hgrep="fc -El 0 | grep"
-alias help="man"
-alias p="ps -f"
-alias sortnr="sort -n -r"
-alias unexport="unset"
-
-alias rm="rm -i"
-
-# Command line head / tail shortcuts
-alias -g H="| head"
-alias -g T="| tail"
-alias -g G="| grep"
-alias -g L="| less"
-alias -g M="| most"
-alias -g LL="2>&1 | less"
-alias -g CA="2>&1 | cat -A"
-alias -g NE="2> /dev/null"
-alias -g NUL="> /dev/null 2>&1"
-alias -g P="2>&1| pygmentize -l pytb"
-
-function dcs() {
-  docker stop $(docker ps -q)
-}
-
-alias nv="mise x node@latest -- nvim"
-alias vim="nvim"
+source "$ZDOTDIR/aliases.zsh"
 
 # history options
 export HISTFILE="$ZSH_STATE_DIR/history"
@@ -232,7 +165,6 @@ plugins=(
   "zsh-autosuggestions"
   "zsh-autopair"
   "zledit"
-  "zsh-abbr"
 )
 plugin-source $plugins
 
