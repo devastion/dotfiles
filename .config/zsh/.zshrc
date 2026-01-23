@@ -17,7 +17,6 @@ repos=(
   "zdharma-continuum/fast-syntax-highlighting"
   "zsh-users/zsh-autosuggestions"
   "hlissner/zsh-autopair"
-  "jimhester/per-directory-history"
   "piotr1215/zledit"
   "olets/zsh-abbr"
   "zsh-users/zsh-completions"
@@ -99,9 +98,6 @@ export ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 export ZVM_VI_HIGHLIGHT_BACKGROUND=("paste:none")
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS"
 export ABBR_USER_ABBREVIATIONS_FILE="${ZDOTDIR:-$HOME/.config/zsh}/.zsh-abbr"
-export HISTORY_BASE="$ZSH_STATE_DIR/per_directory_history"
-export HISTORY_START_WITH_GLOBAL=false
-export PER_DIRECTORY_HISTORY_TOGGLE="^[h"
 
 # aliases
 if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
@@ -201,9 +197,6 @@ setopt always_to_end          # Move cursor to the end of a completed word.
 setopt path_dirs              # Perform path search even on command names with slashes.
 setopt auto_menu              # Show completion menu on a successive tab press.
 setopt auto_list              # Automatically list choices on ambiguous completion.
-  "per-directory-history"
-  "per-directory-history"
-  "per-directory-history"
 setopt auto_param_slash       # If completed parameter is a directory, add a trailing slash.
 setopt no_complete_aliases
 setopt menu_complete          # Do not autoselect the first completion entry.
@@ -238,7 +231,6 @@ plugins=(
   "ohmyzsh/plugins/aliases"
   "zsh-autosuggestions"
   "zsh-autopair"
-  "per-directory-history"
   "zledit"
   "zsh-abbr"
 )
