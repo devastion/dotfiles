@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function cp() {
+  if [[ -z $2 ]]; then
+    command cp -rv $1 ./
+  else
+    command cp -rv "$@"
+  fi
+}

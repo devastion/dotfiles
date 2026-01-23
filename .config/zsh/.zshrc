@@ -6,13 +6,29 @@ fi
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/zsh_unplugged.zsh"
 
-plugins_before_compinit=(
+repos=(
+  "romkatv/powerlevel10k"
+
+  "aloxaf/fzf-tab"
+  "jeffreytse/zsh-vi-mode"
+
+  "romkatv/zsh-defer"
+  "ohmyzsh/ohmyzsh"
+  "zdharma-continuum/fast-syntax-highlighting"
+  "zsh-users/zsh-autosuggestions"
+  "hlissner/zsh-autopair"
+  "jimhester/per-directory-history"
+  "piotr1215/zledit"
+  "olets/zsh-abbr"
   "zsh-users/zsh-completions"
 )
-plugin-load $plugins_before_compinit
+plugin-clone $repos
+
+plugin-source "zsh-completions"
 
 # Load the prompt system and completion system and initilize them
 autoload -Uz compinit promptinit
+
 # Load and initialize the completion system ignoring insecure directories with a
 # cache time of 20 hours, so it should almost always regenerate the first time a
 # shell is opened each day.
@@ -33,20 +49,6 @@ if [[ -d "$XDG_DATA_HOME/shell/functions" ]]; then
   autoload -Uz ${XDG_DATA_HOME}/shell/functions/*(:t)
 fi
 
-repos=(
-  "romkatv/powerlevel10k"
-
-  "aloxaf/fzf-tab"
-  "zsh-users/zsh-autosuggestions"
-  "hlissner/zsh-autopair"
-  "jeffreytse/zsh-vi-mode"
-
-  "romkatv/zsh-defer"
-  "zdharma-continuum/fast-syntax-highlighting"
-  "jimhester/per-directory-history"
-  "piotr1215/zledit"
-  "olets/zsh-abbr"
-)
 
 # Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache true
@@ -102,6 +104,14 @@ export HISTORY_START_WITH_GLOBAL=false
 export PER_DIRECTORY_HISTORY_TOGGLE="^H"
 
 # aliases
+if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
+  function unquarantine() {
+    for attribute in com.apple.metadata:kMDItemDownloadedDate com.apple.metadata:kMDItemWhereFroms com.apple.quarantine; do
+      xattr -r -d "$attribute" "$@"
+    done
+  }
+fi
+
 alias l="eza --git"
 alias ll="l -lao --group-directories-first"
 alias ld="l -lD"
@@ -110,6 +120,13 @@ alias lh="l -ld .* --group-directories-first"
 alias lt="l -la --sort=modified --reverse"
 alias ls="ll"
 alias lsg="l -ao --group-directories-first --grid"
+
+alias q="exit"
+
+alias mypw="pwgen -c -n -s -y 26 -1"
+alias ndate="date \"+%d-%m-%y\""
+# easy reload of zsh stuff
+alias rl="reset && exec zsh -l"
 
 alias "cd.."="cd_up"
 
@@ -173,7 +190,22 @@ setopt correct                # Turn on correction
 
 zle_highlight=('paste:none')  # Disables highlight on paste
 
-plugin-load $repos
+plugins=(
+  "powerlevel10k"
+
+  "fzf-tab"
+  "zsh-vi-mode"
+
+  "zsh-defer"
+  "fast-syntax-highlighting"
+  "ohmyzsh/plugins/magic-enter"
+  "zsh-autosuggestions"
+  "zsh-autopair"
+  "per-directory-history"
+  "zledit"
+  "zsh-abbr"
+)
+plugin-source $plugins
 
 [[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source "${ZDOTDIR}/.p10k.zsh"
 
