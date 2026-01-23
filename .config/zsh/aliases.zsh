@@ -3,7 +3,7 @@
 # aliases
 
 # macos
-if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
+if is-macos; then
   function unquarantine() {
     for attribute in com.apple.metadata:kMDItemDownloadedDate com.apple.metadata:kMDItemWhereFroms com.apple.quarantine; do
       xattr -r -d "$attribute" "$@"
@@ -75,4 +75,3 @@ alias dco="docker compose"
 
 # editor
 alias nv="mise x node@latest -- nvim"
-alias vim="nvim"

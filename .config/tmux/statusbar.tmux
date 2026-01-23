@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-TMUX_CONFIG_DIR=$(tmux show -gqv @tmux-config-dir)
-
 tmux set -g status-right "%d-%m-%Y %H:%M #{?mouse,#[fg="#30363f" bold#,bg="#e55561"],#[fg="#30363f" bold#,bg="#8ebd6b"]} M "
-tmux set -g status-left "#{tmux_mode_indicator} #(gitmux -cfg ${TMUX_CONFIG_DIR}/gitmux.conf '#{pane_current_path}')"
+tmux set -g status-left "#{tmux_mode_indicator}"
 tmux set -g status-left-length 30
 tmux set -g status-right-length 30
 tmux set -g status-justify "centre"

@@ -96,6 +96,7 @@ plugins=(
   "ohmyzsh/plugins/aliases"
   "ohmyzsh/plugins/gitignore"
   "ohmyzsh/plugins/fzf"
+  "ohmyzsh/plugins/tmux"
   "zledit"
   "zsh-you-should-use"
 )

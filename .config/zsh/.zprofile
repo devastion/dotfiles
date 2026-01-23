@@ -40,9 +40,8 @@ if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-path=(
+path+=(
   "${HOME}/.local/bin"
-  "$path"
 )
 
 if [[ -d "$XDG_DATA_HOME/shell/functions" ]]; then
@@ -57,7 +56,6 @@ if [[ -d "$ZDOTDIR/completions" ]]; then
   fpath+=("$ZDOTDIR/completions")
 fi
 
-cdpath=(
+cdpath+=(
   "${XDG_PROJECTS_DIR:-HOME/Projects}"
-  "$cdpath"
 )
