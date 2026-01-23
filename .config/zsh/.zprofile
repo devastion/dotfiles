@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-# zsh
+# zsh directories
 ## xdg base dirs (fallbacks)
 : ${XDG_CONFIG_HOME:=$HOME/.config}
 : ${XDG_DATA_HOME:=$HOME/.local/share}

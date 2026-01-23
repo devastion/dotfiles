@@ -2,7 +2,10 @@
 
 FZF_LUA_CLI="$XDG_DATA_HOME/nvim/lazy/fzf-lua/scripts/cli.lua"
 
+typeset -gU __wk
+
 FzfLua() { ${NVIM:-nvim} -l "$FZF_LUA_CLI" $@ </dev/tty | jq -r ".[] | .path" }
+
 eval_widget() {
     eval "${1}() {
         local res=\$(FzfLua ${2} | while read -r line; do; echo -n -E \"\${(q)line} \"; done);
@@ -17,6 +20,7 @@ git_prefix=(g git)
 fzf_widgets=(f files l lgrep s status c commits b branches h hunks)
 for k_prefix cmd_prefix in "${(@kv)git_prefix}"; do
     local prefix="^${k_prefix}"
+    local temp
     eval "bindkey -r '$prefix'"
     for k v in "${(@kv)fzf_widgets}"; do
         local cmd="${cmd_prefix}_${v}"
@@ -26,18 +30,23 @@ for k_prefix cmd_prefix in "${(@kv)git_prefix}"; do
             eval "bindkey -M $m '$prefix^${k}' ${wn}"
             eval "bindkey -M $m '$prefix${k}' ${wn}"
         done
+    temp+=("$k($cmd)")
     done
+__wk+=("$prefix (git) $temp")
 done
 fzf_widgets=(f files p files g live_grep)
 eval "bindkey -r '^f'"
 for key cmd in "${(@kv)fzf_widgets}"; do
     local wn="_fzf_${cmd}"
+    local temp
     eval_widget ${wn} ${cmd}
     for m in emacs vicmd viins; do
         eval "bindkey -M $m '^f^${key}' ${wn}"
         eval "bindkey -M $m '^f${key}' ${wn}"
     done
+    temp+=("$key($cmd)")
 done
+__wk+=("^f (files) $temp")
 function _fzf_zoxide() {
     local res; res="$(FzfLua zoxide $@)" && __zoxide_cd "${res}";
     zle accept-line;
@@ -46,4 +55,3 @@ zle -N _fzf_zoxide
 for m in emacs vicmd viins; do
     eval "bindkey -M $m '^K' _fzf_zoxide"
 done
-

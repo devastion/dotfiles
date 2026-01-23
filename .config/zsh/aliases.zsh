@@ -48,7 +48,7 @@ alias sgrep="grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} "
 alias "cd.."="cd_up"
 
 # misc
-if ! command -v pwgen &> /dev/null; then
+if ! command -v pwgen &>/dev/null; then
   alias mypw="pwgen -c -n -s -y 26 -1"
 fi
 alias nr="npm run"

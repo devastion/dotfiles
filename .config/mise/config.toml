@@ -1,6 +1,5 @@
 [tools]
 ansible = "latest"
-fzf = "latest"
 go = "latest"
 jq = "latest"
 lazygit = "latest"
@@ -18,6 +17,7 @@ tree-sitter = "latest"
 usage = "latest"
 java = "latest"
 amber = "nightly"
+fzf = "latest"
 
 [tools.bat]
 version = "latest"

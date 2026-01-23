@@ -1,4 +1,7 @@
 # do not bell on tab-completion
 set bell-style none
 # enables recognition of meta key
-set meta-flag on 
+set meta-flag on
+set completion-ignore-case On
+set menu-complete-display-prefix On
+set print-completions-horizontally On

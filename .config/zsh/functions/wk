@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
 
-print -C 2 "C-g (git)" "C-f (files) C-l (lgrep) C-s (status) C-c (commits) C-b (branches) C-h (hunks)"
-print -C 2 "C-f (files)" "C-f (files) C-p (files) C-g (live_grep)"
-print -C 1 "C-K (zoxide)"
-print -C 1 "Option+j (zsh jumper viins)"
-print -C 1 "J (zsh jumper vicmd"
+__wk+=("Option+j (zsh jumper viins)" "J (zsh jumper vicmd)")
+print -c "${__wk[@]}"

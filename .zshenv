@@ -1,9 +1,5 @@
 #!/usr/bin/env zsh
 
-if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
-  SHELL_SESSIONS_DISABLE=1
-fi
-
 # xdg
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
@@ -22,3 +18,7 @@ export XDG_PROJECTS_DIR=${XDG_PROJECTS_DIR:-$HOME/Projects}
 
 # zsh dirs
 export ZDOTDIR="${ZDOTDIR:-$HOME/.config/zsh}"
+
+if [[ $OSTYPE == darwin* && $CPUTYPE == arm64 ]]; then
+  export SHELL_SESSIONS_DISABLE=1
+fi
