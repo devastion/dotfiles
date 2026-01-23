@@ -2,10 +2,10 @@
 
 # zsh directories
 ## xdg base dirs (fallbacks)
-: ${XDG_CONFIG_HOME:=$HOME/.config}
-: ${XDG_DATA_HOME:=$HOME/.local/share}
-: ${XDG_STATE_HOME:=$HOME/.local/state}
-: ${XDG_CACHE_HOME:=$HOME/.cache}
+: "${XDG_CONFIG_HOME:=$HOME/.config}"
+: "${XDG_DATA_HOME:=$HOME/.local/share}"
+: "${XDG_STATE_HOME:=$HOME/.local/state}"
+: "${XDG_CACHE_HOME:=$HOME/.cache}"
 
 export ZSH_DATA_DIR="$XDG_DATA_HOME/zsh"
 export ZSH_STATE_DIR="$XDG_STATE_HOME/zsh"
@@ -16,9 +16,9 @@ export ZPLUGINDIR="$ZSH_DATA_DIR/plugins"
 
 ## ensure dirs exist
 mkdir -p \
-"$ZSH_DATA_DIR" \
-"$ZSH_STATE_DIR" \
-"$ZSH_CACHE_DIR"
+  "$ZSH_DATA_DIR" \
+  "$ZSH_STATE_DIR" \
+  "$ZSH_CACHE_DIR"
 
 # system settings
 export LANG="en_US.UTF-8"
@@ -42,22 +42,22 @@ fi
 
 path=(
   "${HOME}/.local/bin"
-  $path
+  "$path"
 )
 
 if [[ -d "$XDG_DATA_HOME/shell/functions" ]]; then
-  fpath+=("${XDG_DATA_HOME}/shell/functions")
+  fpath+=("$XDG_DATA_HOME/shell/functions")
 fi
 
 if [[ -d "$ZDOTDIR/functions" ]]; then
-  fpath+=("${ZDOTDIR}/functions")
+  fpath+=("$ZDOTDIR/functions")
 fi
 
 if [[ -d "$ZDOTDIR/completions" ]]; then
-  fpath+=("${ZDOTDIR}/completions")
+  fpath+=("$ZDOTDIR/completions")
 fi
 
 cdpath=(
   "${XDG_PROJECTS_DIR:-HOME/Projects}"
-  $cdpath
+  "$cdpath"
 )

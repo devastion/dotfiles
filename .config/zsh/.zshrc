@@ -1,13 +1,13 @@
 #!/usr/bin/env zsh
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER}.zsh"
 fi
 
 # zsh settings
 export HISTFILE="$ZSH_STATE_DIR/history"
-export SAVEHIST=$(( 100 * 1000 ))
-export HISTSIZE=$(( 1.2 * SAVEHIST ))
+export SAVEHIST=$((100 * 1000))
+export HISTSIZE=$((1.2 * SAVEHIST))
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/zsh_unplugged.zsh"
 
@@ -30,29 +30,18 @@ plugin-clone $repos
 
 plugin-source "zsh-completions"
 
-# Load the prompt system and completion system and initilize them
 autoload -Uz compinit promptinit
 
-# Load and initialize the completion system ignoring insecure directories with a
-# cache time of 20 hours, so it should almost always regenerate the first time a
-# shell is opened each day.
-_comp_files=($ZCOMPDUMP(Nm-20))
-if (( $#_comp_files )); then
-    compinit -i -C -d "$ZCOMPDUMP"
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' "$ZCOMPDUMP" 2>/dev/null)" ]; then
+  compinit -i -d "$ZCOMPDUMP"
 else
-    compinit -i -d "$ZCOMPDUMP"
+  compinit -i -C -d "$ZCOMPDUMP"
 fi
-unset _comp_files
 promptinit
 
 if [[ -d "$ZDOTDIR/functions" ]]; then
-  autoload -Uz ${ZDOTDIR}/functions/*(:t)
+  autoload -Uz ${ZDOTDIR}/functions/*
 fi
-
-if [[ -d "$XDG_DATA_HOME/shell/functions" ]]; then
-  autoload -Uz ${XDG_DATA_HOME}/shell/functions/*(:t)
-fi
-
 
 # plugin options
 
@@ -91,7 +80,7 @@ source "$ZDOTDIR/options.zsh"
 # keymaps
 source "$ZDOTDIR/keymaps.zsh"
 
-zle_highlight=('paste:none')  # Disables highlight on paste
+zle_highlight=('paste:none') # Disables highlight on paste
 
 plugins=(
   "powerlevel10k"

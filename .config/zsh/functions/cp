@@ -2,7 +2,7 @@
 
 function cp() {
   if [[ -z $2 ]]; then
-    command cp -rv $1 ./
+    command cp -rv "$1" ./
   else
     command cp -rv "$@"
   fi

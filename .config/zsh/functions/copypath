@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+function copypath {
+  local file="${1:-.}"
+
+  [[ $file = /* ]] || file="$PWD/$file"
+
+  print -n "${file:a}" | pbcopy || return 1
+
+  echo "Path copied to clipboard!"
+  return 0
+}
