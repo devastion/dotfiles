@@ -14,8 +14,8 @@ repos=(
 
   "romkatv/zsh-defer"
   "ohmyzsh/ohmyzsh"
-  "zdharma-continuum/fast-syntax-highlighting"
   "zsh-users/zsh-autosuggestions"
+  "zsh-users/zsh-syntax-highlighting"
   "hlissner/zsh-autopair"
   "piotr1215/zledit"
   "zsh-users/zsh-completions"
@@ -159,7 +159,7 @@ plugins=(
   "zsh-vi-mode"
 
   "zsh-defer"
-  "fast-syntax-highlighting"
+  "zsh-syntax-highlighting"
   "ohmyzsh/plugins/magic-enter"
   "ohmyzsh/plugins/aliases"
   "zsh-autosuggestions"
