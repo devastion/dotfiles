@@ -37,6 +37,7 @@ return {
       "clangd",
       "cspell",
       "cspell-lsp",
+      "copilot-language-server",
       "css-lsp",
       "debugpy",
       "docker-language-server",

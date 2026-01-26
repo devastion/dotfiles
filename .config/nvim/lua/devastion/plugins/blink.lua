@@ -5,7 +5,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "alexandre-abrioux/blink-cmp-npm.nvim",
-    "fang2hou/blink-copilot",
+    -- "fang2hou/blink-copilot",
   },
   event = { "InsertEnter", "CmdlineEnter" },
   opts = function()
@@ -39,6 +39,9 @@ return {
         ["<tab>"] = {
           "snippet_forward",
           "select_next",
+          function() -- sidekick next edit suggestion
+            return require("sidekick").nes_jump_or_apply()
+          end,
           function(cmp)
             if has_words_before() or vim.api.nvim_get_mode().mode == "c" then
               return cmp.show()
@@ -141,7 +144,7 @@ return {
       },
       sources = {
         default = {
-          "copilot",
+          -- "copilot",
           "lsp",
           "path",
           "snippets",
@@ -166,18 +169,18 @@ return {
               end,
             },
           },
-          path = {
-            enabled = function()
-              return vim.bo.filetype ~= "copilot-chat"
-            end,
-          },
+          -- path = {
+          --   enabled = function()
+          --     return vim.bo.filetype ~= "copilot-chat"
+          --   end,
+          -- },
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-          copilot = {
-            name = "copilot",
-            module = "blink-copilot",
-            score_offset = 100,
-            async = true,
-          },
+          -- copilot = {
+          --   name = "copilot",
+          --   module = "blink-copilot",
+          --   score_offset = 100,
+          --   async = true,
+          -- },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",

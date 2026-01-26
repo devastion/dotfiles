@@ -23,7 +23,8 @@ return {
     {
       "<leader>p",
       function()
-        require("yanky.picker").select_in_history()
+        -- require("yanky.picker").select_in_history()
+        Snacks.picker.yanky({ layout = { preset = "vertical" } })
       end,
       mode = { "n", "x" },
       desc = "Open Yank History",

@@ -134,3 +134,7 @@ map("<down>", "", nil, "n")
 map("<leader>L", function()
   require("lazy.view").show("home")
 end, "Lazy")
+
+-- Select all
+map("==", "gg<S-v>G", "Select all")
+map("<A-a>", "ggVG", "Select all", "n", { silent = true })
