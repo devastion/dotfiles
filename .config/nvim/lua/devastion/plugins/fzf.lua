@@ -6,7 +6,7 @@ return {
     local fzf = require("fzf-lua")
     local actions = fzf.actions
     return {
-      "hide",
+      { "fzf-native", "hide" },
       keymap = {
         builtin = {
           ["<c-f>"] = "preview-page-down",

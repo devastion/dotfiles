@@ -176,11 +176,11 @@ autocmd("SourcePost", {
   end,
 })
 
-autocmd("FileType", {
-  desc = "Automatically Split help Buffers to the right",
-  pattern = "help",
-  command = "wincmd L",
-})
+-- autocmd("FileType", {
+--   desc = "Automatically Split help Buffers to the right",
+--   pattern = "help",
+--   command = "wincmd L",
+-- })
 
 -- local autocmd_files = vim.fn.glob(vim.fn.stdpath("config") .. "/lua/devastion/core/autocmds/*.lua")
 --

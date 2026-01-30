@@ -2,7 +2,11 @@
 return {
   {
     "folke/sidekick.nvim",
-    opts = {},
+    opts = {
+      nes = {
+        enabled = false,
+      },
+    },
     keys = {
       {
         "<Tab>",
