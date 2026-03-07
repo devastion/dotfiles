@@ -1,0 +1,7 @@
+packages:
+  darwin:
+    brews:
+      - "coreutils"
+      - "felixkratz/formulae/borders"
+    casks:
+      - "nikitabobko/tap/aerospace"

@@ -1,0 +1,32 @@
+{
+  "Lua section header": {
+    "body": "-- ---------------------------------------------------------------------------\n-- $0\n-- ---------------------------------------------------------------------------\n",
+    "description": "Section header in config",
+    "prefix": "#s"
+  },
+  "Selene allow": {
+    "body": "-- selene: allow($0)",
+    "description": "Selene allow",
+    "prefix": "#isa"
+  },
+  "Stylua ignore": {
+    "body": "-- stylua: ignore",
+    "description": "Stylua ignore",
+    "prefix": "#i"
+  },
+  "Stylua ignore end": {
+    "body": "-- stylua: ignore end",
+    "description": "Stylua ignore end",
+    "prefix": "#ie"
+  },
+  "Stylua ignore start": {
+    "body": "-- stylua: ignore start",
+    "description": "Stylua ignore start",
+    "prefix": "#is"
+  },
+  "Stylua ignore start / end": {
+    "body": "-- stylua: ignore start\n$0\n-- stylua: ignore end",
+    "description": "Stylua ignore start / end",
+    "prefix": "#ise"
+  }
+}

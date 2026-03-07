@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+mkcd() {
+  dir="$*"
+  mkdir -p "$dir" && cd "$dir" || return
+}

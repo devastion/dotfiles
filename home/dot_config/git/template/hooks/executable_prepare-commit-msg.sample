@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+CURRENT_BRANCH=$(git branch --show-current)
+
+# extract BO-XXXXX pattern (5 digits)
+if echo "$CURRENT_BRANCH" | grep -qE 'BO-[0-9]{5}'; then
+    PREFIX="$(echo "$CURRENT_BRANCH" | sed -n 's/.*\(BO-[0-9]\{5\}\).*/[\1]/p')"
+else
+    PREFIX=""
+fi
+
+FILE=$(cat "$1")
+if [[ ! -z "$PREFIX" ]]; then
+    echo -e "$PREFIX: $FILE" >"$1"
+fi

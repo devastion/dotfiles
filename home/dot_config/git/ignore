@@ -1,0 +1,9 @@
+.DS_Store
+.zcompdump*
+.zsh_history*
+.zsh_sessions
+.zcompcache
+Session.vim
+*.local
+.nvim.lua
+# vim:ft=gitignore

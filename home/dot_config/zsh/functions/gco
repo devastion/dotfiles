@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+gco() {
+  branches="$(
+    git for-each-ref \
+      --count=30 \
+      --sort=-committerdate \
+      refs/heads/ \
+      --format='%(refname:short)'
+  )" || return
+
+  branch="$(
+    echo "$branches" | fzf
+  )" || return
+
+  target="$(
+    echo "$branch" |
+      sed "s/.* //" |
+      sed "s#remotes/[^/]*/##"
+  )" || return
+
+  git checkout "$target"
+}

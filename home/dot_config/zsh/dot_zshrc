@@ -1,0 +1,261 @@
+#!/usr/bin/env zsh
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER}.zsh"
+fi
+
+WORDCHARS='*?_[]~=&;!#$%^(){}<>'
+autoload -Uz select-word-style
+select-word-style bash
+
+autoload -Uz colors && colors
+export CLICOLOR=1
+
+TIMEFMT="'$fg[green]%J$reset_color' time: $fg[blue]%*Es$reset_color, cpu: $fg[blue]%P$reset_color"
+REPORTTIME=5
+
+KEYTIMEOUT=1
+
+function plugin-clone {
+  local plugin repo commitsha plugdir initfile initfiles=()
+  ZPLUGINDIR=${ZPLUGINDIR:-${ZDOTDIR:-$HOME/.config/zsh}/plugins}
+  for plugin in $@; do
+    repo="$plugin"
+    clone_args=(-q --depth 1 --recursive --shallow-submodules)
+    # Pin repo to a specific commit sha if provided
+    if [[ "$plugin" == *'@'* ]]; then
+      repo="${plugin%@*}"
+      commitsha="${plugin#*@}"
+      clone_args+=(--no-checkout)
+    fi
+    plugdir=$ZPLUGINDIR/${repo:t}
+    initfile=$plugdir/${repo:t}.plugin.zsh
+    if [[ ! -d $plugdir ]]; then
+      echo "Cloning $repo..."
+      git clone "${clone_args[@]}" https://github.com/$repo $plugdir
+      if [[ -n "$commitsha" ]]; then
+        git -C $plugdir fetch -q origin "$commitsha"
+        git -C $plugdir checkout -q "$commitsha"
+      fi
+    fi
+    if [[ ! -e $initfile ]]; then
+      initfiles=($plugdir/*.{plugin.zsh,zsh-theme,zsh,sh}(N))
+      (($#initfiles)) && ln -sf $initfiles[1] $initfile
+    fi
+  done
+}
+
+function plugin-source {
+  local plugdir
+  ZPLUGINDIR=${ZPLUGINDIR:-${ZDOTDIR:-$HOME/.config/zsh}/plugins}
+  for plugdir in $@; do
+    [[ $plugdir = /* ]] || plugdir=$ZPLUGINDIR/$plugdir
+    fpath+=$plugdir
+    local initfile=$plugdir/${plugdir:t}.plugin.zsh
+    (($+functions[zsh-defer])) && zsh-defer . $initfile || . $initfile
+  done
+}
+
+function plugin-update {
+  ZPLUGINDIR=${ZPLUGINDIR:-$HOME/.config/zsh/plugins}
+  for d in $ZPLUGINDIR/*/.git(/); do
+    echo "Updating ${d:h:t}..."
+    command git -C "${d:h}" pull --ff --recurse-submodules --depth 1 --rebase --autostash
+  done
+}
+
+repos=(
+  "aloxaf/fzf-tab"
+  "hlissner/zsh-autopair"
+  "jeffreytse/zsh-vi-mode"
+  "ohmyzsh/ohmyzsh"
+  "romkatv/powerlevel10k"
+  "zsh-users/zsh-autosuggestions"
+  "zsh-users/zsh-completions"
+  "zsh-users/zsh-syntax-highlighting"
+)
+plugin-clone $repos
+
+plugin-source "zsh-completions"
+
+autoload -Uz compinit && compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+autoload -Uz cd_up cp dai gco mkcd mv which
+
+plugins=(
+  "fzf-tab"
+  "powerlevel10k"
+  "zsh-vi-mode"
+  "zsh-autosuggestions"
+  "zsh-autopair"
+  "ohmyzsh/plugins/magic-enter"
+  "zsh-syntax-highlighting"
+)
+plugin-source $plugins
+
+MAGIC_ENTER_GIT_COMMAND=" git st"
+MAGIC_ENTER_OTHER_COMMAND=" ls ."
+
+export FZF_DEFAULT_OPTS="--tmux=80% \
+--layout=reverse \
+--highlight-line \
+--cycle \
+--bind=ctrl-f:preview-half-page-down,ctrl-b:preview-half-page-up \
+--color=border:#27a1b9
+"
+
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+## zsh-vi-mode
+ZVM_VI_SURROUND_BINDKEY="s-prefix"
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+ZVM_VI_HIGHLIGHT_BACKGROUND=("paste:none")
+
+# copy/paste
+alias pbc="pbcopy"
+alias pbp="pbpaste"
+
+# ls
+alias l="eza --git"
+alias ll="l -lao --group-directories-first"
+alias ld="l -lD"
+alias lf="l -lf"
+alias lh="l -ld .* --group-directories-first"
+alias lt="l -la --sort=modified --reverse"
+alias ls="ll"
+alias lsg="l -ao --group-directories-first --grid"
+
+alias "cd.."="cd_up"
+alias nr="npm run"
+alias dco="docker compose"
+function dcs() {
+  local containers=($(docker ps -q))
+  if [ ${#containers[@]} -eq 0 ]; then
+    echo "No docker containers running!"
+    return 1
+  fi
+
+  echo "Stopping all docker containers..."
+  docker stop ${containers[@]}
+  return 0
+}
+function mnvim() {
+  mise x node@lts -- nvim "$@"
+}
+alias nvim="mnvim"
+alias ch="chezmoi"
+
+[[ -d "${XDG_STATE_HOME:-$HOME/.local/share}/zsh" ]] || mkdir -p "${XDG_STATE_HOME:-$HOME/.local/share}/zsh"
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/share}/zsh/history"
+HISTSIZE=100000
+SAVEHIST=$HISTSIZE
+HIST_IGNORE_PATTERN="(git reset*|reboot|shutdown|exit|cd ..|cd ~|..|~)"
+
+setopt \
+  extended_history \
+  hist_expire_dups_first \
+  hist_find_no_dups \
+  hist_ignore_all_dups \
+  hist_ignore_space \
+  hist_no_store \
+  hist_reduce_blanks \
+  hist_save_no_dups \
+  hist_verify \
+  inc_append_history \
+  share_history \
+  hist_fcntl_lock
+
+# jobs
+setopt long_list_jobs
+unsetopt auto_resume
+setopt notify
+unsetopt bg_nice
+
+# other
+setopt auto_cd
+setopt auto_pushd
+setopt bang_hist
+setopt interactive_comments
+setopt multios
+setopt no_beep
+setopt prompt_subst
+setopt pushd_ignore_dups
+setopt pushd_minus
+setopt globdots
+setopt extendedglob
+unsetopt correct
+setopt noclobber
+setopt globstarshort
+setopt numericglobsort
+setopt no_nomatch
+
+zstyle ":completion::complete:*" use-cache true
+zstyle ":completion::complete:*" cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
+zstyle ":completion:*" rehash true
+
+zstyle ":completion:*" matcher-list \
+  "m:{a-zA-Z}={A-Za-z}" \
+  "r:|[._-]=* r:|=*" \
+  "l:|=* r:|=*"
+
+zstyle ":completion:*:descriptions" format "[%d]"
+
+if [[ -n "${LS_COLORS:-}" ]]; then
+  zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
+fi
+
+zstyle ":completion:*" menu no
+
+setopt \
+  complete_in_word \
+  always_to_end \
+  auto_param_slash \
+  no_complete_aliases \
+  auto_list \
+  auto_menu
+
+zstyle ":completion:*:functions" ignored-patterns "(_*|pre(cmd|exec))"
+zstyle ":completion:*:git-checkout:*" sort false
+zstyle ":completion:*" squeeze-slashes true
+zstyle ":completion:*:approximate:*" max-errors 2 numeric
+zstyle ":completion:*:hosts" hosts off
+
+# fzf-tab
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview \
+  'HOMEBREW_COLOR=1 brew info $word'
+zstyle ':fzf-tab:complete:tldr:*' fzf-preview 'tldr --color always $word'
+zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
+  '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
+zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
+zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
+  'git diff $word | delta'
+zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
+  'git log --color=always $word'
+zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
+  'git help $word | bat -plman --color=always'
+zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
+  'case "$group" in
+"commit tag") git show --color=always $word ;;
+*) git show --color=always $word | delta ;;
+esac'
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+  'case "$group" in
+"modified file") git diff $word | delta ;;
+"recent commit object name") git show --color=always $word | delta ;;
+*) git log --color=always $word ;;
+esac'
+zstyle ':fzf-tab:complete:mise:*' fzf-preview
+zstyle ':fzf-tab:complete:*:options' fzf-preview
+zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
+
+function zvm_after_init() {
+  eval "$(mise activate zsh)"
+  FZF_ALT_C_COMMAND= source <(fzf --zsh)
+  eval "$(zoxide init zsh)"
+}
+
+[[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source "${ZDOTDIR}/.p10k.zsh"

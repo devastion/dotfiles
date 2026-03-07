@@ -1,0 +1,28 @@
+[tools]
+ast-grep = "latest"
+bat = "latest"
+chezmoi = "latest"
+go = "latest"
+java = "latest"
+node = "lts"
+python = "latest"
+rust = "stable"
+usage = "latest"
+delta = "latest"
+eza = "latest"
+fzf = "latest"
+jq = "latest"
+lazygit = "latest"
+neovim = "nightly"
+ripgrep = "latest"
+tlrc = "latest"
+tmux = "latest"
+yq = "latest"
+zoxide = "latest"
+gitleaks = "latest"
+fd = "latest"
+
+[settings]
+lockfile = true
+experimental = true
+idiomatic_version_file_enable_tools = ["node"]

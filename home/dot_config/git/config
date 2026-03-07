@@ -1,0 +1,93 @@
+[init]
+  defaultBranch = "main"
+  templateDir = "~/.config/git/template"
+
+[core]
+  editor = "nvim"
+  excludesFile = "~/.config/git/ignore"
+  attributesFile = "~/.config/git/attributes"
+  autocrlf = input
+  compression = 9
+  whitespace = error
+
+[diff]
+  tool = "nvimdiff"
+  submodule = "log"
+  algorithm = "histogram"
+  colorMoved = "default"
+  colorMovedWS = "allow-indentation-change"
+
+[difftool]
+  prompt = false
+
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
+[merge]
+  tool = "nvimdiff"
+  ff = true
+  conflictstyle = "zdiff3"
+
+[mergetool]
+  prompt = true
+  keepBackup = false
+
+[mergetool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
+  layout = "LOCAL,BASE,REMOTE / MERGED"
+
+[pull]
+  ff = true
+
+[fetch]
+  prune = true
+  pruneTags = true
+  parallel = 0
+
+[commit]
+  verbose = true
+
+[tag]
+  sort = "version:refname"
+
+[column]
+  ui = "auto"
+
+[log]
+  date = "iso"
+
+[push]
+  autoSetupRemote = true
+  followTags = true
+  default = "simple"
+  recurseSubmodules = "check"
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+  instructionFormat = "[%an - %ar] %s"
+
+[rerere]
+  enabled = true
+
+[help]
+  autoCorrect = "prompt"
+
+[branch]
+  autoSetupMerge = true
+  autoSetupRebase = "never"
+  sort = "-committerdate"
+
+; force ssh
+[url "git@github.com:"]
+  insteadOf = "https://github.com/"
+
+; example git clone gh:devastion/dotfiles
+[url "git@github.com:"]
+  insteadOf = "gh:"
+
+[include]
+  path = "~/.config/git/aliases"
+  path = "~/.config/git/delta.gitconfig"
+  path = "~/.config/git/config.local"
+; vim:ft=gitconfig
