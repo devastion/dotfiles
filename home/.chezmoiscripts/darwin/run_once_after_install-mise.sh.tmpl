@@ -1,0 +1,12 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+
+# -e: exit on error
+# -u: exit on unset variables
+set -eu
+
+if ! mise="$(command -v mise)"; then
+  curl https://mise.run | sh
+  curl https://mise.run | MISE_INSTALL_PATH=~/.local/bin/mise-x64 MISE_INSTALL_ARCH=x64 sh
+fi
+{{ end -}}
