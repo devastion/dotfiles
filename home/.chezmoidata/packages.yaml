@@ -5,3 +5,6 @@ packages:
       - "felixkratz/formulae/borders"
     casks:
       - "nikitabobko/tap/aerospace"
+      - "font-maple-mono-normal-nf"
+      - "ghostty"
+      - "spotify"
