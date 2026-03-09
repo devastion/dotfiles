@@ -1,7 +1,6 @@
 [tools]
 ast-grep = "latest"
 bat = "latest"
-chezmoi = "latest"
 go = "latest"
 java = "latest"
 node = "lts"
