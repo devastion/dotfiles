@@ -27,15 +27,6 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':fzf-tab:complete:bat:*' fzf-preview '
-case $group in
-  subcommand)
-    bat cache --help
-    ;;
-  *)
-    [[ -f ${realpath#--*=} ]] && bat ${realpath#--*=} || less ${realpath#--*=}
-    ;;
-esac'
 zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview \
   'HOMEBREW_COLOR=1 brew info $word'
 zstyle ':fzf-tab:complete:tldr:*' fzf-preview 'tldr --color always $word'

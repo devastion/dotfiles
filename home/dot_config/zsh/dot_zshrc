@@ -36,7 +36,8 @@ plugin-clone $repos
 
 plugin-source "zsh-completions"
 
-autoload -Uz compinit && compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+autoload -Uz compinit
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 autoload -Uz cd_up cp dai gco mkcd mv which
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/zstyles.zsh"
@@ -54,7 +55,6 @@ plugins=(
   "zsh-syntax-highlighting"
 )
 plugin-source $plugins
-
 
 MAGIC_ENTER_GIT_COMMAND=" git st"
 MAGIC_ENTER_OTHER_COMMAND=" ls ."
@@ -91,32 +91,7 @@ function zvm_after_init() {
 }
 
 function zvm_after_lazy_keybindings() {
-  bindkey -M viins "^a" beginning-of-line
-  bindkey -M viins "^e" end-of-line
-  bindkey -M viins "^f" forward-char
-  bindkey -M viins "^b" backward-char
-  bindkey -M viins "^[f" forward-word
-  bindkey -M viins "^[b" backward-word
-  bindkey -M viins "^w" backward-kill-word
-  bindkey -M viins "^[d" kill-word
-  bindkey -M viins "^[^?" backward-kill-word
-
-  bindkey -M vicmd "^r" redo
-
-  bindkey -M viins "^[[A" history-substring-search-up
-  bindkey -M viins "^[[B" history-substring-search-down
-  bindkey -M viins "^p" history-substring-search-up
-  bindkey -M viins "^n" history-substring-search-down
-  bindkey -M vicmd "k" history-substring-search-up
-  bindkey -M vicmd "j" history-substring-search-down
-
-  # fzf
-  bindkey -M viins "^r" fzf-history-widget
-  bindkey -M vicmd "/" fzf-history-widget
-
-  # zledit
-  bindkey -M viins "^[e" zledit-widget
-  bindkey -M vicmd "^[e" zledit-widget
+  source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/keybinds.zsh"
 }
 
 [[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source "${ZDOTDIR}/.p10k.zsh"
