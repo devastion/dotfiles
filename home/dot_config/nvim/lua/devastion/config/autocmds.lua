@@ -9,6 +9,24 @@ autocmd("TextYankPost", {
   end,
 })
 
+autocmd("BufReadPost", {
+  desc = "Restore cursor to last location",
+  group = augroup("cursor_last_loc"),
+  callback = function(event)
+    local exclude = { "gitcommit" }
+    local buf = event.buf
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].cursor_last_loc then
+      return
+    end
+    vim.b[buf].cursor_last_loc = true
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local lcount = vim.api.nvim_buf_line_count(buf)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+
 autocmd("FileType", {
   desc = "Disable new line comment continuation",
   group = augroup("disable_new_line_comments"),

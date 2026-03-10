@@ -50,6 +50,7 @@ end
 ---@field event? vim.api.keyset.events|vim.api.keyset.events[]
 ---@field cmd? string
 ---@field pattern? string|string[]
+---@field disabled? boolean
 ---@field config? function
 ---@field init? function
 ---@field task? function
@@ -77,6 +78,10 @@ function M.add(packages)
   vim.pack.add(specs, {
     load = function(package)
       local data = package.spec.data or {}
+
+      if data.disabled then
+        return
+      end
 
       local function init_vim_package()
         vim.cmd.packadd(package.spec.name)

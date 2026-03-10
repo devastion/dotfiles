@@ -63,6 +63,7 @@ require("devastion.utils.pkg").add({
       event = { "BufReadPost", "BufNewFile" },
       config = function()
         require("region-folding").setup({
+          region_text = { start = "#region", ending = "#endregion" },
           fold_indicator = "",
         })
       end,

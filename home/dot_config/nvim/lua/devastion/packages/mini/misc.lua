@@ -2,6 +2,7 @@ require("devastion.utils.pkg").add({
   {
     src = "nvim-mini/mini.misc",
     data = {
+      disabled = true,
       config = function()
         local misc = require("mini.misc")
         misc.setup()
