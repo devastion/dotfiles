@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+function unquarantine() {
+  # DESC:  Manually remove a downloaded app or file from the MacOS quarantine
+  # ARGS:  $1 (required): Path to file or app
+  # USAGE: unquarantine [file]
+
+  local attribute
+  for attribute in com.apple.metadata:kMDItemDownloadedDate com.apple.metadata:kMDItemWhereFroms com.apple.quarantine; do
+    xattr -r -d "${attribute}" "$@"
+  done
+}

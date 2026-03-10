@@ -3,6 +3,9 @@ packages:
     brews:
       - "coreutils"
       - "felixkratz/formulae/borders"
+      - "less"
+      - "lesspipe"
+      - "exiftool"
     casks:
       - "nikitabobko/tap/aerospace"
       - "font-maple-mono-normal-nf"
