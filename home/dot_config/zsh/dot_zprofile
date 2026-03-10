@@ -5,7 +5,8 @@ export LC_ALL="en_US.UTF-8"
 
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
-export PAGER="bat"
+export PAGER="less"
+export LESSOPEN="| lessfilter %s"
 
 export ZSH_COMPLETIONS_DIR="${ZDOTDIR:-$HOME/.config/zsh}/completions"
 
