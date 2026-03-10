@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+copyfile() {
+  if [ -z "$1" ]; then
+    echo "Usage: copyfile <file>"
+    return 1
+  fi
+
+  if [ ! -f "$1" ]; then
+    echo "Error: '$1' is not a valid file."
+    return 1
+  fi
+
+  pbcopy < "$1" || return 1
+  echo "$1 copied to clipboard."
+}

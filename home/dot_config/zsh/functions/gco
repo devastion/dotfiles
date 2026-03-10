@@ -26,6 +26,4 @@ gco() {
   git checkout "$_branch"
 
   unset _branches _branch
-
-  return 0
 }
