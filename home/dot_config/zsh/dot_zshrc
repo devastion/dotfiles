@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER}.zsh"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER.zsh"
 fi
 
 # tokyonight-night ls_colors
@@ -28,6 +28,7 @@ repos=(
   "piotr1215/zledit"
   "reegnz/jq-zsh-plugin"
   "romkatv/powerlevel10k"
+  "romkatv/zsh-defer"
   "zsh-users/zsh-autosuggestions"
   "zsh-users/zsh-completions"
   "zsh-users/zsh-syntax-highlighting"
@@ -38,15 +39,22 @@ plugin-source "zsh-completions"
 
 ZCOMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION"
 [[ -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh" ]] || mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-autoload -Uz compinit && compinit -d "$ZCOMPDUMP"
+autoload -Uz compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ${ZCOMPDUMP} 2>/dev/null)" ]; then
+  compinit -i -d "$ZCOMPDUMP"
+else
+  compinit -i -C -d "$ZCOMPDUMP"
+fi
 autoload -Uz cd_up cp dai gco mkcd mv which unquarantine
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/zstyles.zsh"
 
 plugins=(
-  "fzf-tab"
   "powerlevel10k"
+  "fzf-tab"
   "zsh-vi-mode"
+
+  "zsh-defer"
   "zsh-autosuggestions"
   "zsh-autopair"
   "ohmyzsh/plugins/magic-enter"
