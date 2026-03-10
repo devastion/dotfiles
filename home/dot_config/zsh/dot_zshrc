@@ -31,9 +31,9 @@ repos=(
   "reegnz/jq-zsh-plugin"
   "romkatv/powerlevel10k"
   "romkatv/zsh-defer"
-  "zdharma-continuum/fast-syntax-highlighting"
   "zsh-users/zsh-autosuggestions"
   "zsh-users/zsh-completions"
+  "zsh-users/zsh-syntax-highlighting"
 )
 plugin-clone $repos
 
@@ -64,7 +64,7 @@ plugins=(
   "ohmyzsh/plugins/history-substring-search"
   "zledit"
   "jq-zsh-plugin"
-  "fast-syntax-highlighting"
+  "zsh-syntax-highlighting"
 )
 plugin-source $plugins
 

@@ -25,3 +25,30 @@ function src() {
 function zsh_time() {
   for _i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done
 }
+
+function generate_zsh_completions() {
+  typeset -A commands=(
+    [docker]="docker completion zsh"
+    [sg]="sg completions zsh"
+    [bat]="bat --completion=zsh"
+    [rustup]="rustup completions zsh"
+    [cargo]="rustup completions zsh cargo"
+    [chezmoi]="chezmoi completion zsh"
+    [delta]="delta --generate-completion zsh"
+    [eza]="curl -fsSL https://raw.githubusercontent.com/eza-community/eza/refs/heads/main/completions/zsh/_eza"
+    [fd]="fd --gen-completions zsh"
+    [gitleaks]="gitleaks completion zsh"
+    [hk]="hk completion zsh"
+    [mise]="mise completion zsh"
+    [rg]="rg --generate complete-zsh"
+    [tldr]="curl -fsSL https://raw.githubusercontent.com/tldr-pages/tlrc/refs/heads/main/completions/_tldr"
+    [yq]="yq completion zsh"
+  )
+
+  for k in "${(@k)commands}"; do
+    if [[ ! -d $ZCOMPDIR ]]; then mkdir -p $ZCOMPDIR; fi
+    local cmd="${commands[${k}]}"
+    echo "Running '$cmd >| $ZCOMPDIR/_$k'"
+    eval $cmd >|"$ZCOMPDIR/_$k"
+  done
+}
