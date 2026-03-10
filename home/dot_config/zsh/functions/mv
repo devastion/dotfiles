@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-function mv() {
-  if [[ -z $2 ]]; then
+mv() {
+  if [ -z "$2" ]; then
     command mv -v "$1" ./
   else
     command mv -v "$@"

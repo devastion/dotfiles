@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-function which {
+which() {
   builtin which -a "$@" | bat --language=sh --wrap=character
 }

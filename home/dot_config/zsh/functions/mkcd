@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
 mkcd() {
-  dir="$*"
-  mkdir -p "$dir" && cd "$dir" || return
+  _dir="$*"
+  mkdir -p "$_dir" && cd "$_dir" || return
 }
