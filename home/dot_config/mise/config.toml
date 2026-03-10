@@ -21,6 +21,7 @@ zoxide = "latest"
 gitleaks = "latest"
 fd = "latest"
 watchexec = "latest"
+"go:github.com/reteps/dockerfmt" = "latest"
 
 [settings]
 lockfile = true

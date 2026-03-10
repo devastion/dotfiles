@@ -37,15 +37,16 @@ plugin-clone $repos
 
 plugin-source "zsh-completions"
 
-ZCOMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION"
-[[ -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh" ]] || mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 autoload -Uz compinit
 if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ${ZCOMPDUMP} 2>/dev/null)" ]; then
   compinit -i -d "$ZCOMPDUMP"
 else
   compinit -i -C -d "$ZCOMPDUMP"
 fi
-autoload -Uz cd_up cp dai gco mkcd mv which unquarantine
+
+for func in $ZFUNCDIR/*; do
+  autoload -Uz ${func:t}
+done
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/zstyles.zsh"
 
@@ -77,6 +78,7 @@ export FZF_DEFAULT_OPTS="--tmux=80% \
 "
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 ## zsh-vi-mode
 ZVM_VI_SURROUND_BINDKEY="s-prefix"
@@ -85,8 +87,7 @@ ZVM_VI_HIGHLIGHT_BACKGROUND=("paste:none")
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/aliases.zsh"
 
-[[ -d "${XDG_STATE_HOME:-$HOME/.local/share}/zsh" ]] || mkdir -p "${XDG_STATE_HOME:-$HOME/.local/share}/zsh"
-HISTFILE="${XDG_STATE_HOME:-$HOME/.local/share}/zsh/history"
+HISTFILE="${ZSTATEDIR:-$HOME/.local/state/zsh}/history"
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 HIST_IGNORE_PATTERN="(git reset*|reboot|shutdown|exit|cd ..|cd ~|..|~)"

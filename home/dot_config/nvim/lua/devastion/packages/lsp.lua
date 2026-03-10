@@ -170,6 +170,10 @@ require("devastion.utils.pkg").add({
           },
         })
 
+        vim.lsp.config("bashls", {
+          filetypes = { "bash", "sh", "zsh" },
+        })
+
         vim.lsp.enable(enabled_lsp)
       end,
     },

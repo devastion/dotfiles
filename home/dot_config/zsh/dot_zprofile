@@ -8,21 +8,33 @@ export VISUAL="$EDITOR"
 export PAGER="less"
 export LESSOPEN="| lessfilter %s"
 
-export ZSH_COMPLETIONS_DIR="${ZDOTDIR:-$HOME/.config/zsh}/completions"
+export ZSTATEDIR="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
+export ZSHAREDIR="${XDG_SHARE_HOME:-$HOME/.local/share}/zsh"
+export ZCACHEDIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+export ZPLUGINDIR="${ZSHAREDIR:-$HOME/.local/share/zsh}/plugins"
+export ZCOMPDUMP="$ZCACHEDIR/zcompdump-$ZSH_VERSION"
+export ZCOMPDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}/completions"
+export ZFUNCDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}/functions"
 
-[[ -d $ZSH_COMPLETIONS_DIR ]] || mkdir -p "$ZSH_COMPLETIONS_DIR"
+local z_dirs=(
+  "$ZSTATEDIR"
+  "$ZSHAREDIR"
+  "$ZCACHEDIR"
+)
+
+for dir in $z_dirs; do
+  [[ ! -d "$dir" ]] && mkdir -p "$dir"
+done
 
 typeset -U fpath cdpath
 
 fpath+=(
-  "$ZSH_COMPLETIONS_DIR"
-  "${ZDOTDIR:-$HOME/.config/zsh}/functions"
+  "$ZCOMPDIR"
+  "$ZFUNCDIR"
 )
 
 cdpath+=(
   "${XDG_PROJECTS_DIR:-$HOME/Projects}"
 )
-
-export ZPLUGINDIR="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"

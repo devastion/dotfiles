@@ -12,6 +12,15 @@ require("devastion.utils.pkg").add({
         vim.g.enable_autolint = false
       end,
       config = function()
+        local lint = require("lint")
+        lint.linters.shellcheck_bash = function()
+          local shellcheck = lint.linters.shellcheck
+          local linter = shellcheck
+          table.insert(linter.args, 1, "--shell=bash")
+          table.insert(linter.args, 2, "--exclude=SC2299")
+          return linter
+        end
+
         local linters_by_ft = {
           ["*"] = { "editorconfig-checker" },
           lua = file_exists("selene.toml") and { "selene" } or {},
@@ -20,12 +29,12 @@ require("devastion.utils.pkg").add({
           php = file_exists("artisan") and { "phpstan" } or { "phpcs" },
           sh = { "shellcheck" },
           bash = { "shellcheck" },
+          zsh = { "shellcheck_bash" },
           dockerfile = { "hadolint" },
           markdown = { "markdownlint-cli2" },
           yaml = { "yamllint" },
         }
 
-        local lint = require("lint")
         lint.linters_by_ft = linters_by_ft
 
         require("devastion.utils.pkg").mason_install(vim.tbl_values(linters_by_ft))
