@@ -273,6 +273,10 @@
       "rev": "6784b54587e6d8a6b9ea199318512170ffb9e418",
       "src": "https://github.com/theprimeagen/refactoring.nvim"
     },
+    "region-folding.nvim": {
+      "rev": "949a3348c51a1c0e08c098b5d2537f3efe53030f",
+      "src": "https://github.com/nicolas-martin/region-folding.nvim"
+    },
     "render-markdown.nvim": {
       "rev": "907505549edc2f90c82fc429348af03ee8c3a825",
       "src": "https://github.com/meanderingprogrammer/render-markdown.nvim"

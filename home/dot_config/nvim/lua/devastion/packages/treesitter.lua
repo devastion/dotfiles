@@ -57,6 +57,17 @@ require("devastion.utils.pkg").add({
       end,
     },
   },
+  {
+    src = "nicolas-martin/region-folding.nvim",
+    data = {
+      event = { "BufReadPost", "BufNewFile" },
+      config = function()
+        require("region-folding").setup({
+          fold_indicator = "",
+        })
+      end,
+    },
+  },
   "rrethy/nvim-treesitter-endwise",
 })
 
