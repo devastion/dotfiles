@@ -1,6 +1,6 @@
 local M = {}
 
----Returns current working directory of buffer
+---Returns current buffer path
 ---@return string
 function M.get_bufname()
   return vim.api.nvim_buf_get_name(0)

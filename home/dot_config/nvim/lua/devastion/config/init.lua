@@ -61,6 +61,7 @@ local packages = {
   "devastion.packages.flash",
   "devastion.packages.arrow",
   "devastion.packages.marks",
+  "devastion.packages.warp",
   "devastion.packages.smart-splits",
   "devastion.packages.grug-far",
 

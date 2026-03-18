@@ -22,9 +22,9 @@ require("devastion.utils.pkg").add({
         autocmd("FileType", {
           group = augroup("wrap_noice"),
           pattern = { "noice" },
-          callback = function()
+          callback = function(event)
             vim.schedule(function()
-              vim.wo.wrap = true
+              vim.wo[vim.fn.bufwinid(event.buf)].wrap = true
             end)
           end,
         })

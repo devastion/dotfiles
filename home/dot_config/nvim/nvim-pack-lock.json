@@ -329,6 +329,10 @@
       "rev": "f83350d29e7163ac2dc017900051565b41addd1f",
       "src": "https://github.com/nemanjamalesija/ts-expand-hover.nvim"
     },
+    "warp.nvim": {
+      "rev": "09cc22501ae5d0a7eb36b759f889f75339eb1c21",
+      "src": "https://github.com/y3owk1n/warp.nvim"
+    },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "https://github.com/folke/which-key.nvim"

@@ -50,10 +50,10 @@ autocmd("FileType", {
 autocmd("FileType", {
   group = augroup("wrap_spell"),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
-  callback = function()
+  callback = function(event)
     vim.schedule(function()
-      vim.wo.wrap = true
-      vim.wo.spell = true
+      vim.wo[vim.fn.bufwinid(event.buf)].wrap = true
+      vim.wo[vim.fn.bufwinid(event.buf)].spell = true
     end)
   end,
 })
@@ -171,6 +171,20 @@ autocmd("SourcePost", {
     vim.schedule(function()
       vim.notify("Loaded project config: " .. event.file, vim.log.levels.INFO)
     end)
+  end,
+})
+
+autocmd("PackChanged", {
+  group = augroup("pack_changed"),
+  pattern = "*",
+  callback = function(event)
+    local p = event.data
+    local task = (p.spec.data or {}).task
+    if p.kind ~= "delete" and type(task) == "function" then
+      pcall(task, p)
+
+      vim.notify("Updated " .. p.spec.name, vim.log.levels.INFO)
+    end
   end,
 })
 
