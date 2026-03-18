@@ -9,6 +9,18 @@ autocmd("TextYankPost", {
   end,
 })
 
+autocmd("BufRead", {
+  desc = "Change vim.o.scroll",
+  group = augroup("set_scroll"),
+  callback = function()
+    vim.schedule(function()
+      if vim.o.scroll > 10 then
+        vim.o.scroll = 10
+      end
+    end)
+  end,
+})
+
 autocmd("BufReadPost", {
   desc = "Restore cursor to last location",
   group = augroup("cursor_last_loc"),

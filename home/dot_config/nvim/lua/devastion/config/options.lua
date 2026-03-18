@@ -90,11 +90,12 @@ opt.breakindentopt = { "shift:2", "sbr" }
 -- ═══════════════════════════════════════════════════════════════════════
 -- Folding
 -- ═══════════════════════════════════════════════════════════════════════
+o.foldenable = true
 o.foldmethod = "expr"
 o.foldcolumn = "0"
 o.foldlevel = 99
 o.foldlevelstart = 99
-o.foldnestmax = 4
+o.foldnestmax = 20
 o.foldtext = "v:lua.require'devastion.utils'.foldtext()"
 
 -- ═══════════════════════════════════════════════════════════════════════
@@ -113,6 +114,7 @@ o.writebackup = false
 o.undofile = true
 o.undolevels = 10000
 o.jumpoptions = "view"
+o.shadafile = vim.fn.stdpath("cache") .. "/custom_shada/" .. vim.fn.sha256(vim.fn.getcwd()):sub(1, 8) .. ".shada"
 
 -- ═══════════════════════════════════════════════════════════════════════
 -- Spelling & Text Formatting

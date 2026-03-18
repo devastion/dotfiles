@@ -60,6 +60,7 @@ require("devastion.utils.pkg").add({
   {
     src = "nicolas-martin/region-folding.nvim",
     data = {
+      disabled = true,
       event = { "BufReadPost", "BufNewFile" },
       config = function()
         require("region-folding").setup({
