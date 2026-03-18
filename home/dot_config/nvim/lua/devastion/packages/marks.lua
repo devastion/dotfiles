@@ -13,7 +13,7 @@ require("devastion.utils.pkg").add({
           force_write_shada = false,
           refresh_interval = 250,
           sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
-          excluded_filetypes = { "gitcommit" },
+          excluded_filetypes = { "gitcommit", "noice" },
           excluded_buftypes = {},
           mappings = {},
         })

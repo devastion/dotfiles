@@ -1,0 +1,4 @@
+autocmds
+lualine
+nvim
+stylua

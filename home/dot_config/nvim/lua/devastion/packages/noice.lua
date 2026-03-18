@@ -1,3 +1,5 @@
+local autocmd = require("devastion.utils").autocmd
+local augroup = require("devastion.utils").augroup
 local map = require("devastion.utils").map
 
 require("devastion.utils.pkg").add({
@@ -16,6 +18,17 @@ require("devastion.utils.pkg").add({
   {
     src = "folke/noice.nvim",
     data = {
+      init = function()
+        autocmd("FileType", {
+          group = augroup("wrap_noice"),
+          pattern = { "noice" },
+          callback = function()
+            vim.schedule(function()
+              vim.wo.wrap = true
+            end)
+          end,
+        })
+      end,
       config = function()
         require("noice").setup({
           views = {

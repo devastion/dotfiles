@@ -51,8 +51,10 @@ autocmd("FileType", {
   group = augroup("wrap_spell"),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
-    vim.wo.wrap = true
-    vim.wo.spell = true
+    vim.schedule(function()
+      vim.wo.wrap = true
+      vim.wo.spell = true
+    end)
   end,
 })
 

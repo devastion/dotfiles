@@ -121,6 +121,7 @@ o.shadafile = vim.fn.stdpath("cache") .. "/custom_shada/" .. vim.fn.sha256(vim.f
 -- ═══════════════════════════════════════════════════════════════════════
 opt.spelloptions = { "camel", "noplainbuffer" }
 o.spelllang = "en_us"
+o.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
 opt.iskeyword:append("-")
 opt.diffopt:append("linematch:60")
 o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
