@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=./plugins/tmux-which-key/config.schema.yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/alexwforsythe/tmux-which-key/refs/heads/main/config.schema.yaml
 command_alias_start_index: 200
 keybindings:
   # root_table: C-Space
@@ -246,13 +246,13 @@ items:
         menu:
           - name: Install
             key: i
-            command: run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/install_plugins
+            command: run-shell $TMUX_PLUGINS_DIR/tpm/bindings/install_plugins
           - name: Update
             key: u
-            command: run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/update_plugins
+            command: run-shell $TMUX_PLUGINS_DIR/tpm/bindings/update_plugins
           - name: Clean
             key: c
-            command: run-shell $TMUX_PLUGIN_MANAGER_PATH/tpm/bindings/clean_plugins
+            command: run-shell $TMUX_PLUGINS_DIR/tpm/bindings/clean_plugins
       - name: Detach
         key: D
         command: detach
@@ -269,16 +269,16 @@ items:
   - separator: true
   - name: TMux Pane Focus
     key: T
-    command: run "$TMUX_PLUGIN_MANAGER_PATH/tmux-pane-focus/scripts/menu.sh"
+    command: run "$TMUX_PLUGINS_DIR/tmux-pane-focus/scripts/menu.sh"
   - name: TMux FZF url
     key: u
-    command: run "$TMUX_PLUGIN_MANAGER_PATH/tmux-fzf-url/fzf-url.rb"
+    command: run "$TMUX_PLUGINS_DIR/tmux-fzf-url/fzf-url.rb"
   - name: TMux Fast Copy
     key: f
-    command: run "$TMUX_PLUGIN_MANAGER_PATH/tmux-fastcopy/bin/tmux-fastcopy"
-  - name: TMux Jump
+    command: run "$TMUX_PLUGINS_DIR/tmux-easymotion/mode-s2.sh"
+  - name: TMux Easy Motion
     key: J
-    command: run "$TMUX_PLUGIN_MANAGER_PATH/tmux-jump/scripts/tmux-jump.sh"
+    command: run "$TMUX_PLUGINS_DIR/tmux-jump/scripts/tmux-jump.sh"
   - name: Show messages
     key: "~"
     command: show-messages

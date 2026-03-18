@@ -22,6 +22,7 @@ fd = "latest"
 watchexec = "latest"
 "go:github.com/reteps/dockerfmt" = "latest"
 neovim = "nightly"
+pkl = "latest"
 
 [settings]
 lockfile = true

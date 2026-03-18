@@ -129,6 +129,9 @@ require("devastion.utils.pkg").add({
           settings = {
             ["harper-ls"] = {
               userDictPath = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
+              linters = {
+                SentenceCapitalization = false,
+              },
             },
           },
         })
@@ -220,7 +223,7 @@ require("devastion.utils.pkg").add({
     src = "apple/pkl-neovim",
     data = {
       config = function()
-        require("pkl-neovim").init({})
+        require("pkl-neovim").init()
         vim.g.pkl_neovim = {
           start_command = { "pkl-lsp" },
         }
