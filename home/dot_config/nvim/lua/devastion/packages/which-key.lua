@@ -14,6 +14,7 @@ require("devastion.utils.pkg").add({
           triggers = {
             { "<auto>", mode = "nixsotc" },
             { "s", mode = { "n", "x" } },
+            { "m", mode = { "n" } },
           },
           sort = { "order", "group", "alphanum" },
           icons = {

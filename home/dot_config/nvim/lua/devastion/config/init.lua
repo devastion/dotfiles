@@ -60,6 +60,7 @@ local packages = {
   "devastion.packages.fzf",
   "devastion.packages.flash",
   "devastion.packages.arrow",
+  "devastion.packages.marks",
   "devastion.packages.smart-splits",
   "devastion.packages.grug-far",
 
@@ -133,7 +134,7 @@ safe_require("devastion.config.diagnostics")
 -- Extras
 ---------------------------------------------------------------------------
 local extras = {
-  "devastion.extras.laravel",
+  -- "devastion.extras.laravel",
 }
 
 for _, mod in ipairs(extras) do

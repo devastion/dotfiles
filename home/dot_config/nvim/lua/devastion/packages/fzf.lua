@@ -235,12 +235,12 @@ require("devastion.utils.pkg").add({
         end, "Repeat Grep")
 
         map("<leader>sw", function()
-          require("fzf-lua").grep_cword()
+          require("fzf-lua").grep({ rg_opts = "--column --line-number --no-heading --color=always --smart-case -w" })
         end, "Grep Word")
 
         map("<leader>sW", function()
-          require("fzf-lua").grep_cWORD()
-        end, "Grep WORD")
+          require("fzf-lua").grep_cword()
+        end, "Grep <cword>")
 
         -- Git
         map("<leader>gb", function()

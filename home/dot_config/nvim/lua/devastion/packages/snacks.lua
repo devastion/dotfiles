@@ -8,6 +8,7 @@ require("devastion.utils.pkg").add({
     data = {
       init = function()
         autocmd("User", {
+          group = augroup("snacks_rename"),
           pattern = { "MiniFilesActionRename", "MiniFilesActionMove" },
           callback = function(event)
             require("snacks.rename").on_rename_file(event.data.from, event.data.to)
@@ -86,17 +87,19 @@ require("devastion.utils.pkg").add({
         map("<leader>bO", function()
           require("snacks").bufdelete.all()
         end, "Delete All Buffers")
-        autocmd("FileType", {
-          pattern = "lua",
-          group = augroup("snacks_lua"),
-          callback = function(event)
-            map("<localleader>r", function()
-              require("snacks").debug.run()
-            end, "Run Lua", { "n", "x" }, { buffer = event.buf })
-            map("<localleader>s", function()
-              require("snacks").scratch()
-            end, "Scratch", "n", { buffer = event.buf })
-          end,
+
+        require("snacks.keymap").set({ "n", "x" }, "<localleader>r", function()
+          require("snacks").debug.run()
+        end, {
+          desc = "Run lua",
+          ft = "lua",
+        })
+        require("snacks.keymap").set("n", "<localleader>s", function()
+          require("snacks").scratch()
+        end, {
+          desc = "Scratch",
+          ft = "lua",
+          buffer = true,
         })
       end,
     },

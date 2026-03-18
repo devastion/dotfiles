@@ -27,6 +27,7 @@ function dcs() {
 
   echo "Stopping all docker containers..."
   docker stop ${containers[@]}
+  echo "All docker containers are stopped!"
   return 0
 }
 

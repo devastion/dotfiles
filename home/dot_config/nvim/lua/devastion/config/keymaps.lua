@@ -74,8 +74,6 @@ map("<A-a>", "ggVG", "Select all", "n", { silent = true })
 map("gl", "$", "Go to end of line")
 map("gh", "^", "Go to start of line")
 
-map("<localleader>m", "m", "Set mark")
-
 -- vim.pack
 map("<leader>Pd", pkg.uninstall, "Uninstall Package")
 map("<leader>PD", pkg.prune, "Prune Inactive Packages")

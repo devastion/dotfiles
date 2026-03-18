@@ -12,7 +12,6 @@ eza = "latest"
 fzf = "latest"
 jq = "latest"
 lazygit = "latest"
-neovim = "nightly"
 ripgrep = "latest"
 tlrc = "latest"
 tmux = "latest"
@@ -22,6 +21,7 @@ gitleaks = "latest"
 fd = "latest"
 watchexec = "latest"
 "go:github.com/reteps/dockerfmt" = "latest"
+neovim = "nightly"
 
 [settings]
 lockfile = true
