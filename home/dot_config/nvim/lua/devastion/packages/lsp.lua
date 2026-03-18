@@ -128,7 +128,7 @@ require("devastion.utils.pkg").add({
         vim.lsp.config("harper_ls", {
           settings = {
             ["harper-ls"] = {
-              userDictPath = vim.fn.stdpath("config") .. "/spell/harper_dictionary.txt",
+              userDictPath = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
             },
           },
         })

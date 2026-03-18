@@ -75,7 +75,7 @@ export FZF_DEFAULT_OPTS="--tmux=80% \
 --layout=reverse \
 --highlight-line \
 --cycle \
---bind=ctrl-f:preview-half-page-down,ctrl-b:preview-half-page-up \
+--bind=ctrl-f:preview-half-page-down,ctrl-b:preview-half-page-up,alt-j:preview-down,alt-k:preview-up \
 --color=border:#27a1b9
 "
 

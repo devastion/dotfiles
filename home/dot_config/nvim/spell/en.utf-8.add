@@ -1,4 +1,7 @@
 autocmds
+fzf
 lualine
 nvim
 stylua
+tmux
+zsh

@@ -38,6 +38,11 @@ function mnvim() {
 alias nvim="mnvim"
 alias ch="chezmoi"
 
+# tmux
+alias ta="tmux a -t "
+alias tl="tmux ls"
+alias tksv="tmux kill-server"
+
 # pipe
 alias -g H="| head"
 alias -g T="| tail"
