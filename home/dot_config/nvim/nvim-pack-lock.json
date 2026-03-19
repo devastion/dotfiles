@@ -45,6 +45,10 @@
       "rev": "54669c347fe94d5be41322bd5526095f3e528713",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
+    "gist.nvim": {
+      "rev": "45bdc70962f76f6357330df3e0e7b141def1c30c",
+      "src": "https://github.com/rawnly/gist.nvim"
+    },
     "gitmoji.nvim": {
       "rev": "2659de229c2b26d50732f1220700eebbcdb2d6ef",
       "src": "https://github.com/dynge/gitmoji.nvim"
@@ -241,7 +245,7 @@
       "src": "https://github.com/rrethy/nvim-treesitter-endwise"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "0bc4ef0a34d80fd6e67b59bd71fcbb0ef9ef4756",
+      "rev": "7359dfcefa38db632541e1f9b5b5f291626a1d47",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -252,6 +256,14 @@
     "nvim-ts-context-commentstring": {
       "rev": "1b212c2eee76d787bbea6aa5e92a2b534e7b4f8f",
       "src": "https://github.com/joosepalviste/nvim-ts-context-commentstring"
+    },
+    "nvim-unception": {
+      "rev": "df0e505f0f1371c49c2bcf993985962edb5a279d",
+      "src": "https://github.com/samjwill/nvim-unception"
+    },
+    "octo.nvim": {
+      "rev": "42e547c08433c22c8311d7848998d2d08bfaf77e",
+      "src": "https://github.com/pwntester/octo.nvim"
     },
     "one-small-step-for-vimkind": {
       "rev": "1af6ffb9b5229a856e8090fa2f690e0931a5aace",
@@ -266,7 +278,7 @@
       "src": "https://github.com/vuki656/package-info.nvim"
     },
     "pkl-neovim": {
-      "rev": "51a56dcaaa04035a86d75eb5698864c288142636",
+      "rev": "bdc3dbbbd134992a8d5ff4d0668d8baa40d396ab",
       "src": "https://github.com/apple/pkl-neovim"
     },
     "plenary.nvim": {
@@ -290,7 +302,7 @@
       "src": "https://github.com/devastion/resolve.nvim"
     },
     "schemastore.nvim": {
-      "rev": "157fa3f37a3be55ceb375274e2f3ea2d7d2f9ef6",
+      "rev": "bbc9dd7b38f0afde6baae725980cefc1ad554dca",
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "sidekick.nvim": {

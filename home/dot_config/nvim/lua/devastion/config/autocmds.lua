@@ -112,6 +112,7 @@ autocmd("FileType", {
     "dap-view",
     "dap-view-term",
     "dap-view-help",
+    "octo",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false

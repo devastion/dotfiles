@@ -7,6 +7,8 @@ require("devastion.utils.pkg").add({
       config = function()
         require("gitsigns").setup({
           numhl = true,
+          linehl = false,
+          word_diff = false,
           signs = {
             add = { text = "+" },
             change = { text = "~" },
@@ -50,8 +52,12 @@ require("devastion.utils.pkg").add({
             end, "Reset Hunk", "v", { buffer = bufnr })
 
             map("<leader>ghu", function()
-              require("gitsigns").undo_stage_hunk()
+              require("gitsigns").stage_hunk()
             end, "Undo Stage Hunk", "n", { buffer = bufnr })
+
+            map("<leader>ghu", function()
+              require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+            end, "Undo Stage Hunk", "v", { buffer = bufnr })
 
             -- Buffer actions
             map("<leader>ghS", function()
@@ -67,10 +73,6 @@ require("devastion.utils.pkg").add({
               require("gitsigns").preview_hunk()
             end, "Preview Hunk", "n", { buffer = bufnr })
 
-            map("<leader>gti", function()
-              require("gitsigns").preview_hunk_inline()
-            end, "Preview Hunk [i]nline", "n", { buffer = bufnr })
-
             map("<leader>ghd", function()
               require("gitsigns").diffthis()
             end, "Diff vs index", "n", { buffer = bufnr })
@@ -78,6 +80,10 @@ require("devastion.utils.pkg").add({
             map("<leader>ghD", function()
               require("gitsigns").diffthis("@")
             end, "Diff vs Last Commit", "n", { buffer = bufnr })
+
+            map("<leader>gti", function()
+              require("gitsigns").preview_hunk_inline()
+            end, "Preview Hunk [i]nline", "n", { buffer = bufnr })
 
             -- Blame
             map("<leader>ghb", function()
@@ -105,6 +111,18 @@ require("devastion.utils.pkg").add({
             map("<leader>gtw", function()
               require("gitsigns").toggle_word_diff()
             end, "Toggle Word Diff", "n", { buffer = bufnr })
+
+            map("<leader>gtl", function()
+              require("gitsigns").toggle_linehl()
+            end, "Toggle Line Highlight", "n", { buffer = bufnr })
+
+            map("<leader>gtd", function()
+              require("gitsigns").toggle_deleted()
+            end, "Toggle Deleted", "n", { buffer = bufnr })
+
+            map("<leader>gtn", function()
+              require("gitsigns").toggle_numhl()
+            end, "Toggle Num Highlight", "n", { buffer = bufnr })
 
             -- Text object
             map("ih", function()

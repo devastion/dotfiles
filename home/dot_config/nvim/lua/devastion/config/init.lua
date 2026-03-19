@@ -98,6 +98,8 @@ local packages = {
   "devastion.packages.snacks",
   "devastion.packages.todo-comments",
   "devastion.packages.text-case",
+  "devastion.packages.gist",
+  "devastion.packages.octo",
 }
 
 for _, mod in ipairs(packages) do
