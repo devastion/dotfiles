@@ -6,6 +6,7 @@ require("devastion.utils.pkg").add({
       pattern = { "markdown", "norg", "rmd", "org" },
       config = function()
         require("render-markdown").setup({
+          enabled = false,
           completions = {
             lsp = {
               enabled = true,

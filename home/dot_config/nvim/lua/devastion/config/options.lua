@@ -125,3 +125,5 @@ o.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
 opt.iskeyword:append("-")
 opt.diffopt:append("linematch:60")
 o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
+
+o.shell = "/usr/bin/env zsh -l"

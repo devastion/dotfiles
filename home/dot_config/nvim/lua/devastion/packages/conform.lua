@@ -62,6 +62,11 @@ require("devastion.utils.pkg").add({
             },
           },
         })
+        require("conform").formatters.yamlfmt = {
+          prepend_args = function(self, ctx)
+            return { "-formatter", "retain_line_breaks_single=true" }
+          end,
+        }
 
         require("devastion.utils.pkg").mason_install(vim.tbl_values(require("conform").formatters_by_ft))
 

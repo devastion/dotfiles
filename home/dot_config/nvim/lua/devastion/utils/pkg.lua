@@ -6,7 +6,15 @@ local M = {}
 ---@param packages string[]
 function M.mason_install(packages)
   local mr = require("mason-registry")
-  local pkgs = type(packages) == "table" and vim.iter(packages):flatten():totable() or { packages }
+  local pkgs = type(packages) == "table"
+      and vim
+        .iter(packages)
+        :filter(function(v)
+          return vim.isarray(v)
+        end)
+        :flatten()
+        :totable()
+    or { packages }
 
   vim.schedule(function()
     mr.refresh(function()

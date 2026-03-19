@@ -1,7 +1,10 @@
+arm64
 autocmds
 fzf
 lualine
+mise
 nvim
+nvmrc
 stylua
 tmux
 zsh

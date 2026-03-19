@@ -5,6 +5,7 @@ vim.filetype.add({
   filename = {
     [".env"] = "env",
     ["env"] = "env",
+    ["LICENSE"] = "license",
   },
   pattern = {
     ["[jt]sconfig.*.json"] = "jsonc",
@@ -21,5 +22,6 @@ vim.filetype.add({
     [".*/molecule/.*%.ya?ml"] = "yaml.ansible",
     [".*zprofile"] = "zsh",
     [".*zsh.*"] = "zsh",
+    [".*/%.github/workflows/.*%.ya?ml"] = "yaml.github",
   },
 })

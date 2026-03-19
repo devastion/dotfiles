@@ -33,6 +33,7 @@ require("devastion.utils.pkg").add({
           dockerfile = { "hadolint" },
           markdown = { "markdownlint-cli2" },
           yaml = { "yamllint" },
+          ["yaml.github"] = { "actionlint" },
         }
 
         lint.linters_by_ft = linters_by_ft

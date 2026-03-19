@@ -12,6 +12,7 @@ local enabled_lsp = {
   "dockerls",
   "eslint",
   "fish_lsp",
+  "gh_actions_ls",
   "graphql",
   "harper_ls",
   "html",
@@ -38,6 +39,7 @@ local mason_lsp = {
   "docker-language-server",
   "eslint-lsp",
   "fish-lsp",
+  "gh-actions-language-server",
   "graphql-language-service-cli",
   "harper-ls",
   "html-lsp",
@@ -171,6 +173,10 @@ require("devastion.utils.pkg").add({
 
         vim.lsp.config("bashls", {
           filetypes = { "bash", "sh", "zsh" },
+        })
+
+        vim.lsp.config("gh_actions_ls", {
+          filetypes = { "yaml.github" },
         })
 
         vim.lsp.enable(enabled_lsp)

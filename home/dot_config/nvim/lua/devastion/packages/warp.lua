@@ -91,19 +91,6 @@ require("devastion.utils.pkg").add({
         end, "Clear all lists")
 
         -- Go to navigation
-        map("]h", function()
-          require("warp").goto_index("next")
-        end, "Goto next index")
-        map("[h", function()
-          require("warp").goto_index("prev")
-        end, "Goto prev index")
-        map("]H", function()
-          require("warp").goto_index("first")
-        end, "Goto first index")
-        map("[H", function()
-          require("warp").goto_index("last")
-        end, "Goto last index")
-
         map("<leader>h]", function()
           require("warp").goto_index("next")
         end, "Goto next index")

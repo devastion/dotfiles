@@ -319,6 +319,56 @@ require("devastion.utils.pkg").add({
               ["<c-space>"] = { "show", "fallback" },
               ["<c-n>"] = { "select_next", "fallback" },
               ["<c-p>"] = { "select_prev", "fallback" },
+              ["<a-1>"] = {
+                function(cmp)
+                  cmp.accept({ index = 1 })
+                end,
+              },
+              ["<a-2>"] = {
+                function(cmp)
+                  cmp.accept({ index = 2 })
+                end,
+              },
+              ["<a-3>"] = {
+                function(cmp)
+                  cmp.accept({ index = 3 })
+                end,
+              },
+              ["<a-4>"] = {
+                function(cmp)
+                  cmp.accept({ index = 4 })
+                end,
+              },
+              ["<a-5>"] = {
+                function(cmp)
+                  cmp.accept({ index = 5 })
+                end,
+              },
+              ["<a-6>"] = {
+                function(cmp)
+                  cmp.accept({ index = 6 })
+                end,
+              },
+              ["<a-7>"] = {
+                function(cmp)
+                  cmp.accept({ index = 7 })
+                end,
+              },
+              ["<a-8>"] = {
+                function(cmp)
+                  cmp.accept({ index = 8 })
+                end,
+              },
+              ["<a-9>"] = {
+                function(cmp)
+                  cmp.accept({ index = 9 })
+                end,
+              },
+              ["<a-0>"] = {
+                function(cmp)
+                  cmp.accept({ index = 10 })
+                end,
+              },
             },
             completion = {
               menu = { auto_show = true },

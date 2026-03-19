@@ -43,6 +43,9 @@ function generate_zsh_completions() {
     [rg]="rg --generate complete-zsh"
     [tldr]="curl -fsSL https://raw.githubusercontent.com/tldr-pages/tlrc/refs/heads/main/completions/_tldr"
     [yq]="yq completion zsh"
+    [gh]="gh completion --shell zsh"
+    [dockerfmt]="dockerfmt completion zsh"
+    [npm]="npm completion"
   )
 
   for k in "${(@k)commands}"; do

@@ -20,9 +20,12 @@ zoxide = "latest"
 gitleaks = "latest"
 fd = "latest"
 watchexec = "latest"
-"go:github.com/reteps/dockerfmt" = "latest"
 neovim = "nightly"
 pkl = "latest"
+hk = "latest"
+github-cli = "latest"
+"go:github.com/reteps/dockerfmt" = "latest"
+amber = "nightly"
 
 [settings]
 lockfile = true
