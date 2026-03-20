@@ -101,3 +101,8 @@ map("<leader>uD", function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
   vim.notify((vim.diagnostic.is_enabled() and "Enabled" or "Disabled") .. " diagnostics (global)", vim.log.levels.INFO)
 end, "Toggle Diagnostics (global)")
+map("<leader>uv", function()
+  vim.diagnostic.config({
+    virtual_lines = not vim.diagnostic.config().virtual_lines,
+  })
+end, "Toggle Virtual Lines")

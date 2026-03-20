@@ -7,6 +7,7 @@ require("devastion.utils.pkg").add({
       config = function()
         require("gitsigns").setup({
           numhl = true,
+          attach_to_untracked = true,
           signs = {
             add = { text = "+" },
             change = { text = "~" },

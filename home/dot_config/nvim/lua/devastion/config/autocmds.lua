@@ -226,3 +226,13 @@ if not package.loaded["snacks.words"] then
     end,
   })
 end
+
+vim.api.nvim_create_autocmd("CursorHold", {
+  desc = "Show diagnostics on hover",
+  callback = function()
+    vim.diagnostic.open_float(nil, {
+      focus = false,
+      border = vim.g.border_style,
+    })
+  end,
+})
