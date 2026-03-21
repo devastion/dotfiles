@@ -100,6 +100,7 @@ local packages = {
   "devastion.packages.text-case",
   "devastion.packages.gist",
   "devastion.packages.octo",
+  "devastion.packages.chezmoi",
 }
 
 for _, mod in ipairs(packages) do

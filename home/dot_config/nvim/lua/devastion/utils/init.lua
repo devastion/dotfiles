@@ -93,4 +93,15 @@ function M.foldtext()
   return result
 end
 
+---Check if a command-line tool exists
+---@param cmd string The command to check
+---@return boolean: True if the command exists, false otherwise
+function M.cmd_exists(cmd)
+  if not cmd or cmd == "" then
+    return false
+  end
+
+  return vim.fn.executable(cmd) == 1
+end
+
 return M

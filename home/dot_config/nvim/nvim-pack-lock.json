@@ -17,6 +17,10 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
+    "chezmoi.nvim": {
+      "rev": "ad26a6c4f5be0c348612518fcb1b7116649e026f",
+      "src": "https://github.com/xvzc/chezmoi.nvim"
+    },
     "commitpad.nvim": {
       "rev": "c9fdb2bb8a8792cd161eba9cbe2274a8b01c3d28",
       "src": "https://github.com/sengoku11/commitpad.nvim"
@@ -122,7 +126,7 @@
       "src": "https://github.com/nvim-mini/mini.move"
     },
     "mini.operators": {
-      "rev": "86b1ad0d89e7e6a2ae2f840edbbb5737465ae777",
+      "rev": "65bc941bca46fb3f33bb2fdcc7b67417fb474a10",
       "src": "https://github.com/nvim-mini/mini.operators"
     },
     "mini.pairs": {
@@ -232,7 +236,7 @@
       "src": "https://github.com/chrisgrieser/nvim-spider"
     },
     "nvim-treesitter": {
-      "rev": "2b50ab5ccbcd9e5708deb351308edd738adbf84c",
+      "rev": "e5f65e31a5ec0e8526b2311ff8c7aaea4a581c82",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -245,7 +249,7 @@
       "src": "https://github.com/rrethy/nvim-treesitter-endwise"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "7359dfcefa38db632541e1f9b5b5f291626a1d47",
+      "rev": "93d60a475f0b08a8eceb99255863977d3a25f310",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -306,15 +310,15 @@
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "sidekick.nvim": {
-      "rev": "f95ba541970c41a631d480062afedb0ebc455e19",
+      "rev": "8ad0ede3ff9065878a853e4b037ba6ac88231fb0",
       "src": "https://github.com/folke/sidekick.nvim"
     },
     "smart-splits.nvim": {
-      "rev": "82d01bb71bc051955654b3af68355f783d872fe0",
+      "rev": "96afd5d3b029ac354aaa369fb33b4613a0bbf2f0",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
     },
     "snacks.nvim": {
-      "rev": "a049339328e2599ad6e85a69fa034ac501e921b2",
+      "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
       "src": "https://github.com/folke/snacks.nvim"
     },
     "sqlite.lua": {
