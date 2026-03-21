@@ -271,6 +271,8 @@ require("devastion.utils.pkg").add({
 
                   extended_filetypes = {
                     sh = { "shelldoc" },
+                    zsh = { "shelldoc" },
+                    bash = { "shelldoc" },
                     php = { "phpdoc" },
                   },
                 },

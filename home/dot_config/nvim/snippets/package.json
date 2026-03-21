@@ -13,7 +13,8 @@
         "language": [
           "shell",
           "sh",
-          "bash"
+          "bash",
+          "zsh"
         ],
         "path": "./shell.json"
       }
