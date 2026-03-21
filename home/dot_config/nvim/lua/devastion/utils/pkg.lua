@@ -31,6 +31,35 @@ function M.mason_install(packages)
   end)
 end
 
+---Execute function immediately
+---@param f function
+function M.now(f)
+  require("mini.misc").safely("now", f)
+end
+
+---Queue to be executed soon without blocking the execution of next
+---code in file. Queued functions are executed in order they are added.
+---@param f function
+function M.later(f)
+  require("mini.misc").safely("later", f)
+end
+
+---Execute function on event
+---@param ev table|string event
+---@param f function
+function M.on_event(ev, f)
+  local event = type(ev) == "table" and table.concat(ev, ",") or ev
+  require("mini.misc").safely("event:" .. event, f)
+end
+
+---Execute function on filetypes
+---@param ft table|string
+---@param f function
+function M.on_filetype(ft, f)
+  local filetypes = type(ft) == "table" and table.concat(ft, ",") or ft
+  require("mini.misc").safely("filetype:" .. filetypes, f)
+end
+
 ---Convert plugin name to full URL
 ---@param name string
 ---@return string

@@ -13,6 +13,7 @@ safe_require("devastion.config.filetypes")
 local pkg_ok, pkg = pcall(require, "devastion.utils.pkg")
 if pkg_ok then
   pkg.add({
+    "nvim-mini/mini.misc", -- used in pkg utils
     "nvim-lua/plenary.nvim",
     "muniftanjim/nui.nvim",
     "kkharji/sqlite.lua",
@@ -26,7 +27,6 @@ local early_packages = {
   "devastion.packages.mini.icons",
   "devastion.packages.treesitter",
   "devastion.packages.tokyonight",
-  "devastion.packages.mini.misc",
   "devastion.packages.auto-session",
 }
 

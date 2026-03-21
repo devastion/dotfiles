@@ -102,6 +102,9 @@ require("devastion.utils.pkg").add({
             previewer = "undotree_native",
             locate = true,
           },
+          autocmds = {
+            previewer = "hide",
+          },
         })
 
         map("<leader>:", function()
