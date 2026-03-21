@@ -20,6 +20,7 @@ REPORTTIME=5
 
 KEYTIMEOUT=1
 
+source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/utils.zsh"
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/zsh_unplugged.zsh"
 
 repos=(
@@ -92,15 +93,16 @@ source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/aliases.zsh"
 HISTFILE="${ZSTATEDIR:-$HOME/.local/state/zsh}/history"
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
-HIST_IGNORE_PATTERN="(git reset*|reboot|shutdown|exit|cd ..|cd ~|..|~)"
+HIST_IGNORE="(git reset*|reboot|shutdown|exit|cd ..|cd ~|..|~)"
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/options.zsh"
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/functions.zsh"
 
 function zvm_after_init() {
-  eval "$(mise activate zsh)"
-  FZF_ALT_C_COMMAND= source <(fzf --zsh)
-  eval "$(zoxide init zsh)"
+  _evalcache /opt/homebrew/bin/brew shellenv
+  _evalcache mise activate zsh
+  FZF_ALT_C_COMMAND= _evalcache fzf --zsh
+  _evalcache zoxide init zsh
 }
 
 function zvm_after_lazy_keybindings() {
