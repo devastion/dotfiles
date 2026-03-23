@@ -171,6 +171,10 @@ run = ["layout tiling", "move-node-to-workspace 4"]
 
 # workspace 5
 [[on-window-detected]]
+if.app-id = "com.spotify.client"
+run = ["layout tiling", "move-node-to-workspace 5"]
+
+[[on-window-detected]]
 if.app-id = "com.apple.iCal"
 if.window-title-regex-substring = "calendar"
 run = ["layout tiling", "move-node-to-workspace 5"]
