@@ -7,7 +7,7 @@ require("devastion.utils.pkg").add({
     data = {
       event = { "BufReadPost", "BufWritePost", "BufNewFile" },
       init = function()
-        vim.g.enable_autoformat = false
+        vim.g.ENABLE_AUTOFORMAT = vim.g.ENABLE_AUTOFORMAT or false
       end,
       config = function()
         require("conform").setup({
@@ -33,8 +33,8 @@ require("devastion.utils.pkg").add({
             yaml = { "yamlfmt" },
           },
           format_on_save = function(bufnr)
-            local is_autoformat_enabled = vim.b[bufnr].enable_autoformat == nil and vim.g.enable_autoformat
-              or vim.b[bufnr].enable_autoformat
+            local is_autoformat_enabled = vim.b[bufnr].ENABLE_AUTOFORMAT == nil and vim.g.ENABLE_AUTOFORMAT
+              or vim.b[bufnr].ENABLE_AUTOFORMAT
 
             if is_autoformat_enabled then
               return { timeout_ms = 3000, lsp_format = "fallback" }
@@ -85,13 +85,21 @@ require("devastion.utils.pkg").add({
           require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
         end, "Format Injected Langs", { "n", "v" })
 
-        map("<Leader>uF", function()
-          vim.b.enable_autoformat = not vim.b.enable_autoformat
+        map("<Leader>uf", function()
+          vim.b.ENABLE_AUTOFORMAT = not vim.b.ENABLE_AUTOFORMAT
           vim.notify(
-            (vim.b.enable_autoformat and "Enabled" or "Disabled") .. " autoformat for current buffer",
+            (vim.b.ENABLE_AUTOFORMAT and "Enabled" or "Disabled") .. " autoformat for current buffer",
             vim.log.levels.INFO
           )
-        end, "Toggle Format")
+        end, "Toggle Format (buffer)")
+
+        map("<Leader>uF", function()
+          vim.g.ENABLE_AUTOFORMAT = not vim.g.ENABLE_AUTOFORMAT
+          vim.notify(
+            (vim.g.ENABLE_AUTOFORMAT and "Enabled" or "Disabled") .. " autoformat (global)",
+            vim.log.levels.INFO
+          )
+        end, "Toggle Format (global)")
       end,
     },
   },

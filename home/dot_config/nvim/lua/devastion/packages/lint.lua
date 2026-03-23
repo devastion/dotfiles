@@ -9,7 +9,7 @@ require("devastion.utils.pkg").add({
     data = {
       event = { "BufReadPost", "BufWritePost", "BufNewFile" },
       init = function()
-        vim.g.enable_autolint = false
+        vim.g.ENABLE_AUTOLINT = vim.g.ENABLE_AUTOLINT or false
       end,
       config = function()
         local lint = require("lint")
@@ -43,8 +43,8 @@ require("devastion.utils.pkg").add({
         autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
           group = augroup("nvim_lint"),
           callback = function(event)
-            local is_autolint_enabled = vim.b[event.buf].enable_autolint == nil and vim.g.enable_autolint
-              or vim.b[event.buf].enable_autolint
+            local is_autolint_enabled = vim.b[event.buf].ENABLE_AUTOLINT == nil and vim.g.ENABLE_AUTOLINT
+              or vim.b[event.buf].ENABLE_AUTOLINT
 
             if is_autolint_enabled then
               if vim.opt_local.modifiable:get() then
@@ -66,13 +66,20 @@ require("devastion.utils.pkg").add({
           require("lint").try_lint()
         end, "Lint", { "n", "v" })
 
-        map("<Leader>uL", function()
-          vim.b.enable_autolint = not vim.b.enable_autolint
+        map("<Leader>ul", function()
+          vim.b.ENABLE_AUTOLINT = not vim.b.ENABLE_AUTOLINT
           vim.notify(
-            (vim.b.enable_autolint and "Enabled" or "Disabled") .. " autolint for current buffer",
+            (vim.b.ENABLE_AUTOLINT and "Enabled" or "Disabled") .. " autolint for current buffer",
             vim.log.levels.INFO
           )
-        end, "Toggle Lint")
+        end, "Toggle Lint (buffer)")
+        map("<Leader>uL", function()
+          vim.g.ENABLE_AUTOLINT = not vim.g.ENABLE_AUTOLINT
+          vim.notify(
+            (vim.g.ENABLE_AUTOLINT and "Enabled" or "Disabled") .. " autolint for current buffer",
+            vim.log.levels.INFO
+          )
+        end, "Toggle Lint (global)")
       end,
     },
   },

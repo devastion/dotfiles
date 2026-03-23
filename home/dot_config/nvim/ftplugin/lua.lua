@@ -1,2 +1,2 @@
-vim.b.enable_autoformat = true
-vim.b.enable_autolint = true
+vim.b.ENABLE_AUTOFORMAT = true
+vim.b.ENABLE_AUTOLINT = true
