@@ -3,6 +3,8 @@
   email = ""
 
 ; use custom git config options based on directory
-[includeIf "gitdir:~/Projects/company/"]
+[includeIf "gitdir:github/"]
+  path = "~/Projects/github/.gitconfig"
+[includeIf "gitdir:company/"]
   path = "~/Projects/company/.gitconfig"
 ; vim:ft=gitconfig

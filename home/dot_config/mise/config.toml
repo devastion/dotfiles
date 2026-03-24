@@ -26,7 +26,7 @@ hk = "latest"
 github-cli = "latest"
 "go:github.com/reteps/dockerfmt" = "latest"
 amber = "nightly"
-lua = "5.5"
+lua = "5.1"
 
 [settings]
 lockfile = true

@@ -8,6 +8,7 @@
   features = "decorations"
   line-numbers = true
   hyperlinks = true
+  side-by-side = true
 
 [include]
   path = "~/.config/git/tokyonight_night.gitconfig"

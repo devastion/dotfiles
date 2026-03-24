@@ -1,8 +1,5 @@
 *.png diff=image
-**.png diff=image
 *.gif diff=image
-*.jpg diff=image
-*.java diff=java merge=mergiraf.gif diff=image
 *.jpg diff=image
 *.java diff=java merge=mergiraf
 # vim:ft=gitattributes

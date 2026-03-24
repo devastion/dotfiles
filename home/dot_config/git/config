@@ -16,6 +16,8 @@
   algorithm = "histogram"
   colorMoved = "default"
   colorMovedWS = "allow-indentation-change"
+  renames = copies
+  mnemonicPrefix = true
 
 [difftool]
   prompt = false
@@ -25,7 +27,6 @@
 
 [merge]
   tool = "nvimdiff"
-  ff = true
   conflictstyle = "zdiff3"
 
 [mergetool]
@@ -37,12 +38,19 @@
   layout = "LOCAL,BASE,REMOTE / MERGED"
 
 [pull]
-  ff = true
+  ff = only
+
+[transfer]
+  fsckObjects = true
 
 [fetch]
   prune = true
   pruneTags = true
   parallel = 0
+  fsckObjects = true
+
+[receive]
+  fsckObjects = true
 
 [commit]
   verbose = true
@@ -53,13 +61,18 @@
 [column]
   ui = "auto"
 
+[status]
+  showStash = true
+
+[stash]
+  showPatch = true
+
 [log]
   date = "iso"
 
 [push]
   autoSetupRemote = true
   followTags = true
-  default = "simple"
   recurseSubmodules = "check"
 
 [rebase]

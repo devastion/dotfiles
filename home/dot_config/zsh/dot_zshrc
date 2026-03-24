@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 
-if [[ -v PROFILING ]]; then zmodload zsh/zprof; fi
+if [[ -v PROFILING ]]; then
+  TIMEFMT="'$fg[green]%J$reset_color' time: $fg[blue]%*Es$reset_color, cpu: $fg[blue]%P$reset_color"
+  REPORTTIME=5
+  zmodload zsh/zprof
+fi
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER.zsh"
@@ -14,9 +18,6 @@ select-word-style bash
 
 autoload -Uz colors && colors
 export CLICOLOR=1
-
-TIMEFMT="'$fg[green]%J$reset_color' time: $fg[blue]%*Es$reset_color, cpu: $fg[blue]%P$reset_color"
-REPORTTIME=5
 
 KEYTIMEOUT=1
 

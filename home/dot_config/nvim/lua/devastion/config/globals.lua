@@ -18,15 +18,18 @@ vim.g.diagnostic_signs = {
 }
 vim.g.border_style = "single"
 
-local luarocks_path = {
-  lua = vim.fn.trim(vim.fn.system("luarocks --lua-version 5.1 path --lr-path")),
-  c = vim.fn.trim(vim.fn.system("luarocks --lua-version 5.1 path --lr-cpath")),
-}
+local luarocks_args = { "--lua-version", "5.1", "path" }
 
-if luarocks_path.lua ~= "" then
-  package.path = package.path .. ";" .. luarocks_path.lua
-end
+vim.system({ "luarocks", unpack(luarocks_args), "--lr-path" }, { text = true }, function(out)
+  local path = vim.trim(out.stdout or "")
+  if path ~= "" then
+    package.path = package.path .. ";" .. path
+  end
+end)
 
-if luarocks_path.c ~= "" then
-  package.cpath = package.cpath .. ";" .. luarocks_path.c
-end
+vim.system({ "luarocks", unpack(luarocks_args), "--lr-cpath" }, { text = true }, function(out)
+  local cpath = vim.trim(out.stdout or "")
+  if cpath ~= "" then
+    package.cpath = package.cpath .. ";" .. cpath
+  end
+end)
