@@ -105,6 +105,36 @@ require("devastion.utils.pkg").add({
           ft = "lua",
           buffer = true,
         })
+
+        if vim.env.PROF then
+          map("<leader>Pf", function()
+            require("snacks.profiler").find({})
+          end, "Find")
+          map("<leader>Ph", function()
+            require("snacks.profiler").highlight()
+          end, "Toggle Highlight")
+          map("<leader>Pp", function()
+            require("snacks.profiler").pick()
+          end, "Pick")
+          map("<leader>Pr", function()
+            require("snacks.profiler").running()
+          end, "Running")
+          map("<leader>Px", function()
+            require("snacks.profiler").scratch()
+          end, "Scratch")
+          map("<leader>Ps", function()
+            require("snacks.profiler").start()
+          end, "Start")
+          map("<leader>PS", function()
+            require("snacks.profiler").stop()
+          end, "Stop")
+          map("<leader>Pi", function()
+            require("snacks.profiler").status()
+          end, "Status")
+          map("<leader>Pt", function()
+            require("snacks.profiler").toggle()
+          end, "Toggle")
+        end
       end,
     },
   },

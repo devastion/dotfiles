@@ -46,7 +46,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf-lua": {
-      "rev": "8a79ee54d6216d10b2f153921a12b152be0c1a20",
+      "rev": "3b01dc83a893749f5ae4639f1aa0af523821840a",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gist.nvim": {
@@ -58,7 +58,7 @@
       "src": "https://github.com/dynge/gitmoji.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "5c569562d9f9c98f12d684de5f37150e0ca1b12d",
+      "rev": "0a80125bace82d82847d40bc2c38a22d62c6dc2d",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "grug-far.nvim": {
@@ -158,7 +158,7 @@
       "src": "https://github.com/devastion/neotest-node"
     },
     "neotest-phpunit": {
-      "rev": "a5711d7c9740cceb693cff96e0c6b8cf67b514ec",
+      "rev": "af17be803af4ed191af25de2a1479b6c2545a716",
       "src": "https://github.com/devastion/neotest-phpunit",
       "version": "'feat/add-docker-and-coverage-support'"
     },
