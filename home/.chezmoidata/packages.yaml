@@ -4,6 +4,7 @@ packages:
       - "coreutils"
       - "exiftool"
       - "felixkratz/formulae/borders"
+      - "gnupg"
       - "less"
       - "lesspipe"
     casks:

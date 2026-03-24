@@ -8,7 +8,7 @@ require("devastion.utils.pkg").add({
       config = function()
         require("marks").setup({
           default_mappings = true,
-          builtin_marks = { ".", "<", ">", "^" },
+          builtin_marks = {},
           cyclic = true,
           force_write_shada = false,
           refresh_interval = 250,
@@ -26,7 +26,10 @@ require("devastion.utils.pkg").add({
 
         map("m", "<Nop>", "+[Marks]")
 
-        for i = string.byte("a"), string.byte("z") do
+        map("ma", function()
+          require("marks").toggle()
+        end, "Toggle Mark")
+        for i = string.byte("b"), string.byte("z") do
           local c = string.char(i)
 
           map("m" .. c, function()

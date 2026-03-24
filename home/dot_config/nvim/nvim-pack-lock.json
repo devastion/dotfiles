@@ -58,7 +58,7 @@
       "src": "https://github.com/dynge/gitmoji.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "7c4faa3540d0781a28588cafbd4dd187a28ac6e3",
+      "rev": "5c569562d9f9c98f12d684de5f37150e0ca1b12d",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "grug-far.nvim": {
@@ -266,7 +266,7 @@
       "src": "https://github.com/samjwill/nvim-unception"
     },
     "octo.nvim": {
-      "rev": "42e547c08433c22c8311d7848998d2d08bfaf77e",
+      "rev": "6f09b9269b18c32d837bbfe20eb4ec70859581c8",
       "src": "https://github.com/pwntester/octo.nvim"
     },
     "one-small-step-for-vimkind": {
@@ -306,7 +306,7 @@
       "src": "https://github.com/devastion/resolve.nvim"
     },
     "schemastore.nvim": {
-      "rev": "cf2b276dc88696b35d55ea4bd55dfaf7d608c9a2",
+      "rev": "66e53f3316515ac8548b47826f8d273955aa7af1",
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "sidekick.nvim": {
@@ -338,7 +338,7 @@
       "src": "https://github.com/folke/todo-comments.nvim"
     },
     "tokyonight.nvim": {
-      "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
+      "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
       "src": "https://github.com/folke/tokyonight.nvim"
     },
     "ts-expand-hover.nvim": {

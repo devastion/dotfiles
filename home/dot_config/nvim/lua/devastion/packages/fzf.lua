@@ -105,6 +105,9 @@ require("devastion.utils.pkg").add({
           autocmds = {
             previewer = "hide",
           },
+          marks = {
+            marks = "%a",
+          },
         })
 
         map("<leader>:", function()
