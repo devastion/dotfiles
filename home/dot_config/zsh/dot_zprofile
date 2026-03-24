@@ -16,15 +16,15 @@ export ZCOMPDUMP="$ZCACHEDIR/zcompdump-$ZSH_VERSION"
 export ZCOMPDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}/completions"
 export ZFUNCDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}/functions"
 
-local z_dirs=(
+z_dirs=(
   "$ZSTATEDIR"
   "$ZSHAREDIR"
   "$ZCACHEDIR"
 )
-
 for dir in $z_dirs; do
   [[ ! -d "$dir" ]] && mkdir -p "$dir"
 done
+unset z_dirs
 
 typeset -U fpath cdpath
 

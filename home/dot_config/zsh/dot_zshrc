@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-if [[ -v PROFILING ]]; then
+if [[ -v PROF ]]; then
   TIMEFMT="'$fg[green]%J$reset_color' time: $fg[blue]%*Es$reset_color, cpu: $fg[blue]%P$reset_color"
   REPORTTIME=5
   zmodload zsh/zprof
@@ -24,7 +24,7 @@ KEYTIMEOUT=1
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/utils.zsh"
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/zsh_unplugged.zsh"
 
-repos=(
+_repos=(
   "aloxaf/fzf-tab"
   "hlissner/zsh-autopair"
   "jeffreytse/zsh-vi-mode"
@@ -37,7 +37,8 @@ repos=(
   "zsh-users/zsh-completions"
   "zsh-users/zsh-syntax-highlighting"
 )
-plugin-clone $repos
+plugin-clone $_repos
+unset _repos
 
 plugin-source "zsh-completions"
 
@@ -54,7 +55,7 @@ done
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/zstyles.zsh"
 
-plugins=(
+_plugins=(
   "powerlevel10k"
   "fzf-tab"
   "zsh-vi-mode"
@@ -68,7 +69,8 @@ plugins=(
   "jq-zsh-plugin"
   "zsh-syntax-highlighting"
 )
-plugin-source $plugins
+plugin-source $_plugins
+unset _plugins
 
 MAGIC_ENTER_GIT_COMMAND=" git st"
 MAGIC_ENTER_OTHER_COMMAND=" ls ."
@@ -112,4 +114,4 @@ function zvm_after_lazy_keybindings() {
 
 [[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source "${ZDOTDIR}/.p10k.zsh"
 
-if [[ -v PROFILING ]]; then zprof; fi
+if [[ -v PROF ]]; then zprof; fi
