@@ -31,12 +31,12 @@ require("devastion.utils.pkg").add({
           dashboard = { enabled = false },
           explorer = { enabled = false },
           indent = { enabled = false },
-          input = { enabled = false },
           picker = { enabled = false },
           notifier = { enabled = false },
           quickfile = { enabled = false },
           scope = { enabled = false },
           scroll = { enabled = false },
+          input = { enabled = true },
           statuscolumn = { enabled = true },
           words = { enabled = true },
           terminal = {
@@ -61,7 +61,11 @@ require("devastion.utils.pkg").add({
         end, "Prev Word Reference", "i")
 
         map("grN", function()
-          require("snacks.rename").rename_file()
+          require("snacks.rename").rename_file({
+            on_rename = function(to, from)
+              require("warp").on_file_update(from, to)
+            end,
+          })
         end, "Rename File")
 
         map("<leader>go", function()

@@ -138,19 +138,7 @@ require("devastion.utils.pkg").add({
           },
         })
 
-        vim.lsp.config("eslint", {
-          on_attach = function()
-            local disabled_formatting_lsp = { "vue_ls", "vtsls" }
-            local clients = vim.lsp.get_clients()
-
-            for _, client in ipairs(clients) do
-              if vim.tbl_contains(disabled_formatting_lsp, client.name) then
-                client.server_capabilities.documentFormattingProvider = false
-                vim.notify(string.format("Disabled formatting for: %s", client.name), vim.log.levels.INFO)
-              end
-            end
-          end,
-        })
+        vim.lsp.config("eslint", {})
 
         vim.lsp.config("intelephense", {
           settings = {
@@ -291,11 +279,18 @@ local function fzf_lsp_keymaps(buf)
   end, "LSP Finder", "n", { buffer = buf })
 end
 
+local formatting_disabled_lsp = { "vue_ls", "vtsls" }
+
 autocmd("LspAttach", {
   group = augroup("lsp_attach"),
   callback = function(event)
     local buf = event.buf
     local filetype = vim.bo[buf].filetype
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+    if client and vim.tbl_contains(formatting_disabled_lsp, client.name) then
+      client.server_capabilities.documentFormattingProvider = false
+    end
 
     map("grn", function()
       require("live-rename").rename()

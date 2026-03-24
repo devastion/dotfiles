@@ -1,4 +1,6 @@
 local map = require("devastion.utils").map
+local autocmd = require("devastion.utils").autocmd
+local augroup = require("devastion.utils").augroup
 
 require("devastion.utils.pkg").add({
   {
@@ -117,6 +119,19 @@ require("devastion.utils.pkg").add({
         map("<leader>4", function()
           require("warp").goto_index(4)
         end, "Goto #4")
+
+        autocmd("User", {
+          group = augroup("warp_mini_files"),
+          pattern = { "MiniFilesActionRename", "MiniFilesActionMove" },
+          callback = function(ev)
+            local from, to = ev.data.from, ev.data.to
+
+            local warp_exists, warp = pcall(require, "warp")
+            if warp_exists then
+              warp.on_file_update(from, to)
+            end
+          end,
+        })
       end,
     },
   },
