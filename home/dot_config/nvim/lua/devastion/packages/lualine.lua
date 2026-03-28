@@ -86,6 +86,20 @@ require("lualine").setup({
           hint = signs.HINT,
         },
       },
+      {
+        function()
+          local warp = require("warp")
+          local total = warp.count()
+          local item = warp.get_item_by_buf(0)
+          local current = item and item.index or "-"
+          return string.format("󱐋 [%s/%s]", tonumber(current) or "-", tonumber(total))
+        end,
+        cond = function()
+          local ok, warp = pcall(require, "warp")
+          return ok and warp.count() > 0
+        end,
+        color = { fg = "#1abc9c", gui = "bold" },
+      },
       -- { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
       -- { "filename" },
     },

@@ -158,7 +158,7 @@
       "src": "https://github.com/devastion/neotest-node"
     },
     "neotest-phpunit": {
-      "rev": "a5711d7c9740cceb693cff96e0c6b8cf67b514ec",
+      "rev": "db31eb0f30b4e9d700b1f431d89b67c5034d1413",
       "src": "https://github.com/devastion/neotest-phpunit",
       "version": "'feat/add-docker-and-coverage-support'"
     },
