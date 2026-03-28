@@ -29,7 +29,7 @@ function zsh_time() {
 function generate_zsh_completions() {
   typeset -A commands=(
     [docker]="docker completion zsh"
-    [sg]="sg completions zsh"
+    [ast-grep]="sg completions zsh"
     [bat]="bat --completion=zsh"
     [rustup]="rustup completions zsh"
     [cargo]="rustup completions zsh cargo"
@@ -51,7 +51,11 @@ function generate_zsh_completions() {
   for k in "${(@k)commands}"; do
     if [[ ! -d $ZCOMPDIR ]]; then mkdir -p $ZCOMPDIR; fi
     local cmd="${commands[${k}]}"
-    echo "Running '$cmd >| $ZCOMPDIR/_$k'"
-    eval $cmd >|"$ZCOMPDIR/_$k"
+    if builtin command -v $k >/dev/null 2>&1; then
+      echo "Running '$cmd >| $ZCOMPDIR/_$k'"
+      eval $cmd >|"$ZCOMPDIR/_$k"
+    else
+      echo "Command $k is not available"
+    fi
   done
 }

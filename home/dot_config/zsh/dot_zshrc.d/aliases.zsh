@@ -17,6 +17,7 @@ alias lsg="l -ao --group-directories-first --grid"
 alias "cd.."="cd_up"
 alias nr="npm run"
 alias dco="docker compose"
+alias dcoup="dco up --pull never"
 
 function dcs() {
   local containers=($(docker ps -q))
@@ -36,6 +37,7 @@ function mnvim() {
 }
 
 alias nvim="mnvim"
+alias pnvim="PROF=1 nvim"
 alias ch="chezmoi"
 
 # tmux
