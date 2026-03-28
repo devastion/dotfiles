@@ -7,10 +7,10 @@ require("devastion.utils.pkg").add({
       config = function()
         require("todo-comments").setup()
 
-        map("]t", function()
+        map("]T", function()
           require("todo-comments").jump_next()
         end, "Next ToDo Comment")
-        map("[t", function()
+        map("[T", function()
           require("todo-comments").jump_prev()
         end, "Prev ToDo Comment")
 

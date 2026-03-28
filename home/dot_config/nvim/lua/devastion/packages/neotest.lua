@@ -9,6 +9,9 @@ pkg.later(function()
     {
       src = "devastion/neotest-phpunit",
       version = "feat/add-docker-and-coverage-support",
+      data = {
+        dev = "~/Projects/github/neovim-plugins/neotest-phpunit",
+      },
     },
     "devastion/neotest-node",
     "diidiiman/neotest-python",
@@ -66,6 +69,8 @@ pkg.later(function()
 
           require("which-key").add({
             { "<leader>t", group = "+[Testing]" },
+            { "<leader>t]", group = "+[Next]" },
+            { "<leader>t[", group = "+[Prev]" },
           })
 
           map("<leader>ta", function()
@@ -123,6 +128,28 @@ pkg.later(function()
           map("<leader>tw", function()
             require("neotest").watch.toggle(vim.fn.expand("%"))
           end, "Toggle Watch")
+
+          local test_statuses = {
+            p = "passed",
+            s = "skipped",
+            f = "failed",
+          }
+
+          for key, status in pairs(test_statuses) do
+            map("<leader>t]" .. key, function()
+              require("neotest").jump.next({ status = status })
+            end, status:sub(1, 1):upper() .. status:sub(2) .. " Test")
+            map("<leader>t[" .. key, function()
+              require("neotest").jump.prev({ status = status })
+            end, status:sub(1, 1):upper() .. status:sub(2) .. " Test")
+          end
+
+          map("]t", function()
+            require("neotest").jump.next()
+          end, "Next Test")
+          map("[t", function()
+            require("neotest").jump.prev()
+          end, "Prev Test")
         end,
       },
     },

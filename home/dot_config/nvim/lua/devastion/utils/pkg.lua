@@ -83,6 +83,7 @@ end
 ---@field config? function
 ---@field init? function
 ---@field task? function
+---@field dev? string Local path to the plugin
 
 ---@class pkg.add
 ---@field src string
@@ -107,6 +108,15 @@ function M.add(packages)
   vim.pack.add(specs, {
     load = function(package)
       local data = package.spec.data or {}
+
+      if data.dev then
+        local dev_path = vim.fs.normalize(data.dev)
+        local dev_plugins = vim.fn.stdpath("data") .. "/site/pack/dev/opt"
+        vim.fn.mkdir(dev_plugins, "p")
+        vim.uv.fs_symlink(dev_path, dev_plugins .. "/" .. package.spec.name, { junction = true })
+        vim.cmd.packadd(package.spec.name)
+        return
+      end
 
       if data.disabled then
         return
