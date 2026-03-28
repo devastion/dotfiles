@@ -5,8 +5,8 @@ function src() {
   rm "$ZCOMPDUMP"
   compinit -i -d "$ZCOMPDUMP"
 
-  for f in "${ZDOTDIR:-~}/.zshrc" "$ZCOMPDUMP"; do
-    zrecompile -p "$f" && command rm -f "$f".zwc.old
+  for f in "$ZCOMPDUMP"; do
+    zrecompile -p "$f"
   done
 
   # Use $SHELL if it's available and a zsh shell

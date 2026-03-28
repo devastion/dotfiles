@@ -52,5 +52,6 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 *) git log --color=always $word ;;
 esac'
 zstyle ':fzf-tab:complete:mise:*' fzf-preview
+zstyle ':fzf-tab:complete:docker:*' fzf-preview
 zstyle ':fzf-tab:complete:*:options' fzf-preview
 zstyle ':fzf-tab:complete:*:argument-1' fzf-preview

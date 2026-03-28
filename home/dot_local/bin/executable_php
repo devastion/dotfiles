@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+set -eu
+
+if [ "$(uname -s)" = "Darwin" ]; then
+  _php_bin="php"
+
+  if builtin command -v brew >/dev/null 2>&1; then
+    _php_bin="$(brew --prefix php)/bin/php"
+  fi
+fi
+
+if ! docker ps -q | grep -q .; then
+  $_php_bin "$*"
+else
+  _cid="$(docker ps -q --filter "name=php" | head -n1)"
+
+  docker exec "$_cid" sh -c "php $*"
+
+fi
+
+unset _php_bin _cid

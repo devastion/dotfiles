@@ -10,12 +10,12 @@ require("devastion.utils.pkg").add({
         require("mini.git").setup()
 
         map("<Leader>gA", function()
-          vim.cmd([[Git add %]])
+          vim.cmd("Git add " .. vim.fn.expand("%:p"))
         end, "Add File")
 
         map("<Leader>gR", function()
-          vim.cmd([[Git restore %]])
-        end, "Restore File")
+          vim.cmd("Git reset " .. vim.fn.expand("%:p"))
+        end, "Reset File")
       end,
     },
   },
