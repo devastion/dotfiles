@@ -2,17 +2,20 @@
 
 # history
 setopt \
+  append_history \
   extended_history \
   hist_expire_dups_first \
   hist_find_no_dups \
+  hist_ignore_dups \
   hist_ignore_all_dups \
+  hist_save_no_dups \
   hist_ignore_space \
   hist_no_store \
   hist_reduce_blanks \
-  hist_save_no_dups \
   hist_verify \
-  share_history \
   hist_fcntl_lock
+
+unsetopt share_history hist_beep
 
 # completion
 setopt \
@@ -53,4 +56,4 @@ setopt \
   no_clobber \
   prompt_subst
 
-unsetopt correct
+unsetopt correct rm_star_silent

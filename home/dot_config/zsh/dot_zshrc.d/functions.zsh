@@ -2,6 +2,7 @@
 
 function src() {
   autoload -U compinit zrecompile
+  rm "$ZCOMPDUMP"
   compinit -i -d "$ZCOMPDUMP"
 
   for f in "${ZDOTDIR:-~}/.zshrc" "$ZCOMPDUMP"; do

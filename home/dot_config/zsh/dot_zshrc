@@ -21,7 +21,6 @@ export CLICOLOR=1
 
 KEYTIMEOUT=1
 
-source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/utils.zsh"
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/zsh_unplugged.zsh"
 
 _repos=(
@@ -44,6 +43,7 @@ plugin-source "zsh-completions"
 
 autoload -Uz compinit
 if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ${ZCOMPDUMP} 2>/dev/null)" ]; then
+  echo "Rebuilding $ZCOMPDUMP"
   compinit -i -d "$ZCOMPDUMP"
 else
   compinit -i -C -d "$ZCOMPDUMP"
@@ -97,19 +97,12 @@ HISTFILE="${ZSTATEDIR:-$HOME/.local/state/zsh}/history"
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 HISTORY_IGNORE="(git reset*|reboot*|shutdown*|exit|cd ..|cd ~|..|~)"
-function zshaddhistory() {
-  emulate -L zsh
-  if ! [[ "$1" =~ "$HISTORY_IGNORE" ]]; then
-    print -sr -- "${1%%$'\n'}"
-    fc -p
-  else
-    return 1
-  fi
-}
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/options.zsh"
-source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/functions.zsh"
+zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/functions.zsh"
 
+source "${ZDOTDIR:-$HOME/.config/zsh}/vendor/evalcache.zsh"
+zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/vendor/artisan.zsh"
 function zvm_after_init() {
   _evalcache /opt/homebrew/bin/brew shellenv
   _evalcache mise activate zsh

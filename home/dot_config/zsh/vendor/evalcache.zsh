@@ -1,13 +1,5 @@
 #!/usr/bin/env zsh
 
-function _command_exists {
-  if builtin command -v $1 >/dev/null 2>&1; then
-    return 0
-  fi
-
-  return 1
-}
-
 # =============================================================================
 # ZSH EVALCACHE
 # =============================================================================
@@ -31,7 +23,7 @@ function _evalcache() {
     fi
   done
 
-  if ! _command_exists $name; then
+  if ! builtin command -v $name >/dev/null 2>&1; then
     echo "${funcsourcetrace[1]}: Command $name doesn't exists."
     return 1
   fi
@@ -41,9 +33,9 @@ function _evalcache() {
     data=${data}$(typeset -f "${name}")
   fi
 
-  if _command_exists md5; then
+  if builtin command -v md5 >/dev/null 2>&1; then
     cmd_hash=$(echo -n "${data}" | md5)
-  elif _command_exists md5sum; then
+  elif builtin command -v md5sum >/dev/null 2>&1; then
     cmd_hash=$(echo -n "${data}" | md5sum | cut -d' ' -f1)
   fi
 
