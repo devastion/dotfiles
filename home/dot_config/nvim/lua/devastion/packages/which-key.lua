@@ -15,6 +15,7 @@ require("devastion.utils.pkg").add({
             { "<auto>", mode = "nixsotc" },
             { "s", mode = { "n", "x" } },
             { "m", mode = { "n" } },
+            { "<s-m>", mode = { "n" } },
           },
           sort = { "order", "group", "alphanum" },
           icons = {

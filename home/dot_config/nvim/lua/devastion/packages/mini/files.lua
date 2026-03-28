@@ -6,7 +6,11 @@ require("devastion.utils.pkg").add({
     data = {
       config = function()
         local files = require("mini.files")
-        files.setup()
+        files.setup({
+          options = {
+            permanent_delete = false,
+          },
+        })
         map("<leader>e", function()
           files.open()
         end, "Files (root)")

@@ -95,6 +95,31 @@ require("lualine").setup({
         cond = require("noice").api.statusline.mode.has,
         color = { fg = "#ff9e64" },
       },
+      {
+        function()
+          local fname = vim.fn.expand("%:p")
+          if fname == "" then
+            return ""
+          end
+          return vim.fn.getfperm(fname)
+        end,
+        color = function()
+          local fname = vim.fn.expand("%:p")
+          if fname == "" then
+            return {}
+          end
+          if vim.fn.executable(fname) == 1 then
+            return { fg = "#f7768e" } -- red for executable
+          elseif vim.fn.filewritable(fname) == 1 then
+            return { fg = "#9ece6a" } -- green for writable
+          else
+            return { fg = "#565f89" } -- gray for read-only
+          end
+        end,
+        cond = function()
+          return vim.fn.expand("%:p") ~= ""
+        end,
+      },
       "encoding",
       "filetype",
     },

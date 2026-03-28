@@ -52,71 +52,64 @@ require("devastion.utils.pkg").add({
           }
         )
 
+        local leader = "<s-m>"
         require("which-key").add({
-          { "<leader>h", group = "+[Warp]" },
+          { leader .. "", group = "+[Warp]" },
         })
 
         -- Actions
-        map("<c-s-a>", function()
-          require("warp").add()
-          vim.notify("Added " .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t") .. " to warp")
-        end, "Add [warp]")
-        map("<c-s-d>", function()
-          require("warp").del()
-          vim.notify("Deleted " .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t") .. " from warp")
-        end, "Delete [warp]")
         map("<c-e>", function()
           require("warp").show_list()
         end, "Show list [warp]")
 
-        map("<leader>ha", function()
+        map(leader .. "a", function()
           require("warp").add()
           vim.notify("Added " .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t") .. " to warp")
         end, "Add")
-        map("<leader>hd", function()
+        map(leader .. "d", function()
           require("warp").del()
           vim.notify("Deleted " .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t") .. " from warp")
         end, "Delete")
-        map("<leader>hl", function()
+        map(leader .. "l", function()
           require("warp").show_list()
         end, "Show list")
-        map("<leader>hA", function()
+        map(leader .. "A", function()
           require("warp").add_all_onscreen()
         end, "Add all on screen files")
 
         -- Clear
-        map("<leader>hx", function()
+        map(leader .. "x", function()
           require("warp").clear_current_list()
         end, "Clear current list")
-        map("<leader>hX", function()
+        map(leader .. "X", function()
           require("warp").clear_all_list()
         end, "Clear all lists")
 
         -- Go to navigation
-        map("<leader>h]", function()
+        map(leader .. "]", function()
           require("warp").goto_index("next")
         end, "Goto next index")
-        map("<leader>h[", function()
+        map(leader .. "[", function()
           require("warp").goto_index("prev")
         end, "Goto prev index")
-        map("<leader>h0", function()
+        map(leader .. "0", function()
           require("warp").goto_index("first")
         end, "Goto first index")
-        map("<leader>h$", function()
+        map(leader .. "$", function()
           require("warp").goto_index("last")
         end, "Goto last index")
 
         -- Direct index
-        map("<leader>1", function()
+        map(leader .. "1", function()
           require("warp").goto_index(1)
         end, "Goto #1")
-        map("<leader>2", function()
+        map(leader .. "2", function()
           require("warp").goto_index(2)
         end, "Goto #2")
-        map("<leader>3", function()
+        map(leader .. "3", function()
           require("warp").goto_index(3)
         end, "Goto #3")
-        map("<leader>4", function()
+        map(leader .. "4", function()
           require("warp").goto_index(4)
         end, "Goto #4")
 
