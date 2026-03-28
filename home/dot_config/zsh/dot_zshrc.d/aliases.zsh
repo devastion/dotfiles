@@ -14,6 +14,10 @@ alias lt="l -la --sort=modified --reverse"
 alias ls="ll"
 alias lsg="l -ao --group-directories-first --grid"
 
+function history-stat() {
+  history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head
+}
+
 alias "cd.."="cd_up"
 alias nr="npm run"
 alias dco="docker compose"
@@ -27,7 +31,7 @@ function dcs() {
   fi
 
   echo "Stopping all docker containers..."
-  docker stop ${containers[@]}
+  docker stop "${containers[@]}"
   echo "All docker containers are stopped!"
   return 0
 }

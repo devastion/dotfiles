@@ -48,8 +48,9 @@ function generate_zsh_completions() {
     [npm]="npm completion"
   )
 
+  if [[ ! -d $ZCOMPDIR ]]; then mkdir -p $ZCOMPDIR; fi
+
   for k in "${(@k)commands}"; do
-    if [[ ! -d $ZCOMPDIR ]]; then mkdir -p $ZCOMPDIR; fi
     local cmd="${commands[${k}]}"
     if builtin command -v $k >/dev/null 2>&1; then
       echo "Running '$cmd >| $ZCOMPDIR/_$k'"

@@ -11,40 +11,46 @@ setopt \
   hist_reduce_blanks \
   hist_save_no_dups \
   hist_verify \
-  inc_append_history \
   share_history \
   hist_fcntl_lock
 
 # completion
 setopt \
-complete_in_word \
-always_to_end \
-auto_param_slash \
-no_complete_aliases \
-auto_list \
-auto_menu
+  complete_in_word \
+  always_to_end \
+  auto_param_slash \
+  no_complete_aliases \
+  auto_list \
+  auto_menu
 
 # jobs
-setopt long_list_jobs
-unsetopt auto_resume
-setopt notify
-unsetopt bg_nice
+setopt long_list_jobs notify
+unsetopt auto_resume bg_nice
 
-# other
-setopt auto_cd
-setopt auto_pushd
-setopt bang_hist
-setopt interactive_comments
-setopt multios
-setopt no_beep
-setopt prompt_subst
-setopt pushd_ignore_dups
-setopt pushd_minus
-setopt globdots
-setopt extendedglob
+# directory navigation
+setopt \
+  auto_cd \
+  auto_pushd \
+  pushd_ignore_dups \
+  pushd_minus \
+  pushd_silent
+
+# globbing
+setopt \
+  glob_dots \
+  extended_glob \
+  glob_star_short \
+  numeric_glob_sort \
+  no_nomatch
+
+# I/O & interaction
+setopt \
+  bang_hist \
+  combining_chars \
+  interactive_comments \
+  multios \
+  no_beep \
+  no_clobber \
+  prompt_subst
+
 unsetopt correct
-setopt noclobber
-setopt globstarshort
-setopt numericglobsort
-setopt no_nomatch
-

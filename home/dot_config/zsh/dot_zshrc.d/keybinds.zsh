@@ -50,8 +50,6 @@ key_info+=(
 
 local -A viins_keybinds
 viins_keybinds=(
-  "$key_info[Control]A" beginning-of-line
-  "$key_info[Control]E" end-of-line
   "$key_info[Control]a" beginning-of-line
   "$key_info[Control]e" end-of-line
   "$key_info[Control]f" forward-char

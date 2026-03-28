@@ -96,7 +96,16 @@ source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/aliases.zsh"
 HISTFILE="${ZSTATEDIR:-$HOME/.local/state/zsh}/history"
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
-HIST_IGNORE="(git reset*|reboot|shutdown|exit|cd ..|cd ~|..|~)"
+HISTORY_IGNORE="(git reset*|reboot*|shutdown*|exit|cd ..|cd ~|..|~)"
+function zshaddhistory() {
+  emulate -L zsh
+  if ! [[ "$1" =~ "$HISTORY_IGNORE" ]]; then
+    print -sr -- "${1%%$'\n'}"
+    fc -p
+  else
+    return 1
+  fi
+}
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/options.zsh"
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/functions.zsh"
