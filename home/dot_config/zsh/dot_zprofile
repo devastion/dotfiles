@@ -14,8 +14,6 @@ export ZCACHEDIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 export ZPLUGINDIR="${ZSHAREDIR:-$HOME/.local/share/zsh}/plugins"
 export ZCOMPDUMP="$ZCACHEDIR/zcompdump-$ZSH_VERSION"
 export ZCOMPDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}/completions"
-export ZFUNCDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}/functions"
-
 z_dirs=(
   "$ZSTATEDIR"
   "$ZSHAREDIR"
@@ -30,7 +28,6 @@ typeset -U fpath cdpath
 
 fpath+=(
   "$ZCOMPDIR"
-  "$ZFUNCDIR"
 )
 
 cdpath+=(

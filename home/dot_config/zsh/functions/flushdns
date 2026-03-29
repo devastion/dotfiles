@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-
-flushdns() {
-  dscacheutil -flushcache && sudo killall -HUP mDNSResponder
-}
-

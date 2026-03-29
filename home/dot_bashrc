@@ -10,9 +10,7 @@ export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export PAGER="less"
 
-for func in $HOME/.config/zsh/functions/*; do
-  [ -f "$func" ] && source "$func"
-done
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/functions.sh" ] && . "${XDG_CONFIG_HOME:-$HOME/.config}/shell/functions.sh"
 
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
