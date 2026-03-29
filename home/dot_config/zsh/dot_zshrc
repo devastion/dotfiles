@@ -27,6 +27,8 @@ _repos=(
   "aloxaf/fzf-tab"
   "hlissner/zsh-autopair"
   "jeffreytse/zsh-vi-mode"
+  "jessarcher/zsh-artisan"
+  "mroth/evalcache"
   "ohmyzsh/ohmyzsh"
   "piotr1215/zledit"
   "reegnz/jq-zsh-plugin"
@@ -58,6 +60,7 @@ source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/zstyles.zsh"
 _plugins=(
   "powerlevel10k"
   "fzf-tab"
+  "evalcache"
   "zsh-vi-mode"
 
   "zsh-defer"
@@ -68,9 +71,12 @@ _plugins=(
   "zledit"
   "jq-zsh-plugin"
   "zsh-syntax-highlighting"
+  "zsh-artisan"
 )
 plugin-source $_plugins
 unset _plugins
+
+ZSH_EVALCACHE_DIR="${ZCACHEDIR:-$XDG_CACHE_HOME/zsh}/.zsh-evalcache"
 
 MAGIC_ENTER_GIT_COMMAND=" git st"
 MAGIC_ENTER_OTHER_COMMAND=" ls ."
@@ -101,8 +107,6 @@ HISTORY_IGNORE="(git reset*|reboot*|shutdown*|exit|cd ..|cd ~|..|~)"
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/options.zsh"
 zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/functions.zsh"
 
-source "${ZDOTDIR:-$HOME/.config/zsh}/vendor/evalcache.zsh"
-zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/vendor/artisan.zsh"
 function zvm_after_init() {
   if [[ "$OSTYPE" = darwin* ]]; then
     _evalcache /opt/homebrew/bin/brew shellenv
