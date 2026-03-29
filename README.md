@@ -1,7 +1,7 @@
 # My dotfiles
 
 ```bash
-chezmoi init devastion
+chezmoi init devastion --apply
 ```
 
 or
