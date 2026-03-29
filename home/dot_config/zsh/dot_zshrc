@@ -95,7 +95,7 @@ ZVM_VI_SURROUND_BINDKEY="s-prefix"
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 ZVM_VI_HIGHLIGHT_BACKGROUND=("paste:none")
 
-source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/aliases.zsh"
+source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases.sh"
 
 HISTFILE="${ZSTATEDIR:-$HOME/.local/state/zsh}/history"
 HISTSIZE=100000

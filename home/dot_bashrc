@@ -3,7 +3,9 @@
 [[ -z "$BASHRC_LOADED" ]] || return
 export BASHRC_LOADED=1
 
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/xdg.sh" ] && . "${XDG_CONFIG_HOME:-$HOME/.config}/shell/xdg.sh"
+for file in $HOME/.config/shell/*.sh; do
+  source "$file"
+done
 
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
@@ -11,8 +13,6 @@ export LC_ALL="en_US.UTF-8"
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export PAGER="less"
-
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/functions.sh" ] && . "${XDG_CONFIG_HOME:-$HOME/.config}/shell/functions.sh"
 
 path_add() {
   [[ ":$PATH:" != *":$1:"* ]] && PATH="$1:$PATH"
