@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+for func in ~/.config/zsh/functions/*; do
+  [ -f "$func" ] && source "$func"
+done
