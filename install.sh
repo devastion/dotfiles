@@ -20,4 +20,4 @@ if ! chezmoi="$(command -v chezmoi)"; then
   unset chezmoi_install_script bin_dir
 fi
 
-exec $chezmoi init --apply --source ~/.dotfiles https://github.com/devastion/dotfiles.git
+exec $chezmoi init devastion
