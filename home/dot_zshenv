@@ -7,7 +7,7 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-$HOME/.xdg}"
 export XDG_PROJECTS_DIR="${XDG_PROJECTS_DIR:-$HOME/Projects}"
 
-local xdg_dirs=(
+xdg_dirs=(
   "$XDG_CONFIG_HOME"
   "$XDG_DATA_HOME"
   "$XDG_STATE_HOME"
@@ -17,7 +17,7 @@ local xdg_dirs=(
   "$HOME/.local/bin"
 )
 
-for dir in $xdg_dirs; do
+for dir in "${xdg_dirs[@]}"; do
   [[ ! -d "$dir" ]] && mkdir -p "$dir"
 done
 
