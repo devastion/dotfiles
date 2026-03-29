@@ -306,7 +306,7 @@
       "src": "https://github.com/devastion/resolve.nvim"
     },
     "schemastore.nvim": {
-      "rev": "25a82a141dc0caf3b9b82002a35caf3c9feab741",
+      "rev": "24eeb97da8d605c480dc68bb6276248702e31d2a",
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "sidekick.nvim": {

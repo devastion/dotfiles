@@ -1,3 +1,6 @@
+[plugins]
+amber = "https://github.com/devastion/mise-amber"
+
 [tools]
 ast-grep = "latest"
 bat = "latest"
