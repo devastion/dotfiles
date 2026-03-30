@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
+if [[ -z "$LANG" ]]; then
+  eval "$(locale)"
+fi
 
 export EDITOR="nvim"
 export VISUAL="$EDITOR"

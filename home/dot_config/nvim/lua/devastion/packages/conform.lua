@@ -32,7 +32,8 @@ require("devastion.utils.pkg").add({
             dockerfile = { "dockerfmt" },
             yaml = { "yamlfmt" },
             toml = { "taplo" },
-            templ = { "templ" },
+            go = { "goimports", "gofumpt" },
+            templ = { "templ", "injected" },
           },
           format_on_save = function(bufnr)
             local is_autoformat_enabled = vim.b[bufnr].ENABLE_AUTOFORMAT == nil and vim.g.ENABLE_AUTOFORMAT

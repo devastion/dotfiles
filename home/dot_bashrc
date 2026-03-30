@@ -7,8 +7,9 @@ for file in $HOME/.config/shell/*.sh; do
   source "$file"
 done
 
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
+if [[ -z "$LANG" ]]; then
+  eval "$(locale)"
+fi
 
 export EDITOR="nvim"
 export VISUAL="$EDITOR"

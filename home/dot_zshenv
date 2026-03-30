@@ -3,8 +3,11 @@
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/xdg.sh"
 export ZDOTDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}"
 
-typeset -U path
+typeset -gU path
 path=(
+  "/usr/local/{bin,sbin}"
+  "/usr/{bin,sbin}"
+  "/{bin,sbin}"
   "$HOME/.local/bin"
   "$path"
 )
