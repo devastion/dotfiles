@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-[[ -z "$BASHRC_LOADED" ]] || return
-export BASHRC_LOADED=1
-
 if [[ -z "$LANG" ]]; then
   eval "$(locale)"
 fi
@@ -10,15 +7,6 @@ fi
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export PAGER="less"
-
-path_add() {
-  [[ ":$PATH:" != *":$1:"* ]] && PATH="$1:$PATH"
-}
-
-path_add "/usr/local/{bin,sbin}"
-path_add "/usr/{bin,sbin}"
-path_add "/{bin,sbin}"
-path_add "$HOME/.local/bin"
 
 if builtin command -v mise >/dev/null 2>&1; then
   eval "$(mise activate bash)"

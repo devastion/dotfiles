@@ -7,27 +7,4 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-$HOME/.xdg}"
 export XDG_PROJECTS_DIR="${XDG_PROJECTS_DIR:-$HOME/Projects}"
 
-xdg_dirs=(
-  "$XDG_CONFIG_HOME"
-  "$XDG_DATA_HOME"
-  "$XDG_STATE_HOME"
-  "$XDG_CACHE_HOME"
-  "$XDG_RUNTIME_DIR"
-  "$XDG_PROJECTS_DIR"
-  "$HOME/.local/bin"
-)
-
-for dir in "${xdg_dirs[@]}"; do
-  [[ ! -d "$dir" ]] && mkdir -p "$dir"
-done
-
 export ZDOTDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}"
-
-typeset -U path
-path=(
-  "/usr/local/{bin,sbin}"
-  "/usr/{bin,sbin}"
-  "/{bin,sbin}"
-  "$HOME/.local/bin"
-  "$path"
-)

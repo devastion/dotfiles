@@ -22,7 +22,7 @@ dai() {
     return 1
   fi
 
-  docker exec -it "$_cid" sh -c "if [ -x /bin/zsh ]; then exec /bin/zsh; elif [ -x /bin/bash ]; then exec /bin/bash; else exec /bin/sh; fi"
+  docker exec -e TERM -e COLORTERM -e LC_ALL=C.UTF-8 -it "$_cid" sh -c "if [ -x /bin/bash ]; then exec /bin/bash; else exec /bin/sh; fi"
 
   unset _cid
 }

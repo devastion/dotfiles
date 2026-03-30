@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# -e: exit on error
+# -u: exit on unset variables
+set -eu
+
 {{ if eq .chezmoi.os "darwin" -}}
 brew bundle --file=/dev/stdin <<EOF
 {{ range .packages.darwin.brews -}}

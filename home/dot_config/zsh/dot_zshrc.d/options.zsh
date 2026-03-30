@@ -15,7 +15,7 @@ setopt \
   hist_verify \
   hist_fcntl_lock
 
-unsetopt share_history hist_beep
+unsetopt hist_beep
 
 # completion
 setopt \

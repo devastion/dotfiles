@@ -15,7 +15,7 @@ fzf = "latest"
 jq = "latest"
 lazygit = "latest"
 ripgrep = "latest"
-tlrc = "latest"
+tlrc = { version = "latest", os = ["macos"] }
 tmux = "latest"
 yq = "latest"
 zoxide = "latest"
@@ -31,6 +31,4 @@ amber = "nightly"
 lua = "5.1"
 
 [settings]
-lockfile = true
-experimental = true
 idiomatic_version_file_enable_tools = ["node"]

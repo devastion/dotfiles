@@ -14,6 +14,34 @@ packages:
       - "spotify"
   linux:
     apt:
-      - "exiftool"
+      # build tools
+      - "build-essential"
+      - "cmake"
+      - "pkg-config"
+      # core utilities
+      - "curl"
+      - "file"
+      - "git"
       - "gpg"
+      - "less"
+      - "tar"
+      - "unzip"
+      - "wget"
+      - "xclip"
+      - "xdg-utils"
+      - "zip"
+      # shell
       - "zsh"
+      # libraries (needed by mise-managed tools, lua, python, etc.)
+      - "libbz2-dev"
+      - "libevent-dev"
+      - "libffi-dev"
+      - "libimage-exiftool-perl"
+      - "libncurses-dev"
+      - "libreadline-dev"
+      - "libsqlite3-dev"
+      - "libssl-dev"
+      - "zlib1g-dev"
+      # misc
+      - "ca-certificates"
+      - "locales"

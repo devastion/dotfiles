@@ -27,7 +27,18 @@ for dir in $z_dirs; do
 done
 unset z_dirs
 
-typeset -U fpath cdpath
+typeset -U path fpath cdpath
+
+path=(
+  "/usr/local/bin"
+  "/usr/local/sbin"
+  "/usr/bin"
+  "/usr/sbin"
+  "/bin"
+  "/sbin"
+  "$HOME/.local/bin"
+  "$path"
+)
 
 fpath+=(
   "$ZCOMPDIR"
