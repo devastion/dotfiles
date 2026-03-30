@@ -1,9 +1,5 @@
 #!/usr/bin/env zsh
 
-if [[ -z "$LANG" ]]; then
-  eval "$(locale)"
-fi
-
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export PAGER="less"
@@ -27,24 +23,61 @@ for dir in $z_dirs; do
 done
 unset z_dirs
 
-typeset -U path fpath cdpath
+typeset -gU path fpath cdpath manpath mailpath
+typeset -gUT INFOPATH infopath
 
-path=(
-  "/usr/local/bin"
-  "/usr/local/sbin"
-  "/usr/bin"
-  "/usr/sbin"
-  "/bin"
-  "/sbin"
-  "$HOME/.local/bin"
-  "$path"
-)
+for path_file in /etc/paths.d/*(.N); do
+  path+=($(<$path_file))
+done
+unset path_file
 
-fpath+=(
+fpath=(
   "$ZCOMPDIR"
   "$ZFUNCDIR"
+  $fpath
 )
 
-cdpath+=(
+cdpath=(
   "${XDG_PROJECTS_DIR:-$HOME/Projects}"
+  $cdpath
 )
+
+manpath=(
+  "/usr/local/share/man"
+  "/usr/share/man"
+  $manpath
+)
+for manpath_file in /etc/manpaths.d/*(.N); do
+  manpath+=($(<$manpath_file))
+done
+unset manpath_file
+
+infopath=(
+  "/usr/local/share/info"
+  "/usr/share/info"
+  $infopath
+)
+
+if [[ "$OSTYPE" = darwin* ]]; then
+  path=(
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
+    $path
+  )
+  fpath=(
+    "/opt/homebrew/share/zsh/site-functions"
+    $fpath
+  )
+  infopath=(
+    "/opt/homebrew/share/info"
+    $infopath
+  )
+
+  export HOMEBREW_PREFIX="/opt/homebrew"
+  export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+  export HOMEBREW_REPOSITORY="/opt/homebrew"
+fi
+
+if [[ -z "$LANG" ]]; then
+  eval "$(locale)"
+fi

@@ -108,9 +108,6 @@ source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/options.zsh"
 zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/functions.zsh"
 
 function zvm_after_init() {
-  if [[ "$OSTYPE" = darwin* ]]; then
-    _evalcache /opt/homebrew/bin/brew shellenv
-  fi
   _evalcache mise activate zsh
   FZF_ALT_C_COMMAND= _evalcache fzf --zsh
   _evalcache zoxide init zsh
