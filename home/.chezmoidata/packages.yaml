@@ -12,3 +12,7 @@ packages:
       - "ghostty"
       - "nikitabobko/tap/aerospace"
       - "spotify"
+  linux:
+    apt:
+      - "gpg"
+      - "zsh"
