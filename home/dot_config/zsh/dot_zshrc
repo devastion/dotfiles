@@ -1,10 +1,6 @@
 #!/usr/bin/env zsh
 
-if [[ -v PROF ]]; then
-  TIMEFMT="'$fg[green]%J$reset_color' time: $fg[blue]%*Es$reset_color, cpu: $fg[blue]%P$reset_color"
-  REPORTTIME=5
-  zmodload zsh/zprof
-fi
+[[ -v PROF ]] && zmodload zsh/zprof
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER.zsh"
@@ -98,14 +94,13 @@ ZVM_VI_SURROUND_BINDKEY="s-prefix"
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 ZVM_VI_HIGHLIGHT_BACKGROUND=("paste:none")
 
-source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/aliases.zsh"
-
 HISTFILE="${ZSTATEDIR:-$HOME/.local/state/zsh}/history"
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 HISTORY_IGNORE="(git reset*|reboot*|shutdown*|exit|cd ..|cd ~|..|~)"
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/options.zsh"
+zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/aliases.zsh"
 zsh-defer source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/functions.zsh"
 
 function zvm_after_init() {

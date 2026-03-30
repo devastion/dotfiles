@@ -41,7 +41,7 @@ cmd-h = []
 cmd-alt-h = []
 cmd-m = []
 
-ctrl-alt-cmd-g = "exec-and-forget open -a Ghostty -n"
+ctrl-alt-cmd-g = "exec-and-forget /bin/zsh -c 'open -n -a Ghostty'"
 # screenshot to clipboard
 ctrl-alt-cmd-shift-s = "exec-and-forget screencapture -i -c"
 

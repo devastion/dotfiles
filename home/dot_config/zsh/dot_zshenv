@@ -2,7 +2,8 @@
 
 unsetopt globalrcs
 
-typeset -U path PATH
+typeset -gU path
+
 path=(
   "/usr/local/bin"
   "/usr/local/sbin"
@@ -13,7 +14,6 @@ path=(
   "$HOME/.local/bin"
   $path
 )
-export PATH
 
 function has() { builtin command -v "$1" &>/dev/null; }
 function is_macos() { [[ "$OSTYPE" = darwin* ]]; }

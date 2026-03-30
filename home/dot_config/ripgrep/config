@@ -1,6 +1,6 @@
 --smart-case
 --hidden
---max-columns=200
+--max-columns=0
 --max-columns-preview
 
 # search hidden but skip vcs/tool internals

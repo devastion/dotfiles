@@ -15,7 +15,7 @@ export ZFUNCDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}/functions"
 
 mkdir -p "$ZSTATEDIR" "$ZSHAREDIR" "$ZCACHEDIR"
 
-typeset -gU path fpath cdpath manpath mailpath
+typeset -gU fpath cdpath manpath mailpath
 typeset -gUT INFOPATH infopath
 
 for path_file in /etc/paths.d/*(.N); do
@@ -71,5 +71,7 @@ if is_macos; then
 fi
 
 if [[ -z "$LANG" ]]; then
-  eval "$(locale)"
+  if has locale; then
+    eval "$(locale)"
+  fi
 fi
