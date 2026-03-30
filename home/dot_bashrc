@@ -11,17 +11,48 @@ export VISUAL="$EDITOR"
 export PAGER="less"
 export LESSOPEN="| lessfilter %s"
 
-set -o vi
-
+shopt -s histappend
 export HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/bash/.bash_history"
+mkdir -p "${XDG_STATE_HOME:-$HOME/.local/state}/bash"
 HISTSIZE=10000
 HISTFILESIZE=20000
 HISTCONTROL=ignoreboth:erasedups
-shopt -s histappend
+HISTTIMEFORMAT="%F %T "
+HISTIGNORE="history:exit"
 
+set -o notify
 shopt -s checkwinsize
 shopt -s globstar
+shopt -s globstar
+shopt -s extglob
+shopt -s nullglob
+shopt -s dotglob
+shopt -s autocd
+shopt -s cdspell
+shopt -s dirspell
 
-if command -v mise &>/dev/null; then
+function has() { builtin command -v "$1" &>/dev/null; }
+
+# ls
+if has eza; then
+  alias l="eza --git"
+  alias ll="l -lao --group-directories-first"
+  alias ld="l -lD"
+  alias lf="l -lf"
+  alias lh="l -ld .* --group-directories-first"
+  alias lt="l -la --sort=modified --reverse"
+  alias ls="ll"
+  alias lsg="l -ao --group-directories-first --grid"
+fi
+
+if has mise; then
   eval "$(mise activate bash)"
+fi
+
+if has fzf; then
+  eval "$(fzf --bash)"
+fi
+
+if has zoxide; then
+  eval "$(zoxide init bash)"
 fi

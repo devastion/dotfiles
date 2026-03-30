@@ -1,0 +1,121 @@
+set editing-mode vi
+set show-mode-in-prompt on
+set blink-matching-paren on
+set colored-stats on
+set visible-stats on
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set menu-complete-display-prefix on
+set mark-symlinked-directories on
+set match-hidden-files off
+set page-completions off
+set completion-query-items 200
+set skip-completed-text on
+set bell-style none
+
+set input-meta on
+set output-meta on
+set convert-meta off
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[3;3~": kill-word
+
+$if mode=vi
+  set keymap vi-command
+  # cursor: steady block
+  set vi-cmd-mode-string (cmd)\1\e[2 q\2
+
+  "|": "A | "
+  "D": kill-line
+  "C": "Da"
+  "dw": kill-word
+  "dd": kill-whole-line
+  "db": backward-kill-word
+  "cc": "ddi"
+  "cw": "dwi"
+  "cb": "dbi"
+  "gg": beginning-of-history
+  "G": end-of-history
+
+  "\e\e[A": history-search-backward
+  "\e\e[B": history-search-forward
+
+  # word text objects
+  "daw": "lbdW"
+  "yaw": "lbyW"
+  "caw": "lbcW"
+  "diw": "lbdw"
+  "yiw": "lbyw"
+  "ciw": "lbcw"
+
+  # surround text objects (l normalizes pos, F/f find delims, mt/`t for marks)
+  "da\"": "lF\"df\""
+  "di\"": "lF\"lmtf\"d`t"
+  "ci\"": "di\"i"
+  "ca\"": "da\"i"
+
+  "da'": "lF'df'"
+  "di'": "lF'lmtf'd`t"
+  "ci'": "di'i"
+  "ca'": "da'i"
+
+  "da`": "lF\`df\`"
+  "di`": "lF\`lmtf\`d`t"
+  "ci`": "di`i"
+  "ca`": "da`i"
+
+  "da(": "lF(df)"
+  "di(": "lF(lmtf)d`t"
+  "ci(": "di(i"
+  "ca(": "da(i"
+  "da)": "da("
+  "di)": "di("
+  "ci)": "ci("
+  "ca)": "ca("
+
+  "da{": "lF{df}"
+  "di{": "lF{lmtf}d`t"
+  "ci{": "di{i"
+  "ca{": "da{i"
+  "da}": "da{"
+  "di}": "di{"
+  "ci}": "ci{"
+  "ca}": "ca{"
+
+  "da[": "lF[df]"
+  "di[": "lF[lmtf]d`t"
+  "ci[": "di[i"
+  "ca[": "da[i"
+  "da]": "da["
+  "di]": "di["
+  "ci]": "ci["
+  "ca]": "ca["
+
+  "da<": "lF<df>"
+  "di<": "lF<lmtf>d`t"
+  "ci<": "di<i"
+  "ca<": "da<i"
+  "da>": "da<"
+  "di>": "di<"
+  "ci>": "ci<"
+  "ca>": "ca<"
+
+  "da/": "lF/df/"
+  "di/": "lF/lmtf/d`t"
+  "ci/": "di/i"
+  "ca/": "da/i"
+
+  "da:": "lF:df:"
+  "di:": "lF:lmtf:d`t"
+  "ci:": "di:i"
+  "ca:": "da:i"
+
+  set keymap vi-insert
+  # cursor: blinking bar
+  set vi-ins-mode-string (ins)\1\e[6 q\2
+
+  ";;": vi-movement-mode
+  TAB: menu-complete
+  "\e[Z": menu-complete-backward
+$endif

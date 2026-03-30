@@ -50,7 +50,7 @@ infopath=(
   $infopath
 )
 
-if [[ "$OSTYPE" = darwin* ]]; then
+if is_macos; then
   path=(
     "/opt/homebrew/bin"
     "/opt/homebrew/sbin"

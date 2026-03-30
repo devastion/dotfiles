@@ -88,6 +88,7 @@ export FZF_DEFAULT_OPTS="--tmux=80% \
 --bind=ctrl-f:preview-half-page-down,ctrl-b:preview-half-page-up,alt-j:preview-down,alt-k:preview-up \
 --color=border:#27a1b9
 "
+export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/ripgrep/config"
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
