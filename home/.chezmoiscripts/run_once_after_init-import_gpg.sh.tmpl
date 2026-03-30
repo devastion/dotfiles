@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-if ! gpg --list-secret-keys | grep -q "{{ .email }}"; then
-  gpg --import ~/.gnupg/public.asc
-  gpg --import ~/.gnupg/private.asc
-fi

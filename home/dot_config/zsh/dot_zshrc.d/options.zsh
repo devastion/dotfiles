@@ -2,7 +2,7 @@
 
 # history
 setopt \
-  append_history \
+  share_history \
   extended_history \
   hist_expire_dups_first \
   hist_find_no_dups \

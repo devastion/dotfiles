@@ -14,5 +14,6 @@ packages:
       - "spotify"
   linux:
     apt:
+      - "exiftool"
       - "gpg"
       - "zsh"
