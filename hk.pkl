@@ -1,0 +1,16 @@
+amends "package://github.com/jdx/hk/releases/download/v1.39.0/hk@1.39.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.39.0/hk@1.39.0#/Builtins.pkl"
+
+hooks {
+  ["pre-commit"] {
+    steps {
+      ["gitleaks"] { check = "gitleaks git --staged" }
+    }
+  }
+  ["pre-push"] {
+    steps {
+      ["gitleaks_git"] { check = "gitleaks git -v --exit-code 1" }
+      ["gitleaks_dir"] { check = "gitleaks dir -v --exit-code 1" }
+    }
+  }
+}

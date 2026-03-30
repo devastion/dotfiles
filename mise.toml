@@ -1,0 +1,15 @@
+[tools]
+hk = "latest"
+pkl = "latest"
+
+[tasks.pre-commit]
+run = "hk run pre-commit"
+
+[tasks.pre-push]
+run = "hk run pre-push"
+
+[tasks.ci]
+run = "hk run pre-push"
+
+[env]
+HK_MISE = "true"
