@@ -1,16 +1,39 @@
 amends "package://github.com/jdx/hk/releases/download/v1.39.0/hk@1.39.0#/Config.pkl"
 import "package://github.com/jdx/hk/releases/download/v1.39.0/hk@1.39.0#/Builtins.pkl"
 
+local gitleaks = new Mapping<String, Step> {
+  ["gitleaks_git"] { check = "gitleaks git -v --exit-code 1" }
+  ["gitleaks_dir"] { check = "gitleaks dir -v --exit-code 1" }
+}
+
+local formatters = new Mapping<String, Step> {
+  ["stylua"] = (Builtins.stylua) {
+    glob = List("**/nvim/**/*.lua")
+    check = "stylua --check {{files}} --config-path home/dot_config/nvim/stylua.toml"
+    fix = "stylua {{files}} --config-path home/dot_config/nvim/stylua.toml"
+  }
+}
+
+local linters = new Mapping<String, Step> {
+  ["actionlint"] = (Builtins.actionlint) {
+    glob = ".github/workflows/*.{yml,yaml}"
+    check = "actionlint {{files}}"
+  }
+}
+
 hooks {
   ["pre-commit"] {
     steps {
       ["gitleaks"] { check = "gitleaks git --staged" }
+      ...formatters
+      ...linters
     }
   }
   ["pre-push"] {
     steps {
-      ["gitleaks_git"] { check = "gitleaks git -v --exit-code 1" }
-      ["gitleaks_dir"] { check = "gitleaks dir -v --exit-code 1" }
+      ...gitleaks
+      ...formatters
+      ...linters
     }
   }
 }
