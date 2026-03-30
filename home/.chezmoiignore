@@ -3,6 +3,7 @@
 *.log
 
 {{ if ne .chezmoi.os "darwin" }}
+.chezmoiscripts/darwin/**
 .config/aerospace
 .config/ghostty
 {{ end }}

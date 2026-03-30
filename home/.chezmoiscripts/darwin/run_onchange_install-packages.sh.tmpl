@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 
-{{ if eq .chezmoi.os "darwin" -}}
 brew bundle --file=/dev/stdin <<EOF
 {{ range .packages.darwin.brews -}}
 brew {{ . | quote }}
@@ -9,4 +8,3 @@ brew {{ . | quote }}
 cask {{ . | quote }}
 {{ end -}}
 EOF
-{{ end -}}

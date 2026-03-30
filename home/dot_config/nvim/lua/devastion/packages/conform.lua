@@ -31,6 +31,7 @@ require("devastion.utils.pkg").add({
             ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
             dockerfile = { "dockerfmt" },
             yaml = { "yamlfmt" },
+            toml = { "taplo" },
           },
           format_on_save = function(bufnr)
             local is_autoformat_enabled = vim.b[bufnr].ENABLE_AUTOFORMAT == nil and vim.g.ENABLE_AUTOFORMAT

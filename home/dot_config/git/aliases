@@ -29,4 +29,5 @@
   cpbr = "!sh -c 'git branch --show-current | tr -d \"\n\" | pbcopy'"
   conflicts = "diff --name-only --diff-filter=U"
   json = "!git log --pretty=format:'{\"commit\":\"%H\",\"abbreviated_commit\":\"%h\",\"tree\":\"%T\",\"parent\":\"%P\",\"refs\":\"%D\",\"subject\":\"%s\",\"author\":{\"name\":\"%aN\",\"email\":\"%aE\",\"date\":\"%aD\"},\"committer\":{\"name\":\"%cN\",\"email\":\"%cE\",\"date\":\"%cD\"}}' \"$@\" | sed '1s/^/[/;$!s/$/,/;$s/$/]/' | tr \"'\" '\"'"
+  backup = "!git tag backup-$(date +%s)"
 ; vim:ft=gitconfig

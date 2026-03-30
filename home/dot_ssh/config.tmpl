@@ -1,0 +1,11 @@
+{{- if eq .chezmoi.os "darwin" }}
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+{{- end }}
+
+Host github.com
+  IdentityFile ~/.ssh/github
+
+Host bitbucket.com
+  IdentityFile ~/.ssh/bitbucket
