@@ -1,7 +1,9 @@
 [tools]
+actionlint = "latest"
 gitleaks = "latest"
 hk = "latest"
 pkl = "latest"
+stylua = "latest"
 
 [tasks.pre-commit]
 run = "hk run pre-commit"

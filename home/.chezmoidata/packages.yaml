@@ -8,6 +8,8 @@ packages:
       - "gnupg"
       - "less"
       - "lesspipe"
+      - "tesseract"
+      - "tesseract-lang"
     casks:
       - "font-maple-mono-normal-nf"
       - "ghostty"
