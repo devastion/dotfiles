@@ -51,7 +51,9 @@ else
   compinit -i -C -d "$ZCOMPDUMP"
 fi
 
-source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/functions.sh"
+for func in $ZFUNCDIR/*; do
+  autoload -Uz ${func:t}
+done
 
 source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/zstyles.zsh"
 
@@ -95,7 +97,7 @@ ZVM_VI_SURROUND_BINDKEY="s-prefix"
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 ZVM_VI_HIGHLIGHT_BACKGROUND=("paste:none")
 
-source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases.sh"
+source "${ZDOTDIR:-$HOME/.config/zsh}/.zshrc.d/aliases.zsh"
 
 HISTFILE="${ZSTATEDIR:-$HOME/.local/state/zsh}/history"
 HISTSIZE=100000

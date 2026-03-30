@@ -3,10 +3,6 @@
 [[ -z "$BASHRC_LOADED" ]] || return
 export BASHRC_LOADED=1
 
-for file in $HOME/.config/shell/*.sh; do
-  source "$file"
-done
-
 if [[ -z "$LANG" ]]; then
   eval "$(locale)"
 fi

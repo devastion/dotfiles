@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+which() {
+  builtin which -a "$@" | bat --language=sh --wrap=character
+}
