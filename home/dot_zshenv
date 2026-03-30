@@ -23,7 +23,7 @@ done
 
 export ZDOTDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}"
 
-typeset -gU path
+typeset -U path
 path=(
   "/usr/local/{bin,sbin}"
   "/usr/{bin,sbin}"

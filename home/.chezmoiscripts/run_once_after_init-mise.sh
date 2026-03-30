@@ -11,4 +11,4 @@ if ! builtin command -v "$_mise_path" >/dev/null 2>&1; then
   curl https://mise.run | MISE_INSTALL_PATH=~/.local/bin/mise-x64 MISE_INSTALL_ARCH=x64 sh
 fi
 
-exec "$_mise_path" install
+MISE_VERBOSE=1 exec "$_mise_path" install
