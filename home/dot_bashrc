@@ -32,6 +32,8 @@ shopt -s cdspell
 shopt -s dirspell
 
 function has() { builtin command -v "$1" &>/dev/null; }
+function is_macos() { [[ "$OSTYPE" = darwin* ]]; }
+function is_linux() { [[ "$OSTYPE" = linux* ]]; }
 
 # ls
 if has eza; then
@@ -43,6 +45,26 @@ if has eza; then
   alias lt="l -la --sort=modified --reverse"
   alias ls="ll"
   alias lsg="l -ao --group-directories-first --grid"
+fi
+
+if is_linux; then
+  [[ $PS1 &&
+    ! ${BASH_COMPLETION_VERSINFO:-} &&
+    -f /usr/share/bash-completion/bash_completion ]] &&
+    . /usr/share/bash-completion/bash_completion
+fi
+
+if is_macos; then
+  if [[ -s /opt/homebrew/etc/profile.d/bash_completion.sh ]]; then
+    . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+  fi
+fi
+
+BASH_COMPLETION_USER_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/bash/completions"
+if [[ -d "$BASH_COMPLETION_USER_DIR" ]]; then
+  for f in "$BASH_COMPLETION_USER_DIR"/*; do
+    source "$f"
+  done
 fi
 
 if has mise; then

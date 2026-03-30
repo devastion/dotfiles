@@ -6,36 +6,44 @@ font-style = Medium
 font-size = 16
 font-feature = -calt
 bold-is-bright = true
+adjust-cell-height = 10%
 
 # window
 window-padding-x = 8
 window-padding-y = 8
+window-padding-balance = true
+resize-overlay = never
 
-# macos
+# macOS
 macos-titlebar-style = hidden
 macos-window-shadow = false
 macos-option-as-alt = true
 macos-non-native-fullscreen = true
 macos-window-buttons = hidden
 macos-titlebar-proxy-icon = hidden
-mouse-hide-while-typing = true
 
+# quick terminal
 quick-terminal-position = center
 quick-terminal-screen = macos-menu-bar
 quick-terminal-animation-duration = 0
 
-shell-integration-features = no-cursor, ssh-env
+# behavior
+mouse-hide-while-typing = true
+copy-on-select = true
+clipboard-trim-trailing-spaces = true
 confirm-close-surface = false
 quit-after-last-window-closed = true
-copy-on-select = true
+scrollback-limit = 100000
+shell-integration-features = no-cursor, ssh-env, ssh-terminfo
 
-# keybinds
+# keybinds — clear defaults, only keep essentials (tmux handles the rest)
 keybind = clear
 keybind = performable:cmd+c=copy_to_clipboard
 keybind = performable:cmd+v=paste_from_clipboard
+keybind = cmd+plus=increase_font_size:1
+keybind = cmd+minus=decrease_font_size:1
+keybind = cmd+zero=reset_font_size
+keybind = cmd+n=new_window
+keybind = cmd+q=quit
 
-shell-integration = none
-scrollback-limit = 1000000
-
-term = "xterm-256color"
 # vim: ft=ghostty

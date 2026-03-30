@@ -1,6 +1,7 @@
 packages:
   darwin:
     brews:
+      - "bash-completion@2"
       - "coreutils"
       - "exiftool"
       - "felixkratz/formulae/borders"
@@ -32,6 +33,7 @@ packages:
       - "zip"
       # shell
       - "zsh"
+      - "bash"
       # libraries (needed by mise-managed tools, lua, python, etc.)
       - "libbz2-dev"
       - "libevent-dev"
@@ -45,3 +47,4 @@ packages:
       # misc
       - "ca-certificates"
       - "locales"
+      - "bash-completion"

@@ -1,15 +1,27 @@
 root = true
 
 [*]
+indent_style = space
 indent_size = 2
 end_of_line = lf
 charset = utf-8
-indent_style = space
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[markdown]
+[*.md]
 trim_trailing_whitespace = false
 
-[makefile]
+[{Makefile,makefile,*.mk}]
 indent_style = tab
+
+[*.go]
+indent_style = tab
+
+[*.py]
+indent_size = 4
+
+[*.lua]
+indent_size = 2
+
+[*.{bash,sh}]
+indent_size = 2

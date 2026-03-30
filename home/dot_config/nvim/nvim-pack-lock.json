@@ -46,7 +46,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf-lua": {
-      "rev": "bde73a6886b607246095aa59f396de5e0d036890",
+      "rev": "c9e7b7bfbd01f949164988ee1684035468e1995c",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gist.nvim": {
@@ -266,7 +266,7 @@
       "src": "https://github.com/samjwill/nvim-unception"
     },
     "octo.nvim": {
-      "rev": "efc48d4b766b91c8666fe860779a91a73b217b97",
+      "rev": "b51e52888e678441a266bfd5ae2dc0a02a21d67e",
       "src": "https://github.com/pwntester/octo.nvim"
     },
     "one-small-step-for-vimkind": {
