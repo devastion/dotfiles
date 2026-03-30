@@ -5,9 +5,7 @@ function src() {
   rm "$ZCOMPDUMP"
   compinit -i -d "$ZCOMPDUMP"
 
-  for f in "$ZCOMPDUMP"; do
-    zrecompile -p "$f"
-  done
+  zrecompile -p "$ZCOMPDUMP"
 
   # Use $SHELL if it's available and a zsh shell
   local shell="$ZSH_ARGZERO"

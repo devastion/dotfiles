@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+[[ $- != *i* ]] && return
+
 if [[ -z "$LANG" ]]; then
   eval "$(locale)"
 fi
@@ -7,7 +9,19 @@ fi
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export PAGER="less"
+export LESSOPEN="| lessfilter %s"
 
-if builtin command -v mise >/dev/null 2>&1; then
+set -o vi
+
+export HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/bash/.bash_history"
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTCONTROL=ignoreboth:erasedups
+shopt -s histappend
+
+shopt -s checkwinsize
+shopt -s globstar
+
+if command -v mise &>/dev/null; then
   eval "$(mise activate bash)"
 fi

@@ -13,13 +13,6 @@ require("devastion.utils.pkg").add({
       end,
       config = function()
         local lint = require("lint")
-        lint.linters.shellcheck_bash = function()
-          local shellcheck = lint.linters.shellcheck
-          local linter = shellcheck
-          table.insert(linter.args, 1, "--shell=bash")
-          table.insert(linter.args, 2, "--exclude=SC2299")
-          return linter
-        end
 
         local linters_by_ft = {
           ["*"] = { "editorconfig-checker" },
@@ -29,11 +22,11 @@ require("devastion.utils.pkg").add({
           php = file_exists("artisan") and { "phpstan" } or { "phpcs" },
           sh = { "shellcheck" },
           bash = { "shellcheck" },
-          zsh = { "shellcheck_bash" },
           dockerfile = { "hadolint" },
           markdown = { "markdownlint-cli2" },
           yaml = { "yamllint" },
           ["yaml.github"] = { "actionlint" },
+          go = { "golangcilint" },
         }
 
         lint.linters_by_ft = linters_by_ft

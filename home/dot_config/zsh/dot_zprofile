@@ -6,22 +6,14 @@ export PAGER="less"
 export LESSOPEN="| lessfilter %s"
 
 export ZSTATEDIR="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
-export ZSHAREDIR="${XDG_SHARE_HOME:-$HOME/.local/share}/zsh"
+export ZSHAREDIR="${XDG_DATA_HOME:-$HOME/.local/share}/zsh"
 export ZCACHEDIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 export ZPLUGINDIR="${ZSHAREDIR:-$HOME/.local/share/zsh}/plugins"
 export ZCOMPDUMP="$ZCACHEDIR/zcompdump-$ZSH_VERSION"
 export ZCOMPDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}/completions"
 export ZFUNCDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}/functions"
 
-z_dirs=(
-  "$ZSTATEDIR"
-  "$ZSHAREDIR"
-  "$ZCACHEDIR"
-)
-for dir in $z_dirs; do
-  [[ ! -d "$dir" ]] && mkdir -p "$dir"
-done
-unset z_dirs
+mkdir -p "$ZSTATEDIR" "$ZSHAREDIR" "$ZCACHEDIR"
 
 typeset -gU path fpath cdpath manpath mailpath
 typeset -gUT INFOPATH infopath

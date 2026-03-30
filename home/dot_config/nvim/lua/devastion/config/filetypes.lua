@@ -1,7 +1,6 @@
 vim.filetype.add({
   extension = {
     env = "env",
-    tmpl = "templ",
   },
   filename = {
     [".env"] = "env",
