@@ -1,5 +1,5 @@
 [plugins]
-amber = "https://github.com/devastion/mise-amber"
+"vfox-backend:amber" = "https://github.com/devastion/mise-amber"
 
 [tools]
 ast-grep = "latest"
