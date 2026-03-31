@@ -30,7 +30,8 @@ fpath=(
 )
 
 cdpath=(
-  "${XDG_PROJECTS_DIR:-$HOME/Projects}"
+  "$HOME"
+  "${PROJECTS_DIR:-$HOME/Projects}"
   $cdpath
 )
 

@@ -1,0 +1,10 @@
+[user]
+signingKey = "~/.ssh/github.pub"
+
+[commit]
+gpgSign = true
+
+[gpg]
+format = "ssh"
+
+; vim:ft=gitconfig

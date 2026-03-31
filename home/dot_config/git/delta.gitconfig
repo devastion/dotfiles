@@ -1,6 +1,11 @@
 [core]
   pager = "delta"
 
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+
 [interactive]
   diffFilter = "delta --color-only --features=interactive"
 

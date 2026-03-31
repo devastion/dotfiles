@@ -1,5 +1,6 @@
 {{ $passphrase := promptStringOnce . "passphrase" "passphrase" -}}
 
+sourceDir = "~/projects/github/dotfiles"
 encryption = "gpg"
 [data]
     passphrase = {{ $passphrase | quote }}

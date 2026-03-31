@@ -1,14 +1,12 @@
 [init]
   defaultBranch = "main"
   templateDir = "~/.config/git/template"
+  commitTemplate = "~/.config/git/commit.template"
 
 [core]
   editor = "nvim"
   excludesFile = "~/.config/git/ignore"
   attributesFile = "~/.config/git/attributes"
-  autocrlf = input
-  compression = 9
-  whitespace = error
 
 [diff]
   tool = "nvimdiff"
@@ -16,8 +14,9 @@
   algorithm = "histogram"
   colorMoved = "default"
   colorMovedWS = "allow-indentation-change"
-  renames = copies
+  renames = "copies"
   mnemonicPrefix = true
+  indentHeuristic = true
 
 [difftool]
   prompt = false
@@ -26,8 +25,10 @@
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 
 [merge]
+  renormalize = true
   tool = "nvimdiff"
   conflictstyle = "zdiff3"
+  autoStash = true
 
 [mergetool]
   prompt = true
@@ -38,7 +39,7 @@
   layout = "LOCAL,BASE,REMOTE / MERGED"
 
 [pull]
-  ff = only
+  ff = "only"
 
 [transfer]
   fsckObjects = true
@@ -48,6 +49,7 @@
   pruneTags = true
   parallel = 0
   fsckObjects = true
+  writeCommitGraph = true
 
 [receive]
   fsckObjects = true
@@ -63,14 +65,17 @@
 
 [status]
   showStash = true
+  submoduleSummary = true
 
 [stash]
   showPatch = true
 
 [log]
+  decorate = "short"
   date = "iso"
 
 [push]
+  default = "simple"
   autoSetupRemote = true
   followTags = true
   recurseSubmodules = "check"
@@ -79,6 +84,8 @@
   autoSquash = true
   autoStash = true
   instructionFormat = "[%an - %ar] %s"
+  updateRefs = true
+  missingCommitsCheck = "warn"
 
 [rerere]
   enabled = true
@@ -94,9 +101,6 @@
 ; force ssh
 [url "git@github.com:"]
   insteadOf = "https://github.com/"
-
-; example git clone gh:devastion/dotfiles
-[url "git@github.com:"]
   insteadOf = "gh:"
 
 [include]

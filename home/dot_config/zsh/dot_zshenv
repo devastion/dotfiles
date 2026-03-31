@@ -11,7 +11,7 @@ path=(
   "/usr/sbin"
   "/bin"
   "/sbin"
-  "$HOME/.local/bin"
+  "${LOCAL_BIN:-$HOME/.local/bin}"
   $path
 )
 

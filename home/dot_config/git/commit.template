@@ -1,0 +1,43 @@
+# <type>(<scope>): <subject>
+#
+# Types:
+#   feat     ✨ new feature
+#   fix      🐛 bug fix
+#   refactor ♻️ code change (no behavior change)
+#   perf     ⚡ performance improvement
+#   docs     📝 documentation only
+#   style    💄 formatting, missing semi colons, etc
+#   test     ✅ adding or fixing tests
+#   chore    🔧 maintenance, tooling
+#   build    📦 build system or dependencies
+#   ci       🤖 CI/CD changes
+#   revert   ⏪ revert commit
+#
+# Scope (optional): module, package, feature (e.g. auth, api, ui)
+#
+# Subject rules:
+#   - imperative mood ("add", not "added" or "adds")
+#   - max ~72 chars
+#   - no trailing period
+#
+# ------------------------------------------------------------
+# Why:
+#   Explain WHY this change is needed (problem, context).
+#
+# What:
+#   High-level summary of WHAT changed.
+#
+# How:
+#   Optional: implementation details if non-obvious.
+#
+# ------------------------------------------------------------
+# Breaking Changes:
+#   Describe any breaking changes here.
+#
+# ------------------------------------------------------------
+# Closes:
+#   Link issues (e.g. Closes #123, Fixes #456)
+#
+# ------------------------------------------------------------
+# Co-authored-by:
+#   Name <email>

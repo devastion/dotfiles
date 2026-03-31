@@ -1,7 +1,7 @@
 # My dotfiles
 
 ```bash
-chezmoi init devastion --apply
+chezmoi init devastion --apply --source ~/projects/github/dotfiles
 ```
 
 or
