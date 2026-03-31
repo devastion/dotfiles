@@ -58,7 +58,7 @@
       "src": "https://github.com/dynge/gitmoji.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "50c205548d8b037b7ff6378fca6d21146f0b6161",
+      "rev": "caa98e2e5e4c23a1652c23be839d2e1722cecc29",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "grug-far.nvim": {
@@ -228,7 +228,7 @@
       "src": "https://github.com/rcarriga/nvim-notify"
     },
     "nvim-scissors": {
-      "rev": "855ce6ba0c0bf3b03428d6352f61940cdcf332f3",
+      "rev": "b3eda2318d1892eefee516af02a232588e0fa1a9",
       "src": "https://github.com/chrisgrieser/nvim-scissors"
     },
     "nvim-spider": {
@@ -306,7 +306,7 @@
       "src": "https://github.com/devastion/resolve.nvim"
     },
     "schemastore.nvim": {
-      "rev": "24eeb97da8d605c480dc68bb6276248702e31d2a",
+      "rev": "4f1c58a59d3a4da095743dd6f04b73caa0cefc3d",
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "sidekick.nvim": {

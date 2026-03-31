@@ -9,9 +9,6 @@ pkg.later(function()
     {
       src = "devastion/neotest-phpunit",
       version = "feat/add-docker-and-coverage-support",
-      data = {
-        dev = "~/Projects/github/neovim-plugins/neotest-phpunit",
-      },
     },
     "devastion/neotest-node",
     "diidiiman/neotest-python",

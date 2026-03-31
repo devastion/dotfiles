@@ -7,7 +7,6 @@ require("devastion.utils.pkg").add({
       config = function()
         require("scissors").setup({
           snippetDir = vim.fn.stdpath("config") .. "/snippets",
-          jsonFormatter = "jq",
         })
 
         map("<leader>cS", function()
