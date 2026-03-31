@@ -1,9 +1,18 @@
+# macos
 .DS_Store
+.DS_Store?
+
+# zsh
 .zcompdump*
 .zsh_history*
 .zsh_sessions
 .zcompcache
+
+# vim / nvim
 Session.vim
-*.local
 .nvim.lua
+
+# local
+*.local
+*.local.*
 # vim:ft=gitignore

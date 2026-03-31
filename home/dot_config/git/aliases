@@ -28,6 +28,9 @@
     | cut -d \" \" -f1 ' -"
   cpbr = "!sh -c 'git branch --show-current | tr -d \"\n\" | pbcopy'"
   conflicts = "diff --name-only --diff-filter=U"
-  json = "!git log --pretty=format:'{\"commit\":\"%H\",\"abbreviated_commit\":\"%h\",\"tree\":\"%T\",\"parent\":\"%P\",\"refs\":\"%D\",\"subject\":\"%s\",\"author\":{\"name\":\"%aN\",\"email\":\"%aE\",\"date\":\"%aD\"},\"committer\":{\"name\":\"%cN\",\"email\":\"%cE\",\"date\":\"%cD\"}}' \"$@\" | sed '1s/^/[/;$!s/$/,/;$s/$/]/' | tr \"'\" '\"'"
+  json = "!git log --pretty=format:'{%n  \"commit\": \"%H\",%n  \"abbreviated_commit\": \"%h\",%n  \"tree\": \"%T\",%n  \"parent\": \"%P\",%n  \"refs\": \"%D\",%n  \"subject\": \"%s\",%n  \"author\": { \"name\": \"%aN\", \"email\": \"%aE\", \"date\": \"%aD\" },%n  \"committer\": { \"name\": \"%cN\", \"email\": \"%cE\", \"date\": \"%cD\" }%n}' \"$@\" | jq -s '.'"
   backup = "!git tag backup-$(date +%s)"
+  unstage = "reset HEAD --"
+  stash-all = "stash --include-untracked"
+  gone = "!git branch -vv | grep ': gone]' | awk '{print $1}'"
 ; vim:ft=gitconfig

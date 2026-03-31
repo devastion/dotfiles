@@ -1,7 +1,6 @@
 [init]
   defaultBranch = "main"
   templateDir = "~/.config/git/template"
-  commitTemplate = "~/.config/git/commit.template"
 
 [core]
   editor = "nvim"
@@ -16,7 +15,7 @@
   colorMovedWS = "allow-indentation-change"
   renames = "copies"
   mnemonicPrefix = true
-  indentHeuristic = true
+  wsErrorHighlight = "all"
 
 [difftool]
   prompt = false
@@ -47,6 +46,7 @@
 [fetch]
   prune = true
   pruneTags = true
+  all = true
   parallel = 0
   fsckObjects = true
   writeCommitGraph = true
@@ -56,6 +56,7 @@
 
 [commit]
   verbose = true
+  template = "~/.config/git/commit.template"
 
 [tag]
   sort = "version:refname"

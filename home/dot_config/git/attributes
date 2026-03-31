@@ -13,5 +13,12 @@
 *.png diff=image
 *.gif diff=image
 *.jpg diff=image
-*.java diff=java merge=mergiraf
+*.java diff=java
+*.md diff=markdown
+*.py diff=python
+*.rb diff=ruby
+*.rs diff=rust
+*.go diff=golang
+*.css diff=css
+*.html diff=html
 # vim:ft=gitattributes

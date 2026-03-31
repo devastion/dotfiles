@@ -5,12 +5,15 @@
   diff = delta
   log = delta
   reflog = delta
+  show = delta
+  blame = delta
 
 [interactive]
   diffFilter = "delta --color-only --features=interactive"
 
 [delta]
   features = "decorations"
+  navigate = true
   line-numbers = true
   hyperlinks = true
   side-by-side = true

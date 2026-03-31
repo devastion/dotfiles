@@ -52,4 +52,13 @@ tags
 # Persistent undo
 [._]*.un~
 
+# IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# Environment
+.env
+.env.*
+
 # vim:ft=gitignore
