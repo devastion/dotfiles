@@ -11,6 +11,8 @@ zmodload zsh/terminfo
 typeset -g VI_MODE_INDICATOR='❯'
 
 _vi_cursor() {
+  [[ ${TERM-} != dumb ]] || return 0
+
   case $1 in
     block) printf '\e[2 q' ;;
     under) printf '\e[4 q' ;;
@@ -63,16 +65,21 @@ add-zle-hook-widget line-init _vi_line_init
 add-zle-hook-widget line-finish _vi_line_finish
 
 expand-alias-space() {
-  local remove_space=1
+  local alias_name remove_space=1
 
-  if (($#baliases)) && [[ $LBUFFER =~ (^| )(${(j:|:)baliases})$ ]]; then
-    remove_space=0
-  fi
+  for alias_name in "${baliases[@]}"; do
+    if [[ $LBUFFER == "$alias_name" || $LBUFFER == *" $alias_name" ]]; then
+      remove_space=0
+      break
+    fi
+  done
 
-  if (($#ealiases)) && (($+widgets[_expand_alias])) &&
-    [[ $LBUFFER =~ (${(j:|:)ealiases})$ ]]; then
-    zle _expand_alias
-  fi
+  for alias_name in "${ealiases[@]}"; do
+    if (($+widgets[_expand_alias])) && [[ $LBUFFER == *"$alias_name" ]]; then
+      zle _expand_alias
+      break
+    fi
+  done
 
   zle self-insert
 
@@ -86,7 +93,7 @@ bindkey -M viins '^ ' magic-space
 vi-yank-clip() {
   zle vi-yank
 
-  print -rn -- "$CUTBUFFER" | pbcopy &> /dev/null
+  (($+commands[pbcopy])) && print -rn -- "$CUTBUFFER" | command pbcopy &>/dev/null
 }
 
 zle -N vi-yank-clip
@@ -148,6 +155,7 @@ for km in viins vicmd; do
 done
 
 unset km
+unset _keys
 unfunction _bindkey_terminfo
 
 bindkey -M vicmd 'k' up-line-or-beginning-search
@@ -216,7 +224,7 @@ magic-enter() {
   function _magic-enter() {
     [[ -n $BUFFER || $CONTEXT != start ]] && return
 
-    if (($+commands[git])) && command git rev-parse --is-inside-work-tree &> /dev/null; then
+    if (($+commands[git])) && command git rev-parse --is-inside-work-tree &>/dev/null; then
       BUFFER=' git status -sbu .'
     else
       BUFFER=' ls .'
@@ -246,7 +254,7 @@ zsh-defer magic-enter || magic-enter
 
 function pound-toggle() {
   if [[ $BUFFER == '#'* ]]; then
-    if [[ $CURSOR != $#BUFFER ]]; then
+    if ((CURSOR > 0)); then
       ((CURSOR -= 1))
     fi
     BUFFER="${BUFFER:1}"
