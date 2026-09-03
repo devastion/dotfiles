@@ -2,7 +2,9 @@
 
 set -euo pipefail
 
-ZDOTDIR_PATH="$HOME/.config/zsh"
+ZDOTDIR_PATH="${ZDOTDIR:-$HOME/.config/zsh}"
+CLAUDE_CONFIG_DIR_PATH="${CLAUDE_CONFIG_DIR:-$HOME/.config/claude}"
+COPILOT_HOME_PATH="${COPILOT_HOME:-$HOME/.config/copilot}"
 PLIST_DIR="$HOME/Library/LaunchAgents"
 PLIST_FILE="$PLIST_DIR/com.user.zdotdir.plist"
 LABEL="com.user.zdotdir"
@@ -21,10 +23,13 @@ cat >"$PLIST_FILE" <<PLIST
     <string>${LABEL}</string>
     <key>ProgramArguments</key>
     <array>
-        <string>launchctl</string>
-        <string>setenv</string>
-        <string>ZDOTDIR</string>
-        <string>${ZDOTDIR_PATH}</string>
+        <string>/bin/sh</string>
+        <string>-c</string>
+        <string>
+          launchctl setenv ZDOTDIR ${ZDOTDIR_PATH};
+          launchctl setenv CLAUDE_CONFIG_DIR ${CLAUDE_CONFIG_DIR_PATH};
+          launchctl setenv COPILOT_HOME ${COPILOT_HOME_PATH};
+        </string>
     </array>
     <key>RunAtLoad</key>
     <true/>
@@ -40,5 +45,6 @@ launchctl bootout "gui/$USER_ID/$LABEL" 2>/dev/null || true
 launchctl bootstrap "gui/$USER_ID" "$PLIST_FILE"
 
 launchctl setenv ZDOTDIR "$ZDOTDIR_PATH"
+launchctl setenv CLAUDE_CONFIG_DIR "$CLAUDE_CONFIG_DIR_PATH"
 
 echo "Success! Please restart your terminal application."

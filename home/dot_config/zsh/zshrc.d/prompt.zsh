@@ -1,16 +1,15 @@
 #!/usr/bin/env zsh
 
 setopt prompt_subst
-setopt transient_rprompt
 
 zmodload zsh/datetime
 autoload -Uz add-zsh-hook
 
-typeset -gF PROMPT_MIN_DURATION=2.0
+typeset -gF _PROMPT_MIN_DURATION=2.0
 
-typeset -g PATH_INFO=''
-typeset -g GIT_INFO=''
-typeset -g CMD_STATUS=''
+typeset -g _PROMPT_GIT_STATUS=''
+typeset -g _PROMPT_CMD_STATUS=''
+typeset -g _PROMPT_CMD_INFO=''
 
 typeset -gF _PROMPT_START_TIME=-1
 
@@ -20,24 +19,26 @@ _prompt_escape() {
 
 _prompt_duration() {
   local -F secs=$1
-  local -i total=$secs
-  local -i h=$((total / 3600)) m=$((total % 3600 / 60)) s=$((total % 60))
-  local -i tenths=$(((secs - total) * 10))
+  local -i total=${secs%.*}
+  local -i h=$((total / 3600))
+  local -i m=$((total % 3600 / 60))
+  local -i s=$((total % 60))
 
   if ((h)); then
     REPLY="${h}h${m}m${s}s"
   elif ((m)); then
     REPLY="${m}m${s}s"
   else
+    local -i tenths=$(((secs * 10) % 10))
     REPLY="${s}.${tenths}s"
   fi
 }
 
-_git_prompt() {
+_prompt_git() {
   local line oid branch repo REPLY
   local -i in_repo=0
   local -i staged=0 unstaged=0 untracked=0 conflicted=0 ahead=0 behind=0
-  local -a segments fields
+  local -a segments
 
   (($+commands[git])) || return 1
 
@@ -61,7 +62,8 @@ _git_prompt() {
         branch=${line#'# branch.head '}
         ;;
       '# branch.ab '*)
-        fields=(${(s: :)${line#'# branch.ab '}})
+        local ab=${line#'# branch.ab '}
+        local -a fields=(${(s: :)ab})
         ahead=${fields[1]#+}
         behind=${fields[2]#-}
         ;;
@@ -71,15 +73,16 @@ _git_prompt() {
   ((in_repo)) || return 1
 
   if [[ $branch == '(detached)' ]]; then
-    branch=${oid[1,7]:+HEAD (${oid[1,7]})}
+    branch="HEAD (${oid[1,7]})"
   fi
 
-  repo=${$(git rev-parse --show-toplevel 2>/dev/null):t}
-  _prompt_escape ${repo:-'(unknown)'}
-  GIT_INFO="%F{green}󰘬 ${REPLY}%f"
+  _prompt_escape "$branch"
+  branch=$REPLY
 
-  _prompt_escape ${branch:-'(unknown)'}
-  GIT_INFO+=" %F{red}${REPLY}%f"
+  _prompt_escape "${PWD:t}"
+  local repo=$REPLY
+
+  _PROMPT_GIT_STATUS="%F{green}󰘬 ${repo}%f %F{red}${branch}%f"
 
   ((staged)) && segments+=("%F{green}+${staged}%f")
   ((unstaged)) && segments+=("%F{yellow}!${unstaged}%f")
@@ -88,22 +91,11 @@ _git_prompt() {
   ((ahead)) && segments+=("%F{magenta}⇡${ahead}%f")
   ((behind)) && segments+=("%F{blue}⇣${behind}%f")
 
-  (($#segments)) \
-    && GIT_INFO+=" %B[${(j: :)segments}]%b"
+  if ((${#segments})); then
+    _PROMPT_GIT_STATUS+=" %B[${(j: :)segments}]%b"
+  fi
 
   return 0
-}
-
-_refresh_prompt() {
-  local REPLY
-
-  GIT_INFO=''
-
-  if _git_prompt; then
-    PATH_INFO='%~'
-  else
-    PATH_INFO='%~'
-  fi
 }
 
 _prompt_preexec() {
@@ -117,9 +109,9 @@ _prompt_precmd() {
   local REPLY
 
   if ((exit_code == 0)); then
-    CMD_STATUS='%F{green}'
+    _PROMPT_CMD_STATUS='%F{green}'
   else
-    CMD_STATUS='%F{red}'
+    _PROMPT_CMD_STATUS='%F{red}'
     info+=("%F{red}${exit_code}%f")
   fi
 
@@ -127,16 +119,19 @@ _prompt_precmd() {
     elapsed=$((EPOCHREALTIME - _PROMPT_START_TIME))
     _PROMPT_START_TIME=-1
 
-    if ((elapsed >= PROMPT_MIN_DURATION)); then
+    if ((elapsed >= _PROMPT_MIN_DURATION)); then
       _prompt_duration $elapsed
       info+=("%F{yellow}${REPLY}%f")
     fi
   fi
 
-  _refresh_prompt
+  _PROMPT_CMD_INFO="${(j: :)info}"
+
+  _PROMPT_GIT_STATUS=''
+  _prompt_git
 }
 
 add-zsh-hook preexec _prompt_preexec
 add-zsh-hook precmd _prompt_precmd
 
-PROMPT=$'\n%B%F{blue}${PATH_INFO}%f%b ${GIT_INFO}\n${CMD_STATUS}${VI_MODE_INDICATOR}%f '
+PROMPT=$'\n%B%F{blue}%~%f%b ${_PROMPT_GIT_STATUS} ${_PROMPT_CMD_INFO}\n${_PROMPT_CMD_STATUS}${VI_MODE_INDICATOR}%f '

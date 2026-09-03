@@ -10,14 +10,14 @@ source "$ZSH_CONFIG_HOME/zshrc.d/history.zsh"
 
 autoload -Uz ${ZSH_FUNCTIONS_DIR:-$ZDOTDIR/functions}/*(N.:t)
 
-plugin source 'romkatv/zsh-defer'
+source "$ZSH_PLUGINS_DIR/zsh-defer/zsh-defer.plugin.zsh"
 
 zsh-defer -c '
   run-compinit
-  plugin source "aloxaf/fzf-tab"
-  plugin source "hlissner/zsh-autopair"
-  plugin source "zsh-users/zsh-autosuggestions"
-  plugin source "zdharma-continuum/fast-syntax-highlighting"
+  source "$ZSH_PLUGINS_DIR/fzf-tab/fzf-tab.plugin.zsh"
+  source "$ZSH_PLUGINS_DIR/zsh-autopair/zsh-autopair.plugin.zsh"
+  source "$ZSH_PLUGINS_DIR/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
+  source "$ZSH_PLUGINS_DIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
   (( $+commands[mise] )) && source <(mise activate zsh)
   (( $+commands[fzf] )) && source <(fzf --zsh)
   (( $+commands[zoxide] )) && source <(zoxide init zsh)

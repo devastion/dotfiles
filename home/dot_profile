@@ -9,10 +9,8 @@ _OS="$(uname -s)"
 _UID="$(id -u)"
 
 is_macos() { [ "$_OS" = Darwin ]; }
-is_linux() { [ "$_OS" = Linux ]; }
 
 is_zsh() { [ -n "${ZSH_VERSION:-}" ]; }
-is_bash() { [ -n "${BASH_VERSION:-}" ]; }
 
 is_interactive() {
   case $- in
@@ -115,8 +113,6 @@ export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 
 export EZA_CONFIG_DIR="$XDG_CONFIG_HOME/eza"
 
-export FZF_DEFAULT_OPTS_FILE="$XDG_CONFIG_HOME/fzf/config"
-
 export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
 
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
@@ -212,6 +208,75 @@ else
   unset LESSOPEN
 fi
 
+if is_interactive; then
+  LESS_TERMCAP_mb=$(tput blink setaf 4)
+  LESS_TERMCAP_md=$(tput bold setaf 4)
+  LESS_TERMCAP_me=$(tput sgr0)
+  LESS_TERMCAP_se=$(tput sgr0)
+  LESS_TERMCAP_so=$(tput rev)
+  LESS_TERMCAP_ue=$(tput sgr0)
+  LESS_TERMCAP_us=$(tput smul setaf 5)
+  export LESS_TERMCAP_mb LESS_TERMCAP_md LESS_TERMCAP_me LESS_TERMCAP_se \
+    LESS_TERMCAP_so LESS_TERMCAP_ue LESS_TERMCAP_us
+fi
+
+export FZF_DEFAULT_OPTS_FILE="$XDG_CONFIG_HOME/fzf/config"
+
+_fzf_history="$XDG_STATE_HOME/fzf/history"
+if is_interactive; then
+  _fzf_history_dir=$(dirname -- "$_fzf_history")
+  [ -d "$_fzf_history_dir" ] || mkdir -p -- "$_fzf_history_dir"
+  unset _fzf_history_dir
+fi
+export FZF_DEFAULT_OPTS="--history ${_fzf_history}"
+unset _fzf_history
+
+if command_exists fd; then
+  export FZF_DEFAULT_COMMAND='command fd --type f --hidden --follow --strip-cwd-prefix --exclude .git'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND='command fd --type d --hidden --follow --strip-cwd-prefix --exclude .git'
+fi
+
+export FZF_CTRL_T_OPTS="
+--multi
+--bind 'ctrl-o:execute(nvim {+})+abort'
+--header 'CTRL-O open in neovim'
+"
+export FZF_CTRL_R_OPTS="
+--preview 'printf %s {2..}'
+--preview-window=down:3:wrap:hidden,border-up
+--bind 'ctrl-y:execute-silent(printf %s {2..} | pbcopy)+abort'
+--color header:italic
+--header 'CTRL-Y copy · ? preview · CTRL-R toggle sort'
+"
+
+if command_exists rg; then
+  _fzf_compgen_path() {
+    command rg --files --glob '!.git' "$1"
+  }
+fi
+
+if command_exists fd; then
+  _fzf_compgen_dir() {
+    command fd --type d --hidden --follow --exclude '.git' "$1"
+  }
+fi
+
+if is_interactive; then
+  if ! is_macos; then
+    if command_exists 'wl-copy'; then
+      alias pbcopy='command wl-copy'
+      alias pbpaste='command wl-paste'
+    elif command_exists 'xclip'; then
+      alias pbcopy='command xclip -selection clipboard'
+      alias pbpaste='command xclip -selection clipboard -o'
+    elif command_exists 'clip.exe'; then
+      alias pbcopy='command clip.exe'
+      alias pbpaste='command powershell.exe -command Get-Clipboard'
+    fi
+  fi
+fi
+
 path_prepend() {
   [ -d "$1" ] || return 0
 
@@ -239,3 +304,6 @@ fi
 path_prepend "$XDG_DATA_HOME/npm/bin"
 path_prepend "$MISE_DATA_DIR/shims"
 path_prepend "$HOME/.local/bin"
+
+unset -f is_macos is_zsh is_interactive command_exists is_executable \
+  is_readable path_prepend
