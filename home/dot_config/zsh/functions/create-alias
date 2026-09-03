@@ -7,7 +7,7 @@ create-alias() {
   typeset -gaU baliases
   typeset -gA alias_descriptions
 
-  local -i expand=0 blank=0 global=0
+  local -i expand=0 blank=0 global=0 print_description=0
   local description='' definition key
 
   while (($#)); do
@@ -21,6 +21,9 @@ create-alias() {
       -g | --global)
         global=1
         ;;
+      -p | --print)
+        print_description=1
+        ;;
       -d | --description)
         (($# >= 2)) || {
           print -u2 -- "create-alias: $1 requires an argument"
@@ -28,6 +31,15 @@ create-alias() {
         }
         description=$2
         shift
+        ;;
+      -s | --show)
+        local result=''
+        for key in ${(ok)alias_descriptions}; do
+          result+="${result:+}${key} - ${alias_descriptions[$key]}"
+          result+=$'\n'
+        done
+        print -r -- "$result" | "${PAGER:-less}"
+        return 0
         ;;
       --)
         shift
@@ -44,6 +56,19 @@ create-alias() {
 
     shift
   done
+
+  if ((print_description)); then
+    (($# == 1)) || {
+      print -u2 -- 'Usage: create-alias --print name'
+      return 1
+    }
+    [[ -n ${alias_descriptions[$1]} ]] || {
+      print -u2 -- "create-alias: no description for: $1"
+      return 1
+    }
+    print -- "${alias_descriptions[$1]}"
+    return
+  fi
 
   (($# == 1)) || {
     print -u2 -- 'Usage: create-alias [options] name=value'

@@ -52,6 +52,7 @@ packages:
       - 'jq'
       - 'lazygit'
       - 'lesspipe'
+      - 'man-db'
       - 'mas'
       - 'neovim'
       - 'php'

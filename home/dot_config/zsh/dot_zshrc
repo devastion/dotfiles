@@ -30,6 +30,7 @@ source "$ZSH_CONFIG_HOME/zshrc.d/prompt.zsh"
 source "$ZSH_CONFIG_HOME/zshrc.d/completion.zsh"
 source "$ZSH_CONFIG_HOME/zshrc.d/editor.zsh"
 
+zsh-defer source "$ZSH_CONFIG_HOME/zshrc.d/gnu_coreutils.zsh"
 zsh-defer source "$ZSH_CONFIG_HOME/zshrc.d/fzf.zsh"
 
 zsh-defer source "$ZSH_CONFIG_HOME/zshrc.d/alias.zsh"

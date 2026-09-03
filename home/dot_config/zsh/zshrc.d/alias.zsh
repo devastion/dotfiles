@@ -8,7 +8,7 @@ for _index in {1..10}; do
 done
 unset -v _index _dotdot
 
-((${+aliases[run-help]})) && unalias run-help
+unalias run-help
 autoload -Uz run-help
 alias help='run-help'
 
@@ -32,12 +32,12 @@ alias zprofile='ZSH_PROFILE=1 exec zsh'
 }
 
 # safety / defaults
-alias cp='command cp -iv'
-alias grep='command grep --color=auto'
-alias ln='command ln -iv'
-alias man='command man'
-alias mkdir='command mkdir -pv'
-alias mv='command mv -iv'
+alias cp='cp -iv'
+alias grep='grep --color=auto'
+alias ln='ln -iv'
+alias man='man'
+alias mkdir='mkdir -pv'
+alias mv='mv -iv'
 
 if (($+commands[trash])); then
   alias trash='command trash -v'
@@ -66,7 +66,7 @@ alias myip='curl -fsSL --max-time 5 ifconfig.me'
 [[ $OSTYPE == darwin* ]] && alias localip='ipconfig getifaddr en0'
 
 # Processes
-alias psf='ps aux | grep -i' # usage: psf nginx
+alias psf='ps aux | grep -i' # usage: psf <name>
 alias listening='lsof -i -P -n | grep LISTEN'
 
 # Filesystem
@@ -113,9 +113,23 @@ alias md5='md5 -q'
 }
 
 ((${+commands[chezmoi]})) && {
-  create-alias -e ch='chezmoi'
-  create-alias -e cha='chezmoi add'
-  create-alias -e chap='chezmoi apply'
+  # Status
+  create-alias -e ch="chezmoi"
+  create-alias -e chd="chezmoi diff"
+  create-alias -e chst="chezmoi status"
+  create-alias -e chdoc="chezmoi doctor"
+
+  # Editing source
+  create-alias -e cha="chezmoi add"
+  create-alias -e chr="chezmoi re-add"
+  create-alias -e che="chezmoi edit"
+  create-alias -e chea="chezmoi edit --apply"
+  create-alias -e chcd="chezmoi cd"
+
+  # Updating target
+  create-alias -e chap="chezmoi apply"
+  create-alias -e chup="chezmoi update"
+  create-alias -e chug="chezmoi upgrade"
 }
 
 ((${+commands[npm]})) && {

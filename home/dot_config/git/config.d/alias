@@ -33,3 +33,4 @@
   unstage = restore --staged --
   wdiff = diff --word-diff=color
   wip = commit -am "wip"
+  root = rev-parse --show-toplevel
