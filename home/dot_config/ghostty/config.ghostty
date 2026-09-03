@@ -3,7 +3,7 @@ term = xterm-ghostty
 theme = TokyoNight Night
 
 # font
-font-family = Maple Normal Mono NF
+font-family = Maple Mono NF
 font-style = Regular
 font-size = 16
 font-feature = -calt, -liga, -dlig

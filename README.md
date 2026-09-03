@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal dotfiles managed by `chezmoi`.
+Personal dotfiles managed by [`chezmoi`](https://chezmoi.io).
 
 ## 🚀 Quick Start
 

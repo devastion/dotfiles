@@ -1,6 +1,7 @@
 externals:
   tmux:
     plugins:
+      - 'parwest/tmux-spoony'
       - 'ddzero2c/tmux-easymotion'
       - 'wfxr/tmux-fzf-url'
       - 'abhinav/tmux-fastcopy'

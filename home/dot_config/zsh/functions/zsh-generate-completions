@@ -125,6 +125,10 @@ zsh-generate-completions() {
     fi
   done
 
+  if (( $#generated )) && (( $+functions[run-compinit] )); then
+    run-compinit --force
+  fi
+
   print
   print -r -- "Generated: ${#generated}"
   print -r -- "Skipped:   ${#skipped}"

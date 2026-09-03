@@ -281,7 +281,7 @@ do
     group = relative_number_toggle_group,
     callback = function(args)
       if vim.bo[args.buf].buftype ~= '' then return end
-      if vim.opt_local.number then vim.opt_local.relativenumber = false end
+      if vim.wo.number then vim.wo.relativenumber = false end
     end,
   })
 
@@ -289,7 +289,7 @@ do
     group = relative_number_toggle_group,
     callback = function(args)
       if vim.bo[args.buf].buftype ~= '' then return end
-      if vim.opt_local.number then vim.opt_local.relativenumber = true end
+      if vim.wo.number then vim.wo.relativenumber = true end
     end,
   })
 end

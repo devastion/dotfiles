@@ -8,7 +8,7 @@ for _index in {1..10}; do
 done
 unset -v _index _dotdot
 
-unalias run-help
+unalias run-help 2> /dev/null
 autoload -Uz run-help
 alias help='run-help'
 
@@ -35,7 +35,6 @@ alias zprofile='ZSH_PROFILE=1 exec zsh'
 alias cp='cp -iv'
 alias grep='grep --color=auto'
 alias ln='ln -iv'
-alias man='man'
 alias mkdir='mkdir -pv'
 alias mv='mv -iv'
 
@@ -182,8 +181,24 @@ alias md5='md5 -q'
 }
 
 ((${+commands[brew]})) && {
-  create-alias -e -b brewup="brew update && brew upgrade && brew cleanup"
-  create-alias -e -b brewinfo="brew leaves | xargs brew desc --eval-all"
+  create-alias -e -d 'Remove outdated downloads and old versions' brewc='brew cleanup'
+  create-alias -e -d 'Install a formula' brewi='brew install'
+  create-alias -e -d 'List installed formulae that are not dependencies' brewL='brew leaves'
+  create-alias -e -d 'List installed formulae' brewl='brew list'
+  create-alias -e -d 'List outdated formulae' brewo='brew outdated'
+  create-alias -e -d 'Search for formulae' brews='brew search'
+  create-alias -e -d 'Upgrade installed formulae' brewu='brew upgrade'
+  create-alias -e -d 'Uninstall a formula' brewx='brew uninstall'
+
+  create-alias -e -d 'Install a cask' caski='brew install --cask'
+  create-alias -e -d 'List installed casks' caskl='brew list --cask'
+  create-alias -e -d 'List outdated casks' casko='brew outdated --cask'
+  create-alias -e -d 'Search for casks' casks='brew search --cask'
+  create-alias -e -d 'Upgrade installed casks' casku='brew upgrade --cask'
+  create-alias -e -d 'Uninstall a cask' caskx='brew uninstall --cask'
+
+  create-alias -e -b -d 'Update Homebrew, upgrade packages, and clean up' brewup="brew update && brew upgrade && brew cleanup"
+  create-alias -e -b -d 'Show descriptions for installed formulae' brewinfo="brew leaves | xargs brew desc --eval-all"
   brewdeps() {
     emulate -L zsh
     local bluify_deps='
@@ -195,80 +210,80 @@ alias md5='md5 -q'
 }
 
 # Pipes (|& = 2>&1 - pipe both stdout and stderr)
-create-alias --global --expand --description 'Pipe stdout and stderr to column and format as a table' COL='|& column -t'
-create-alias --global --expand --description 'Pipe stdout and stderr to grep' G='|& grep'
-create-alias --global --expand --description 'Copy stdout to the clipboard' C='| pbcopy'
-create-alias --global --expand --description 'Remove newlines and copy stdout to the clipboard' CC='| tr -d "\n" | pbcopy'
-create-alias --global --expand --description 'Pipe stdout and stderr to less' L='|& less'
-create-alias --global --expand --description 'Pipe stdout and stderr to sort' S='|& sort'
-create-alias --global --expand --description 'Pipe stdout and stderr to reverse numeric sort' R='|& sort -rn'
-create-alias --global --expand --description 'Count lines' W='|& wc -l | sed "s/^\ *//"'
-create-alias --global --expand --description 'Show the first lines' H='|& head'
-create-alias --global --expand --description 'Show the last lines' T='|& tail'
-create-alias --global --expand --description 'Show the first line' H1='H -n 1'
-create-alias --global --expand --description 'Show the last line' T1='T -n 1'
-create-alias --global --expand --description 'Pipe stdout and stderr to less' LL='2>&1 | less'
-create-alias --global --expand --description 'Pipe stdout and stderr to cat with visible control characters' CA='2>&1 | cat -vET'
-create-alias --global --expand --description 'Suppress stderr' NE='2> /dev/null'
-create-alias --global --expand --description 'Suppress stdout and stderr' NUL='> /dev/null 2>&1'
+create-alias -g -e -d 'Pipe stdout and stderr to column and format as a table' COL='|& column -t'
+create-alias -g -e -d 'Pipe stdout and stderr to grep' G='|& grep'
+create-alias -g -e -d 'Copy stdout to the clipboard' C='| pbcopy'
+create-alias -g -e -d 'Remove newlines and copy stdout to the clipboard' CC='| tr -d "\n" | pbcopy'
+create-alias -g -e -d 'Pipe stdout and stderr to less' L='|& less'
+create-alias -g -e -d 'Pipe stdout and stderr to sort' S='|& sort'
+create-alias -g -e -d 'Pipe stdout and stderr to reverse numeric sort' R='|& sort -rn'
+create-alias -g -e -d 'Count lines' W='|& wc -l | sed "s/^\ *//"'
+create-alias -g -e -d 'Show the first lines' H='|& head'
+create-alias -g -e -d 'Show the last lines' T='|& tail'
+create-alias -g -e -d 'Show the first line' H1='H -n 1'
+create-alias -g -e -d 'Show the last line' T1='T -n 1'
+create-alias -g -e -d 'Pipe stdout and stderr to less' LL='2>&1 | less'
+create-alias -g -e -d 'Pipe stdout and stderr to cat with visible control characters' CA='2>&1 | cat -vET'
+create-alias -g -e -d 'Suppress stderr' NE='2> /dev/null'
+create-alias -g -e -d 'Suppress stdout and stderr' NUL='> /dev/null 2>&1'
 
 # Glob modifiers
 
 # Empty / directories
-create-alias --global --expand --description 'Zero-byte regular files' ZF='*(.L0)'
-create-alias --global --expand --description 'Empty directories' ZD='*(/^F)'
-create-alias --global --expand --description 'Non-empty directories' FD='*(F)'
+create-alias -g -e -d 'Zero-byte regular files' ZF='*(.L0)'
+create-alias -g -e -d 'Empty directories' ZD='*(/^F)'
+create-alias -g -e -d 'Non-empty directories' FD='*(F)'
 
 # Recursive
-create-alias --global --expand --description 'All regular files recursively' AF='**/*(.)'
-create-alias --global --expand --description 'All directories recursively' AD='**/*(/)'
-create-alias --global --expand --description 'All symbolic links recursively' AS='**/*(@)'
-create-alias --global --expand --description 'All executable regular files recursively' AX='**/*(*)'
-create-alias --global --expand --description 'All FIFOs recursively' AP='**/*(p)'
-create-alias --global --expand --description 'All hidden regular files recursively' AH='**/*(.D)'
+create-alias -g -e -d 'All regular files recursively' AF='**/*(.)'
+create-alias -g -e -d 'All directories recursively' AD='**/*(/)'
+create-alias -g -e -d 'All symbolic links recursively' AS='**/*(@)'
+create-alias -g -e -d 'All executable regular files recursively' AX='**/*(*)'
+create-alias -g -e -d 'All FIFOs recursively' AP='**/*(p)'
+create-alias -g -e -d 'All hidden regular files recursively' AH='**/*(.D)'
 
 # Current directory
-create-alias --global --expand --description 'All entries in the current directory, including dotfiles' AE='{,.}*'
+create-alias -g -e -d 'All entries in the current directory, including dotfiles' AE='{,.}*'
 
 # Newest / oldest
-create-alias --global --expand --description 'Newest regular file' NF='*(.om[1])'
-create-alias --global --expand --description 'Newest directory' ND='*(/om[1])'
-create-alias --global --expand --description 'Newest symbolic link' NS='*(@om[1])'
-create-alias --global --expand --description 'Oldest regular file' OF='*(.om[-1])'
-create-alias --global --expand --description 'Oldest directory' OD='*(/om[-1])'
-create-alias --global --expand --description 'Oldest symbolic link' OS='*(@om[-1])'
-create-alias --global --expand --description '3 newest regular files' N3='*(.om[1,3])'
-create-alias --global --expand --description '10 newest regular files' N10='*(.om[1,10])'
+create-alias -g -e -d 'Newest regular file' NF='*(.om[1])'
+create-alias -g -e -d 'Newest directory' ND='*(/om[1])'
+create-alias -g -e -d 'Newest symbolic link' NS='*(@om[1])'
+create-alias -g -e -d 'Oldest regular file' OF='*(.om[-1])'
+create-alias -g -e -d 'Oldest directory' OD='*(/om[-1])'
+create-alias -g -e -d 'Oldest symbolic link' OS='*(@om[-1])'
+create-alias -g -e -d '3 newest regular files' N3='*(.om[1,3])'
+create-alias -g -e -d '10 newest regular files' N10='*(.om[1,10])'
 
 # Modified time
-create-alias --global --expand --description 'Regular files modified within the last hour' MH='*(.mh-1)'
-create-alias --global --expand --description 'Regular files modified within the last day' MD='*(.m-1)'
-create-alias --global --expand --description 'Regular files modified within the last week' MW='*(.mw-1)'
-create-alias --global --expand --description 'Regular files older than 30 days' MO='*(.m+30)'
+create-alias -g -e -d 'Regular files modified within the last hour' MH='*(.mh-1)'
+create-alias -g -e -d 'Regular files modified within the last day' MD='*(.m-1)'
+create-alias -g -e -d 'Regular files modified within the last week' MW='*(.mw-1)'
+create-alias -g -e -d 'Regular files older than 30 days' MO='*(.m+30)'
 
 # Size
-create-alias --global --expand --description 'Largest regular file' LF='*(.OL[1])'
-create-alias --global --expand --description 'Smallest regular file' SF='*(.OL[-1])'
-create-alias --global --expand --description '10 largest regular files' L10='*(.OL[1,10])'
-create-alias --global --expand --description 'Regular files larger than 1 MiB' G1='*(.Lk+1024)'
-create-alias --global --expand --description 'Regular files smaller than 100 KiB' S1='*(.Lk-100)'
+create-alias -g -e -d 'Largest regular file' LF='*(.OL[1])'
+create-alias -g -e -d 'Smallest regular file' SF='*(.OL[-1])'
+create-alias -g -e -d '10 largest regular files' L10='*(.OL[1,10])'
+create-alias -g -e -d 'Regular files larger than 1 MiB' G1='*(.Lk+1024)'
+create-alias -g -e -d 'Regular files smaller than 100 KiB' S1='*(.Lk-100)'
 
 # Ownership / permissions
-create-alias --global --expand --description 'Files owned by the current user' ME='*(U)'
-create-alias --global --expand --description 'Files not owned by the current user' NM='*(^U)'
-create-alias --global --expand --description 'World-writable regular files' WX='*(.W)'
+create-alias -g -e -d 'Files owned by the current user' ME='*(U)'
+create-alias -g -e -d 'Files not owned by the current user' NM='*(^U)'
+create-alias -g -e -d 'World-writable regular files' WX='*(.W)'
 
 # Broken symlinks
-create-alias --global --expand --description 'Broken symbolic links recursively' BL='**/*(-@)'
+create-alias -g -e -d 'Broken symbolic links recursively' BL='**/*(-@)'
 
 # Files
-create-alias --global --expand --description 'Executable regular files' EX='*(*.)'
-create-alias --global --expand --description 'Non-hidden regular files' HF='*(.^D)'
+create-alias -g -e -d 'Executable regular files' EX='*(*.)'
+create-alias -g -e -d 'Non-hidden regular files' HF='*(.^D)'
 
 # File extensions
-create-alias --global --expand --description 'Image files' IMG='*.(jpg|jpeg|png|gif|webp|avif|heic)'
-create-alias --global --expand --description 'Video files' VID='*.(mp4|mkv|mov|avi|webm)'
-create-alias --global --expand --description 'Audio files' AUD='*.(mp3|flac|ogg|m4a|wav)'
-create-alias --global --expand --description 'PDF files' PDF='*.pdf'
-create-alias --global --expand --description 'Log files' LOG='*.log'
-create-alias --global --expand --description 'Archive files' TAR='*.(tar|tar.gz|tgz|tar.xz|zip|7z)'
+create-alias -g -e -d 'Image files' IMG='*.(jpg|jpeg|png|gif|webp|avif|heic)'
+create-alias -g -e -d 'Video files' VID='*.(mp4|mkv|mov|avi|webm)'
+create-alias -g -e -d 'Audio files' AUD='*.(mp3|flac|ogg|m4a|wav)'
+create-alias -g -e -d 'PDF files' PDF='*.pdf'
+create-alias -g -e -d 'Log files' LOG='*.log'
+create-alias -g -e -d 'Archive files' TAR='*.(tar|tar.gz|tgz|tar.xz|zip|7z)'

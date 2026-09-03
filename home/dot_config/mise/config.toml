@@ -22,4 +22,3 @@ uv = "latest"
 [settings]
 idiomatic_version_file_enable_tools = ["node", "python", "ruby", "go"]
 lockfile = true
-minimum_release_age = "7d"

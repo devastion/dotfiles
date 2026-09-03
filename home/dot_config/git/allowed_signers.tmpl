@@ -1,0 +1,4 @@
+{{- $key := joinPath .chezmoi.homeDir ".ssh" "keys" "github.pub" -}}
+{{- if stat $key -}}
+48967408+devastion@users.noreply.github.com {{ output "cat" $key | trim }}
+{{ end -}}

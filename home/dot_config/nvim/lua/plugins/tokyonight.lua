@@ -8,6 +8,8 @@ require('tokyonight').setup({
   styles = {
     sidebars = 'transparent',
     floats = 'transparent',
+    comments = { italic = false },
+    keywords = { italic = false },
   },
   on_highlights = function(hl, c)
     hl['WinSeparator'] = { fg = c.fg_gutter }

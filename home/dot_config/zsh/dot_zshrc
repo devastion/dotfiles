@@ -10,14 +10,34 @@ source "$ZSH_CONFIG_HOME/zshrc.d/history.zsh"
 
 autoload -Uz ${ZSH_FUNCTIONS_DIR:-$ZDOTDIR/functions}/*(N.:t)
 
-source "$ZSH_PLUGINS_DIR/zsh-defer/zsh-defer.plugin.zsh"
+plugin-source() {
+  local plugin=$1
+  local file="$ZSH_PLUGINS_DIR/$plugin/$plugin.plugin.zsh"
+  [[ -r $file ]] || {
+    print -u2 "zshrc: missing plugin '$plugin' (run: chezmoi apply)"
+    return 1
+  }
+  source "$file"
+}
+
+plugin-source zsh-defer || function zsh-defer {
+  while [[ $1 == -[acmpt]* ]]; do
+    [[ $1 == -c ]] && {
+      shift
+      eval "$1"
+      return
+    }
+    shift 2
+  done
+  "$@"
+}
 
 zsh-defer -c '
   run-compinit
-  source "$ZSH_PLUGINS_DIR/fzf-tab/fzf-tab.plugin.zsh"
-  source "$ZSH_PLUGINS_DIR/zsh-autopair/zsh-autopair.plugin.zsh"
-  source "$ZSH_PLUGINS_DIR/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
-  source "$ZSH_PLUGINS_DIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+  plugin-source fzf-tab
+  plugin-source zsh-autopair
+  plugin-source zsh-autosuggestions
+  plugin-source fast-syntax-highlighting
   (( $+commands[mise] )) && source <(mise activate zsh)
   (( $+commands[fzf] )) && source <(fzf --zsh)
   (( $+commands[zoxide] )) && source <(zoxide init zsh)

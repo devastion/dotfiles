@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo 'Homebrew not found; skipping package installation.' >&2
+  echo 'Install it from https://brew.sh and re-run: chezmoi apply' >&2
+  exit 0
+fi
+
 echo 'Installing Homebrew packages, casks, and App Store applications...'
-brew bundle --file=/dev/stdin <<EOF
+brew bundle --file=/dev/stdin <<'BREWFILE'
 {{ range .packages.darwin.taps -}}
 tap {{ . | quote }}
 {{ end -}}
@@ -14,4 +22,4 @@ cask {{ . | quote }}
 {{ range .packages.darwin.mas -}}
 mas {{ .name | quote }}, id: {{ .id }}
 {{ end -}}
-EOF
+BREWFILE

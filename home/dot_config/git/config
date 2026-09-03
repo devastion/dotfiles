@@ -1,5 +1,6 @@
 [user]
   name = Dimitar Banev
+  useConfigOnly = true
 
 [init]
   defaultBranch = main
@@ -44,6 +45,7 @@
 
 [rerere]
   enabled = true
+  autoUpdate = true
 
 [rebase]
   autoSquash = true
@@ -65,12 +67,30 @@
   all = true
   writeCommitGraph = true
   output = compact
+  fsckObjects = true
 
 [commit]
   verbose = true
 
 [help]
   autocorrect = prompt
+
+[branch]
+  sort = -committerdate
+
+[tag]
+  sort = version:refname
+
+[column]
+  ui = auto
+
+# Reject objects with malformed/malicious metadata instead of writing them
+# into the object store.
+[transfer]
+  fsckObjects = true
+
+[receive]
+  fsckObjects = true
 
 [color]
   ui = auto

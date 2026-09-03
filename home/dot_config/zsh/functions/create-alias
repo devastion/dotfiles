@@ -33,12 +33,11 @@ create-alias() {
         shift
         ;;
       -s | --show)
-        local result=''
+        local -a lines
         for key in ${(ok)alias_descriptions}; do
-          result+="${result:+}${key} - ${alias_descriptions[$key]}"
-          result+=$'\n'
+          lines+=("${key} - ${alias_descriptions[$key]}")
         done
-        print -r -- "$result" | "${PAGER:-less}"
+        print -rl -- "${lines[@]}" | "${PAGER:-less}"
         return 0
         ;;
       --)

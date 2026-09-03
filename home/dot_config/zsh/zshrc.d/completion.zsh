@@ -49,9 +49,9 @@ run-compinit() {
   _comp_options+=(globdots)
 }
 
-LS_COLORS=${LS_COLORS:-'di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'}
+typeset -x LS_COLORS=${LS_COLORS:-'di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'}
 
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle -e ':completion:*:default' list-colors 'reply=( "${(@s.:.)LS_COLORS}" )'
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 
 zstyle ':completion:*' use-cache on
