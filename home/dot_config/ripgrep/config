@@ -1,0 +1,49 @@
+# Don't let long lines flood the terminal
+--max-columns=150
+--max-columns-preview
+
+# Search hidden files/dirs (but still respect .gitignore)
+--hidden
+
+# Better output
+--heading
+
+# Follow symlinks
+--follow
+
+# Use PCRE2 regex
+--pcre2
+
+# But never search these
+--glob=!.git/*
+--glob=!node_modules/*
+
+# Ignore lock and build files
+--glob=!package-lock.json
+--glob=!yarn.lock
+--glob=!pnpm-lock.yaml
+--glob=!Gemfile.lock
+--glob=!Cargo.lock
+--glob=!bun.lockb
+--glob=!.DS_Store
+
+# Colors
+--color=auto
+--colors=line:none
+--colors=line:style:bold
+--colors=path:fg:green
+--colors=match:fg:yellow
+--colors=match:style:nobold
+--colors=line:fg:magenta
+
+# Smart case: lowercase = insensitive, uppercase = sensitive
+--smart-case
+
+# Show line numbers
+--line-number
+
+# Show column numbers
+--column
+
+# Show a bit of context (lines before and after each match)
+# --context=2

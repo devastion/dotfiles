@@ -1,0 +1,7 @@
+let s:cache = expand($XDG_CACHE_HOME !=# '' ? $XDG_CACHE_HOME : '~/.cache') . '/vim'
+
+if !isdirectory(s:cache)
+  call mkdir(s:cache, 'p', 0700)
+endif
+
+let &viminfofile = s:cache . '/viminfo'

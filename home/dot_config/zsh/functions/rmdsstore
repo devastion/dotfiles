@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+
+rmdsstore() {
+  emulate -L zsh
+
+  if [[ $OSTYPE != darwin* ]]; then
+    print -u2 'rmdsstore: Warning: Designed for macOS environments.'
+  fi
+
+  local target
+  local -a ds_files
+  local count=0
+
+  for target in "${@:-.}"; do
+    if [[ ! -e $target ]]; then
+      print -u2 "rmdsstore: path not found: $target"
+      continue
+    fi
+
+    if [[ -d $target ]]; then
+      ds_files=($target/**/.DS_Store(ND))
+    elif [[ -f $target && ${target:t} == '.DS_Store' ]]; then
+      ds_files=($target)
+    else
+      ds_files=()
+    fi
+
+    if (($#ds_files > 0)); then
+      command rm -f -- "${ds_files[@]}"
+      count=$((count + $#ds_files))
+    fi
+  done
+
+  print -r "Cleaned $count .DS_Store file(s)."
+}

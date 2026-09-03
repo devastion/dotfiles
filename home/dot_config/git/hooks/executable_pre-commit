@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+#
+# Global pre-commit git hook
+
+execute() {
+  cmd="$1"
+  shift
+
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    printf 'pre-commit: %s not found, skipping\n' "$cmd" >&2
+    return 0
+  fi
+
+  "$cmd" "$@"
+}
+
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null) || {
+  printf 'pre-commit: not in a git repository\n' >&2
+  exit 1
+}
+
+execute betterleaks git "$repo_root" --pre-commit --staged || exit 1
+
+git_dir=$(git rev-parse --git-dir) || {
+  printf 'pre-commit: unable to find the repository git directory\n' >&2
+  exit 1
+}
+
+repo_hook="$git_dir/hooks/pre-commit"
+
+if [ -x "$repo_hook" ] && [ ! "$repo_hook" -ef "$0" ]; then
+  "$repo_hook" "$@" || exit 1
+fi

@@ -1,0 +1,21 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto eol=lf
+
+# Declare files that will always have CRLF line endings on checkout.
+*.sln text eol=crlf
+*.csproj text eol=crlf
+
+# Images
+# *.png diff=image
+# *.gif diff=image
+# *.jpg diff=image
+
+# Languages
+*.java diff=java
+*.md diff=markdown
+*.py diff=python
+*.rb diff=ruby
+*.rs diff=rust
+*.go diff=golang
+*.css diff=css
+*.html diff=html

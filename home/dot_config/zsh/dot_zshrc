@@ -1,0 +1,37 @@
+#!/usr/bin/env zsh
+
+[[ -o 'interactive' ]] || return
+
+if (($+ZSH_PROFILE)); then zmodload zsh/zprof; fi
+
+source "$ZSH_CONFIG_HOME/zshrc.d/environment.zsh"
+source "$ZSH_CONFIG_HOME/zshrc.d/setopt.zsh"
+source "$ZSH_CONFIG_HOME/zshrc.d/history.zsh"
+
+autoload -Uz ${ZSH_FUNCTIONS_DIR:-$ZDOTDIR/functions}/*(N.:t)
+
+plugin source 'romkatv/zsh-defer'
+
+zsh-defer -c '
+  run-compinit
+  plugin source "aloxaf/fzf-tab"
+  plugin source "hlissner/zsh-autopair"
+  plugin source "zsh-users/zsh-autosuggestions"
+  plugin source "zdharma-continuum/fast-syntax-highlighting"
+  (( $+commands[mise] )) && source <(mise activate zsh)
+  (( $+commands[fzf] )) && source <(fzf --zsh)
+  (( $+commands[zoxide] )) && source <(zoxide init zsh)
+  (( $+commands[gdircolors] )) &&
+    [[ -r "$XDG_CONFIG_HOME/dircolors/tokyonight.dircolors" ]] &&
+    source <(gdircolors -b "$XDG_CONFIG_HOME/dircolors/tokyonight.dircolors")
+'
+
+source "$ZSH_CONFIG_HOME/zshrc.d/prompt.zsh"
+source "$ZSH_CONFIG_HOME/zshrc.d/completion.zsh"
+source "$ZSH_CONFIG_HOME/zshrc.d/editor.zsh"
+
+zsh-defer source "$ZSH_CONFIG_HOME/zshrc.d/fzf.zsh"
+
+zsh-defer source "$ZSH_CONFIG_HOME/zshrc.d/alias.zsh"
+
+if (($+ZSH_PROFILE)); then builtin zprof; fi

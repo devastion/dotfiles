@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+target=$(tmux list-windows -F "#{session_name}:#{window_index} - #{window_name} (#{pane_current_path})" |
+  grep -v '^cursor' |
+  fzf --header "Switch tmux window" --border=none) || exit 0
+
+if [[ -n $target ]]; then
+  session_win=$(echo "$target" | cut -d' ' -f1)
+  tmux select-window -t "$session_win"
+fi

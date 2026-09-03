@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+
+[[ -o 'login' ]] || return
+
+zmodload -m -F zsh/files 'b:zf_*'
+
+# Create XDG Base Directories
+zf_mkdir -p -- \
+  "$XDG_CACHE_HOME" \
+  "$XDG_CONFIG_HOME" \
+  "$XDG_DATA_HOME" \
+  "$XDG_STATE_HOME"
+
+[[ -d "$XDG_RUNTIME_DIR" ]] || zf_mkdir -m 0700 -p "$XDG_RUNTIME_DIR"
+
+# Create XDG User Directories
+zf_mkdir -p -- \
+  "$XDG_DESKTOP_DIR" \
+  "$XDG_DOCUMENTS_DIR" \
+  "$XDG_DOWNLOAD_DIR" \
+  "$XDG_MUSIC_DIR" \
+  "$XDG_PICTURES_DIR" \
+  "$XDG_PROJECTS_DIR" \
+  "$XDG_PUBLICSHARE_DIR" \
+  "$XDG_SCREENSHOTS_DIR" \
+  "$XDG_TEMPLATES_DIR" \
+  "$XDG_VIDEOS_DIR"
+
+# Create ZSH Directories
+zf_mkdir -p -- \
+  "$ZSH_CACHE_HOME" \
+  "$ZSH_CONFIG_HOME" \
+  "$ZSH_DATA_HOME" \
+  "$ZSH_STATE_HOME" \
+  "$ZSH_FUNCTIONS_DIR" \
+  "$ZSH_COMPLETIONS_DIR" \
+  "$ZSH_PLUGINS_DIR"
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :

@@ -1,0 +1,14 @@
+externals:
+  tmux:
+    plugins:
+      - 'ddzero2c/tmux-easymotion'
+      - 'wfxr/tmux-fzf-url'
+      - 'abhinav/tmux-fastcopy'
+
+  zsh:
+    plugins:
+      - 'romkatv/zsh-defer'
+      - 'aloxaf/fzf-tab'
+      - 'hlissner/zsh-autopair'
+      - 'zsh-users/zsh-autosuggestions'
+      - 'zdharma-continuum/fast-syntax-highlighting'

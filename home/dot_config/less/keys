@@ -1,0 +1,36 @@
+#command
+H help
+
+j forw-line
+k back-line
+h left-scroll
+l right-scroll
+
+d forw-scroll
+u back-scroll
+
+g goto-line
+G goto-end
+
+J forw-screen
+K back-screen
+
+e forw-line
+y back-line
+
+Ctrl-N forw-line
+Ctrl-P back-line
+
+/ forw-search
+? back-search
+n repeat-search
+N reverse-search
+
+q quit
+Q quit
+
+#line-edit
+\e[A up
+\e[B down
+\e[C right
+\e[D left

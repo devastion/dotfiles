@@ -1,0 +1,25 @@
+[tools]
+bun = "latest"
+cargo-binstall = "latest"
+"cargo:selene" = "latest"
+deno = "latest"
+go = "latest"
+java = "latest"
+lua = "5.1"
+node = "lts"
+perl = "latest"
+pipx = "latest"
+pnpm = "latest"
+python = "latest"
+ruby = "latest"
+rust = "stable"
+shellcheck = "latest"
+shfmt = "latest"
+stylua = "latest"
+usage = "latest"
+uv = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node", "python", "ruby", "go"]
+lockfile = true
+minimum_release_age = "7d"

@@ -1,0 +1,8 @@
+--theme="tokyonight"
+--style="numbers,changes,header"
+--italic-text="always"
+--paging="auto"
+--pager="less -R"
+--wrap="auto"
+--map-syntax "*.ino:C++"
+--map-syntax ".ignore:Git Ignore"

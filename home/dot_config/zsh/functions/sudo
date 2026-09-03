@@ -1,0 +1,33 @@
+#!/usr/bin/env zsh
+#
+# sudo <cmd> [args...]
+# sudo exec <cmd> [args...] -> replace current shell
+
+sudo() {
+  emulate -L zsh
+
+  if (($# == 0)); then
+    command sudo
+    return
+  fi
+
+  if [[ $1 == exec ]]; then
+    shift
+    (($#)) || {
+      print -u2 'sudo: exec: missing command'
+      return 1
+    }
+
+    if ((EUID == 0)); then
+      exec "$@"
+    else
+      exec command sudo "$@"
+    fi
+  fi
+
+  if ((EUID == 0)); then
+    "$@"
+  else
+    command sudo "$@"
+  fi
+}

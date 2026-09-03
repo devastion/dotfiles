@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+setopt no_global_rcs
+
+if [[ -f "$HOME/.profile" ]]; then
+  source "$HOME/.profile"
+fi
+
+typeset -x ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+typeset -x ZSH_CACHE_HOME="$XDG_CACHE_HOME/zsh"
+typeset -x ZSH_CONFIG_HOME="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}"
+typeset -x ZSH_DATA_HOME="$XDG_DATA_HOME/zsh"
+typeset -x ZSH_STATE_HOME="$XDG_STATE_HOME/zsh"
+typeset -x ZSH_FUNCTIONS_DIR="$ZSH_CONFIG_HOME/functions"
+typeset -x ZSH_COMPLETIONS_DIR="$ZSH_DATA_HOME/site-functions"
+typeset -x ZSH_PLUGINS_DIR="$ZSH_DATA_HOME/plugins"
+typeset -x ZSH_COMPDUMP_FILE="$ZSH_CACHE_HOME/zcompdump"
+
+typeset -U path

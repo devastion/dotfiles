@@ -1,0 +1,124 @@
+[user]
+  name = Dimitar Banev
+
+[init]
+  defaultBranch = main
+
+[core]
+  editor = nvim
+  autocrlf = input
+  untrackedCache = true
+  hooksPath = ~/.config/git/hooks
+
+[merge]
+  tool = nvimdiff
+  renormalize = true
+  conflictstyle = zdiff3
+  autoStash = true
+  log = true
+
+[diff]
+  algorithm = histogram
+  colorMoved = default
+  colorMovedWS = allow-indentation-change
+  mnemonicPrefix = true
+  renames = copies
+  submodule = log
+  tool = nvimdiff
+  wsErrorHighlight = all
+  context = 3
+
+[difftool]
+  prompt = false
+
+[difftool "nvimdiff"]
+  cmd = nvim -c "lua vim.cmd.packadd('nvim.difftool')" -d "$LOCAL" "$REMOTE"
+
+[mergetool]
+  prompt = true
+  keepBackup = false
+
+[mergetool "nvimdiff"]
+  cmd = nvim -c "lua vim.cmd.packadd('nvim.difftool')" -d "$LOCAL" "$REMOTE" "$MERGED" -c "wincmd w" -c "wincmd J"
+  trustExitCode = false
+
+[rerere]
+  enabled = true
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+  instructionFormat = [%an - %ar] %s
+  missingCommitsCheck = warn
+
+[pull]
+  rebase = true
+
+[push]
+  autoSetupRemote = true
+  followTags = true
+
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
+  writeCommitGraph = true
+  output = compact
+
+[commit]
+  verbose = true
+
+[help]
+  autocorrect = prompt
+
+[color]
+  ui = auto
+
+[color "interactive"]
+  error = red bold
+
+[color "grep"]
+  match = normal
+
+[color "branch"]
+  current = cyan bold
+  local = blue bold
+  remote = red bold
+  plain = normal
+
+[color "diff"]
+  plain = normal
+  meta = white bold
+  frag = yellow bold
+  old = red bold
+  new = green bold
+  commit = blue bold
+  whitespace = white reverse
+
+[color "status"]
+  header = white bold
+  added = green bold
+  changed = yellow bold
+  untracked = magenta bold
+  updated = green bold
+  nobranch = red reverse bold
+
+[web]
+  browser = open
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+
+[credential]
+  helper = osxkeychain
+
+[include]
+  path = config.d/alias
+  path = config.d/pager
+
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
+  path = config.d/github
+
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+  path = config.d/github

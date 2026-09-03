@@ -1,0 +1,137 @@
+#!/usr/bin/env zsh
+#
+# Generate zsh completions for installed tools.
+#
+# Usage:
+#   zsh-generate-completions
+#   zsh-generate-completions --force
+
+zsh-generate-completions() {
+  emulate -L zsh
+  setopt local_options pipe_fail
+
+  zmodload -m -F zsh/files 'b:zf_*'
+
+  local -i force=0
+  [[ $1 == (--force|-f) ]] && force=1
+
+  (( $# <= force )) || {
+    print -u2 -- 'Usage: zsh-generate-completions [--force]'
+    return 2
+  }
+
+  local dir=${ZSH_COMPLETIONS_DIR:-$ZDOTDIR/completions}
+
+  zf_mkdir -p -- "$dir" || {
+    print -u2 -- "zsh-generate-completions: cannot create $dir"
+    return 1
+  }
+
+  local -A generators=(
+    [ast-grep]='ast-grep completions zsh'
+    [bat]='bat --completion=zsh'
+    [betterleaks]='betterleaks completion zsh'
+    [cargo]='rustup completions zsh cargo'
+    [chezmoi]='chezmoi completion zsh'
+    [delta]='delta --generate-completion zsh'
+    [dive]='dive completion zsh'
+    [docker]='docker completion zsh'
+    [dockerfmt]='dockerfmt completion zsh'
+    [fd]='fd --gen-completions zsh'
+    [gh]='gh completion --shell zsh'
+    [herdr]='herdr completion zsh'
+    [hk]='hk completion zsh'
+    [just]='just --completions zsh'
+    [lazygit]='lazygit completion zsh'
+    [mas]='mas --generate-completion-script zsh'
+    [mise]='mise completion zsh'
+    [mo]='mo completion zsh'
+    [npm]='npm completion zsh'
+    [pkl]='pkl shell-completion zsh'
+    [pnpm]='pnpm completion zsh'
+    [procs]='procs --gen-completion-out zsh'
+    [rg]='rg --generate complete-zsh'
+    [rustup]='rustup completions zsh'
+    [tree-sitter]='tree-sitter complete --shell zsh'
+    [usage]='usage --completions zsh'
+    [uv]='uv generate-shell-completion zsh'
+    [watchexec]='watchexec --completions zsh'
+    [yq]='yq completion zsh'
+    [zsh-patina]='zsh-patina completion'
+  )
+
+  # Static/network completions.
+  local -A urls=(
+    [act]='https://raw.githubusercontent.com/iloveitaly/zsh-ai-completions/58b1a5aee5068df14b5cec543623d746f20f7189/completions/_act'
+    [chafa]='https://raw.githubusercontent.com/hpjansson/chafa/master/tools/completions/zsh-completion.zsh'
+    [claude]='https://raw.githubusercontent.com/wbingli/zsh-claudecode-completion/refs/heads/main/_claude'
+    [dust]='https://raw.githubusercontent.com/bootandy/dust/refs/heads/master/completions/_dust'
+    [eza]='https://raw.githubusercontent.com/eza-community/eza/refs/heads/main/completions/zsh/_eza'
+    [fzf]='https://raw.githubusercontent.com/iloveitaly/zsh-ai-completions/refs/heads/master/completions/_fzf'
+    [tldr]='https://raw.githubusercontent.com/tldr-pages/tlrc/refs/heads/main/completions/_tldr'
+    [tmux]='https://raw.githubusercontent.com/zsh-users/zsh/master/Completion/Unix/Command/_tmux'
+    [xh]='https://raw.githubusercontent.com/ducaale/xh/master/completions/_xh'
+  )
+
+  local -a generated=()
+  local -a skipped=()
+  local -a failed=()
+
+  local cmd out tmp generator url
+
+  for cmd generator in "${(@kv)generators}"; do
+    (( $+commands[$cmd] )) || continue
+
+    out="$dir/_$cmd"
+
+    if (( ! force )) && [[ -s $out ]]; then
+      skipped+=("$cmd")
+      continue
+    fi
+
+    tmp="${out}.tmp.$$.$RANDOM"
+
+    print -r -- "  generating $cmd"
+
+    if command ${(z)generator} >| "$tmp" 2>/dev/null &&
+       [[ -s $tmp ]] &&
+      zf_mv -f -- "$tmp" "$out"; then
+      generated+=("$cmd")
+    else
+      zf_rm -f -- "$tmp"
+      failed+=("$cmd")
+    fi
+  done
+
+  for cmd url in "${(@kv)urls}"; do
+    out="$dir/_$cmd"
+
+    if (( ! force )) && [[ -s $out ]]; then
+      skipped+=("$cmd")
+      continue
+    fi
+
+    tmp="${out}.tmp.$$.$RANDOM"
+
+    print -r -- "  downloading $cmd"
+
+    if command curl -fsSL --max-time 15 "$url" >| "$tmp" 2>/dev/null &&
+       [[ -s $tmp ]] &&
+       zf_mv -f -- "$tmp" "$out"; then
+      generated+=("$cmd")
+    else
+      zf_rm -f -- "$tmp"
+      failed+=("$cmd")
+    fi
+  done
+
+  print
+  print -r -- "Generated: ${#generated}"
+  print -r -- "Skipped:   ${#skipped}"
+
+  if (( $#failed )); then
+    print -r -- "Failed:    ${#failed}"
+    print -u2 -- "  ${(j:, :)failed}"
+    return 1
+  fi
+}

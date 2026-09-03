@@ -1,0 +1,99 @@
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.icloud
+
+# Editor files
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+[._]*.un~
+.nvim.lua
+.nvimrc
+.exrc
+.netrwhist
+*.bak
+*.backup
+*.orig
+*.ref
+*~
+.vscode
+.idea
+.iml
+*.sublime-workspace
+Session.vim
+
+# Logs
+*.log
+*.sqlite
+log.txt
+
+# Generated / build files
+build/
+target/
+dist/
+tags
+
+# Sensitive files
+*.env
+*.key
+*.pem
+*.credentials
+*.password
+*.secret
+*.gpg
+*.kbx
+*.ovpn
+*.p12
+*.sec
+*.private
+
+# Scratch files
+.scratch/
+
+# PhpStorm HTTP Requests
+.http/
+
+# Temp files
+tmp/
+
+# Web
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.pyc
+
+# Rust
+**/*.rs.bk
+**/*.rl.bk
+
+# zsh
+*.zwc
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.msi
+
+# AI
+# .claude/

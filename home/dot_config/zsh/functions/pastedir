@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+pastedir() {
+  emulate -L zsh
+
+  pbpaste |
+    command base64 -d |
+    command tar -xzf -
+
+  local -a ps=($pipestatus)
+
+  if ((ps[1] == 0 && ps[2] == 0 && ps[3] == 0)); then
+    print -r -- "Extracted archive from clipboard into $PWD"
+    return 0
+  fi
+
+  print -u2 -- 'pastedir: failed to decode or extract clipboard archive'
+  return 1
+}

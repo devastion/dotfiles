@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+[[ -o 'login' ]] || return
+
+if [[ -z $TMUX && -t 1 ]]; then
+  printf '\e[38;5;242mSession: %s on %s (%s)\e[0m\n' "$USER" "${TTY#/dev/}" "$(date '+%H:%M')"
+fi

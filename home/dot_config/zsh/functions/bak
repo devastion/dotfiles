@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+
+function bak() {
+  emulate -L zsh
+  setopt local_options err_return
+
+  if (($# == 0)); then
+    print -u2 'Usage: bak <path> [path...]'
+    return 1
+  fi
+
+  local now f target stamped
+  local backup_dir=${BAK_DIR:-$HOME/Backup}
+  now=$(date +'%Y%m%d-%H%M%S')
+
+  command mkdir -p -- "$backup_dir" || {
+    print -u2 "bak: cannot create backup directory: $backup_dir"
+    return 1
+  }
+
+  for f in "$@"; do
+    if [[ ! -e $f ]]; then
+      print -u2 "bak: file or directory not found: $f"
+      continue
+    fi
+
+    target="${f%/}"
+    stamped="${target:t}.${now}.bak"
+
+    command cp -RL -- "$target" "${target}.${now}.bak" &&
+      print -r "Backed up: $target -> ${target}.${now}.bak"
+
+    command cp -RL -- "$target" "$backup_dir/$stamped" &&
+      print -r "Global backup: $target -> $backup_dir/$stamped"
+  done
+}

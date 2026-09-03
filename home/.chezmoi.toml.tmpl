@@ -1,0 +1,22 @@
+encryption = "age"
+
+{{- if lookPath "delta" }}
+[diff]
+command = "delta"
+pager = "delta"
+exclude = ["scripts"]
+{{- end }}
+
+{{- if lookPath "nvim" }}
+[edit]
+command = "nvim"
+
+[merge]
+command = "nvim"
+args = [
+  "-d",
+  {{ printf "%q" "{{ .Destination }}" }},
+  {{ printf "%q" "{{ .Source }}" }},
+  {{ printf "%q" "{{ .Target }}" }},
+]
+{{- end }}

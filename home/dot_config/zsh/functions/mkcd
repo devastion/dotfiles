@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+mkcd() {
+  emulate -L zsh
+
+  if (($# == 0)); then
+    print -u2 'Usage: mkcd <directory>'
+    return 1
+  fi
+
+  local dir="$1"
+
+  command mkdir -p -- "$dir" || return
+
+  builtin cd -P -- "$dir"
+}

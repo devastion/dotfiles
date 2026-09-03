@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+copydir() {
+  emulate -L zsh
+
+  (($#)) || {
+    print -u2 'Usage: copydir <dir_or_file> [dir_or_file...]'
+    return 1
+  }
+
+  command tar -czf - -- "$@" |
+    command base64 |
+    pbcopy
+
+  local -a ps=($pipestatus)
+
+  if ((ps[1] == 0 && ps[2] == 0 && ps[3] == 0)); then
+    print -r -- "Copied $# item(s) as a base64-encoded tar.gz archive."
+    return 0
+  fi
+
+  print -u2 -- 'copydir: failed to archive or copy'
+  return 1
+}

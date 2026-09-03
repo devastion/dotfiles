@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+flushdns() {
+  emulate -L zsh
+
+  [[ $OSTYPE == darwin* ]] || {
+    print -u2 'flushdns: only supported on macOS'
+    return 1
+  }
+
+  print -r -- 'Flushing macOS DNS cache...'
+
+  command dscacheutil -flushcache &&
+    sudo killall -HUP mDNSResponder ||
+    {
+      print -u2 'flushdns: failed to flush DNS cache'
+      return 1
+    }
+
+  print -r -- 'Successfully flushed DNS cache.'
+}

@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+[[ -o 'login' ]] || return
+
+if [[ $TTY == /dev/tty* ]]; then
+  (($+ZSH_PROFILE)) || clear
+fi
+
+[[ -o 'interactive' ]] &&
+  printf 'Logged out from %s at %s\n' "$(hostname)" "$(date '+%Y-%m-%d %H:%M:%S %z')" >&2

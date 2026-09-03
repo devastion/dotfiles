@@ -1,0 +1,241 @@
+#!/usr/bin/env sh
+
+if [ "${_PROFILE_SOURCED:-0}" = 1 ]; then
+  return 0
+fi
+export _PROFILE_SOURCED=1
+
+_OS="$(uname -s)"
+_UID="$(id -u)"
+
+is_macos() { [ "$_OS" = Darwin ]; }
+is_linux() { [ "$_OS" = Linux ]; }
+
+is_zsh() { [ -n "${ZSH_VERSION:-}" ]; }
+is_bash() { [ -n "${BASH_VERSION:-}" ]; }
+
+is_interactive() {
+  case $- in
+    *i*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+command_exists() { command -v "$1" >/dev/null 2>&1; }
+is_executable() { [ -n "$1" ] && [ -f "$1" ] && [ -x "$1" ]; }
+is_readable() { [ -n "$1" ] && [ -f "$1" ] && [ -r "$1" ]; }
+
+export SHELL_SESSIONS_DISABLE=1
+
+# XDG Base Directories
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+if is_interactive; then
+  mkdir -p -- \
+    "$XDG_CACHE_HOME" \
+    "$XDG_CONFIG_HOME" \
+    "$XDG_DATA_HOME" \
+    "$XDG_STATE_HOME"
+fi
+
+# XDG User Directories
+export XDG_DESKTOP_DIR="$HOME/Desktop"
+export XDG_DOCUMENTS_DIR="$HOME/Documents"
+export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+export XDG_MUSIC_DIR="$HOME/Music"
+export XDG_PICTURES_DIR="$HOME/Pictures"
+export XDG_PROJECTS_DIR="$HOME/Projects"
+if is_macos; then
+  export XDG_PUBLICSHARE_DIR="/Users/Shared"
+  export XDG_RUNTIME_DIR="${TMPDIR%/}/xdg-runtime-${_UID}"
+else
+  export XDG_PUBLICSHARE_DIR="$HOME/Public"
+  export XDG_RUNTIME_DIR="/run/user/${_UID}"
+fi
+export XDG_SCREENSHOTS_DIR="$HOME/Screenshots"
+export XDG_TEMPLATES_DIR="$HOME/Templates"
+export XDG_VIDEOS_DIR="$HOME/Videos"
+
+[ -d "$XDG_RUNTIME_DIR" ] || {
+  mkdir -p "$XDG_RUNTIME_DIR"
+  chmod 700 "$XDG_RUNTIME_DIR"
+}
+
+if is_interactive; then
+  mkdir -p -- \
+    "$XDG_DESKTOP_DIR" \
+    "$XDG_DOCUMENTS_DIR" \
+    "$XDG_DOWNLOAD_DIR" \
+    "$XDG_MUSIC_DIR" \
+    "$XDG_PICTURES_DIR" \
+    "$XDG_PROJECTS_DIR" \
+    "$XDG_PUBLICSHARE_DIR" \
+    "$XDG_SCREENSHOTS_DIR" \
+    "$XDG_TEMPLATES_DIR" \
+    "$XDG_VIDEOS_DIR"
+fi
+
+# Disable Telemetry
+export DISABLE_TELEMETRY=1
+export DO_NOT_TRACK=1
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
+export EXPO_NO_TELEMETRY=1
+export GH_TELEMETRY=0
+export NEXT_TELEMETRY_DISABLED=1
+export RTK_TELEMETRY_DISABLED=1
+export STORYBOOK_DISABLE_TELEMETRY=1
+export TRIVY_DISABLE_TELEMETRY=1
+
+# Follow XDG Directories
+export BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config"
+
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
+export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
+
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+export COPILOT_HOME="$XDG_CONFIG_HOME/copilot"
+
+export COMPOSER_HOME="$XDG_CONFIG_HOME/composer"
+export COMPOSER_CACHE_DIR="$XDG_CACHE_HOME/composer"
+
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
+export CURL_HOME="$XDG_CONFIG_HOME/curl"
+
+export FFMPEG_DATADIR="$XDG_CONFIG_HOME/ffmpeg"
+
+export CURSOR_CONFIG_DIR="$XDG_CONFIG_HOME/cursor"
+
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+
+export EZA_CONFIG_DIR="$XDG_CONFIG_HOME/eza"
+
+export FZF_DEFAULT_OPTS_FILE="$XDG_CONFIG_HOME/fzf/config"
+
+export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
+
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+if is_zsh; then
+  export GPG_TTY="$TTY"
+else
+  GPG_TTY="$(tty 2>/dev/null)"
+  export GPG_TTY
+fi
+
+export GOPATH="$XDG_DATA_HOME/go"
+
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+export EDITRC="$XDG_CONFIG_HOME/editline/editrc"
+
+export LG_CONFIG_FILE="$XDG_CONFIG_HOME/lazygit/config.yml"
+
+export MISE_CACHE_DIR="$XDG_CACHE_HOME/mise"
+export MISE_DATA_DIR="$XDG_DATA_HOME/mise"
+export MISE_GLOBAL_CONFIG_FILE="$XDG_CONFIG_HOME/mise/config.toml"
+
+export NODE_REPL_HISTORY="$XDG_STATE_HOME/node_repl_history"
+
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
+
+export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
+export SCREENDIR="$XDG_RUNTIME_DIR/screen"
+
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+
+export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
+
+_HOMEBREW_BIN='/opt/homebrew/bin/brew'
+if is_macos && is_executable "$_HOMEBREW_BIN"; then
+  export HOMEBREW_PREFIX='/opt/homebrew'
+  export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+  export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
+  if is_readable "$CURL_HOME/.curlrc"; then
+    export HOMEBREW_CURLRC="$CURL_HOME/.curlrc"
+  fi
+  if is_readable "$XDG_CONFIG_HOME/homebrew/Brewfile"; then
+    export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
+  fi
+
+  export HOMEBREW_NO_ANALYTICS=1
+  export HOMEBREW_NO_AUTO_UPDATE=1
+  export HOMEBREW_NO_EMOJI=1
+  export HOMEBREW_NO_ENV_HINTS=1
+  export HOMEBREW_CLEANUP_MAX_AGE_DAYS=7
+  export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=7
+  export HOMEBREW_DISPLAY_INSTALL_TIMES=1
+  export HOMEBREW_NO_ASK=1
+fi
+
+# Locale, editor, pager etc.
+export LANG="${LANG:-en_US.UTF-8}"
+export PAGER='less'
+if is_macos; then
+  export BROWSER='open'
+else
+  export BROWSER='xdg-open'
+fi
+export MANPAGER="$PAGER"
+if is_zsh; then
+  export READNULLCMD="$PAGER"
+fi
+
+if command_exists nvim; then
+  export EDITOR='nvim'
+  export MANPAGER='nvim +Man!'
+elif command_exists vim; then
+  export EDITOR='vim'
+else
+  export EDITOR='vi'
+fi
+export VISUAL="$EDITOR"
+
+export LESS='-g -i -M -R -S -X -w -z-4 --incsearch --mouse'
+export LESSHISTFILE='-'
+export LESSKEYIN="$XDG_CONFIG_HOME/less/keys"
+export LESS_SHELL_LINES=10
+if command_exists lessfilter; then
+  export LESSOPEN='| lessfilter %s'
+elif command_exists lesspipe; then
+  export LESSOPEN='| lesspipe %s'
+elif command_exists lesspipe.sh; then
+  export LESSOPEN='| lesspipe.sh %s'
+else
+  unset LESSOPEN
+fi
+
+path_prepend() {
+  [ -d "$1" ] || return 0
+
+  case ":${PATH-}:" in
+    *:"$1":*) return 0 ;;
+  esac
+
+  PATH="$1${PATH:+:$PATH}"
+  export PATH
+}
+
+path_prepend "/sbin"
+path_prepend "/bin"
+path_prepend "/usr/sbin"
+path_prepend "/usr/bin"
+path_prepend "/usr/local/sbin"
+path_prepend "/usr/local/bin"
+path_prepend "$HOME/.orbstack/bin"
+path_prepend "$CARGO_HOME/bin"
+if [ -n "${HOMEBREW_PREFIX:-}" ]; then
+  path_prepend "$HOMEBREW_PREFIX/opt/trash-cli/bin"
+  path_prepend "$HOMEBREW_PREFIX/sbin"
+  path_prepend "$HOMEBREW_PREFIX/bin"
+fi
+path_prepend "$XDG_DATA_HOME/npm/bin"
+path_prepend "$MISE_DATA_DIR/shims"
+path_prepend "$HOME/.local/bin"

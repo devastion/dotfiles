@@ -1,0 +1,81 @@
+#!/usr/bin/env zsh
+
+create-alias() {
+  emulate -L zsh
+
+  typeset -gaU ealiases
+  typeset -gaU baliases
+  typeset -gA alias_descriptions
+
+  local -i expand=0 blank=0 global=0
+  local description='' definition key
+
+  while (($#)); do
+    case $1 in
+      -e | --expand)
+        expand=1
+        ;;
+      -b | --blank)
+        blank=1
+        ;;
+      -g | --global)
+        global=1
+        ;;
+      -d | --description)
+        (($# >= 2)) || {
+          print -u2 -- "create-alias: $1 requires an argument"
+          return 1
+        }
+        description=$2
+        shift
+        ;;
+      --)
+        shift
+        break
+        ;;
+      -*)
+        print -u2 -- "create-alias: unknown option: $1"
+        return 1
+        ;;
+      *)
+        break
+        ;;
+    esac
+
+    shift
+  done
+
+  (($# == 1)) || {
+    print -u2 -- 'Usage: create-alias [options] name=value'
+    return 1
+  }
+
+  definition=$1
+
+  [[ $definition == *=* ]] || {
+    print -u2 -- "create-alias: expected name=value, got: $definition"
+    return 1
+  }
+
+  key=${definition%%=*}
+
+  [[ -n $key ]] || {
+    print -u2 -- 'create-alias: alias name cannot be empty'
+    return 1
+  }
+
+  if ((global)); then
+    alias -g -- "$definition" || return
+  else
+    alias -- "$definition" || return
+  fi
+
+  ((expand)) && ealiases+=("$key")
+  ((blank)) && baliases+=("$key")
+
+  if [[ -n $description ]]; then
+    alias_descriptions[$key]=$description
+  else
+    unset "alias_descriptions[$key]"
+  fi
+}

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+tmux list-panes -F "#{pane_index}: #{pane_current_command} (#{pane_width}x#{pane_height})" |
+  fzf --header "CTRL-X to kill tmux pane" --border=none \
+    --preview 'tmux capture-pane -pt $(echo {} | cut -d: -f1)' \
+    --bind 'ctrl-x:execute(tmux kill-pane -t $(echo {} | cut -d: -f1))+reload(tmux list-panes -F "#{pane_index}: #{pane_current_command}")'

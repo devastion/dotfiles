@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+[[ $- != *i* ]] && return
+
+HISTCONTROL='ignoreboth:erasedups'
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/bash/history"
+[[ -d "${HISTFILE%/*}" ]] || mkdir -p "${HISTFILE%/*}"
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTIGNORE='ls:ll:cd:cd -:pwd:exit:clear:history:bg:fg'
+HISTTIMEFORMAT='%F %T '
+
+PROMPT_COMMAND='history -a; history -c; history -r'
+
+shopt -s histappend
+shopt -s cmdhist
+shopt -s checkwinsize
+shopt -s globstar
+shopt -s nocaseglob
+shopt -s autocd
+shopt -s cdspell dirspell
+shopt -s no_empty_cmd_completion
+
+set -o noclobber
+stty -ixon
+
+PS1='\u@\h:\w\$ '

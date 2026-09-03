@@ -1,0 +1,59 @@
+#!/usr/bin/env zsh
+
+timezsh() {
+  emulate -L zsh
+  zmodload zsh/datetime
+
+  local runs=${1:-20}
+  local warmup=${2:-3}
+
+  ((runs > 0)) || {
+    print -u2 'Usage: timezsh [runs] [warmup]'
+    return 1
+  }
+
+  local -a times
+  local start end elapsed
+  local -i i
+  local total=0
+  local min=999999999
+  local max=0
+
+  print -r -- "Benchmarking interactive Zsh startup"
+  print -r -- "Runs: $runs | Warmup: $warmup"
+  print
+
+  # Warm up filesystem/cache.
+  for ((i = 0; i < warmup; i++)); do
+    zsh -i -c exit > /dev/null 2>&1
+  done
+
+  for ((i = 1; i <= runs; i++)); do
+    start=$EPOCHREALTIME
+    zsh -i -c exit > /dev/null 2>&1
+    end=$EPOCHREALTIME
+
+    elapsed=$(((end - start) * 1000))
+
+    times+=($elapsed)
+    total=$((total + elapsed))
+
+    ((elapsed < min)) && min=$elapsed
+    ((elapsed > max)) && max=$elapsed
+
+    printf 'Run %2d: %7.2f ms\n' "$i" "$elapsed"
+  done
+
+  times=(${(n)times})
+
+  local avg=$((total / runs))
+  local median=${times[$(((runs + 1) / 2))]}
+
+  print
+  print -r -- '─────────────────────────'
+  printf 'Min:      %7.2f ms\n' "$min"
+  printf 'Max:      %7.2f ms\n' "$max"
+  printf 'Average:  %7.2f ms\n' "$avg"
+  printf 'Median:   %7.2f ms\n' "$median"
+  print -r -- '─────────────────────────'
+}

@@ -1,0 +1,28 @@
+# Ignore documents
+# *.pdf
+
+# Ignore images
+# *.jpg
+# *.jpeg
+# *.png
+# *.webp
+
+.git/
+
+.venv/
+.cache/
+__pycache__/
+
+node_modules/
+
+dist/
+build/
+target/
+
+*.pyc
+.DS_Store
+*.lock
+
+*.bak
+
+/Library/**

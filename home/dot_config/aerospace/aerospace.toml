@@ -1,0 +1,182 @@
+config-version = 2
+
+after-startup-command = [
+  'exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0 style=uniform order=above',
+]
+
+start-at-login = true
+
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = false
+
+accordion-padding = 0
+
+default-root-container-layout = 'accordion'
+default-root-container-orientation = 'vertical'
+
+automatically-unhide-macos-hidden-apps = true
+
+on-focus-changed = ['move-mouse window-lazy-center']
+
+persistent-workspaces = ["1", "2", "3", "4", "5", "6"]
+
+[key-mapping]
+preset = 'qwerty'
+
+[gaps]
+inner.horizontal = [{ monitor.main = 16 }, 16]
+inner.vertical = [{ monitor.main = 16 }, 16]
+outer.left = [{ monitor.main = 16 }, 16]
+outer.bottom = [{ monitor.main = 16 }, 16]
+outer.top = [{ monitor.main = 16 }, 16]
+outer.right = [{ monitor.main = 16 }, 16]
+
+[workspace-to-monitor-force-assignment]
+'1' = 'main'
+'2' = 'main'
+'3' = 'main'
+'4' = 'main'
+'5' = 'main'
+'6' = 'secondary'
+
+[mode.main.binding]
+cmd-h = []
+cmd-alt-h = []
+cmd-m = []
+cmd-q = 'close --quit-if-last-window'
+ctrl-alt-cmd-backspace = 'close-all-windows-but-current --quit-if-last-window'
+ctrl-alt-cmd-r = 'flatten-workspace-tree'
+
+ctrl-alt-cmd-g = 'exec-and-forget open -na Ghostty'
+
+# Layout switching
+ctrl-alt-cmd-t = 'layout h_tiles v_tiles'
+ctrl-alt-cmd-s = 'layout v_accordion'
+ctrl-alt-cmd-f = 'layout floating tiling'
+
+# Window focus
+ctrl-alt-cmd-h = 'focus --boundaries-action stop left'
+ctrl-alt-cmd-j = 'focus --boundaries-action stop down'
+ctrl-alt-cmd-k = 'focus --boundaries-action stop up'
+ctrl-alt-cmd-l = 'focus --boundaries-action stop right'
+alt-tab = 'focus-back-and-forth'
+alt-backtick = 'workspace-back-and-forth'
+ctrl-alt-cmd-shift-f = 'fullscreen'
+
+# Move window
+ctrl-alt-cmd-shift-h = 'move left'
+ctrl-alt-cmd-shift-j = 'move down'
+ctrl-alt-cmd-shift-k = 'move up'
+ctrl-alt-cmd-shift-l = 'move right'
+
+# Monitor focus
+ctrl-alt-cmd-m = 'focus-monitor next --wrap-around'
+
+# Workspaces
+ctrl-alt-cmd-1 = 'workspace 1'
+ctrl-alt-cmd-2 = 'workspace 2'
+ctrl-alt-cmd-3 = 'workspace 3'
+ctrl-alt-cmd-4 = 'workspace 4'
+ctrl-alt-cmd-5 = 'workspace 5'
+ctrl-alt-cmd-6 = 'workspace 6'
+ctrl-alt-cmd-n = 'workspace next --wrap-around'
+ctrl-alt-cmd-p = 'workspace prev --wrap-around'
+
+# Move to workspace
+ctrl-alt-cmd-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
+ctrl-alt-cmd-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
+ctrl-alt-cmd-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
+ctrl-alt-cmd-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
+ctrl-alt-cmd-shift-5 = 'move-node-to-workspace 5 --focus-follows-window'
+ctrl-alt-cmd-shift-6 = 'move-node-to-workspace 6 --focus-follows-window'
+ctrl-alt-cmd-shift-n = 'move-node-to-workspace next --focus-follows-window'
+ctrl-alt-cmd-shift-p = 'move-node-to-workspace prev --focus-follows-window'
+ctrl-alt-cmd-shift-m = 'move-node-to-monitor next --wrap-around --focus-follows-window'
+
+# Volume
+ctrl-alt-cmd-minus = 'volume down'
+ctrl-alt-cmd-equal = 'volume up'
+ctrl-alt-cmd-0 = 'volume mute-toggle'
+
+# Enter service mode (resize, join, etc.)
+ctrl-alt-cmd-space = [
+  'exec-and-forget borders active_color=0xfff7768e inactive_color=0xff292e42 width=8.0 style=uniform order=above',
+  'mode service',
+]
+
+[mode.service.binding]
+# Exit service mode
+esc = [
+  'exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0 style=uniform order=above',
+  'reload-config',
+  'mode main',
+]
+ctrl-alt-cmd-space = [
+  'exec-and-forget borders active_color=0xff8990b0 inactive_color=0xff292e42 width=8.0 style=uniform order=above',
+  'mode main',
+]
+
+# Resize
+h = 'resize width +50'
+j = 'resize height -50'
+k = 'resize height +50'
+l = 'resize width -50'
+0 = 'balance-sizes'
+
+# Join
+ctrl-alt-cmd-h = 'join-with left'
+ctrl-alt-cmd-j = 'join-with down'
+ctrl-alt-cmd-k = 'join-with up'
+ctrl-alt-cmd-l = 'join-with right'
+
+# Window management
+[[on-window-detected]]
+check-further-callbacks = true
+run = 'layout floating'
+
+# Workspace 1
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = '(?i)brave'
+run = ['layout tiling', 'move-node-to-workspace 1']
+check-further-callbacks = false
+
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+if.window-title-regex-substring = '(?i)firefox'
+run = ['layout tiling', 'move-node-to-workspace 1']
+check-further-callbacks = false
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+if.window-title-regex-substring = '(?i)chrome'
+run = ['layout tiling', 'move-node-to-workspace 1']
+check-further-callbacks = false
+
+# Workspace 2
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = ['layout tiling', 'move-node-to-workspace 2']
+check-further-callbacks = false
+
+# Workspace 5
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = ['layout tiling', 'move-node-to-workspace 5']
+check-further-callbacks = false
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
+run = ['layout tiling', 'move-node-to-workspace 5']
+check-further-callbacks = false
+
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+run = ['layout tiling', 'move-node-to-workspace 5']
+check-further-callbacks = false
+
+# Workspace 6
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = ['layout tiling', 'move-node-to-workspace 6']
+check-further-callbacks = false

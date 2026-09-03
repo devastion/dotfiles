@@ -1,0 +1,64 @@
+#!/usr/bin/env zsh
+
+archive() {
+  emulate -L zsh
+
+  if (($# != 2)); then
+    print -u2 'Usage: archive <type> <path>'
+    print -u2 'Types: tar, tgz, tbz, txz, tzst, zip, 7z'
+    return 1
+  fi
+
+  local type=$1
+  local target=$2
+  local base_name=${target:t}
+  local output
+
+  [[ -e $target ]] || {
+    print -u2 -- "archive: path not found: $target"
+    return 1
+  }
+
+  case $type in
+    tar) output="${base_name}.tar" ;;
+    tgz) output="${base_name}.tar.gz" ;;
+    tbz) output="${base_name}.tar.bz2" ;;
+    txz) output="${base_name}.tar.xz" ;;
+    tzst) output="${base_name}.tar.zst" ;;
+    zip) output="${base_name}.zip" ;;
+    7z) output="${base_name}.7z" ;;
+    *)
+      print -u2 -- "archive: unsupported format: $type"
+      return 1
+      ;;
+  esac
+
+  if [[ -e $output ]]; then
+    print -u2 -- "archive: output already exists: $output"
+    return 1
+  fi
+
+  case $type in
+    tar)
+      command tar -cf "$output" -- "$target"
+      ;;
+    tgz)
+      command tar -czf "$output" -- "$target"
+      ;;
+    tbz)
+      command tar -cjf "$output" -- "$target"
+      ;;
+    txz)
+      command tar -cJf "$output" -- "$target"
+      ;;
+    tzst)
+      command tar --zstd -cf "$output" -- "$target"
+      ;;
+    zip)
+      command zip -r "$output" -- "$target"
+      ;;
+    7z)
+      command 7z a "$output" "$target"
+      ;;
+  esac
+}

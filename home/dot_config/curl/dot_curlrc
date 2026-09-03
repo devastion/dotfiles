@@ -1,0 +1,23 @@
+# Errors & redirects
+show-error
+location
+proto-redir = https
+
+# Protocol defaults
+proto-default = https
+tlsv1.2
+http2
+compressed
+globoff
+
+# Timeouts & retries
+connect-timeout = 10
+retry = 3
+retry-delay = 1
+retry-max-time = 60
+retry-connrefused
+
+# Downloads
+progress-bar
+remote-time
+create-dirs

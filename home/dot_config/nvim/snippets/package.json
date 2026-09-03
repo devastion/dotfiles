@@ -1,0 +1,23 @@
+{
+  "contributes": {
+    "snippets": [
+      {
+        "language": "global",
+        "path": "./global.json"
+      },
+      {
+        "language": "lua",
+        "path": "./lua.json"
+      },
+      {
+        "language": [
+          "bash",
+          "sh",
+          "shell",
+          "zsh"
+        ],
+        "path": "./shell.json"
+      }
+    ]
+  }
+}

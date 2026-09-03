@@ -1,0 +1,55 @@
+#!/usr/bin/env zsh
+
+lsarchive() {
+  emulate -L zsh
+
+  if (($# != 1)); then
+    print -u2 'Usage: lsarchive <archive>'
+    return 1
+  fi
+
+  local file=$1
+
+  [[ -f $file ]] || {
+    print -u2 -- "lsarchive: file not found: $file"
+    return 1
+  }
+
+  case ${file:l} in
+    *.tar | *.tar.* | *.tgz | *.tbz | *.tbz2 | *.txz | *.tzst)
+      command tar -tf "$file"
+      ;;
+
+    *.zip)
+      (($+commands[unzip])) || {
+        print -u2 'lsarchive: unzip not found'
+        return 127
+      }
+      command unzip -l -- "$file"
+      ;;
+
+    *.rar)
+      if (($+commands[unrar])); then
+        command unrar l -- "$file"
+      elif (($+commands[bsdtar])); then
+        command bsdtar -tf "$file"
+      else
+        print -u2 'lsarchive: need unrar or bsdtar for .rar'
+        return 127
+      fi
+      ;;
+
+    *.7z)
+      (($+commands[7z])) || {
+        print -u2 'lsarchive: 7z not found'
+        return 127
+      }
+      command 7z l -- "$file"
+      ;;
+
+    *)
+      print -u2 -- "lsarchive: unsupported archive format: $file"
+      return 1
+      ;;
+  esac
+}

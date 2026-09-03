@@ -1,0 +1,32 @@
+{
+  "Selene allow": {
+    "body": "-- selene: allow($0)",
+    "description": "Selene allow",
+    "prefix": "#selene-allow"
+  },
+  "Selene allow global": {
+    "body": "--# selene: allow($0)",
+    "description": "Selene allow",
+    "prefix": "#selene-allow-global"
+  },
+  "Stylua ignore": {
+    "body": "-- stylua: ignore",
+    "description": "Stylua ignore",
+    "prefix": "#stylua-ignore"
+  },
+  "Stylua ignore start": {
+    "body": "-- stylua: ignore start",
+    "description": "Stylua ignore start",
+    "prefix": "#stylua-ignore-start"
+  },
+  "Stylua ignore end": {
+    "body": "-- stylua: ignore end",
+    "description": "Stylua ignore end",
+    "prefix": "#stylua-ignore-end"
+  },
+  "Stylua ignore start / end": {
+    "body": "-- stylua: ignore start\n$0\n-- stylua: ignore end",
+    "description": "Stylua ignore start / end",
+    "prefix": "#stylua-ignore-start-end"
+  }
+}

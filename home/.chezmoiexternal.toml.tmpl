@@ -1,0 +1,23 @@
+{{ range .externals.zsh.plugins }}
+{{- $dir := printf ".local/share/zsh/plugins/%s" (base .) }}
+[{{ $dir | quote }}]
+type = "git-repo"
+url = {{ printf "https://github.com/%s.git" . | quote }}
+refreshPeriod = "168h"
+[{{ $dir | quote }}.clone]
+args = ["--depth", "1", "--recursive", "--shallow-submodules"]
+[{{ $dir | quote }}.pull]
+args = ["--ff-only", "--recurse-submodules"]
+{{ end -}}
+
+{{ range .externals.tmux.plugins }}
+{{- $dir := printf ".local/share/tmux/plugins/%s" (base .) }}
+[{{ $dir | quote }}]
+type = "git-repo"
+url = {{ printf "https://github.com/%s.git" . | quote }}
+refreshPeriod = "168h"
+[{{ $dir | quote }}.clone]
+args = ["--depth", "1"]
+[{{ $dir | quote }}.pull]
+args = ["--ff-only"]
+{{ end }}

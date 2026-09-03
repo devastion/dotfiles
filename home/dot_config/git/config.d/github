@@ -1,0 +1,12 @@
+[user]
+  signingKey = ~/.ssh/keys/github.pub
+  email = 48967408+devastion@users.noreply.github.com
+
+[gpg]
+  format = ssh
+
+[commit]
+  gpgSign = true
+
+[tag]
+  gpgSign = true

@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+typeset -x ZDOTDIR="${ZDOTDIR:-$HOME/.config/zsh}"

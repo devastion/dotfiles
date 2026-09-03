@@ -1,0 +1,87 @@
+packages:
+  darwin:
+    taps:
+      - 'nikitabobko/tap'
+      - 'felixkratz/formulae'
+
+    brews:
+      # GNU Utils
+      - 'autoconf'
+      - 'bash'
+      - 'binutils'
+      - 'bison'
+      - 'coreutils'
+      - 'diffutils'
+      - 'ed'
+      - 'emacs'
+      - 'findutils'
+      - 'flex'
+      - 'gawk'
+      - 'gnu-indent'
+      - 'gnu-sed'
+      - 'gnu-tar'
+      - 'gnu-which'
+      - 'gnupg'
+      - 'gpatch'
+      - 'grep'
+      - 'gzip'
+      - 'less'
+      - 'm4'
+      - 'make'
+      - 'nano'
+      - 'screen'
+      - 'tree'
+      - 'watch'
+      - 'wdiff'
+      - 'wget'
+
+      # CLI Tools
+      - 'bat'
+      - 'betterleaks'
+      - 'borders'
+      - 'composer'
+      - 'eza'
+      - 'fd'
+      - 'ffmpeg'
+      - 'fzf'
+      - 'gh'
+      - 'git'
+      - 'git-delta'
+      - 'hexyl'
+      - 'imagemagick'
+      - 'jq'
+      - 'lazygit'
+      - 'lesspipe'
+      - 'mas'
+      - 'neovim'
+      - 'php'
+      - 'ripgrep'
+      - 'sherlock'
+      - 'tmux'
+      - 'trash-cli'
+      - 'tree-sitter-cli'
+      - 'universal-ctags'
+      - 'vim'
+      - 'zoxide'
+
+    casks:
+      - 'aerospace'
+      - 'claude'
+      - 'claude-code'
+      - 'copilot-cli'
+      - 'font-maple-mono-nf'
+      - 'ghostty'
+      - 'google-chrome'
+      - 'hyperkey'
+      - 'orbstack'
+      - 'spotify'
+
+    mas:
+      - name: 'Bitwarden'
+        id: 1352778147
+      - name: 'Keynote'
+        id: 361285480
+      - name: 'Numbers'
+        id: 361304891
+      - name: 'Pages'
+        id: 361309726
