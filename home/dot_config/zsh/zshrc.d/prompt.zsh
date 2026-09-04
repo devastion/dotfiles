@@ -21,16 +21,23 @@ if [[ -n $SSH_CONNECTION || -n $SSH_TTY || -n $SSH_CLIENT ]]; then
 fi
 
 typeset -x _PROMPT_SHELL_PID="${_PROMPT_SHELL_PID:-$$}"
+typeset -x _PROMPT_TMUX_PANE="${_PROMPT_TMUX_PANE:-}"
+
+if [[ -n $TMUX && $TMUX_PANE != "$_PROMPT_TMUX_PANE" ]]; then
+  _PROMPT_SHELL_PID="$$"
+  _PROMPT_TMUX_PANE="$TMUX_PANE"
+fi
+
 if (("$_PROMPT_SHELL_PID" != $$)); then
   _PROMPT_NESTED_SHELL_INDICATOR="%F{yellow}%f "
 fi
 
 _prompt_duration() {
-  local -F secs=$1
-  local -i total=${secs%.*}
-  local -i h=$((total / 3600))
-  local -i m=$((total % 3600 / 60))
-  local -i s=$((total % 60))
+  local -F secs="$1"
+  local -i total="${secs%.*}"
+  local -i h="$((total / 3600))"
+  local -i m="$((total % 3600 / 60))"
+  local -i s="$((total % 60))"
 
   if ((h)); then
     REPLY="${h}h${m}m${s}s"
