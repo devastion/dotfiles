@@ -17,7 +17,7 @@ typeset -g _PROMPT_SSH_INDICATOR=''
 typeset -g _PROMPT_NESTED_SHELL_INDICATOR=''
 
 if [[ -n $SSH_CONNECTION || -n $SSH_TTY || -n $SSH_CLIENT ]]; then
-  _PROMPT_SSH_INDICATOR='%F{yellow}%n@%m%f'
+  _PROMPT_SSH_INDICATOR=' %F{yellow}%n@%m%f'
 fi
 
 typeset -x _PROMPT_SHELL_PID="${_PROMPT_SHELL_PID:-$$}"
@@ -94,7 +94,7 @@ _prompt_git() {
   toplevel=$(git --no-optional-locks rev-parse --show-toplevel 2> /dev/null)
   repo="${toplevel:t}"
 
-  _PROMPT_GIT_STATUS="%F{green}󰘬 ${repo}%f %F{yellow}on%f %F{red}${branch}%f"
+  _PROMPT_GIT_STATUS=" %F{green}󰘬 ${repo}%f %F{yellow}on%f %F{red}${branch}%f"
 
   ((staged)) && segments+=("%F{green}+${staged}%f")
   ((unstaged)) && segments+=("%F{yellow}!${unstaged}%f")
@@ -137,7 +137,7 @@ _prompt_precmd() {
     fi
   fi
 
-  _PROMPT_CMD_INFO="${(j: :)info}"
+  _PROMPT_CMD_INFO=" ${(j: :)info}"
 
   _PROMPT_GIT_STATUS=''
   _prompt_git
@@ -146,4 +146,4 @@ _prompt_precmd() {
 add-zsh-hook preexec _prompt_preexec
 add-zsh-hook precmd _prompt_precmd
 
-PROMPT=$'\n%B%F{blue}%~%f%b ${_PROMPT_GIT_STATUS} ${_PROMPT_SSH_INDICATOR} ${_PROMPT_CMD_INFO}\n${_PROMPT_NESTED_SHELL_INDICATOR}${_PROMPT_CMD_STATUS}${VI_MODE_INDICATOR}%f '
+PROMPT=$'\n%B%F{blue}%~%f%b${_PROMPT_GIT_STATUS}${_PROMPT_SSH_INDICATOR}${_PROMPT_CMD_INFO}\n${_PROMPT_NESTED_SHELL_INDICATOR}${_PROMPT_CMD_STATUS}${VI_MODE_INDICATOR}%f '

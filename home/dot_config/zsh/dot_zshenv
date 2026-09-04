@@ -126,6 +126,7 @@ typeset -U path
 path=(
   "$HOME/.local/bin"(-/NF)
   $HOMEBREW_PREFIX/{,s}bin(-/NF)
+  "$HOMEBREW_PREFIX/opt/trash-cli/bin"(-/NF)
   "$CARGO_HOME/bin"(-/NF)
   "$HOME/.orbstack/bin"(-/NF)
   /usr/local/{,s}bin(-/NF)

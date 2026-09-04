@@ -14,6 +14,7 @@ fpath=(
 manpath=(
   "$HOMEBREW_PREFIX/share/man"(-/NF)
   "$HOMEBREW_PREFIX/opt/"{coreutils,ed,findutils,gawk,gnu-indent,gnu-sed,gnu-tar,gnu-which,grep,make}/libexec/gnuman(-/NF)
+  ''
   $manpath
 )
 

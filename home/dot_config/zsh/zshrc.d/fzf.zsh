@@ -1,15 +1,15 @@
 #!/usr/bin/env zsh
 
-fzf::edit() {
+fzf:edit() {
   emulate -L zsh
   local -a files
-  files=("${(@f)$(fzf::find "$@")}") || return 1
+  files=("${(@f)$(fzf:find "$@")}") || return 1
   files=(${(@)files:#})
   (($#files)) || return 1
   "${EDITOR:-nvim}" -- "${files[@]}"
 }
 
-fzf::alias() {
+fzf:alias() {
   emulate -L zsh
   local sel kind name tab=$'\t'
   sel=$(
@@ -36,7 +36,7 @@ fzf::alias() {
   esac
 }
 
-fzf::cd() {
+fzf:cd() {
   emulate -L zsh
   local dir
   dir="$(
@@ -48,7 +48,7 @@ fzf::cd() {
   [[ -n $dir ]] && builtin cd -- "$dir"
 }
 
-fzf::env() {
+fzf:env() {
   emulate -L zsh
   local entry
   entry="$(
@@ -63,7 +63,7 @@ fzf::env() {
   print -r -- "${entry#*=}"
 }
 
-fzf::find() {
+fzf:find() {
   emulate -L zsh
   local -a selected
   selected=("${(@f)$(
@@ -77,7 +77,7 @@ fzf::find() {
   print -r -- ${(F)selected}
 }
 
-fzf::history() {
+fzf:history() {
   emulate -L zsh
   local print_only=0 cmd
   [[ $1 == -p ]] && {
@@ -100,7 +100,7 @@ fzf::history() {
   fi
 }
 
-fzf::kill() {
+fzf:kill() {
   emulate -L zsh
   local -a pids
   pids=("${(@f)$(
@@ -115,7 +115,7 @@ fzf::kill() {
   kill -- $pids
 }
 
-fzf::log() {
+fzf:log() {
   emulate -L zsh
   local logfile
   logfile="$(fd --type f --extension log --hidden . "$HOME" /var/log 2> /dev/null | fzf \
@@ -125,7 +125,7 @@ fzf::log() {
   [[ -n $logfile ]] && tail -f "$logfile"
 }
 
-fzf::man() {
+fzf:man() {
   emulate -L zsh
   local page
   page="$(
@@ -138,7 +138,7 @@ fzf::man() {
   man -- "${${(z)page}[1]%%\(*}"
 }
 
-fzf::path() {
+fzf:path() {
   emulate -L zsh
   local dir
   dir="$(
@@ -149,7 +149,7 @@ fzf::path() {
   [[ -n $dir ]] && builtin cd -- "$dir"
 }
 
-fzf::port() {
+fzf:port() {
   emulate -L zsh
   local selection pid
   if [[ $OSTYPE == darwin* ]]; then
@@ -171,7 +171,7 @@ fzf::port() {
   kill -- "$pid" && print -r -- "Terminated $pid"
 }
 
-fzf::rg() {
+fzf:rg() {
   emulate -L zsh
   local reload='reload:rg --column --line-number --no-heading --color=always --smart-case {q} || :'
   local selection file line
@@ -191,7 +191,7 @@ fzf::rg() {
   ${EDITOR:-nvim} "+${line}" -- "$file"
 }
 
-fzf::git:alias() {
+fzf:git-alias() {
   emulate -L zsh
   git config --get-regexp '^alias\.' |
     sed 's/^alias\.//' |
@@ -207,7 +207,7 @@ fzf::git:alias() {
       --bind 'enter:become(git {2})'
 }
 
-fzf::git:browse() {
+fzf:git-browse() {
   emulate -L zsh
   git log --graph --color=always \
     --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
@@ -219,7 +219,7 @@ xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
 FZF-EOF"
 }
 
-fzf::git:checkout() {
+fzf:git-checkout() {
   emulate -L zsh
   git rev-parse --is-inside-work-tree > /dev/null 2>&1 || {
     print -u2 'Not a git repository'
@@ -244,7 +244,7 @@ fzf::git:checkout() {
   fi
 }
 
-fzf::git:log() {
+fzf:git-log() {
   emulate -L zsh
   git rev-parse --is-inside-work-tree > /dev/null 2>&1 || {
     print -u2 'Not a git repository'
@@ -260,7 +260,7 @@ fzf::git:log() {
       --bind 'enter:execute:git show --color=always {1} | less -R'
 }
 
-fzf::git:stash() {
+fzf:git-stash() {
   emulate -L zsh
   local out query reflog_selector sha
   local -a selection
@@ -301,7 +301,7 @@ fzf::git:stash() {
   done
 }
 
-fzf::git:status() {
+fzf:git-status() {
   emulate -L zsh
   git rev-parse --is-inside-work-tree > /dev/null 2>&1 || {
     print -u2 'Not a git repository'

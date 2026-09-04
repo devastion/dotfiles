@@ -26,9 +26,9 @@ run-compinit() {
     zf_rm -f -- "$dumpfile" "${dumpfile}.zwc"
   fi
 
-  local -a args=(-i -d "$dumpfile")
+  local -a args=('-i' '-d' "$dumpfile")
 
-  if [[ -s $dumpfile && -n ${dumpfile}(Nmh-24) ]]; then
+  if [[ -s $dumpfile && -n "${dumpfile}"(#qN.mh+24) ]]; then
     compinit -C "${args[@]}"
   else
     compinit "${args[@]}"

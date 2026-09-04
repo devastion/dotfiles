@@ -311,9 +311,9 @@ local function ts_attach(bufnr, lang)
     end
   end
 
-  -- if vim.treesitter.query.get(lang, 'indents') then
-  -- vim.bo[bufnr].indentexpr = ts.indentexpr
-  -- end
+  if vim.treesitter.query.get(lang, 'indents') then
+    vim.bo[bufnr].indentexpr = ts.indentexpr
+  end
 
   ts_textobjects_maps(bufnr)
 end
