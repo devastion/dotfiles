@@ -15,6 +15,7 @@ local config = {
   ---@type table<string,string|false>
   keys = {
     open = '<C-e>',
+    add = '<leader>ha',
     add_prefix = '<leader>h',
   },
 
@@ -171,6 +172,10 @@ local function current_menu()
   return config.menus[current].name
 end
 
+local highlight_ns = vim.api.nvim_create_namespace('anchor_current_file')
+
+vim.api.nvim_set_hl(0, 'AnchorCurrentFile', { link = 'Title', default = true })
+
 ---@param line string
 ---@return string
 local function parse_line(line)
@@ -201,6 +206,11 @@ end
 local function open()
   load_state()
 
+  local origin_path = vim.api.nvim_buf_get_name(0)
+  local origin_rel = origin_path ~= ''
+      and (vim.fs.relpath(cwd(), origin_path) or origin_path)
+    or nil
+
   local buf = vim.api.nvim_create_buf(false, true)
   vim.bo[buf].bufhidden = 'wipe'
   vim.bo[buf].modifiable = true
@@ -219,10 +229,24 @@ local function open()
 
   local function render_buffer()
     local lines = {}
+    local current_line
     for i, path in ipairs(get_list(current_menu())) do
       lines[i] = string.format('%d  %s', i, path)
+      if origin_rel and path == origin_rel then current_line = i end
     end
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+
+    vim.api.nvim_buf_clear_namespace(buf, highlight_ns, 0, -1)
+    if current_line then
+      vim.hl.range(
+        buf,
+        highlight_ns,
+        'AnchorCurrentFile',
+        { current_line - 1, 0 },
+        { current_line - 1, 0 },
+        { regtype = 'V' }
+      )
+    end
   end
 
   local function render_footer()
@@ -247,9 +271,19 @@ local function open()
   local function restore_cursor()
     if not vim.api.nvim_win_is_valid(win) then return end
 
-    local line_count = #get_list(current_menu())
-    local row =
-      math.min(cursor_positions[current_menu()] or 1, math.max(line_count, 1))
+    local list = get_list(current_menu())
+    local row
+    if origin_rel then
+      for i, path in ipairs(list) do
+        if path == origin_rel then
+          row = i
+          break
+        end
+      end
+    end
+
+    row = row
+      or math.min(cursor_positions[current_menu()] or 1, math.max(#list, 1))
     vim.api.nvim_win_set_cursor(win, { row, 0 })
   end
 
@@ -392,6 +426,12 @@ end, {
 
 if config.keys.open then
   vim.keymap.set('n', config.keys.open, open, { desc = 'Anchor: open menu' })
+end
+
+if config.keys.add then
+  vim.keymap.set('n', config.keys.add, function()
+    add('files')
+  end, { desc = 'Anchor: add file' })
 end
 
 if config.keys.add_prefix then

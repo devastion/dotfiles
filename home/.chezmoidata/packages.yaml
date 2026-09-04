@@ -71,6 +71,7 @@ packages:
       - 'claude'
       - 'claude-code'
       - 'copilot-cli'
+      - 'figma'
       - 'font-maple-mono-nf'
       - 'ghostty'
       - 'github-copilot-app'
