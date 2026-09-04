@@ -5,7 +5,7 @@ externals:
       - 'ddzero2c/tmux-easymotion'
       - 'wfxr/tmux-fzf-url'
       - 'abhinav/tmux-fastcopy'
-
+      - 'tmux-plugins/tmux-resurrect'
   zsh:
     plugins:
       - 'romkatv/zsh-defer'
