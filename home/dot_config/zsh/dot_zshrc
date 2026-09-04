@@ -11,7 +11,7 @@ source "$ZSH_CONFIG_HOME/zshrc.d/history.zsh"
 autoload -Uz ${ZSH_FUNCTIONS_DIR:-$ZDOTDIR/functions}/*(N.:t)
 
 plugin-source() {
-  local plugin=$1
+  local plugin="$1"
   local file="$ZSH_PLUGINS_DIR/$plugin/$plugin.plugin.zsh"
   [[ -r $file ]] || {
     print -u2 "zshrc: missing plugin '$plugin' (run: chezmoi apply)"

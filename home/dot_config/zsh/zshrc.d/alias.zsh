@@ -1,5 +1,18 @@
 #!/usr/bin/env zsh
 
+if [[ $OSTYPE == 'darwin'* ]]; then
+  if is-callable 'wl-copy'; then
+    alias pbcopy='command wl-copy'
+    alias pbpaste='command wl-paste'
+  elif is-callable 'xclip'; then
+    alias pbcopy='command xclip -selection clipboard'
+    alias pbpaste='command xclip -selection clipboard -o'
+  elif is-callable 'clip.exe'; then
+    alias pbcopy='command clip.exe'
+    alias pbpaste='command powershell.exe -command Get-Clipboard'
+  fi
+fi
+
 () {
   local _index
   for _index in {1..10}; do

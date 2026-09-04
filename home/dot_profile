@@ -10,12 +10,10 @@ _UID="$(id -u)"
 
 is_macos() { [ "$_OS" = Darwin ]; }
 
-is_zsh() { [ -n "${ZSH_VERSION:-}" ]; }
-
 is_interactive() {
   case $- in
-    *i*) return 0 ;;
-    *) return 1 ;;
+  *i*) return 0 ;;
+  *) return 1 ;;
   esac
 }
 
@@ -117,12 +115,8 @@ export EZA_CONFIG_DIR="$XDG_CONFIG_HOME/eza"
 export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
 
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
-if is_zsh; then
-  export GPG_TTY="$TTY"
-else
-  GPG_TTY="$(tty 2>/dev/null)"
-  export GPG_TTY
-fi
+GPG_TTY="$(tty 2>/dev/null)"
+export GPG_TTY
 
 export GOPATH="$XDG_DATA_HOME/go"
 
@@ -177,7 +171,7 @@ path_prepend() {
   [ -d "$1" ] || return 0
 
   case ":${PATH-}:" in
-    *:"$1":*) return 0 ;;
+  *:"$1":*) return 0 ;;
   esac
 
   PATH="$1${PATH:+:$PATH}"
@@ -210,9 +204,6 @@ else
   export BROWSER='xdg-open'
 fi
 export MANPAGER="$PAGER"
-if is_zsh; then
-  export READNULLCMD="$PAGER"
-fi
 
 if command_exists nvim; then
   export EDITOR='nvim'
@@ -280,18 +271,6 @@ export FZF_CTRL_R_OPTS="
 --header 'CTRL-Y copy · ? preview · CTRL-R toggle sort'
 "
 
-if command_exists rg; then
-  _fzf_compgen_path() {
-    command rg --files --glob '!.git' "$1"
-  }
-fi
-
-if command_exists fd; then
-  _fzf_compgen_dir() {
-    command fd --type d --hidden --follow --exclude '.git' "$1"
-  }
-fi
-
 if is_interactive; then
   if ! is_macos; then
     if command_exists 'wl-copy'; then
@@ -307,5 +286,5 @@ if is_interactive; then
   fi
 fi
 
-unset -f is_macos is_zsh is_interactive command_exists is_executable \
+unset -f is_macos is_interactive command_exists is_executable \
   is_readable path_prepend
