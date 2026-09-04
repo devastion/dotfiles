@@ -73,6 +73,7 @@ packages:
       - 'copilot-cli'
       - 'font-maple-mono-nf'
       - 'ghostty'
+      - 'github-copilot-app'
       - 'google-chrome'
       - 'hyperkey'
       - 'orbstack'

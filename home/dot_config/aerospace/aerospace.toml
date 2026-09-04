@@ -159,6 +159,11 @@ if.app-id = 'com.anthropic.claudefordesktop'
 run = ['layout tiling', 'move-node-to-workspace 2']
 check-further-callbacks = false
 
+[[on-window-detected]]
+if.app-id = 'com.github.githubapp'
+run = ['layout tiling', 'move-node-to-workspace 2']
+check-further-callbacks = false
+
 # Workspace 5
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
