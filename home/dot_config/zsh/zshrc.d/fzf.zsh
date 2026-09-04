@@ -63,7 +63,7 @@ fzf::env() {
   print -r -- "${entry#*=}"
 }
 
-function fzf::find() {
+fzf::find() {
   emulate -L zsh
   local -a selected
   selected=("${(@f)$(

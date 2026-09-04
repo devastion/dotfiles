@@ -20,7 +20,7 @@ plugin-source() {
   source "$file"
 }
 
-plugin-source zsh-defer || function zsh-defer {
+plugin-source zsh-defer || zsh-defer() {
   while [[ $1 == -[acmpt]* ]]; do
     [[ $1 == -c ]] && {
       shift

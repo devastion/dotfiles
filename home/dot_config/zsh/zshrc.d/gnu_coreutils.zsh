@@ -45,7 +45,7 @@ for _gnu_utility_cmd in "${_gnu_utility_cmds[@]}"; do
   if (($+commands[$_gnu_utility_pcmd] && ! \
     $+builtins[$_gnu_utility_cmd])); then
     eval "
-      function $_gnu_utility_cmd {
+      $_gnu_utility_cmd() {
         '$commands[$_gnu_utility_pcmd]' \"\$@\"
       }
     "

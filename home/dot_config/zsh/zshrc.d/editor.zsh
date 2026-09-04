@@ -221,7 +221,7 @@ magic-enter() {
   unfunction magic-enter
   local _accept_line='accept-line'
 
-  function _magic-enter() {
+  _magic-enter() {
     [[ -n $BUFFER || $CONTEXT != start ]] && return
 
     if (($+commands[git])) && command git rev-parse --is-inside-work-tree &> /dev/null; then
@@ -234,13 +234,13 @@ magic-enter() {
   case ${widgets[$_accept_line]} in
     user:*)
       zle -N _magic-enter_orig_accept-line "${widgets[$_accept_line]#user:}"
-      function _magic-enter_accept-line() {
+      _magic-enter_accept-line() {
         _magic-enter
         zle _magic-enter_orig_accept-line -- "$@"
       }
       ;;
     *)
-      function _magic-enter_accept-line() {
+      _magic-enter_accept-line() {
         _magic-enter
         zle .accept-line
       }
@@ -252,7 +252,7 @@ magic-enter() {
 
 zsh-defer magic-enter || magic-enter
 
-function pound-toggle() {
+pound-toggle() {
   if [[ $BUFFER == '#'* ]]; then
     if ((CURSOR > 0)); then
       ((CURSOR -= 1))
@@ -266,7 +266,7 @@ function pound-toggle() {
 zle -N pound-toggle
 bindkey -M vicmd '#' pound-toggle
 
-function sudo-toggle() {
+sudo-toggle() {
   if [[ $BUFFER == sudo\ * ]]; then
     BUFFER="${BUFFER#sudo }"
   else
@@ -278,7 +278,7 @@ zle -N sudo-toggle
 bindkey -M vicmd '!' sudo-toggle
 bindkey -M viins '^x^s' sudo-toggle
 
-function symmetric-ctrl-z() {
+symmetric-ctrl-z() {
   if [[ ${#BUFFER} -eq 0 ]]; then
     BUFFER="fg"
     zle accept-line -w
@@ -290,7 +290,7 @@ function symmetric-ctrl-z() {
 zle -N symmetric-ctrl-z
 bindkey '^z' symmetric-ctrl-z
 
-function dot-expansion() {
+dot-expansion() {
   if [[ $LBUFFER == *.. ]]; then
     LBUFFER+='/..'
   else
