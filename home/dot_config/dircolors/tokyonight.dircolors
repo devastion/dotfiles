@@ -91,15 +91,6 @@ EXEC 01;32
 #.bat 01;32
 # Or if you want to color scripts even if they do not have the
 # executable bit actually set.
-.bash 0;38;5;179
-.csh 0;38;5;179
-.sh 0;38;5;179
-.zsh 0;38;5;179
-.zshenv 0;38;5;179
-.zprofile 0;38;5;179
-.zshrc 0;38;5;179
-.zlogin 0;38;5;179
-.zlogout 0;38;5;179
 # archives or compressed (bright red)
 .7z 01;31
 .ace 01;31
@@ -654,6 +645,11 @@ STICKY_OTHER_WRITABLE 1;38;5;234;48;5;111
 *.zip 1;38;5;210
 *.zoo 1;38;5;210
 *.zsh 0;38;5;179
+.zshenv 0;38;5;179
+.zprofile 0;38;5;179
+.zshrc 0;38;5;179
+.zlogin 0;38;5;179
+.zlogout 0;38;5;179
 *.zst 1;38;5;210
 *TODO 1;38;5;159
 *cljc 0;38;5;179

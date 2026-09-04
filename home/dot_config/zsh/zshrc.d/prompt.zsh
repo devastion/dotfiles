@@ -68,7 +68,7 @@ _prompt_git() {
         behind=${fields[2]#-}
         ;;
     esac
-  done < <(git --no-optional-locks status --porcelain=v2 --branch 2>/dev/null)
+  done < <(git --no-optional-locks status --porcelain=v2 --branch 2> /dev/null)
 
   ((in_repo)) || return 1
 
@@ -82,7 +82,7 @@ _prompt_git() {
   _prompt_escape "${PWD:t}"
   local repo=$REPLY
 
-  _PROMPT_GIT_STATUS="%F{green}󰘬 ${repo}%f %F{red}${branch}%f"
+  _PROMPT_GIT_STATUS="%F{green}󰘬 ${repo}%f %F{yellow}on%f %F{red}${branch}%f"
 
   ((staged)) && segments+=("%F{green}+${staged}%f")
   ((unstaged)) && segments+=("%F{yellow}!${unstaged}%f")

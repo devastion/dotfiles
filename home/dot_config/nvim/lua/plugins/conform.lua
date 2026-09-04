@@ -59,8 +59,6 @@ conform.setup({
     }
   end,
   formatters = {
-    shfmt = { prepend_args = { '-i', '2', '-ci', '-bn' } },
-    golines = { prepend_args = { '-m', '100' } },
     injected = { options = { ignore_errors = true } },
   },
 })

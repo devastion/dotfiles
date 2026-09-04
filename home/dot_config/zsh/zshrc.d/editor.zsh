@@ -93,7 +93,7 @@ bindkey -M viins '^ ' magic-space
 vi-yank-clip() {
   zle vi-yank
 
-  (($+commands[pbcopy])) && print -rn -- "$CUTBUFFER" | command pbcopy &>/dev/null
+  (($+commands[pbcopy])) && print -rn -- "$CUTBUFFER" | command pbcopy &> /dev/null
 }
 
 zle -N vi-yank-clip
@@ -158,8 +158,8 @@ unset km
 unset _keys
 unfunction _bindkey_terminfo
 
-bindkey -M vicmd 'k' up-line-or-beginning-search
-bindkey -M vicmd 'j' down-line-or-beginning-search
+bindkey -M vicmd 'k' up-line-or-history
+bindkey -M vicmd 'j' down-line-or-history
 
 bindkey -M vicmd '/' history-incremental-pattern-search-backward
 bindkey -M vicmd '?' history-incremental-pattern-search-forward
@@ -224,7 +224,7 @@ magic-enter() {
   function _magic-enter() {
     [[ -n $BUFFER || $CONTEXT != start ]] && return
 
-    if (($+commands[git])) && command git rev-parse --is-inside-work-tree &>/dev/null; then
+    if (($+commands[git])) && command git rev-parse --is-inside-work-tree &> /dev/null; then
       BUFFER=' git status -sbu .'
     else
       BUFFER=' ls .'

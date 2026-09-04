@@ -1,0 +1,7 @@
+[*]
+shell_variant = zsh
+binary_next_line = false
+switch_case_indent = true
+space_redirects = true
+keep_padding = false
+simplify = true

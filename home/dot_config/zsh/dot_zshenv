@@ -2,13 +2,31 @@
 
 setopt no_global_rcs
 
-if [[ -f "$HOME/.profile" ]]; then
-  source "$HOME/.profile"
-fi
+typeset -x SHELL_SESSIONS_DISABLE=1
 
-typeset -x ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+# XDG base directories
+typeset -x XDG_CACHE_HOME="$HOME/.cache"
+typeset -x XDG_CONFIG_HOME="$HOME/.config"
+typeset -x XDG_DATA_HOME="$HOME/.local/share"
+typeset -x XDG_STATE_HOME="$HOME/.local/state"
+
+# XDG user directories
+typeset -x XDG_DESKTOP_DIR="$HOME/Desktop"
+typeset -x XDG_DOCUMENTS_DIR="$HOME/Documents"
+typeset -x XDG_DOWNLOAD_DIR="$HOME/Downloads"
+typeset -x XDG_MUSIC_DIR="$HOME/Music"
+typeset -x XDG_PICTURES_DIR="$HOME/Pictures"
+typeset -x XDG_PROJECTS_DIR="$HOME/Projects"
+typeset -x XDG_PUBLICSHARE_DIR="$HOME/Public"
+typeset -x XDG_RUNTIME_DIR="${TMPDIR%/}/xdg-runtime-${UID}"
+typeset -x XDG_SCREENSHOTS_DIR="$HOME/Screenshots"
+typeset -x XDG_TEMPLATES_DIR="$HOME/Templates"
+typeset -x XDG_VIDEOS_DIR="$HOME/Videos"
+
+# Custom zsh directories
+typeset -x ZDOTDIR="${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}"
 typeset -x ZSH_CACHE_HOME="$XDG_CACHE_HOME/zsh"
-typeset -x ZSH_CONFIG_HOME="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}"
+typeset -x ZSH_CONFIG_HOME="$ZDOTDIR"
 typeset -x ZSH_DATA_HOME="$XDG_DATA_HOME/zsh"
 typeset -x ZSH_STATE_HOME="$XDG_STATE_HOME/zsh"
 typeset -x ZSH_FUNCTIONS_DIR="$ZSH_CONFIG_HOME/functions"
@@ -16,4 +34,159 @@ typeset -x ZSH_COMPLETIONS_DIR="$ZSH_DATA_HOME/site-functions"
 typeset -x ZSH_PLUGINS_DIR="$ZSH_DATA_HOME/plugins"
 typeset -x ZSH_COMPDUMP_FILE="$ZSH_CACHE_HOME/zcompdump"
 
+# Disable Telemetry
+typeset -x DISABLE_TELEMETRY=1
+typeset -x DO_NOT_TRACK=1
+typeset -x FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
+typeset -x EXPO_NO_TELEMETRY=1
+typeset -x GH_TELEMETRY=0
+typeset -x NEXT_TELEMETRY_DISABLED=1
+typeset -x RTK_TELEMETRY_DISABLED=1
+typeset -x STORYBOOK_DISABLE_TELEMETRY=1
+typeset -x TRIVY_DISABLE_TELEMETRY=1
+
+# Follow XDG directories
+typeset -x BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config"
+
+typeset -x BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
+typeset -x BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
+typeset -x BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
+
+typeset -x CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+typeset -x COPILOT_HOME="$XDG_CONFIG_HOME/copilot"
+
+typeset -x COMPOSER_HOME="$XDG_CONFIG_HOME/composer"
+typeset -x COMPOSER_CACHE_DIR="$XDG_CACHE_HOME/composer"
+
+typeset -x CARGO_HOME="$XDG_DATA_HOME/cargo"
+typeset -x RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
+typeset -x CURL_HOME="$XDG_CONFIG_HOME/curl"
+
+typeset -x FFMPEG_DATADIR="$XDG_CONFIG_HOME/ffmpeg"
+
+typeset -x CURSOR_CONFIG_DIR="$XDG_CONFIG_HOME/cursor"
+
+typeset -x DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+
+typeset -x EZA_CONFIG_DIR="$XDG_CONFIG_HOME/eza"
+
+typeset -x GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
+
+typeset -x GNUPGHOME="$XDG_DATA_HOME/gnupg"
+typeset -x GPG_TTY="$TTY"
+
+typeset -x GOPATH="$XDG_DATA_HOME/go"
+
+typeset -x INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+typeset -x EDITRC="$XDG_CONFIG_HOME/editline/editrc"
+
+typeset -x LG_CONFIG_FILE="$XDG_CONFIG_HOME/lazygit/config.yml"
+
+typeset -x MISE_CACHE_DIR="$XDG_CACHE_HOME/mise"
+typeset -x MISE_DATA_DIR="$XDG_DATA_HOME/mise"
+typeset -x MISE_GLOBAL_CONFIG_FILE="$XDG_CONFIG_HOME/mise/config.toml"
+
+typeset -x NODE_REPL_HISTORY="$XDG_STATE_HOME/node_repl_history"
+
+typeset -x NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+
+typeset -x RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
+
+typeset -x SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
+typeset -x SCREENDIR="$XDG_RUNTIME_DIR/screen"
+
+typeset -x TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+
+typeset -x WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+
+typeset -x _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
+
+if [[ -x '/opt/homebrew/bin/brew' ]]; then
+  typeset -x HOMEBREW_PREFIX='/opt/homebrew'
+  typeset -x HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+  typeset -x HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
+  typeset -x HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
+  if [[ -f "$CURL_HOME/.curlrc" ]]; then
+    typeset -x HOMEBREW_CURLRC="$CURL_HOME/.curlrc"
+  fi
+
+  typeset -x HOMEBREW_NO_ANALYTICS=1
+  typeset -x HOMEBREW_NO_AUTO_UPDATE=1
+  typeset -x HOMEBREW_NO_EMOJI=1
+  typeset -x HOMEBREW_NO_ENV_HINTS=1
+  typeset -x HOMEBREW_CLEANUP_MAX_AGE_DAYS=7
+  typeset -x HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=7
+  typeset -x HOMEBREW_DISPLAY_INSTALL_TIMES=1
+  typeset -x HOMEBREW_NO_ASK=1
+fi
+
 typeset -U path
+
+path=(
+  "$HOME/.local/bin"(-/NF)
+  $HOMEBREW_PREFIX/{,s}bin(-/NF)
+  "$CARGO_HOME/bin"(-/NF)
+  "$HOME/.orbstack/bin"(-/NF)
+  /usr/local/{,s}bin(-/NF)
+  /usr/{,s}bin(-/NF)
+  /{,s}bin(-N)
+  $path
+)
+
+is-callable() {
+  (($+commands[$1] || $+functions[$1] || $+aliases[$1] || $+builtins[$1]))
+}
+
+# Editor, locale, pager etc.
+typeset -x LANG="${LANG:-en_US.UTF-8}"
+if is-callable 'nvim'; then
+  typeset -x EDITOR='nvim'
+  typeset -x MANPAGER='nvim +Man!'
+elif is-callable 'vim'; then
+  typeset -x EDITOR='vim'
+else
+  typeset -x EDITOR='vi'
+fi
+typeset -x VISUAL="$EDITOR"
+typeset -x PAGER='less'
+typeset -x MANPAGER="${MANPAGER:-$PAGER}"
+typeset -x BROWSER='open'
+typeset -x READNULLCMD="$PAGER"
+
+typeset -x LESS='-g -i -M -R -S -X -w -z-4 --incsearch --mouse'
+typeset -x LESSHISTFILE='-'
+typeset -x LESSKEYIN="$XDG_CONFIG_HOME/less/keys"
+typeset -x LESS_SHELL_LINES=10
+
+if is-callable 'lessfilter'; then
+  typeset -x LESSOPEN='| lessfilter %s'
+elif is-callable 'lesspipe'; then
+  typeset -x LESSOPEN='| lesspipe %s'
+elif is-callable 'lesspipe.sh'; then
+  typeset -x LESSOPEN='| lesspipe.sh %s'
+else
+  unset LESSOPEN
+fi
+
+typeset -x FZF_DEFAULT_OPTS_FILE="$XDG_CONFIG_HOME/fzf/config"
+typeset -x FZF_DEFAULT_OPTS="--history $XDG_STATE_HOME/fzf/history"
+
+if is-callable 'fd'; then
+  typeset -x FZF_DEFAULT_COMMAND='command fd --type f --hidden --follow --strip-cwd-prefix --exclude .git'
+  typeset -x FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  typeset -x FZF_ALT_C_COMMAND='command fd --type d --hidden --follow --strip-cwd-prefix --exclude .git'
+fi
+
+typeset -x FZF_CTRL_T_OPTS="
+--multi
+--bind 'ctrl-o:execute(nvim {+})+abort'
+--header 'CTRL-O open in neovim'
+"
+typeset -x FZF_CTRL_R_OPTS="
+--preview 'printf %s {2..}'
+--preview-window=down:3:wrap:hidden,border-up
+--bind 'ctrl-y:execute-silent(printf %s {2..} | pbcopy)+abort'
+--color header:italic
+--header 'CTRL-Y copy · ? preview · CTRL-R toggle sort'
+"

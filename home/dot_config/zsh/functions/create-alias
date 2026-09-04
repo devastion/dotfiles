@@ -32,12 +32,29 @@ create-alias() {
         description=$2
         shift
         ;;
-      -s | --show)
+      -cs | --cheatsheet)
         local -a lines
+
+        local key_color=$'\e[38;5;4m'
+        local desc_color=$'\e[38;5;15m'
+        local reset=$'\e[0m'
+
         for key in ${(ok)alias_descriptions}; do
-          lines+=("${key} - ${alias_descriptions[$key]}")
+          lines+=("${key_color}${key}${reset} - ${desc_color}${alias_descriptions[$key]}${reset}")
         done
-        print -rl -- "${lines[@]}" | "${PAGER:-less}"
+
+        if (("${+TMUX}")); then
+          local tmpfile="$(mktemp)"
+
+          print -rl -- "$lines[@]" >| "$tmpfile"
+
+          command tmux popup -w '90%' -h '90%' -E \
+            "zsh -c 'exec cat ${tmpfile} | less -R'"
+
+          command rm -f -- "$tmpfile"
+        else
+          print -rl -- "$lines[@]" | "${PAGER:-less}"
+        fi
         return 0
         ;;
       --)

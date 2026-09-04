@@ -180,13 +180,14 @@ local winbar = {
         return { fg = palette.modified }
       end,
     },
+    'selectioncount',
+  },
+  lualine_x = {
     {
       'lsp_status',
       icon = icons.ui.dot,
     },
-    'selectioncount',
   },
-  lualine_x = {},
   lualine_y = {},
   lualine_z = {
     {

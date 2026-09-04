@@ -2,7 +2,7 @@
 
 [[ -o 'login' ]] || return
 
-if [[ $TTY == /dev/tty* ]]; then
+if [[ $TTY == '/dev/tty'* ]]; then
   (($+ZSH_PROFILE)) || clear
 fi
 

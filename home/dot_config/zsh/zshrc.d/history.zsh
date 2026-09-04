@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+zmodload -m -F zsh/files 'b:zf_*'
+
 setopt extended_history
 setopt hist_allow_clobber
 setopt hist_expire_dups_first
@@ -18,7 +20,7 @@ setopt no_bang_hist
 setopt no_hist_beep
 
 typeset HISTFILE="${ZSH_STATE_HOME:-${XDG_STATE_HOME:-$HOME/.local/state}/zsh}/history"
-[[ -d ${HISTFILE:h} ]] || mkdir -p "${HISTFILE:h}"
+[[ -d ${HISTFILE:h} ]] || zf_mkdir -p "${HISTFILE:h}"
 typeset -i HISTSIZE=100000
 typeset -i SAVEHIST=20000
 typeset HISTORY_IGNORE='(rm *|cd#( *)#|..|pushd#( *)#|popd#( *)#|l[alsh]#( *)#|pwd|exit|*sudo -S*|(n|)vi(m|)( *)#)'

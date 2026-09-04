@@ -1,12 +1,11 @@
 #!/usr/bin/env zsh
 
-_dotdot='../'
-for _index in {1..10}; do
-  alias -- "${_index}"="builtin cd -${_index}"
-  create-alias -g -e -b "..${_index}"="${_dotdot}"
-  _dotdot+="../"
-done
-unset -v _index _dotdot
+() {
+  local _index
+  for _index in {1..10}; do
+    alias -- "${_index}"="builtin cd -${_index}"
+  done
+}
 
 unalias run-help 2> /dev/null
 autoload -Uz run-help
@@ -14,8 +13,19 @@ alias help='run-help'
 
 alias zprofile='ZSH_PROFILE=1 exec zsh'
 
-(($+commands[eza])) && {
-  alias l='eza --group-directories-first --icons=auto --color=auto --hyperlink'
+alias cp='command cp -iv'
+alias grep='command grep --color=auto'
+alias ln='command ln -iv'
+alias mkdir='command mkdir -pv'
+alias mv='command mv -iv'
+
+if is-callable 'trash'; then
+  alias trash='command trash -v'
+  alias rm='command trash -v'
+fi
+
+is-callable 'eza' && {
+  alias l='command eza --group-directories-first --icons=auto --color=auto --hyperlink'
   # --long --header --binary --octal-permissions --git --smart-group --time-style=relative
   alias ll='l -lhbo --git --smart-group --time-style=relative'
   alias ls='ll -a' # short listing
@@ -31,18 +41,6 @@ alias zprofile='ZSH_PROFILE=1 exec zsh'
   alias lst='l --tree --level 2'
 }
 
-# safety / defaults
-alias cp='cp -iv'
-alias grep='grep --color=auto'
-alias ln='ln -iv'
-alias mkdir='mkdir -pv'
-alias mv='mv -iv'
-
-if (($+commands[trash])); then
-  alias trash='command trash -v'
-  alias rm='command trash -v'
-fi
-
 alias dirs='dirs -v -l'
 alias type='type -a'
 alias diskspace='command df -P -kHl'
@@ -55,8 +53,8 @@ alias utc='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias unixepoch='date +%s'
 
 # Clipboard
-alias cpwd='pwd | pbcopy'
-alias ccat='pbcopy <' # usage: ccat <file>
+create-alias -e -b cpwd='pwd | pbcopy'
+create-alias -g -e ccat='pbcopy <' # usage: ccat <file>
 create-alias -g -e -b pbp='pbpaste'
 create-alias -g -e -b pbc='pbcopy'
 
@@ -104,8 +102,8 @@ alias sha224='shasum -a 224'
 alias md5='md5 -q'
 
 ((${+commands[tmux]})) && {
-  [[ -x "${XDG_CONFIG_HOME}/tmux/scripts/switch-session" ]] \
-    && alias ta="${XDG_CONFIG_HOME}/tmux/scripts/switch-session"
+  [[ -x "${XDG_CONFIG_HOME}/tmux/scripts/switch-session" ]] &&
+    alias ta="${XDG_CONFIG_HOME}/tmux/scripts/switch-session"
   alias tls='tmux ls'
   alias tkss='tmux kill-session'
   alias tksv='tmux kill-server'
@@ -113,22 +111,22 @@ alias md5='md5 -q'
 
 ((${+commands[chezmoi]})) && {
   # Status
-  create-alias -e ch="chezmoi"
-  create-alias -e chd="chezmoi diff"
-  create-alias -e chst="chezmoi status"
-  create-alias -e chdoc="chezmoi doctor"
+  create-alias -e -b ch="chezmoi"
+  create-alias -e -b chd="chezmoi diff"
+  create-alias -e -b chst="chezmoi status"
+  create-alias -e -b chdoc="chezmoi doctor"
 
   # Editing source
   create-alias -e cha="chezmoi add"
-  create-alias -e chr="chezmoi re-add"
-  create-alias -e che="chezmoi edit"
-  create-alias -e chea="chezmoi edit --apply"
-  create-alias -e chcd="chezmoi cd"
+  create-alias -e -b chr="chezmoi re-add"
+  create-alias -e -b che="chezmoi edit"
+  create-alias -e -b chea="chezmoi edit --apply"
+  create-alias -e -b chcd="chezmoi cd"
 
   # Updating target
-  create-alias -e chap="chezmoi apply"
-  create-alias -e chup="chezmoi update"
-  create-alias -e chug="chezmoi upgrade"
+  create-alias -e -b chap="chezmoi apply"
+  create-alias -e -b chup="chezmoi update"
+  create-alias -e -b chug="chezmoi upgrade"
 }
 
 ((${+commands[npm]})) && {
@@ -147,9 +145,9 @@ alias md5='md5 -q'
       _cid="$(docker ps -q --filter "name=$1" | head -n1)"
     else
       _cid="$(
-        docker ps --format "{{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}" \
-          | fzf -1 \
-          | awk '{print $1}'
+        docker ps --format "{{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}" |
+          fzf -1 |
+          awk '{print $1}'
       )" || return 1
     fi
 
@@ -180,7 +178,7 @@ alias md5='md5 -q'
   create-alias -e dcoup='docker compose up --pull never'
 }
 
-((${+commands[brew]})) && {
+is-callable 'brew' && {
   create-alias -e -d 'Remove outdated downloads and old versions' brewc='brew cleanup'
   create-alias -e -d 'Install a formula' brewi='brew install'
   create-alias -e -d 'List installed formulae that are not dependencies' brewL='brew leaves'

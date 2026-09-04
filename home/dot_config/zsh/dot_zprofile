@@ -4,19 +4,21 @@
 
 zmodload -m -F zsh/files 'b:zf_*'
 
-# Create XDG Base Directories
-for dir in "$XDG_CACHE_HOME" \
+# Create XDG base directories
+for dir in \
+  "$XDG_CACHE_HOME" \
   "$XDG_CONFIG_HOME" \
   "$XDG_DATA_HOME" \
   "$XDG_STATE_HOME"; do
-  [[ -n "$dir" ]] || continue
+  [[ -n $dir ]] || continue
   zf_mkdir -p -- "$dir"
 done
 
-[[ -d "$XDG_RUNTIME_DIR" ]] || zf_mkdir -m 0700 -p "$XDG_RUNTIME_DIR"
+[[ -d $XDG_RUNTIME_DIR ]] || zf_mkdir -m 0700 -p "$XDG_RUNTIME_DIR"
 
-# Create XDG User Directories
-for dir in "$XDG_DESKTOP_DIR" \
+# Create XDG user directories
+for dir in \
+  "$XDG_DESKTOP_DIR" \
   "$XDG_DOCUMENTS_DIR" \
   "$XDG_DOWNLOAD_DIR" \
   "$XDG_MUSIC_DIR" \
@@ -26,18 +28,19 @@ for dir in "$XDG_DESKTOP_DIR" \
   "$XDG_SCREENSHOTS_DIR" \
   "$XDG_TEMPLATES_DIR" \
   "$XDG_VIDEOS_DIR"; do
-  [[ -n "$dir" ]] || continue
+  [[ -n $dir ]] || continue
   zf_mkdir -p -- "$dir"
 done
 
-# Create ZSH Directories
-for dir in "$ZSH_CACHE_HOME" \
+# Create zsh directories
+for dir in \
+  "$ZSH_CACHE_HOME" \
   "$ZSH_CONFIG_HOME" \
   "$ZSH_DATA_HOME" \
   "$ZSH_STATE_HOME" \
   "$ZSH_FUNCTIONS_DIR" \
   "$ZSH_COMPLETIONS_DIR" \
   "$ZSH_PLUGINS_DIR"; do
-  [[ -n "$dir" ]] || continue
+  [[ -n $dir ]] || continue
   zf_mkdir -p -- "$dir"
 done
