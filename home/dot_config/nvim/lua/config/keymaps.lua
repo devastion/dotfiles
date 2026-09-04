@@ -33,19 +33,6 @@ do
     return move_vertical('k')
   end, { expr = true, desc = 'Move up' })
 
-  map({ 'n', 'x' }, '<C-d>', "m'<C-d>zz", {
-    desc = 'Scroll down, center cursor and save jump position',
-  })
-  map({ 'n', 'x' }, '<C-u>', "m'<C-u>zz", {
-    desc = 'Scroll up, center cursor and save jump position',
-  })
-
-  map('n', 'n', "m'nzzzv", { desc = 'Next search match (centered)' })
-  map('n', 'N', "m'Nzzzv", { desc = 'Previous search match (centered)' })
-
-  map('n', '}', '}zz', { desc = 'Next paragraph (centered)' })
-  map('n', '{', '{zz', { desc = 'Previous paragraph (centered)' })
-
   map('x', 'g/', [[<esc>/\%V]], { desc = 'Search in visual selection' })
 end
 

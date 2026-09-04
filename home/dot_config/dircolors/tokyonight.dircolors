@@ -895,6 +895,7 @@ STICKY_OTHER_WRITABLE 1;38;5;234;48;5;111
 *appveyor.yml 0;38;5;73
 *configure.ac 0;38;5;38
 *.bash_profile 0;38;5;179
+*.bash_logout 0;38;5;179
 *.clang-format 0;38;5;38
 *.dockerignore 0;38;5;38
 *.editorconfig 0;38;5;38

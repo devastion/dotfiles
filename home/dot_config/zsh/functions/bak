@@ -4,6 +4,12 @@ function bak() {
   emulate -L zsh
   setopt local_options err_return
 
+  local -i global=0
+  if [[ $1 == '-g' ]]; then
+    global=1
+    shift
+  fi
+
   if (($# == 0)); then
     print -u2 'Usage: bak <path> [path...]'
     return 1
@@ -30,7 +36,9 @@ function bak() {
     command cp -RL -- "$target" "${target}.${now}.bak" &&
       print -r "Backed up: $target -> ${target}.${now}.bak"
 
-    command cp -RL -- "$target" "$backup_dir/$stamped" &&
-      print -r "Global backup: $target -> $backup_dir/$stamped"
+    if ((global)); then
+      command cp -RL -- "$target" "$backup_dir/$stamped" &&
+        print -r "Global backup: $target -> $backup_dir/$stamped"
+    fi
   done
 }
