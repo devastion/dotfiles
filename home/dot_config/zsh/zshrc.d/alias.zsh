@@ -124,7 +124,7 @@ alias md5='md5 -q'
 
 ((${+commands[chezmoi]})) && {
   # Status
-  create-alias -e -b ch="chezmoi"
+  create-alias -e ch="chezmoi"
   create-alias -e -b chd="chezmoi diff"
   create-alias -e -b chst="chezmoi status"
   create-alias -e -b chdoc="chezmoi doctor"

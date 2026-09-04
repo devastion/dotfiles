@@ -13,6 +13,18 @@ typeset -g _PROMPT_CMD_INFO=''
 
 typeset -gF _PROMPT_START_TIME=-1
 
+typeset -g _PROMPT_SSH_INDICATOR=''
+typeset -g _PROMPT_NESTED_SHELL_INDICATOR=''
+
+if [[ -n $SSH_CONNECTION || -n $SSH_TTY || -n $SSH_CLIENT ]]; then
+  _PROMPT_SSH_INDICATOR='%F{yellow}%n@%m%f'
+fi
+
+typeset -x _PROMPT_SHELL_PID="${_PROMPT_SHELL_PID:-$$}"
+if (("$_PROMPT_SHELL_PID" != $$)); then
+  _PROMPT_NESTED_SHELL_INDICATOR="%F{yellow}%f "
+fi
+
 _prompt_duration() {
   local -F secs=$1
   local -i total=${secs%.*}
@@ -127,4 +139,4 @@ _prompt_precmd() {
 add-zsh-hook preexec _prompt_preexec
 add-zsh-hook precmd _prompt_precmd
 
-PROMPT=$'\n%B%F{blue}%~%f%b ${_PROMPT_GIT_STATUS} ${_PROMPT_CMD_INFO}\n${_PROMPT_CMD_STATUS}${VI_MODE_INDICATOR}%f '
+PROMPT=$'\n%B%F{blue}%~%f%b ${_PROMPT_GIT_STATUS} ${_PROMPT_SSH_INDICATOR} ${_PROMPT_CMD_INFO}\n${_PROMPT_NESTED_SHELL_INDICATOR}${_PROMPT_CMD_STATUS}${VI_MODE_INDICATOR}%f '
