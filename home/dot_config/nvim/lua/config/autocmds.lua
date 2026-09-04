@@ -327,7 +327,7 @@ autocmd('VimResized', {
 })
 
 autocmd({ 'BufNewFile', 'BufReadPre' }, {
-  group = augroup('secure'),
+  group = default_group,
   pattern = {
     '/tmp/*',
     '*.env',
@@ -342,6 +342,22 @@ autocmd({ 'BufNewFile', 'BufReadPre' }, {
     vim.opt_local.swapfile = false
     vim.opt_local.undofile = false
     vim.opt_local.writebackup = false
+  end,
+})
+
+autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+  group = default_group,
+  callback = function(args)
+    if vim.bo[args.buf].filetype == 'minifiles' then return end
+
+    local line = vim.api.nvim_win_get_cursor(0)[1]
+
+    if vim.b.last_line == nil then vim.b.last_line = line end
+
+    if line ~= vim.b.last_line then
+      vim.cmd('norm! zz')
+      vim.b.last_line = line
+    end
   end,
 })
 

@@ -13,10 +13,6 @@ typeset -g _PROMPT_CMD_INFO=''
 
 typeset -gF _PROMPT_START_TIME=-1
 
-_prompt_escape() {
-  REPLY=${1//\%/%%}
-}
-
 _prompt_duration() {
   local -F secs=$1
   local -i total=${secs%.*}
@@ -35,7 +31,7 @@ _prompt_duration() {
 }
 
 _prompt_git() {
-  local line oid branch repo REPLY
+  local line oid branch repo toplevel REPLY
   local -i in_repo=0
   local -i staged=0 unstaged=0 untracked=0 conflicted=0 ahead=0 behind=0
   local -a segments
@@ -76,11 +72,8 @@ _prompt_git() {
     branch="HEAD (${oid[1,7]})"
   fi
 
-  _prompt_escape "$branch"
-  branch=$REPLY
-
-  _prompt_escape "${PWD:t}"
-  local repo=$REPLY
+  toplevel=$(git --no-optional-locks rev-parse --show-toplevel 2> /dev/null)
+  repo="${toplevel:t}"
 
   _PROMPT_GIT_STATUS="%F{green}󰘬 ${repo}%f %F{yellow}on%f %F{red}${branch}%f"
 
