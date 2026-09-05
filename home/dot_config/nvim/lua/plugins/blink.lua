@@ -55,10 +55,8 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 vim.pack.add({
-  {
-    src = 'https://github.com/saghen/blink.cmp',
-    version = vim.version.range('1.*'),
-  },
+  'https://github.com/Saghen/blink.lib',
+  'https://github.com/saghen/blink.cmp',
   'https://github.com/rafamadriz/friendly-snippets',
 }, { confirm = false })
 

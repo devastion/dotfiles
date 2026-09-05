@@ -167,6 +167,30 @@ local function set_list(menu, list)
   save_state()
 end
 
+---@param path string
+---@return boolean
+local function file_exists(path)
+  return vim.uv.fs_stat(vim.fs.abspath(path)) ~= nil
+end
+
+---@param menu string
+local function prune_menu(menu)
+  local list = get_list(menu)
+
+  local kept = {}
+  for _, path in ipairs(list) do
+    if file_exists(path) then kept[#kept + 1] = path end
+  end
+
+  if #kept ~= #list then set_list(menu, kept) end
+end
+
+local function prune_all()
+  for _, menu in ipairs(config.menus) do
+    prune_menu(menu.name)
+  end
+end
+
 ---@return string
 local function current_menu()
   return config.menus[current].name
@@ -205,6 +229,7 @@ end
 
 local function open()
   load_state()
+  prune_all()
 
   local origin_path = vim.api.nvim_buf_get_name(0)
   local origin_rel = origin_path ~= ''
@@ -397,6 +422,15 @@ local function menu_names()
     return menu.name
   end, config.menus)
 end
+
+vim.api.nvim_create_autocmd('BufDelete', {
+  group = vim.api.nvim_create_augroup('anchor_prune_menu', { clear = true }),
+  callback = function(args)
+    local path = vim.api.nvim_buf_get_name(args.buf)
+    if path == '' or vim.uv.fs_stat(path) then return end
+    prune_all()
+  end,
+})
 
 vim.api.nvim_create_user_command(
   'Anchor',

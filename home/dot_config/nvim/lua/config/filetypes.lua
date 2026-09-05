@@ -45,8 +45,8 @@ vim.filetype.add({
       local name = vim.fs.basename(path)
       if not name:find('%.', 2) then return 'zsh' end
     end,
-    ['%.env%.[%w_.]+'] = 'sh',
-    ['%.env%.local'] = 'sh',
+    ['%.env%.[%w_.]+'] = 'dosini',
+    ['%.env%.local'] = 'dosini',
     ['[jt]sconfig.*%.json$'] = 'jsonc',
     ['.*/%.github/workflows/.*%.ya?ml'] = 'yaml.github',
     ['.*/Cargo%.lock$'] = 'toml',
