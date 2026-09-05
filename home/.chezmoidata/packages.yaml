@@ -55,6 +55,7 @@ packages:
       - 'man-db'
       - 'mas'
       - 'neovim'
+      - 'pam-reattach'
       - 'php'
       - 'poppler'
       - 'ripgrep'

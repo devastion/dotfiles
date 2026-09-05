@@ -355,7 +355,10 @@ autocmd({ 'CursorMoved', 'CursorMovedI' }, {
     if vim.b.last_line == nil then vim.b.last_line = line end
 
     if line ~= vim.b.last_line then
-      vim.cmd('norm! zz')
+      local win_height = vim.api.nvim_win_get_height(0)
+      vim.fn.winrestview({
+        topline = math.max(1, line - math.floor(win_height / 2)),
+      })
       vim.b.last_line = line
     end
   end,

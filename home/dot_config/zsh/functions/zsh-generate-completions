@@ -15,7 +15,7 @@ zsh-generate-completions() {
   local -i force=0
   [[ $1 == (--force|-f) ]] && force=1
 
-  (( $# <= force )) || {
+  (($# <= force)) || {
     print -u2 -- 'Usage: zsh-generate-completions [--force]'
     return 2
   }
@@ -28,7 +28,7 @@ zsh-generate-completions() {
   }
 
   local -A generators=(
-    [ast-grep]='ast-grep completions zsh'
+    ['ast-grep']='ast-grep completions zsh'
     [bat]='bat --completion=zsh'
     [betterleaks]='betterleaks completion zsh'
     [cargo]='rustup completions zsh cargo'
@@ -52,15 +52,14 @@ zsh-generate-completions() {
     [procs]='procs --gen-completion-out zsh'
     [rg]='rg --generate complete-zsh'
     [rustup]='rustup completions zsh'
-    [tree-sitter]='tree-sitter complete --shell zsh'
+    ['tree-sitter']='tree-sitter complete --shell zsh'
     [usage]='usage --completions zsh'
     [uv]='uv generate-shell-completion zsh'
     [watchexec]='watchexec --completions zsh'
     [yq]='yq completion zsh'
-    [zsh-patina]='zsh-patina completion'
+    ['zsh-patina']='zsh-patina completion'
   )
 
-  # Static/network completions.
   local -A urls=(
     [act]='https://raw.githubusercontent.com/iloveitaly/zsh-ai-completions/58b1a5aee5068df14b5cec543623d746f20f7189/completions/_act'
     [chafa]='https://raw.githubusercontent.com/hpjansson/chafa/master/tools/completions/zsh-completion.zsh'
@@ -77,63 +76,54 @@ zsh-generate-completions() {
   local -a skipped=()
   local -a failed=()
 
-  local cmd out tmp generator url
+  _generate_completion() {
+    local name="$1"
+    shift
 
-  for cmd generator in "${(@kv)generators}"; do
-    (( $+commands[$cmd] )) || continue
+    out="$dir/_$name"
 
-    out="$dir/_$cmd"
-
-    if (( ! force )) && [[ -s $out ]]; then
-      skipped+=("$cmd")
-      continue
+    if ((! force)) && [[ -s $out ]]; then
+      skipped+=("$name")
+      return 0
     fi
 
-    tmp="${out}.tmp.$$.$RANDOM"
+    tmp="${out}.tmp.${$}.${RANDOM}"
 
     print -r -- "  generating $cmd"
 
-    if command ${(z)generator} >| "$tmp" 2>/dev/null &&
-       [[ -s $tmp ]] &&
+    if "$@" >| "$tmp" 2> /dev/null &&
+      [[ -s $tmp ]] &&
       zf_mv -f -- "$tmp" "$out"; then
-      generated+=("$cmd")
-    else
-      zf_rm -f -- "$tmp"
-      failed+=("$cmd")
+      generated+=("$name")
+      return 0
     fi
+
+    zf_rm -f -- "$tmp"
+    failed+=("$name")
+    return 1
+  }
+
+  local cmd out tmp generator url
+
+  for cmd in "${(@k)generators}"; do
+    (($+commands[$cmd])) || continue
+
+    _generate_completion "$cmd" "${(z)generators[$cmd]}"
   done
 
-  for cmd url in "${(@kv)urls}"; do
-    out="$dir/_$cmd"
-
-    if (( ! force )) && [[ -s $out ]]; then
-      skipped+=("$cmd")
-      continue
-    fi
-
-    tmp="${out}.tmp.$$.$RANDOM"
-
-    print -r -- "  downloading $cmd"
-
-    if command curl -fsSL --max-time 15 "$url" >| "$tmp" 2>/dev/null &&
-       [[ -s $tmp ]] &&
-       zf_mv -f -- "$tmp" "$out"; then
-      generated+=("$cmd")
-    else
-      zf_rm -f -- "$tmp"
-      failed+=("$cmd")
-    fi
+  for cmd in "${(@k)urls}"; do
+    _generate_completion "$cmd" \
+      curl -fsSL --max-time 15 "${urls[$cmd]}"
   done
 
-  if (( $#generated )) && (( $+functions[run-compinit] )); then
+  if (($#generated)) && (($+functions[run - compinit])); then
     run-compinit --force
   fi
 
-  print
   print -r -- "Generated: ${#generated}"
   print -r -- "Skipped:   ${#skipped}"
 
-  if (( $#failed )); then
+  if (($#failed)); then
     print -r -- "Failed:    ${#failed}"
     print -u2 -- "  ${(j:, :)failed}"
     return 1

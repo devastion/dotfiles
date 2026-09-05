@@ -177,6 +177,8 @@ if is-callable 'fd'; then
   typeset -x FZF_DEFAULT_COMMAND='command fd --type f --hidden --follow --strip-cwd-prefix --exclude .git'
   typeset -x FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   typeset -x FZF_ALT_C_COMMAND='command fd --type d --hidden --follow --strip-cwd-prefix --exclude .git'
+else
+  typeset -x FZF_DEFAULT_COMMAND='find . -type f -not -path "*/.git/*"'
 fi
 
 typeset -x FZF_CTRL_T_OPTS="

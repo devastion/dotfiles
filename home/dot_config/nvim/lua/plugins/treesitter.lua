@@ -312,7 +312,7 @@ local function ts_attach(bufnr, lang)
   end
 
   if vim.treesitter.query.get(lang, 'indents') then
-    vim.bo[bufnr].indentexpr = ts.indentexpr
+    vim.bo[bufnr].indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
   end
 
   ts_textobjects_maps(bufnr)
