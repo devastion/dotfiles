@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+mime="$(file -bL --mime-type "$1")"
+category="${mime%%/*}"
+kind="${mime#*/}"
+
+if [ -d "$1" ]; then
+  eza --git -hl --color=always --icons=auto --tree --level=2 "$1"
+
+elif [ "$category" = "image" ]; then
+  chafa "$1"
+  exiftool "$1"
+
+elif [ "$kind" = "vnd.openxmlformats-officedocument.spreadsheetml.sheet" ] ||
+  [ "$kind" = "vnd.ms-excel" ]; then
+  in2csv "$1" | xsv table | bat -ltsv --color=always
+
+elif file --mime --brief "$1" | grep -q 'charset=binary'; then
+  hexyl --border none --length 2KiB "$1" 2>/dev/null || echo "Binary file"
+
+elif [ "$category" = "text" ]; then
+  bat --color=always --line-range :200 "$1"
+
+else
+  lesspipe.sh "$1" | bat --color=always
+fi
+

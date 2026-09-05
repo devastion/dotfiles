@@ -147,6 +147,7 @@ packages:
       - man-db
       - neovim
       - php-cli
+      - php8.5-xml
       - pinentry-curses
       - poppler-utils
       - ripgrep

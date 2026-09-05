@@ -121,7 +121,7 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:complete:*:options' fzf-flags --preview-window=hidden
 zstyle ':fzf-tab:complete:*:argument-1' fzf-flags --preview-window=hidden
 
-zstyle ':fzf-tab:complete:(cd|z|nvim|vim):*' fzf-preview '$XDG_CONFIG_HOME/fzf/preview.sh ${(Q)realpath}'
+zstyle ':fzf-tab:complete:(cd|z|nvim|vim):*' fzf-preview 'less ${(Q)realpath}'
 
 zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
 zstyle ':fzf-tab:complete:git-log:*' fzf-preview 'git show --color=always $word'
