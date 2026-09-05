@@ -6,6 +6,7 @@ encryption = "gpg"
     passphrase = {{ $passphrase | quote }}
 
 [gpg]
+suffix='.gpg'
 symmetric = true
 args = [
   "--batch",

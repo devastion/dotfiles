@@ -53,6 +53,7 @@ tags
 *.password
 *.secret
 *.gpg
+!encrypted_*.gpg
 *.kbx
 *.ovpn
 *.p12

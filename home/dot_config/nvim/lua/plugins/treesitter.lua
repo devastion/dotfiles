@@ -211,19 +211,21 @@ local treesitter_swaps = {
 }
 
 local treesitter_selects = {
+  [','] = '@assignment.lhs',
+  ['.'] = '@assignment.rhs',
+  ['`'] = '@codeblock.outer',
   A = '@assignment.outer',
   C = '@comment.outer',
+  O = '@class.outer',
   S = '@statement.outer',
   a = '@parameter.outer',
-  c = '@class.outer',
+  c = '@conditional.outer',
   f = '@function.outer',
   l = '@loop.outer',
-  n = '@conditional.outer',
   o = '@block.outer',
   r = '@return.outer',
   s = '@string.outer',
   u = '@call.outer',
-  ['`'] = '@codeblock.outer',
 }
 
 ---@param bufnr integer
