@@ -64,7 +64,7 @@ which_key.add({
     icon = icons.git.change,
   },
   { '<leader>gu', group = 'Toggles', icon = icons.ui.switch },
-  { '<leader>h', group = 'Anchor' },
+  { '<leader>h', group = 'Anchor', icon = icons.ui.anchor },
   { '<leader>q', group = 'Session' },
   { '<leader>r', group = 'Refactor', mode = { 'n', 'x' } },
   { '<leader>s', group = 'Search', mode = { 'n', 'x' } },

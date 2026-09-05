@@ -57,6 +57,7 @@ packages:
       - 'neovim'
       - 'pam-reattach'
       - 'php'
+      - 'pinentry-mac'
       - 'poppler'
       - 'ripgrep'
       - 'sherlock'

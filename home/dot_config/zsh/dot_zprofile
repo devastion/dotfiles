@@ -44,3 +44,5 @@ for dir in \
   [[ -n $dir ]] || continue
   zf_mkdir -p -- "$dir"
 done
+
+[[ -d $GNUPGHOME ]] || zf_mkdir -m 0700 -p "$GNUPGHOME"

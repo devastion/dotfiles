@@ -1,5 +1,4 @@
 [user]
-  name = Dimitar Banev
   useConfigOnly = true
 
 [init]
@@ -136,6 +135,7 @@
 [include]
   path = config.d/alias
   path = config.d/pager
+  path = config.d/user
 
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
   path = config.d/github

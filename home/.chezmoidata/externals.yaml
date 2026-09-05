@@ -1,15 +1,15 @@
 externals:
   tmux:
     plugins:
-      - 'parwest/tmux-spoony'
-      - 'ddzero2c/tmux-easymotion'
-      - 'wfxr/tmux-fzf-url'
       - 'abhinav/tmux-fastcopy'
+      - 'ddzero2c/tmux-easymotion'
+      - 'parwest/tmux-spoony'
       - 'tmux-plugins/tmux-resurrect'
+      - 'wfxr/tmux-fzf-url'
   zsh:
     plugins:
-      - 'romkatv/zsh-defer'
       - 'aloxaf/fzf-tab'
       - 'hlissner/zsh-autopair'
-      - 'zsh-users/zsh-autosuggestions'
+      - 'romkatv/zsh-defer'
       - 'zdharma-continuum/fast-syntax-highlighting'
+      - 'zsh-users/zsh-autosuggestions'

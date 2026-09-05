@@ -7,7 +7,7 @@ local icons = require('config.icons')
 local function wordcount()
   local wc = vim.fn.wordcount()
   local visual_words = wc.visual_words or wc.words
-  local word_string = visual_words == 1 and ' word' or ' words'
+  local word_string = visual_words == 1 and 'word' or 'words'
   local reading_time = math.ceil(visual_words / 200.0) .. ' min'
   return string.format(
     '%s %s (%s)',
@@ -118,6 +118,28 @@ local function lint_progress()
   return '󰑐 ' .. table.concat(linters, ', ')
 end
 
+local function available_tools()
+  local lsp = vim
+    .iter(vim.lsp.get_clients({ bufnr = 0 }))
+    :map(function(lsp_client)
+      return lsp_client.name
+    end)
+    :totable()
+  local linters = require('lint').linters_by_ft[vim.bo.filetype]
+  local formatters = vim
+    .iter(require('conform').list_formatters(0))
+    :map(function(formatter)
+      return formatter.name
+    end)
+    :totable()
+
+  return table.concat(linters, icons.ui('small_dot', 'both'))
+    .. icons.ui('small_dot', 'both')
+    .. table.concat(formatters, icons.ui('small_dot', 'both'))
+    .. icons.ui('small_dot', 'both')
+    .. table.concat(lsp, icons.ui('small_dot', 'both'))
+end
+
 local options = {
   theme = 'auto',
   globalstatus = true,
@@ -183,10 +205,7 @@ local winbar = {
     'selectioncount',
   },
   lualine_x = {
-    {
-      'lsp_status',
-      icon = icons.ui.dot,
-    },
+    available_tools,
   },
   lualine_y = {},
   lualine_z = {
