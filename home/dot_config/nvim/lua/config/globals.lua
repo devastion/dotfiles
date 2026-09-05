@@ -27,6 +27,7 @@ if vim.env.SSH_TTY then
 end
 
 vim.g.LSP_SERVERS = {
+  astro = 'astro-language-server',
   bash_ls = 'bash-language-server',
   clangd = 'clangd',
   css_ls = 'css-lsp',

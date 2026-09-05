@@ -118,22 +118,26 @@ local function lint_progress()
   return '󰑐 ' .. table.concat(linters, ', ')
 end
 
-local function available_tools()
-  local lsp = vim
-    .iter(vim.lsp.get_clients({ bufnr = 0 }))
-    :map(function(lsp_client)
-      return lsp_client.name
-    end)
-    :totable()
-  local linters = require('lint').linters_by_ft[vim.bo.filetype] or {}
-  local formatters = require('conform').formatters_by_ft[vim.bo.filetype] or {}
-
-  return table.concat(linters, icons.ui('small_dot', 'both'))
-    .. icons.ui('small_dot', 'both')
-    .. table.concat(formatters, icons.ui('small_dot', 'both'))
-    .. icons.ui('small_dot', 'both')
-    .. table.concat(lsp, icons.ui('small_dot', 'both'))
-end
+local available_tools = {
+  lsp = function()
+    local lsp_servers = vim
+      .iter(vim.lsp.get_clients({ bufnr = 0 }))
+      :map(function(lsp_client)
+        return lsp_client.name
+      end)
+      :totable()
+    return table.concat(lsp_servers, icons.ui('small_dot', 'both'))
+  end,
+  linters = function()
+    local linters = require('lint').linters_by_ft[vim.bo.filetype] or {}
+    return table.concat(linters, icons.ui('small_dot', 'both'))
+  end,
+  formatters = function()
+    local formatters = require('conform').formatters_by_ft[vim.bo.filetype]
+      or {}
+    return table.concat(formatters, icons.ui('small_dot', 'both'))
+  end,
+}
 
 local options = {
   theme = 'auto',
@@ -200,7 +204,19 @@ local winbar = {
     'selectioncount',
   },
   lualine_x = {
-    available_tools,
+    {
+      available_tools.formatters,
+      color = function()
+        return { fg = palette.muted }
+      end,
+    },
+    {
+      available_tools.linters,
+      color = function()
+        return { fg = palette.modified }
+      end,
+    },
+    available_tools.lsp,
   },
   lualine_y = {},
   lualine_z = {

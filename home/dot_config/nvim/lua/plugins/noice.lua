@@ -180,6 +180,10 @@ noice.setup({
   },
 })
 
+vim.keymap.set('n', '<Esc>', function()
+  noice.cmd('dismiss')
+  vim.cmd('nohlsearch')
+end, { desc = 'Dismiss notifications and clear search highlight' })
 map('n', '<leader>na', function()
   noice.cmd('all')
 end, { desc = 'Noice all' })

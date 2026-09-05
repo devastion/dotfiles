@@ -11,6 +11,7 @@ local ignore = {
   'No information available',
 }
 
+---@diagnostic disable-next-line: duplicate-set-field
 vim.notify = function(msg, level, o)
   if type(msg) == 'string' then
     for _, pat in ipairs(ignore) do
