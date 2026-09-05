@@ -24,4 +24,3 @@ elif [ "$category" = "text" ]; then
 else
   lesspipe.sh "$1" | bat --color=always
 fi
-

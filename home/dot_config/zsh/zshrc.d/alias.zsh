@@ -147,11 +147,12 @@ alias md5='md5 -q'
 
 ((${+commands[docker]})) && {
   dai() {
-    local _cid
     if ! docker ps -q | grep -q .; then
       printf "No docker containers running!"
       return 1
     fi
+
+    local _cid
 
     if [ -n "$1" ]; then
       _cid="$(docker ps -q --filter "name=$1" | head -n1)"

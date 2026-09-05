@@ -137,14 +137,20 @@ if [[ -x '/opt/homebrew/bin/brew' ]]; then
     typeset -x HOMEBREW_CURLRC="$CURL_HOME/.curlrc"
   fi
 
-  typeset -x HOMEBREW_NO_ANALYTICS=1
-  typeset -x HOMEBREW_NO_AUTO_UPDATE=1
-  typeset -x HOMEBREW_NO_EMOJI=1
-  typeset -x HOMEBREW_NO_ENV_HINTS=1
-  typeset -x HOMEBREW_CLEANUP_MAX_AGE_DAYS=7
-  typeset -x HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=7
-  typeset -x HOMEBREW_DISPLAY_INSTALL_TIMES=1
-  typeset -x HOMEBREW_NO_ASK=1
+  typeset -i -x HOMEBREW_NO_ANALYTICS=1
+  typeset -i -x HOMEBREW_NO_AUTO_UPDATE=1
+  typeset -i -x HOMEBREW_NO_EMOJI=1
+  typeset -i -x HOMEBREW_NO_ENV_HINTS=1
+  typeset -i -x HOMEBREW_CLEANUP_MAX_AGE_DAYS=7
+  typeset -i -x HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=7
+  typeset -i -x HOMEBREW_DISPLAY_INSTALL_TIMES=1
+  typeset -i -x HOMEBREW_NO_ASK=1
+fi
+
+if [[ "$OSTYPE" == *'linux'* ]]; then
+  typeset -x SYSTEMD_PAGER="$PAGER"
+  typeset -x SYSTEMD_LESS="$LESS"
+  typeset -x SYSTEMD_COLORS=1
 fi
 
 typeset -U path
