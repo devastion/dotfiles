@@ -5,7 +5,7 @@ category="${mime%%/*}"
 kind="${mime#*/}"
 
 if [ -d "$1" ]; then
-  eza --git -hl --color=always --icons=auto --tree --level=2 "$1"
+  eza --git --color=always --icons=auto --tree --level=2 "$1"
 
 elif [ "$category" = "image" ]; then
   chafa "$1"

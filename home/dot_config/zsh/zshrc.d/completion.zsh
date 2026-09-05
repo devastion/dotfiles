@@ -119,9 +119,11 @@ zstyle ':fzf-tab:*' fzf-min-height 50
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
 zstyle ':fzf-tab:complete:*:options' fzf-flags --preview-window=hidden
-zstyle ':fzf-tab:complete:*:argument-1' fzf-flags --preview-window=hidden
 
-zstyle ':fzf-tab:complete:(cd|z|nvim|vim):*' fzf-preview 'less ${(Q)realpath}'
+zstyle ':fzf-tab:complete:(cd|z|zi|pushd|__zoxide_z|nvim|vim|bat|cat|less|open|cp|mv|ln|rm|trash):*' \
+  fzf-preview 'less ${(Q)realpath}'
+zstyle ':fzf-tab:complete:(cd|z|zi|pushd|__zoxide_z|nvim|vim|bat|cat|less|open|cp|mv|ln|rm|trash):*' \
+  fzf-flags --preview-window=nohidden
 
 zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
 zstyle ':fzf-tab:complete:git-log:*' fzf-preview 'git show --color=always $word'
@@ -137,3 +139,5 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
     "recent commit object name") git show --color=always $word | delta ;;
     *) git log --color=always $word ;;
   esac'
+
+zstyle ':fzf-tab:complete:git-(add|diff|restore|log|show|checkout):*' fzf-flags --preview-window=nohidden

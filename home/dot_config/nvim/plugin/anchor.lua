@@ -5,7 +5,6 @@ local config = {
   menus = {
     { key = 'f', name = 'files' },
     { key = 't', name = 'tests' },
-    { key = 'd', name = 'docs' },
   },
 
   width = 60,
@@ -15,7 +14,7 @@ local config = {
   ---@type table<string,string|false>
   keys = {
     open = '<C-e>',
-    add = '<leader>ha',
+    add = '<localleader>a',
     add_prefix = '<leader>h',
   },
 

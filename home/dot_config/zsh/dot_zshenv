@@ -18,7 +18,11 @@ typeset -x XDG_MUSIC_DIR="$HOME/Music"
 typeset -x XDG_PICTURES_DIR="$HOME/Pictures"
 typeset -x XDG_PROJECTS_DIR="$HOME/Projects"
 typeset -x XDG_PUBLICSHARE_DIR="$HOME/Public"
-typeset -x XDG_RUNTIME_DIR="${TMPDIR%/}/xdg-runtime-${UID}"
+if [[ "$OSTYPE" == 'darwin'* ]]; then
+  typeset -x XDG_RUNTIME_DIR="${TMPDIR%/}/xdg-runtime-${UID}"
+else
+  typeset -x XDG_RUNTIME_DIR="/run/user/${UID}"
+fi
 typeset -x XDG_SCREENSHOTS_DIR="$HOME/Screenshots"
 typeset -x XDG_TEMPLATES_DIR="$HOME/Templates"
 typeset -x XDG_VIDEOS_DIR="$HOME/Videos"
@@ -77,6 +81,8 @@ typeset -x GNUPGHOME="$XDG_DATA_HOME/gnupg"
 typeset -x GPG_TTY="$TTY"
 
 typeset -x GOPATH="$XDG_DATA_HOME/go"
+typeset -x GOMODCACHE="$XDG_CACHE_HOME/go/mod"
+typeset -x GOCACHE="$XDG_CACHE_HOME/go-build"
 
 typeset -x INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 typeset -x EDITRC="$XDG_CONFIG_HOME/editline/editrc"
@@ -88,8 +94,21 @@ typeset -x MISE_DATA_DIR="$XDG_DATA_HOME/mise"
 typeset -x MISE_GLOBAL_CONFIG_FILE="$XDG_CONFIG_HOME/mise/config.toml"
 
 typeset -x NODE_REPL_HISTORY="$XDG_STATE_HOME/node_repl_history"
-
 typeset -x NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+typeset -x NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
+typeset -x NPM_CONFIG_PREFIX="$XDG_DATA_HOME/npm"
+typeset -x COREPACK_HOME="$XDG_DATA_HOME/corepack"
+typeset -x PNPM_HOME="$XDG_DATA_HOME/pnpm"
+typeset -x YARN_CACHE_FOLDER="$XDG_CACHE_HOME/yarn"
+typeset -x YARN_GLOBAL_FOLDER="$XDG_DATA_HOME/yarn"
+typeset -x BUN_INSTALL="$XDG_DATA_HOME/bun"
+
+typeset -x PYTHONHISTFILE="$XDG_STATE_HOME/python/history"
+typeset -x PIPX_HOME="$XDG_DATA_HOME/pipx"
+typeset -x PIPX_BIN_DIR="$XDG_DATA_HOME/pipx/bin"
+typeset -x UV_CACHE_DIR="$XDG_CACHE_HOME/uv"
+typeset -x UV_TOOL_DIR="$XDG_DATA_HOME/uv/tools"
+typeset -x UV_TOOL_BIN_DIR="$XDG_DATA_HOME/uv/bin"
 
 typeset -x RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 
@@ -100,7 +119,14 @@ typeset -x TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 
 typeset -x WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 
+typeset -x SQLITE_HISTORY="$XDG_STATE_HOME/sqlite/history"
+typeset -x PSQL_HISTORY="$XDG_STATE_HOME/psql/history"
+typeset -x MYSQL_HISTFILE="$XDG_STATE_HOME/mysql/history"
+typeset -x REDISCLI_HISTFILE="$XDG_STATE_HOME/redis/history"
+
 typeset -x _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
+typeset -i -x _ZO_ECHO=0
+typeset -i -x _ZO_RESOLVE_SYMLINKS=0
 
 if [[ -x '/opt/homebrew/bin/brew' ]]; then
   typeset -x HOMEBREW_PREFIX='/opt/homebrew'
@@ -141,6 +167,7 @@ is-callable() {
 
 # Editor, locale, pager etc.
 typeset -x LANG="${LANG:-en_US.UTF-8}"
+typeset -x LC_CTYPE="${LC_CTYPE:-$LANG}"
 if is-callable 'nvim'; then
   typeset -x EDITOR='nvim'
   typeset -x MANPAGER='nvim +Man!'
