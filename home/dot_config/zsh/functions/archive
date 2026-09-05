@@ -20,13 +20,27 @@ archive() {
   }
 
   case $type in
-    tar) output="${base_name}.tar" ;;
-    tgz) output="${base_name}.tar.gz" ;;
-    tbz) output="${base_name}.tar.bz2" ;;
-    txz) output="${base_name}.tar.xz" ;;
-    tzst) output="${base_name}.tar.zst" ;;
-    zip) output="${base_name}.zip" ;;
-    7z) output="${base_name}.7z" ;;
+    tar)
+      output="${base_name}.tar"
+      ;;
+    tgz)
+      output="${base_name}.tar.gz"
+      ;;
+    tbz)
+      output="${base_name}.tar.bz2"
+      ;;
+    txz)
+      output="${base_name}.tar.xz"
+      ;;
+    tzst)
+      output="${base_name}.tar.zst"
+      ;;
+    zip)
+      output="${base_name}.zip"
+      ;;
+    7z)
+      output="${base_name}.7z"
+      ;;
     *)
       print -u2 -- "archive: unsupported format: $type"
       return 1

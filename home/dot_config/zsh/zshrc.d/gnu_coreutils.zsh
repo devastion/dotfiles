@@ -2,7 +2,7 @@
 
 _gnu_utility_p='g'
 
-if ((! $+commands[${_gnu_utility_p}whoami])); then
+if ((!$+commands[${_gnu_utility_p}whoami])); then
   return 1
 fi
 
@@ -42,8 +42,7 @@ _gnu_utility_cmds=(
 
 for _gnu_utility_cmd in "${_gnu_utility_cmds[@]}"; do
   _gnu_utility_pcmd="${_gnu_utility_p}${_gnu_utility_cmd}"
-  if (($+commands[$_gnu_utility_pcmd] && ! \
-    $+builtins[$_gnu_utility_cmd])); then
+  if (($+commands[$_gnu_utility_pcmd] && !$+builtins[$_gnu_utility_cmd])); then
     eval "
       $_gnu_utility_cmd() {
         '$commands[$_gnu_utility_pcmd]' \"\$@\"

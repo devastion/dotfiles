@@ -4,7 +4,7 @@ setopt combining_chars
 setopt no_beep
 
 bindkey -v
-typeset KEYTIMEOUT=1
+typeset -x KEYTIMEOUT=1
 
 zmodload zsh/terminfo
 
@@ -14,9 +14,15 @@ _vi_cursor() {
   [[ ${TERM-} != dumb ]] || return 0
 
   case $1 in
-    block) printf '\e[2 q' ;;
-    under) printf '\e[4 q' ;;
-    beam) printf '\e[6 q' ;;
+    block)
+      printf '\e[2 q'
+      ;;
+    under)
+      printf '\e[4 q'
+      ;;
+    beam)
+      printf '\e[6 q'
+      ;;
   esac
 }
 
@@ -83,7 +89,7 @@ expand-alias-space() {
 
   zle self-insert
 
-  ((! remove_space)) && zle backward-delete-char
+  ((!remove_space)) && zle backward-delete-char
 }
 
 zle -N expand-alias-space
@@ -219,7 +225,6 @@ bindkey -M visual 'S' add-surround
 
 magic-enter() {
   unfunction magic-enter
-  local _accept_line='accept-line'
 
   _magic-enter() {
     [[ -n $BUFFER || $CONTEXT != start ]] && return
@@ -231,9 +236,9 @@ magic-enter() {
     fi
   }
 
-  case ${widgets[$_accept_line]} in
+  case ${widgets[accept-line]} in
     user:*)
-      zle -N _magic-enter_orig_accept-line "${widgets[$_accept_line]#user:}"
+      zle -N _magic-enter_orig_accept-line "${widgets[accept-line]#user:}"
       _magic-enter_accept-line() {
         _magic-enter
         zle _magic-enter_orig_accept-line -- "$@"

@@ -28,7 +28,7 @@ zsh-generate-completions() {
   }
 
   local -A generators=(
-    ['ast-grep']='ast-grep completions zsh'
+    [ast-grep]='ast-grep completions zsh'
     [bat]='bat --completion=zsh'
     [betterleaks]='betterleaks completion zsh'
     [cargo]='rustup completions zsh cargo'
@@ -48,12 +48,13 @@ zsh-generate-completions() {
     [mo]='mo completion zsh'
     [mole]='mole completion zsh'
     [npm]='npm completion zsh'
+    [orb]='orb completion zsh'
     [pkl]='pkl shell-completion zsh'
     [pnpm]='pnpm completion zsh'
     [procs]='procs --gen-completion-out zsh'
     [rg]='rg --generate complete-zsh'
     [rustup]='rustup completions zsh'
-    ['tree-sitter']='tree-sitter complete --shell zsh'
+    [tree-sitter]='tree-sitter complete --shell zsh'
     [usage]='usage --completions zsh'
     [uv]='uv generate-shell-completion zsh'
     [watchexec]='watchexec --completions zsh'
@@ -83,14 +84,14 @@ zsh-generate-completions() {
 
     out="$dir/_$name"
 
-    if ((! force)) && [[ -s $out ]]; then
+    if ((!force)) && [[ -s $out ]]; then
       skipped+=("$name")
       return 0
     fi
 
     tmp="${out}.tmp.${$}.${RANDOM}"
 
-    print -r -- "  generating $cmd"
+    print -r -- "Generating $cmd"
 
     if "$@" >| "$tmp" 2> /dev/null &&
       [[ -s $tmp ]] &&
@@ -104,7 +105,7 @@ zsh-generate-completions() {
     return 1
   }
 
-  local cmd out tmp generator url
+  local cmd out tmp
 
   for cmd in "${(@k)generators}"; do
     (($+commands[$cmd])) || continue
@@ -117,7 +118,8 @@ zsh-generate-completions() {
       curl -fsSL --max-time 15 "${urls[$cmd]}"
   done
 
-  if (($#generated)) && (($+functions[run - compinit])); then
+  if (($#generated)) && (($+functions[run-compinit])); then
+    print -r -- 'Running compinit...'
     run-compinit --force
   fi
 

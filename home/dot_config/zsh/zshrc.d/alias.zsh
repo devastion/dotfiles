@@ -12,7 +12,6 @@ if [[ $OSTYPE == 'darwin'* ]]; then
     alias pbpaste='command powershell.exe -command Get-Clipboard'
   fi
 fi
-
 () {
   local _index
   for _index in {1..10}; do

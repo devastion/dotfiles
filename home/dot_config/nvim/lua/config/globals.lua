@@ -39,6 +39,7 @@ vim.g.LSP_SERVERS = {
   markdown_oxide = 'markdown-oxide',
   marksman = 'marksman',
   pyright = 'pyright',
+  shuck = 'shuck',
   taplo = 'taplo',
   vts_ls = 'vtsls',
   yaml_ls = 'yaml-language-server',

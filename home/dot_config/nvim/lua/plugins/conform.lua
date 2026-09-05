@@ -46,7 +46,7 @@ conform.setup({
     vue = { 'prettierd', stop_after_first = true },
     xml = { 'xmlformatter' },
     yaml = { 'yamlfmt' },
-    zsh = { 'shfmt' },
+    zsh = { 'shuck' },
   },
   format_on_save = function(bufnr)
     if vim.g.autoformat == false or vim.b[bufnr].autoformat == false then
@@ -59,6 +59,21 @@ conform.setup({
     }
   end,
   formatters = {
+    shuck = {
+      command = 'shuck',
+      args = function(_, ctx)
+        local args = { 'format', '--stdin-filename', '$FILENAME' }
+        if vim.bo[ctx.buf].filetype:find('zsh', 1, true) then
+          vim.list_extend(args, { '--dialect', 'zsh' })
+        end
+        return args
+      end,
+      cwd = require('conform.util').root_file({
+        '.shuck.toml',
+        'shuck.toml',
+        '.git',
+      }),
+    },
     injected = { options = { ignore_errors = true } },
   },
 })

@@ -31,7 +31,6 @@ lint.linters_by_ft = {
   typescript = { 'eslint_d' },
   typescriptreact = { 'eslint_d' },
   yaml = { 'yamllint' },
-  zsh = { 'shellcheck' },
 }
 
 require('plugins.mason').install(require('lint').linters_by_ft)

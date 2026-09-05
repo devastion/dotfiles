@@ -13,17 +13,17 @@ fzf:alias() {
   emulate -L zsh
   local sel kind name tab=$'\t'
   sel=$(
-    {
-      print -rl -- "${(@k)aliases/#/alias${tab}}"
-      print -rl -- "${(@k)functions/#/func${tab}}"
-    } | fzf --delimiter=$'\t' --with-nth=2 \
-      --preview 'case {1} in
+  {
+    print -rl -- "${(@k)aliases/#/alias${tab}}"
+    print -rl -- "${(@k)functions/#/func${tab}}"
+  } | fzf --delimiter=$'\t' --with-nth=2 \
+    --preview 'case {1} in
                   alias) alias -- {2};;
                   func)  whence -f -- {2} | head -80;;
                 esac' \
-      --preview-window=right:60%:wrap \
-      --header='enter print definition'
-  ) || return 1
+    --preview-window=right:60%:wrap \
+    --header='enter print definition'
+) || return 1
   kind=${sel%%$'\t'*}
   name=${sel#*$'\t'}
   case $kind in
@@ -68,9 +68,9 @@ fzf:find() {
   local -a selected
   selected=("${(@f)$(
     fd --type f --hidden --follow --exclude .git |
-      fzf --query="${*:-}" \
-        --preview 'bat --style=numbers --color=always --line-range :500 {}' \
-        --preview-window=right:60%:wrap
+    	fzf --query="${*:-}" \
+    		--preview 'bat --style=numbers --color=always --line-range :500 {}' \
+    		--preview-window=right:60%:wrap
   )}") || return 1
   selected=(${(@)selected:#})
   (($#selected)) || return 1
@@ -105,10 +105,10 @@ fzf:kill() {
   local -a pids
   pids=("${(@f)$(
     ps -ef |
-      sed 1d |
-      fzf --multi --header='TAB multi-select · enter terminate' \
-        --preview 'echo {}' --preview-window=down:3:wrap |
-      awk '{print $2}'
+    	sed 1d |
+    	fzf --multi --header='TAB multi-select · enter terminate' \
+    		--preview 'echo {}' --preview-window=down:3:wrap |
+    	awk '{print $2}'
   )}") || return 1
   pids=(${(@)pids:#})
   (($#pids)) || return 1
@@ -311,11 +311,11 @@ fzf:git-status() {
   local -a paths
   paths=("${(@f)$(
     git status --short | awk '{print ($3 == "->") ? $4 : $2}' | fzf --multi \
-      --header='TAB multi-select · enter stage · ctrl-o open in editor' \
-      --preview 'git diff --cached -- {} | delta --width $FZF_PREVIEW_COLUMNS && git diff -- {} | \
-        delta --width $FZF_PREVIEW_COLUMNS && git diff --no-index -- /dev/null {} | delta --width $FZF_PREVIEW_COLUMNS' \
-      --preview-window 'nohidden' \
-      --bind "ctrl-o:execute(${EDITOR:-nvim} {})"
+    	--header='TAB multi-select · enter stage · ctrl-o open in editor' \
+    	--preview 'git diff --cached -- {} | delta --width $FZF_PREVIEW_COLUMNS && git diff -- {} |
+    		delta --width $FZF_PREVIEW_COLUMNS && git diff --no-index -- /dev/null {} | delta --width $FZF_PREVIEW_COLUMNS' \
+    	--preview-window 'nohidden' \
+    	--bind "ctrl-o:execute(${EDITOR:-nvim} {})"
   )}") || return 1
   paths=(${(@)paths:#})
   (($#paths)) || return 1

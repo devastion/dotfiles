@@ -125,13 +125,8 @@ local function available_tools()
       return lsp_client.name
     end)
     :totable()
-  local linters = require('lint').linters_by_ft[vim.bo.filetype]
-  local formatters = vim
-    .iter(require('conform').list_formatters(0))
-    :map(function(formatter)
-      return formatter.name
-    end)
-    :totable()
+  local linters = require('lint').linters_by_ft[vim.bo.filetype] or {}
+  local formatters = require('conform').formatters_by_ft[vim.bo.filetype] or {}
 
   return table.concat(linters, icons.ui('small_dot', 'both'))
     .. icons.ui('small_dot', 'both')
