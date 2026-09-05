@@ -1,93 +1,168 @@
 packages:
   darwin:
     taps:
-      - 'nikitabobko/tap'
-      - 'felixkratz/formulae'
+      - nikitabobko/tap
+      - felixkratz/formulae
 
     brews:
       # GNU Utils
-      - 'autoconf'
-      - 'bash'
-      - 'binutils'
-      - 'bison'
-      - 'coreutils'
-      - 'diffutils'
-      - 'ed'
-      - 'emacs'
-      - 'findutils'
-      - 'flex'
-      - 'gawk'
-      - 'gnu-indent'
-      - 'gnu-sed'
-      - 'gnu-tar'
-      - 'gnu-which'
-      - 'gnupg'
-      - 'gpatch'
-      - 'grep'
-      - 'gzip'
-      - 'less'
-      - 'm4'
-      - 'make'
-      - 'nano'
-      - 'screen'
-      - 'tree'
-      - 'watch'
-      - 'wdiff'
-      - 'wget'
+      - autoconf
+      - bash
+      - binutils
+      - bison
+      - coreutils
+      - diffutils
+      - ed
+      - emacs
+      - findutils
+      - flex
+      - gawk
+      - gnu-indent
+      - gnu-sed
+      - gnu-tar
+      - gnu-which
+      - gnupg
+      - gpatch
+      - grep
+      - gzip
+      - less
+      - m4
+      - make
+      - nano
+      - screen
+      - tree
+      - watch
+      - wdiff
+      - wget
 
       # CLI Tools
-      - 'bat'
-      - 'betterleaks'
-      - 'borders'
-      - 'composer'
-      - 'eza'
-      - 'fd'
-      - 'ffmpeg'
-      - 'fzf'
-      - 'gh'
-      - 'git'
-      - 'git-delta'
-      - 'hexyl'
-      - 'imagemagick'
-      - 'jq'
-      - 'lazygit'
-      - 'lesspipe'
-      - 'man-db'
-      - 'mas'
-      - 'neovim'
-      - 'pam-reattach'
-      - 'php'
-      - 'pinentry-mac'
-      - 'poppler'
-      - 'ripgrep'
-      - 'sherlock'
-      - 'tmux'
-      - 'trash-cli'
-      - 'tree-sitter-cli'
-      - 'universal-ctags'
-      - 'vim'
-      - 'zoxide'
+      - bat
+      - betterleaks
+      - borders
+      - composer
+      - csvkit
+      - eza
+      - fd
+      - ffmpeg
+      - fzf
+      - gh
+      - git
+      - git-delta
+      - hexyl
+      - imagemagick
+      - jq
+      - lazygit
+      - lesspipe
+      - man-db
+      - mas
+      - neovim
+      - pam-reattach
+      - php
+      - pinentry-mac
+      - poppler
+      - ripgrep
+      - sherlock
+      - tmux
+      - trash-cli
+      - tree-sitter-cli
+      - universal-ctags
+      - vim
+      - yq
+      - zoxide
 
     casks:
-      - 'aerospace'
-      - 'claude'
-      - 'claude-code'
-      - 'copilot-cli'
-      - 'figma'
-      - 'font-maple-mono-nf'
-      - 'ghostty'
-      - 'github-copilot-app'
-      - 'google-chrome'
-      - 'karabiner-elements'
-      - 'orbstack'
-      - 'spotify'
+      - aerospace
+      - claude
+      - claude-code
+      - copilot-cli
+      - figma
+      - font-maple-mono-nf
+      - ghostty
+      - github-copilot-app
+      - google-chrome
+      - karabiner-elements
+      - orbstack
+      - spotify
 
     mas:
-      - name: 'Bitwarden'
+      - name: Bitwarden
         id: 1352778147
-      - name: 'Keynote'
+      - name: Keynote
         id: 361285480
-      - name: 'Numbers'
+      - name: Numbers
         id: 361304891
-      - name: 'Pages'
+      - name: Pages
         id: 361309726
+
+  ubuntu:
+    repositories:
+      - ppa:neovim-ppa/unstable
+
+    apt:
+      # GNU utils (many are already in the base system)
+      - autoconf
+      - bash
+      - binutils
+      - bison
+      - coreutils
+      - diffutils
+      - ed
+      - emacs
+      - findutils
+      - flex
+      - gawk
+      - indent
+      - sed
+      - tar
+      - debianutils
+      - gnupg
+      - patch
+      - grep
+      - gzip
+      - less
+      - m4
+      - make
+      - nano
+      - screen
+      - tree
+      - procps
+      - wdiff
+      - wget
+
+      # CLI tools
+      - bat
+      - composer
+      - csvkit
+      - eza
+      - fd-find
+      - ffmpeg
+      - fzf
+      - gh
+      - git
+      - git-delta
+      - hexyl
+      - imagemagick
+      - jq
+      - lazygit
+      - man-db
+      - neovim
+      - php-cli
+      - pinentry-curses
+      - poppler-utils
+      - ripgrep
+      - tmux
+      - trash-cli
+      - tree-sitter-cli
+      - universal-ctags
+      - vim
+      - yq
+      - zoxide
+
+      # Build essentials
+      - build-essential
+      - ca-certificates
+      - curl
+      - libgd-dev
+      - libpcre2-dev
+      - libssl-dev
+      - zlib1g-dev
