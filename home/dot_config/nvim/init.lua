@@ -63,6 +63,7 @@ try_require('plugins.flash')
 try_require('plugins.grug-far')
 try_require('plugins.csvview')
 try_require('plugins.noice')
+try_require('plugins.gpg')
 
 local mason_ok, mason = try_require('plugins.mason')
 if mason_ok then

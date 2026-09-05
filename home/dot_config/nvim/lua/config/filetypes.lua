@@ -1,13 +1,15 @@
 vim.filetype.add({
   extension = {
-    mdx = 'markdown.mdx',
-    http = 'http',
-    tsv = 'tsv',
+    asc = 'gpg',
     conf = function(path)
       if path:match('/gnupg/') then return 'gpg' end
       return 'conf'
     end,
     dircolors = 'dircolors',
+    gpg = 'gpg',
+    http = 'http',
+    mdx = 'markdown.mdx',
+    tsv = 'tsv',
   },
   filename = {
     ['.zshenv'] = 'zsh',
