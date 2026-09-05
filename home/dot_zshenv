@@ -1,9 +1,0 @@
-#!/usr/bin/env zsh
-
-setopt no_global_rcs
-
-typeset -x ZDOTDIR="${ZDOTDIR:-$HOME/.config/zsh}"
-
-if [[ -r $ZDOTDIR/.zshenv && ! $ZDOTDIR/.zshenv -ef ${(%):-%N} ]]; then
-  source "$ZDOTDIR/.zshenv"
-fi
