@@ -4,7 +4,3 @@
 .chezmoiscripts/darwin/**
 .config/aerospace
 {{ end }}
-
-{{ if ne .chezmoi.os "linux" }}
-.chezmoiscripts/linux/**
-{{ end }}

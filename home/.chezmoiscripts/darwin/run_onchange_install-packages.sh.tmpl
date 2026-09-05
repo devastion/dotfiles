@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-{{ if eq .chezmoi.os "darwin" }}
 if ! command -v brew >/dev/null 2>&1; then
   echo 'Homebrew not found; skipping package installation.' >&2
   echo 'Install it from https://brew.sh and re-run: chezmoi apply' >&2
@@ -24,13 +23,3 @@ cask {{ . | quote }}
 mas {{ .name | quote }}, id: {{ .id }}
 {{ end -}}
 BREWFILE
-{{ end }}
-
-{{ if eq .chezmoi.os "linux" }}
-echo 'Installing apt packages'
-
-{{ range .packages.ubuntu.repositories -}}
-sudo add-apt-repository -y {{ . | quote }}
-{{ end -}}
-sudo apt install -y {{ join " " .packages.ubuntu.apt }}
-{{ end }}
