@@ -31,6 +31,8 @@ else
   unset HELPDIR
 fi
 
+zle_highlight+=(paste:none)
+
 # zsh-autosuggestions
 typeset -x ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 typeset -x ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
@@ -48,4 +50,11 @@ typeset -a _autosuggest_ignore=(
 
 typeset -x ZSH_AUTOSUGGEST_HISTORY_IGNORE="(${(j:|:)_autosuggest_ignore})"
 typeset -x ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+typeset -i -x ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 unset _git_ignore _autosuggest_ignore
+
+# zsh-history-substring-search
+typeset -x HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=cyan,fg=black,bold'
+typeset -x HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black,bold'
+typeset -i -x HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+typeset -i -x HISTORY_SUBSTRING_SEARCH_FUZZY=1

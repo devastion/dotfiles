@@ -63,7 +63,8 @@ zstyle ':completion:*' matcher-list \
   '+m:{[:lower:]}={[:upper:]}' \
   '+m:{[:upper:]}={[:lower:]}' \
   '+m:{_-}={-_}' \
-  'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+  '+r:|[._-]=* r:|=*' \
+  '+l:|=* r:|=*'
 
 zstyle ':completion:*' menu no
 zstyle ':completion:*:matches' group yes
@@ -95,6 +96,15 @@ zstyle ':completion:*:*:kill:*:processes' command \
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;36=0=01'
 zstyle ':completion:*:*:kill:*' force-list always
 zstyle ':completion:*:*:kill:*' insert-ids single
+
+zstyle ':completion:*:*:*:users' ignored-patterns \
+  adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
+  dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
+  hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
+  mailman mailnull mldonkey mysql nagios \
+  named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
+  operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+  rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs '_*'
 
 zstyle ':completion:*:(ssh|scp|rsync):*' tag-order 'hosts:-host:host hosts:-domain:domain hosts:-ipaddr:ip\ address *'
 zstyle ':completion:*:(scp|rsync):*' group-order users files all-files hosts-domain hosts-host hosts-ipaddr

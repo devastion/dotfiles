@@ -164,8 +164,11 @@ unset km
 unset _keys
 unfunction _bindkey_terminfo
 
-bindkey -M vicmd 'k' up-line-or-history
 bindkey -M vicmd 'j' down-line-or-history
+bindkey -M vicmd 'k' up-line-or-history
+
+bindkey -M vicmd '^P' history-substring-search-up
+bindkey -M vicmd '^N' history-substring-search-down
 
 bindkey -M vicmd '/' history-incremental-pattern-search-backward
 bindkey -M vicmd '?' history-incremental-pattern-search-forward

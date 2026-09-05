@@ -1,9 +1,9 @@
 [format]
+binary-next-line = false
+function-next-line = false
 indent-style = "space"
 indent-width = 2
-binary-next-line = false
-switch-case-indent = true
-space-redirects = true
 keep-padding = false
-function-next-line = false
 never-split = false
+space-redirects = true
+switch-case-indent = true

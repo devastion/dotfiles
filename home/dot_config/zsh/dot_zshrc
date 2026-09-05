@@ -36,6 +36,7 @@ zsh-defer -c '
   run-compinit
   plugin-source fzf-tab
   plugin-source zsh-autopair
+  plugin-source zsh-history-substring-search
   plugin-source zsh-autosuggestions
   plugin-source fast-syntax-highlighting
   (( $+commands[mise] )) && source <(mise activate zsh)

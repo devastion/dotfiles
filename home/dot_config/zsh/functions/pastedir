@@ -3,14 +3,26 @@
 pastedir() {
   emulate -L zsh
 
+  (("$#" > 1)) && {
+    print -u2 'Usage: pastedir [dir]'
+    return 1
+  }
+
+  local dest="${1:-$PWD}"
+
+  [[ -d $dest ]] || {
+    print -u2 -- "pastedir: not a directory: $dest"
+    return 1
+  }
+
   pbpaste |
     command base64 -d |
-    command tar -xzf -
+    command tar -xzf - -C "$dest"
 
   local -a ps=($pipestatus)
 
   if ((ps[1] == 0 && ps[2] == 0 && ps[3] == 0)); then
-    print -r -- "Extracted archive from clipboard into $PWD"
+    print -r -- "Extracted archive from clipboard into ${dest}"
     return 0
   fi
 
