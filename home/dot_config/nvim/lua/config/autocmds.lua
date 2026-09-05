@@ -13,6 +13,7 @@ local autocmd = vim.api.nvim_create_autocmd
 
 autocmd('TextYankPost', {
   group = default_group,
+  pattern = '*',
   desc = 'Highlight yanked text',
   callback = function()
     vim.hl.on_yank({
@@ -87,7 +88,9 @@ do
       local lcount = vim.api.nvim_buf_line_count(buf)
       if mark[1] > 0 and mark[1] <= lcount then
         pcall(vim.api.nvim_win_set_cursor, 0, mark)
-        vim.cmd.normal({ 'zz', bang = true })
+        vim.schedule(function()
+          vim.cmd.normal({ 'zz', bang = true })
+        end)
       end
     end,
   })
@@ -128,27 +131,14 @@ autocmd('FileType', {
 
 do
   local qf_group = augroup('qf')
-  -- autocmd(
-  --   'QuickFixCmdPost',
-  --   { group = qf_group, pattern = '[^l]*', command = 'cwindow' }
-  -- )
+  autocmd(
+    'QuickFixCmdPost',
+    { group = qf_group, pattern = '[^l]*', command = 'cwindow' }
+  )
   autocmd(
     'QuickFixCmdPost',
     { group = qf_group, pattern = 'l*', command = 'lwindow' }
   )
-  autocmd('QuickFixCmdPost', {
-    group = qf_group,
-    pattern = { 'grep', 'grepadd', 'make', 'vimgrep' },
-    desc = 'Open quickfix on grep results',
-    callback = function()
-      local items = vim.fn.getqflist()
-      if #items > 0 then
-        vim.cmd.cwindow()
-      else
-        vim.notify('No results', vim.log.levels.WARN)
-      end
-    end,
-  })
 end
 
 autocmd('FileType', {

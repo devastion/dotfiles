@@ -67,7 +67,7 @@ try_require('plugins.gpg')
 
 local mason_ok, mason = try_require('plugins.mason')
 if mason_ok then
-  mason.install({ 'fzf', 'ripgrep', 'ast-grep' })
+  mason.install({ 'ast-grep', 'fd', 'fzf', 'ripgrep' })
   mason.install(vim.tbl_values(vim.g.LSP_SERVERS))
 end
 
