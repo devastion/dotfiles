@@ -46,6 +46,7 @@ zsh-generate-completions() {
     [mas]='mas --generate-completion-script zsh'
     [mise]='mise completion zsh'
     [mo]='mo completion zsh'
+    [mole]='mole completion zsh'
     [npm]='npm completion zsh'
     [pkl]='pkl shell-completion zsh'
     [pnpm]='pnpm completion zsh'
